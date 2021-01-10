@@ -1,0 +1,353 @@
+// -----------PAGE ACCUEIL----------//
+
+/* GENERAL */
+
+html
+{
+	scroll-behavior: smooth; /* important pour l'effet de la scroll-arrow */
+}
+
+
+
+/* SECTION HEADER */ 
+
+.header-homepage
+{	
+	
+	width: 100vw;
+	max-width: 100%;
+	height: 100vh; // pour afficher le bg sur 100% de l'ecran, du mobile a l'ultra wide
+	background-image: url(assets/images/headers/headervh.jpg);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-color: @lightcream;
+	background-size: cover;
+	.mgdown50();
+	position: relative; // en lien avec la scroll arrow absolute
+
+	@media (max-width: 1050px) { background-image: url(assets/images/headers/headervh-1200.jpg); }
+	@media (max-width: 600px), (orientation: portrait) { background-image: url(assets/images/headers/headervh-mobile.jpg); }
+}
+
+
+
+/* SCROLL ARROW */
+
+@keyframes scroll-down { from { margin-top: -30px; opacity: 1; } to { margin-bottom: 50px; opacity: 0; } }
+/* simple animation d'invitation au scroll avec effet fade */
+
+.scroll-arrow
+{
+	animation: 1.5s linear 0s infinite normal scroll-down;
+	position: absolute;
+	top: 90%;
+	left: 0;
+	right: 0;
+	.center();
+	width: 10px;
+	font-size: 3rem;
+}
+
+.scroll-arrow a
+{
+	color: white;
+}
+
+#anchor
+{
+	.mgdown50();
+	color: transparent;
+
+	@media (max-width: 992px) { margin-bottom: 0;}
+}
+
+
+
+/* SECTION "NOS 3 PRINCIPES" */
+
+.trois-principes
+{
+	margin-top: 50px;
+	.mgdown50();
+}
+
+.principe-titre, .newsletter-homepage-titre // (+ titre de la newsletter)
+{
+	.latoL();
+	color: @mygrey;
+	font-size: 1.5rem;
+	.spacing100();
+	.mgdown50();
+
+	@media (max-width: 800px) and (min-width: 600px) { font-size: 1.3rem; }
+	@media (max-width: 600px) { font-size: 1.3rem; }
+
+}
+
+.circle
+{
+	background-color: @lightcream;
+	border-radius: 50%;
+	.shadow();
+	width: 300px;
+	height: 300px;
+
+	@media (max-width: 1200px) and (min-width: 1000px) { width: 250px; height: 250px; }
+}
+
+.circle-content
+{
+	padding: 30px 40px;
+	margin-bottom: 30px;
+	.center();
+
+	@media (max-width: 1200px) and (min-width: 1000px) { padding: 20px 15px; }
+}
+
+.trois-principes img
+{
+	margin-bottom: 10px;
+}
+
+.trois-principes h1
+{
+	.latoB();
+	font-size: 1.2rem;
+	color: @myblue;
+	.spacing100();
+	.center();
+	margin-bottom: 20px;
+
+	@media (max-width: 1200px) and (min-width: 1000px) { font-size: 1rem; }
+}
+
+.trois-principes p
+{
+	.opensansL();
+	font-size: 0.8rem;
+	.center();
+
+	@media (max-width: 1200px) and (min-width: 1000px) { font-size: 0.6rem; }
+}
+
+
+
+/* SECTION "UN CORPS DETENDU" + "UN ESPRIT APAISE" */
+
+.corps-detendu h2, .esprit-apaise h2
+{
+	.latoL();
+	letter-spacing: 2px;
+	font-size: 1.8rem;
+	.mgdown50();
+
+	@media (max-width: 350px) { font-size: 1.2rem; }
+}
+
+.corps-detendu, .esprit-apaise
+{
+	width: 100vw;
+	max-width: 100%;
+	height: 100vh;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center top;
+	background-attachment: fixed; /* effet parallax */
+	background-color: @lightcream;
+	.mgdown50();
+}
+
+.corps-detendu
+{
+	background-image: url(assets/images/corps-detendu.jpg);
+
+	@media (max-width: 1260px) { background-image: url(assets/images/corps-detendu-small.jpg); }
+	@media (max-width: 1024px) { background-attachment: scroll; }
+}
+
+.esprit-apaise
+{
+	background-image: url(assets/images/esprit-apaise.jpg);
+
+	@media (max-width: 1260px) { background-image: url(assets/images/esprit-apaise-small.jpg); }
+	@media (max-width: 1024px) { background-attachment: scroll; }
+}
+
+.encart-detendu, .encart-apaise
+{
+  	color: white;
+  	.opensansL();
+  	.spacing50();
+}
+
+.encart-detendu p, .encart-apaise p
+{
+	.mgdown50();
+
+	@media (max-width: 400px) { font-size: 0.7rem; }
+	@media (min-width: 1921px) { width: 70%; .center(); font-size: 1.5rem; }
+}
+
+.encart-detendu a, .encart-apaise a
+{
+	color: white;
+	border-radius: 0;
+	.opensansSB();
+	padding: 10px 20px;
+
+	&:hover
+	{
+		color: @mygrey;
+		text-decoration: none;
+	}
+}
+
+
+/* SECTION LIENS MIDDLE */
+
+.liens-middle
+{
+	margin-bottom: 60px;
+	margin-top: 120px;
+}
+
+.lien-planning, .lien-centre
+{
+	background-color: @lightcream;
+	border-radius: 5px;
+	.shadow();
+	padding: 50px 30px;
+	height: 250px;
+	width: 250px;
+	.latoL();
+	font-size: 1.4rem;
+	.spacing100();
+	position: relative;
+}
+
+.lien-centre
+{
+	@media (max-width: 515px) { margin-top: 140px; }
+}
+
+.liens-middle a
+{
+	background-color: @myred;
+	display: block;
+	border: none;
+	.center();
+	margin-top: 30px;
+	width: 170px;
+	padding: 10px 10px;
+	.opensansSB();
+	font-size: 0.7rem;
+	color: white;
+
+	&:hover
+	{
+		background-color: @hoverred;
+		color: white;
+		text-decoration: none;
+	}
+
+	&:active, &:focus
+	{
+		background-color: @hoverred !important;
+	}
+}
+
+.yoga1-homepage, .yoga2-homepage
+{
+	position: absolute;
+	
+}
+
+.yoga1-homepage
+{
+	top: -32%;
+	left: 25%;
+}
+
+.yoga2-homepage
+{
+	top: -35.5%;
+	left: 27%;
+}
+
+
+
+/* SECTION NEWSLETTER */
+
+// (newsletter-titre groupé avec principes-titre)
+
+.newsletter-homepage span
+{
+	.latoB();
+}
+
+.yoga-male-homepage
+{
+	.mgdown50()
+}
+
+.newsletter-homepage form
+{
+	.mgdown50();
+}
+
+.newsletter-homepage input
+{
+	margin-right: -2px;
+	padding-left: 20px;
+	height: 50px;
+	width: 500px;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+	border: 1.8px solid #9F9F9F;
+
+	@media (max-width: 1200px) { width: 40%; }
+	@media (max-width: 1000px) { width: 45%; }
+	@media (max-width: 770px) { width: 50%; }
+	@media (max-width: 440px) { width: 60%; }
+}
+
+.newsletter-homepage input::placeholder
+{
+	.opensansL();
+	.spacing100();
+	opacity: 0.8;
+}
+
+.newsletter-homepage .btn-primary
+{
+	background-color: @myblue;
+	border: none;
+	height: 50px;
+	border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
+	width: 250px;
+	.opensansSB();
+	font-size: 0.7rem;
+
+	&:hover
+	{
+		background-color: @hoverblue;
+	}
+
+	&:focus, &:active
+	{
+		background-color: @hoverblue !important;
+	}
+
+	@media (max-width: 1200px) { width: 20%; }
+	@media (max-width: 1000px) { width: 25%; }
+	@media (max-width: 770px) { width: 30%; }
+	@media (max-width: 440px) { width: 40%; }
+}
+
+.newsletter-homepage-disclaimer
+{
+	.mgdown50();
+	.opensans();
+	font-size: 0.7rem;
+}

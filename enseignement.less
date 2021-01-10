@@ -1,0 +1,330 @@
+// -----------PAGE ENSEIGNEMENT----------//
+
+
+/* SECTION QUOTE */
+
+.quote-block-enseignement
+{
+	background-color: @lightcream;
+	padding-top: 50px;
+}
+
+.quote-block-enseignement p
+{
+	.lato();
+	font-style: italic;
+	color: @myblue;
+	font-size: 1.5rem;
+	.mgdown50();
+
+	@media (max-width: 1200px) { font-size: 1.2rem; }
+}
+
+.quote-block-enseignement img
+{
+	.mgdown50();
+}
+
+
+
+/* SECTION PRESENTATION BLOCK */
+.presentation-block
+{
+	margin-top: 70px;
+	margin-bottom: 150px;
+}
+
+
+.team-block-p, .team-block-img, .yt-block-p, .yt-block-img
+{
+	width: 364px;
+	height: 211px;
+
+	@media (max-width: 370px) { width: 300px; }
+}
+
+.team-block-p p, .yt-block-p p
+{
+	padding: 10px;
+}
+
+.presentation-block span
+{
+	.opensansSB();
+}
+
+.team-block-p, .yt-block-p
+{
+	background-color: @lightcream;
+	padding: 15px 25px;
+	.opensansL();
+	font-style: italic;
+	color: @mygrey;
+	font-size: 0.8rem;
+
+	@media (max-width: 370px) { height: 250px; }
+}
+
+.team-block-img
+{
+	background-image: url(assets/images/team_preview.jpg);
+	position: relative;
+}
+
+.yt-block-img
+{
+	background-image: url(assets/images/yt_preview.jpg);
+	position: relative;
+}
+
+.presentation-block a
+{
+	border-radius: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	border: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	.opensansL();
+	.spacing100();
+	font-size: 0.9rem;
+}
+
+
+
+/* SECTION LISTE DES COURS */
+.cours-bg, .medit-bg
+{
+	background-color: @lightcream;
+	padding-top: 60px;
+	padding-bottom: 60px;
+	position: relative;
+}
+
+.yoga-mat, .lotus
+{
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: -42px;
+	.center();
+}
+
+.lotus
+{
+	top: -35px;
+}
+
+.cours-bg h1, .medit-bg h1
+{
+	margin-bottom: 100px;
+	.opensansSB();
+	.spacing100();
+	color: @myblue;
+	font-size: 1.7rem;
+}
+
+.nom-cours
+{
+	margin-bottom: 40px;
+	.opensansSB();
+	.spacing100();
+	color: @myred;
+	font-size: 1.2rem;
+	border-bottom: 4px solid rgba(122, 22, 60, 0.2);
+}
+
+.hatha-block p, .vinyasa-block p, .slow-block p, .kid-block p, .medit-guidee-block p, .medit-tibet-block p
+{
+	font-size: 0.9rem;
+	.opensansL();
+	.spacing50();
+	color: @mygrey;
+}
+
+.hatha-block a, .vinyasa-block a, .slow-block a, .kid-block a, .medit-guidee-block a, .medit-tibet-block a
+{
+	margin-top: 15px;
+	background-color: @myblue;
+	border: none;
+
+	&:hover
+	{
+		background-color: @hoverblue;
+	}
+
+	&:active, &:focus
+	{
+		background-color: @hoverblue !important;
+	}
+}
+
+.hatha-img
+{
+	background-image: url(assets/images/hatha-yoga.jpg);
+	background-size: contain;
+	background-repeat: no-repeat;
+	height: 333px;
+	width: 500px;
+	position: relative;
+	
+	@media (max-width: 1200px ) { width: 400px; height: 266px; }
+	@media (max-width: 992px ) { .center(); .mgdown50(); }
+	@media (max-width: 576px ) { width: 300px; height: 200px; }
+}
+
+.yoga3-enseignement
+{
+	position: absolute;
+	top: -61px;
+	left: 10%;
+}
+
+.vinyasa-block, .slow-block, .kid-block, .medit-tibet-block
+{
+	padding-top: 80px;
+	padding-bottom: 80px;
+	position: relative;
+}
+
+.kid-block
+{
+	margin-bottom: 60px;
+}
+
+.vinyasa-img
+{
+	background-image: url(assets/images/vinyasa-yoga.jpg);
+	background-size: contain;
+	background-repeat: no-repeat;
+	.center();
+	height: 333px;
+	width: 500px;
+	position: relative;
+	
+	@media (max-width: 1200px ) { width: 400px; height: 266px; }
+	@media (max-width: 992px ) { .mgdown50(); }
+	@media (max-width: 576px ) { width: 300px; height: 200px; }
+}
+
+.yoga1-enseignement
+{
+	position: absolute;
+	top: -73px;
+	left: 60%;
+}
+
+.slow-bg
+{
+	background-color: @lightcream;
+}
+
+.slow-img
+{
+	background-image: url(assets/images/slow-yoga.jpg);
+	background-size: contain;
+	background-repeat: no-repeat;
+	.center();
+	height: 333px;
+	width: 500px;
+	position: relative;
+	
+	@media (max-width: 1200px ) { width: 400px; height: 266px; }
+	@media (max-width: 992px ) { .mgdown50(); }
+	@media (max-width: 576px ) { width: 300px; height: 200px; }
+}
+
+.yoga-senior-enseignement
+{
+	position: absolute;
+	top: -62px;
+	left: 46%;
+}
+
+.kid-img
+{
+	background-image: url(assets/images/kid-yoga.jpg);
+	background-size: contain;
+	background-repeat: no-repeat;
+	.center();
+	height: 333px;
+	width: 500px;
+	position: relative;
+	
+	@media (max-width: 1200px ) { width: 400px; height: 266px; }
+	@media (max-width: 992px ) { .mgdown50(); }
+	@media (max-width: 576px ) { width: 300px; height: 200px; }
+}
+
+.yoga2-enseignement
+{
+	position: absolute;
+	top: -80px;
+	left: 66%;
+}
+ 
+
+.medit-guidee-img
+{
+	background-image: url(assets/images/medit-guidee.jpg);
+	background-size: contain;
+	background-repeat: no-repeat;
+	.center();
+	height: 333px;
+	width: 500px;
+	position: relative;
+	
+	@media (max-width: 1200px ) { width: 400px; height: 266px; }
+	@media (max-width: 992px ) { .mgdown50(); }
+	@media (max-width: 576px ) { width: 300px; height: 200px; }
+}
+
+.yoga4-enseignement
+{
+	position: absolute;
+	top: -77px;
+	left: 26%;
+}
+
+.medit-tibet-img
+{
+	background-image: url(assets/images/medit-tibet.jpg);
+	background-size: contain;
+	background-repeat: no-repeat;
+	.center();
+	height: 333px;
+	width: 500px;
+	position: relative;
+	
+	@media (max-width: 1200px ) { width: 400px; height: 266px; }
+	@media (max-width: 992px ) { .mgdown50(); }
+	@media (max-width: 576px ) { width: 300px; height: 200px; }
+}
+
+.medit2-enseignement
+{
+	position: absolute;
+	top: -62px;
+	left: 56%;
+}
+
+
+
+/* SECTION LIEN TARIFS */
+
+.lien-tarifs
+{
+	margin-top: 50px;
+	.mgdown50();
+	.opensansL();
+	.spacing100();
+	color: @mygrey;
+	font-size: 1.3rem;
+}
+
+.lien-tarifs a
+{
+	.opensansB();
+	color: @myblue;
+}

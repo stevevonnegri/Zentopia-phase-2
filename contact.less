@@ -1,0 +1,157 @@
+// -----------PAGE CONTACT----------//
+
+
+/* SECTION CONTACT */
+
+.contact-info p
+{
+	.latoL();
+	.spacing100();
+	color: @mygrey;
+	font-size: 1.3rem;
+
+	@media (min-width: 1921px) { max-width: 60%; .center(); }
+	@media (max-width: 576px) { font-size: 1rem; }
+}
+
+.contact-info p span
+{
+	.latoB();
+}
+
+.contact-info
+{
+	padding-top: 50px;
+	padding-bottom: 70px;
+	background-color: @lightcream;
+	position: relative;
+}
+
+.yoga4-contact
+{
+	position: absolute;
+	bottom: -23px;
+	left: 21%;
+}
+
+.contact-block h1, .plan-block h1
+{
+	.opensansSB();
+	.spacing100();
+	color: @myblue;
+	font-size: 1.8rem;
+
+	@media (max-width: 1200px) { font-size: 1.5rem; }
+}
+
+.nous-ecrire
+{
+	.mgdown50();
+}
+
+.contact-block
+{
+	width: 80%;
+	.center();
+	padding-top: 60px;
+
+	@media (max-width: 992px) { padding-bottom: 100px; }
+	@media (min-width: 1921px) { width: 60%; }
+	@media (max-width: 1350px) { width: 90%; }
+}
+
+.contact-block input, .contact-block textarea
+{
+	padding-left: 50px;
+	border-radius: 0;
+}
+
+.contact-block input::placeholder, .contact-block textarea::placeholder
+{
+	.opensansL();
+	color: grey;
+}
+
+.form-input
+{
+	position: relative;
+}
+
+.form-icon
+{
+	position: absolute;
+	left: 15px;
+	top: 8px;
+	color: @myblue;
+	font-size: 1.3rem;
+}
+
+.contact-block button
+{
+	background-color: @myred;
+	border: none;
+	padding: 10px 30px;
+	.opensansL();
+	.spacing50();
+	color: white;
+	margin-bottom: 100px;
+
+	&:hover
+	{
+		background-color: @hoverred;
+		color: white;
+		text-decoration: none;
+	}
+
+	&:active, &:focus
+	{
+		background-color: @hoverred !important;
+	}
+}
+
+.coordoonnees p
+{
+	.opensans();
+	.spacing50();
+}
+
+.coordoonnees span
+{
+	.opensansB();
+	color: @myblue;
+}
+
+
+
+/* SECTION PLAN */
+
+.plan-block
+{
+	background-color: @lightcream;
+	padding-top: 60px;
+	position: relative;
+}
+
+.plan-block p
+{
+	.opensansL();
+	margin-bottom: 30px;
+}
+
+.yoga2-contact
+{
+	position: absolute;
+	top: -89px;
+	right: 17%;
+}
+
+.plan-block h1
+{
+	margin-bottom: 60px;
+}
+
+iframe
+{
+	.mgdown50();
+	width: 90vw;
+}

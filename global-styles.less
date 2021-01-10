@@ -1,0 +1,332 @@
+/* COLORS */
+
+@lightcream: #f7f4f3;
+@myred: #7a163c;
+@hoverred: #CD2564;
+@myblue: #004e64;
+@hoverblue: #016E8D;
+@mygrey: #464646;
+
+
+
+/* MIXINS */
+
+.mgdown50
+{
+	margin-bottom: 50px;
+}
+
+.center
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.shadow
+{
+	box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.2);
+}
+
+.spacing100
+{
+	letter-spacing: 1px;
+}
+
+.spacing50
+{
+	letter-spacing: 0.5px;
+}
+
+.lato
+{
+	font-family: 'Lato', sans-serif;
+}
+
+.latoL
+{
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+}
+
+.latoB
+{
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+}
+
+.opensans
+{
+	font-family: 'Open Sans', sans-serif;
+}
+
+.opensansL
+{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+}
+
+.opensansSB
+{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 600;
+}
+
+.opensansB
+{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 700;
+}
+
+
+/* HEADER INFO */
+
+.header-info
+{
+	background-color: @myblue;
+}
+
+.header-info-content
+{
+	width: 75%;
+	.center();
+	padding: 10px 0;
+
+	@media (max-width: 800px) { width: 90%;}
+}
+
+.header-info p
+{
+	color: @lightcream;
+	.opensansL();
+	margin-bottom: 0;
+
+	@media (max-width: 800px) { font-size: 0.9rem ;}
+	@media (max-width: 500px) { font-size: 0.6rem ;}
+	@media (max-width: 350px) { font-size: 0.5rem ;}
+}
+
+.header-info-icon
+{
+	color: @lightcream;
+	margin-right: 10px;
+}
+
+
+
+/* NAVBAR */
+
+.nav-bg
+{
+	background-color: rgba(255, 255, 255, 0.6);
+	z-index: 1; /* plus bas pour que les logos apparaissent au-dessus */
+}
+
+.nav-bg .container-fluid
+{
+	width: 80%;
+	.center();
+	position: relative; // en lien avec les logos absolute
+
+	@media (max-width: 400px) { width: 100% ;}
+}
+
+.rs-logos
+{
+	display: inline-block;
+	position: absolute;
+	right: 30px;
+	top: 20px;
+	font-size: 1.5rem;
+	z-index: 11; /* plus haut pr que les logos apparaissent au-dessus du bandeau */
+
+	@media (max-width: 1200px) { display: none; } /* logos disparaissent en mm tps que la navbar */
+}
+
+.rs-logos a
+{
+	color: @myblue;
+	margin: 0 10px;
+
+	&:hover
+	{
+		color: @hoverblue;
+	}
+}
+
+.col-logo img
+{
+	height: auto;
+	max-width: 100%;
+
+	@media (max-width: 600px) { width: 180px; height: auto;	} /* resize du logo pour les écrans mobile */
+	@media (max-width: 300px) { width: 150px; height: auto;	}
+}
+
+nav ul
+{
+	margin-top: 80px; 
+}
+
+.nav-item
+{
+	margin: 0 15px;
+}
+
+.navbar-nav .dropdown-menu
+{
+	background-color: rgba(255, 255, 255, 0.6);
+}
+
+.navbar-light .navbar-nav .nav-link, .navbar-light .navbar-nav .active .nav-link, .navbar-nav .dropdown-item
+{
+	.opensansB();
+	color: @myblue;
+	.spacing100();
+	/* début effet transition underline au survol */
+	border-bottom: 3px solid transparent;
+	padding-bottom: -20px;
+	transition: 0.3s linear;
+
+	&:hover 
+	{
+		color: @hoverblue;
+		border-bottom: 3px solid white;
+	}
+
+	/*fin effet underline au survol */
+
+	@media (max-width: 1360px) { font-size: 0.8rem; } /* resize la taille de police pr moyens écrans */
+}
+
+.navbar-light .navbar-nav .active .nav-link
+{
+	border-bottom: 3px solid white;
+}
+
+
+.navbar-nav .dropdown-item:hover
+{
+	background-color: rgba(255, 255, 255, 0.6);
+}
+
+.navbar-collapse
+{
+	z-index: 9;
+}
+
+
+
+/* HEADER (sauf homepage) */
+
+.header-all
+{	
+	width: 100vw;
+	max-width: 100%;
+	background-image: url(assets/images/headers/header-all.jpg);
+	background-repeat: no-repeat;
+	background-position: center 45%;
+	background-color: @lightcream;
+	background-size: cover;
+}
+
+
+
+/* SCROLL-TOP ARROW */
+
+#scroll-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    width: 50px;
+    height: 50px;
+    display: block;
+    text-decoration: none;
+    border-radius: 10px;
+    display: none;
+    transition: all 0.3s ease;
+
+    &:hover
+    {
+    	background: rgba(0, 0, 0, 0.7);
+    }
+
+    @media (max-width: 550px) { display: none !important; }
+}
+
+.fa-long-arrow-alt-up 
+{
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    position: relative;
+    left: 17px;
+    top: 8px;
+    font-size: 2rem;
+    transition: all 0.3s ease;
+
+    &:hover
+    {
+	    color: white;
+	    top: 5px;
+    }
+}
+
+
+/* SECTION FOOTER */
+
+footer
+{
+	background-color: @myblue;
+	color: white;
+	.latoL();
+	.spacing100();
+	padding-bottom: 30px;
+}
+
+footer ul li a 
+{
+	color: white;
+	padding-bottom: 10px;
+	border-bottom: 2px solid transparent;
+	transition: 0.5s linear;
+
+	&:hover 
+		{
+			color: white;
+			border-bottom: 2px solid white;
+			text-decoration: none;
+		}
+}
+
+.footer-line1
+{
+	margin-bottom: 30px;
+}
+
+.footer-line2
+{
+	.mgdown50();
+}
+
+footer ul
+{
+	width: 70%;
+
+	@media (max-width: 1200px) { width: 100%; }
+}
+
+footer ul .nav-item
+{
+	margin-left: 0;
+}
+
+.rs-logos-white
+{
+	font-size: 1.5rem;
+}
+
+.rs-logos-white a
+{
+	color: white;
+	margin: 0 10px;
+}
