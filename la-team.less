@@ -141,18 +141,33 @@
 	 @media (max-width: 992px) { width: auto; } 
 }
 
-.team-desktop
+.team-member-block
 {
-	@media (max-width: 767px) { display: none;  } 	
+	background-color: @lightcream;
+	.shadow();
+	border-radius: 10px;
+	padding: 30px 30px;
+	margin: 10px 20px 50px 20px;
 }
 
-.team-mobile
+.img-prof
 {
-	.mgdown50();
-
-	@media (min-width: 768px) { display: none; } 
+	@media (max-width: 768px) { margin-bottom: 30px; }	
 }
 
+.nom-prof
+ {
+ 	.opensansSB();
+ 	color: @myblue;
+ 	font-size: 1.5rem;
+ }
+
+ .description-prof
+  {
+  	.opensans();
+
+  	@media (max-width: 992px) { font-size: 0.8rem; }
+  }
 
 
 /* SECTION SLIDESHOW */
@@ -231,6 +246,14 @@
 	border-radius: 10px;
 	padding: 30px 15px;
 	margin: 20px 0;
+	position: relative;
+}
+
+.quote-img
+{
+	position: absolute;
+	top: -7%;
+	left: 5%;
 }
 
 .avis-nom
@@ -254,7 +277,7 @@
 	padding-top: 50px;
 }
 
-.avis-inner img
+.avis-stars
 {
 	width: 150px;
 	.center();

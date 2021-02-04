@@ -23,6 +23,9 @@
 		<!-- liens Font Awesome -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous"/>
 
+		<!-- lien favicon -->
+		<link rel="icon" type="image/png" href="assets/icons/yoga-male.png" />
+
 		<!-- Liens Slick -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
@@ -104,17 +107,9 @@
 
 					<p class="quote">&laquo; Celui qui est le maître de lui-même est plus grand que celui qui est le maître du monde &raquo; -Bouddha</p>
 
-					<img src="assets/images/la-team.png" class="img-fluid team-desktop" alt="Portraits des professeur de yoga" />
 
-
-					<div class="team-mobile clearfix"> <!-- pour clear les floats contenus dans la div -->
-
-						<img src="assets/images/marie.png" class="marie rounded float-right img-fluid" alt="Portrait du professeur de yoga" />
-						<img src="assets/images/lena.png" class="lena rounded float-left img-fluid" alt="Portrait du professeur de yoga" />
-						<img src="assets/images/helene.png" class="helene rounded float-right img-fluid" alt="Portrait du professeur de yoga" />
-						<img src="assets/images/bastien.png" class="bastien rounded float-left img-fluid" alt="Portrait du professeur de yoga" />
-
-					</div>
+					<!-- INSERTION DE LA PARTIE DYNAMIQUE PROF, HTML DEJA CREE -->
+					<?php include('front-end/prof-description.php'); ?>
 
 				</div>
 
@@ -169,12 +164,14 @@
 				<div class="col-12 col-sm-6 col-lg-3 avis text-center">
 
 					<div class="avis-inner">
+
+						<img src="assets/icons/quotationmarks.png" class="quote-img" />
 					
-					<p class="avis-nom">Jordan, 28 ans</p>
+						<p class="avis-nom">Jordan, 28 ans</p>
 
-					<p class="avis-p">&laquo; J'adore venir au centre Zentopia méditer après mes parties de jeux vidéos ! Une fois posé au centre de la salle, assis en tailleur, j'oublie tout le stress et la rage que me procurent ces infâmes jeux et je renaît tel un homme nouveau... &raquo;</p>
+						<p class="avis-p">&laquo; J'adore venir au centre Zentopia méditer après mes parties de jeux vidéos ! Une fois posé au centre de la salle, assis en tailleur, j'oublie tout le stress et la rage que me procurent ces infâmes jeux et je renaît tel un homme nouveau... &raquo;</p>
 
-					<img src="assets/icons/fivestar.png" width="150" height="36" alt="5 étoiles" />
+						<img src="assets/icons/fivestar.png" class="avis-stars" width="150" height="36" alt="5 étoiles" />
 
 					</div>
 
@@ -183,12 +180,14 @@
 				<div class="col-12 col-sm-6 col-lg-3 avis text-center">
 
 					<div class="avis-inner">
+
+						<img src="assets/icons/quotationmarks.png" class="quote-img" />
 					
-					<p class="avis-nom">Cassandra, 23 ans</p>
+						<p class="avis-nom">Cassandra, 23 ans</p>
 
-					<p class="avis-p">&laquo; Située à deux pas de ma librairie préférée, j'ai sauté le pas en été et décidé de me joindre à l'une des séances découverte. J'ai adoré, je me suis sentie à l'aise et valorisée. Un mois plus tard, j'avais mon abonnement ! &raquo;</p>
+						<p class="avis-p">&laquo; Située à deux pas de ma librairie préférée, j'ai sauté le pas en été et décidé de me joindre à l'une des séances découverte. J'ai adoré, je me suis sentie à l'aise et valorisée. Un mois plus tard, j'avais mon abonnement ! &raquo;</p>
 
-					<img src="assets/icons/fourstar.png" width="150" height="36" alt="4 étoiles" />
+						<img src="assets/icons/fourstar.png" class="avis-stars" width="150" height="36" alt="4 étoiles" />
 
 					</div>
 				</div>
@@ -196,26 +195,14 @@
 				<div class="col-12 col-sm-6 col-lg-3 avis text-center">
 
 					<div class="avis-inner">
+
+						<img src="assets/icons/quotationmarks.png" class="quote-img" />
 					
-					<p class="avis-nom">Olivier, 28 ans</p>
+						<p class="avis-nom">Olivier, 28 ans</p>
 
-					<p class="avis-p">&laquo; Etant éleveur de chiens de profession, mon quotidien n'est pas de tout repos ! J'ai trouvé dans la pratique Zentopienne du yoga un exutoire, un moment important pour me recharger les batteries. L'équipe est devenue une véritable famille pour moi. &raquo;</p>
+						<p class="avis-p">&laquo; Etant éleveur de chiens de profession, mon quotidien n'est pas de tout repos ! J'ai trouvé dans la pratique Zentopienne du yoga un exutoire, un moment important pour me recharger les batteries. L'équipe est devenue une véritable famille pour moi. &raquo;</p>
 
-					<img src="assets/icons/fourstarhalf.png" width="150" height="36" alt="4.5 étoiles" />
-
-					</div>
-
-				</div>
-
-				<div class="col-12 col-sm-6 col-lg-3 avis text-center">
-
-					<div class="avis-inner">
-					
-					<p class="avis-nom">Emilien, 20 ans</p>
-
-					<p class="avis-p">&laquo; Très exigeant en matière de yoga, j'ai enfin trouvé un enseignement qui me plaît : j'aime sentir mon corps dépasser ses limites et le voir atteindre une souplesse inégalée. Les enseignants de Zentopia savent répondre à mes attentes très précises.  &raquo;</p>
-
-					<img src="assets/icons/fivestar.png" width="150" height="36" alt="5 étoiles" />
+						<img src="assets/icons/fourstarhalf.png" class="avis-stars" width="150" height="36" alt="4.5 étoiles" />
 
 					</div>
 
@@ -224,12 +211,14 @@
 				<div class="col-12 col-sm-6 col-lg-3 avis text-center">
 
 					<div class="avis-inner">
+
+						<img src="assets/icons/quotationmarks.png" class="quote-img" />
 					
-					<p class="avis-nom">Steve, 23 ans</p>
+						<p class="avis-nom">Emilien, 20 ans</p>
 
-					<p class="avis-p">&laquo; Etant quelqu'un de très zen, que la pression ne saurait affecter, c'est tout naturellement que j'ai adhéré à l'esprit du centre Zentopia. Ici, on avance à notre rythme, on prend le temps et on ne se laisse jamais perturber par les autres ! &raquo;</p>
+						<p class="avis-p">&laquo; Très exigeant en matière de yoga, j'ai enfin trouvé un enseignement qui me plaît : j'aime sentir mon corps dépasser ses limites et le voir atteindre une souplesse inégalée. Les enseignants de Zentopia savent répondre à mes attentes très précises.  &raquo;</p>
 
-					<img src="assets/icons/fourstarhalf.png" width="150" height="36" alt="4.5 étoiles" />
+						<img src="assets/icons/fivestar.png" class="avis-stars" width="150" height="36" alt="5 étoiles" />
 
 					</div>
 
@@ -238,12 +227,14 @@
 				<div class="col-12 col-sm-6 col-lg-3 avis text-center">
 
 					<div class="avis-inner">
+
+						<img src="assets/icons/quotationmarks.png" class="quote-img" />
 					
-					<p class="avis-nom">Melitta, 27 ans</p>
+						<p class="avis-nom">Steve, 23 ans</p>
 
-					<p class="avis-p">&laquo; J'ai trouvé en la communauté de Zentopia un véritable espace où l'on se sent bien, écouté et entouré. Leurs méthodes d'enseignement sont incroyablement pédagogues et adaptées à tous, c'est un vrai instant magique que l'on partage ensemble à chaque séance. &raquo;</p>
+						<p class="avis-p">&laquo; Etant quelqu'un de très zen, que la pression ne saurait affecter, c'est tout naturellement que j'ai adhéré à l'esprit du centre Zentopia. Ici, on avance à notre rythme, on prend le temps et on ne se laisse jamais perturber par les autres ! &raquo;</p>
 
-					<img src="assets/icons/fivestar.png" width="150" height="36" alt="5 étoiles" />
+						<img src="assets/icons/fourstarhalf.png" class="avis-stars" width="150" height="36" alt="4.5 étoiles" />
 
 					</div>
 
@@ -252,12 +243,30 @@
 				<div class="col-12 col-sm-6 col-lg-3 avis text-center">
 
 					<div class="avis-inner">
+
+						<img src="assets/icons/quotationmarks.png" class="quote-img" />
 					
-					<p class="avis-nom">Fatima, 62 ans</p>
+						<p class="avis-nom">Melitta, 27 ans</p>
 
-					<p class="avis-p">&laquo; J'ai découvert le yoga il y a peu, à l'initiative d'une amie qui m'a emmenée lors d'une séance découverte au centre Zentopia. J'ai beaucoup apprécié ce moment et j'ai pu faire la rencontre charmante d'Olenna, de Morgane ainsi qu'une partie de l'équipe. Je pense prendre mon abonnement prochainement. &raquo;</p>
+						<p class="avis-p">&laquo; J'ai trouvé en la communauté de Zentopia un véritable espace où l'on se sent bien, écouté et entouré. Leurs méthodes d'enseignement sont incroyablement pédagogues et adaptées à tous, c'est un vrai instant magique que l'on partage ensemble à chaque séance. &raquo;</p>
 
-					<img src="assets/icons/fourstarhalf.png" width="150" height="36" alt="4.5 étoiles" />
+						<img src="assets/icons/fivestar.png" class="avis-stars" width="150" height="36" alt="5 étoiles" />
+
+					</div>
+
+				</div>
+
+				<div class="col-12 col-sm-6 col-lg-3 avis text-center">
+
+					<div class="avis-inner">
+
+						<img src="assets/icons/quotationmarks.png" class="quote-img" />
+					
+						<p class="avis-nom">Fatima, 62 ans</p>
+
+						<p class="avis-p">&laquo; J'ai découvert le yoga il y a peu, à l'initiative d'une amie qui m'a emmenée lors d'une séance découverte au centre Zentopia. J'ai beaucoup apprécié ce moment et j'ai pu faire la rencontre charmante d'Olenna, de Morgane ainsi qu'une partie de l'équipe. Je pense prendre mon abonnement prochainement. &raquo;</p>
+
+						<img src="assets/icons/fourstarhalf.png" class="avis-stars" width="150" height="36" alt="4.5 étoiles" />
 
 					</div>
 

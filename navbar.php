@@ -64,6 +64,10 @@
 						
 
 						<li class="nav-item <?php active('contact.php');?>"><a class="nav-link" href="contact.php">CONTACT</a></li>
+
+						<!-- si session non active : affiche ESPACE MEMEBRE et lien vers la page de connexion 
+							 si session active : affiche MON ESPACE et lien vers la pace "Espace personnel" -->
+						<li><a href="espace-personnel.php" class="btn btn-primary btn-espace-membre shadow-none">ESPACE MEMBRE</a></li>
 						
 
 					</ul>
