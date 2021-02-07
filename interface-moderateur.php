@@ -2,7 +2,7 @@
 <html lang="fr-FR">
 	<head>
 
-		<title>Espace personnel - Zentopia</title>
+		<title>Interface modérateur - Zentopia</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"/>
 
@@ -59,15 +59,12 @@
 
 						<a href="espace-personnel.php" class="btn btn-primary btn-menu-left shadow-none">MES INFORMATIONS <i class="fas fa-caret-right text-right"></i></a>
 
-						<a href="#mes-cours" class="btn btn-primary btn-menu-left shadow-none">MES COURS <i class="fas fa-caret-right text-right"></i></a>
+						<a href="espace-personnel.php#mes-cours" class="btn btn-primary btn-menu-left shadow-none">MES COURS <i class="fas fa-caret-right text-right"></i></a>
 
-						<a href="#mon-avis" class="btn btn-primary btn-menu-left shadow-none">MON AVIS CLIENT<i class="fas fa-caret-right text-right"></i></a>
+						<a href="espace-personnel.php#mon-avis" class="btn btn-primary btn-menu-left shadow-none">MON AVIS CLIENT<i class="fas fa-caret-right text-right"></i></a>
 
-						<!-- afficher seulement si modérateur -->
-						<a href="interface-moderateur.php" class="btn btn-primary btn-admin shadow-none">MODERATION<i class="fas fa-caret-right text-right"></i></a>
-
-						<!-- afficher seulement si admin -->
-						<a href="interface-admin.php" class="btn btn-primary btn-admin shadow-none">ADMINISTRATEUR<i class="fas fa-caret-right text-right"></i></a>						
+						<!-- afficher seulement si modérateur / admin -->
+						<a href="interface-admin.php" class="btn btn-primary btn-admin shadow-none">MODERATION<i class="fas fa-caret-right text-right"></i></a>
 
 						<!-- déconnecter la session et quitter la page au clic -->
 						<a href="" class="btn btn-primary btn-red shadow-none">DECONNEXION</a>
@@ -78,128 +75,13 @@
 
 				<div class="col col-right">
 					
-					<form class="block-coordonnees" action="#" method="#">
-
-						<h1>MES COORDONNEES</h1>
-
-						<div class="row">
-
-							<div class="col-12 col-lg-6">
-								
-								<legend>Civilité :</legend>
-
-								<input type="radio" name="genre" id="femme" value="Mme" required>
-								<label for="femme">Mme</label>
-
-								<input type="radio" name="genre" id="homme" value="Mr">
-								<label for="homme">Mr</label>
-
-							</div>
-
-							<div class="col-12 col-lg-6">
-								
-								<label for="">Date de naissance :</label>
-								<input type="date" name="" class="form-control">
-
-							</div>
-							
-
-						</div>
-
-						<div class="row">
-
-							<div class="col-12 col-lg-6">
-								
-								<label for="">Prénom :</label>
-								<input type="text" name="" class="form-control">
-
-							</div>
-
-							<div class="col-12 col-lg-6">
-								
-								<label for="">Nom :</label>
-								<input type="text" name="" class="form-control">
-
-							</div>
-							
-						</div>
-
-						<div class="row">
-							
-							<div class="col-12 col-lg-6">
-								
-								<label for="">Email :</label>
-								<input type="email" name="" class="form-control">
-
-							</div>
-
-							<div class="col-12 col-lg-6">
-								
-								<label for="">Téléphone :</label>
-								<input type="tel" name="" class="form-control">
-
-							</div>
-
-						</div>
-
-						<div class="row">
-							
-							<div class="col-12 col-lg-6">
-								
-								<label for="">Code postal :</label>
-								<input type="number" name="" class="form-control">
-
-							</div>
-
-							<div class="col-12 col-lg-6">
-
-								<label for="">Ville :</label>
-								<input type="text" name="" class="form-control">
-
-							</div>
-
-						</div>
-
-						<div class="row align-items-center">
-							
-							<div class="col">
-								
-								<label for="">Adresse :</label>
-								<input type="text" name="" class="form-control">
-
-							</div>
-
-							<div class="col">
-								
-								<legend>Newsletter :</legend>
-
-								<!-- si le membre n'est pas encore inscrit à la newsletter on lui propose de le faire -->
-								<!-- <input type="checkbox" name="" id="newsletter">
-								<label for="newsletter">Je souhaite m'inscrire à la newsletter</label> -->
-
-								<!-- si le membre est déjà inscrit à la newsletter, il peut s'en désabonner -->
-								<input type="checkbox" name="" id="newsletter">
-								<label for="newsletter">Je souhaite me désinscrire de la newsletter</label>
-
-							</div>
-
-						</div>
-
-						<div class="row">
-
-							<div class="col text-center">
-	
-								<input type="submit" class="btn btn-primary btn-red shadow-none" value="VALIDER">
-
-							</div>
-
-						</div>
-
-						<img src="assets/icons/yoga4.png" class="yoga4" height="100" width="100"/>
+					<div class="block-moderation">
 						
-					</form> <!-- fin div block-coordonnees -->
+						<h1>MODERATION</h1>
 
-					<!-- le reste des rubriques n'est pas display puisqu'on pourra inclure seulement la partie du formulaire avec le POO et l'architecture MVC -->
+
+
+					</div>
 
 				</div>
 
@@ -238,9 +120,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" integrity="sha512-F5QTlBqZlvuBEs9LQPqc1iZv2UMxcVXezbHzomzS6Df4MZMClge/8+gXrKw2fl5ysdk4rWjR0vKS7NNkfymaBQ==" crossorigin="anonymous"></script>
 
 
-	<!-- script pour la scroll-top -->
 	<script>
 		
+		// SCROLL TOP SCRIPT
 		$(window).scroll(function() {
 		    if ($(this).scrollTop() >= 200) {        // Si on scroll à + de 200px
 		        $('#scroll-top').fadeIn(200);    // faire apparaître
@@ -255,6 +137,7 @@
 		    }, 500);
 		});
 
+		
 	</script>
 
 	</body>

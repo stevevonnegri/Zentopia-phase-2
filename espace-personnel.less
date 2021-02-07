@@ -5,7 +5,7 @@
 	margin-top: 50px;
 }
 
-.menu-left, .block-coordonnees, .block-mdp, .block-cours
+.menu-left, .block-coordonnees, .block-mdp, .block-cours, .block-avis
 {
 	background-color: @lightcream;
 	.shadow();
@@ -74,6 +74,7 @@
 	width: 90%;
 	padding: 10px;
 	background-color: #E27310;
+	margin-bottom: 10px;
 
 	&:hover, &:active, &:focus
 	{
@@ -100,7 +101,7 @@
 	}
 }
 
-.block-coordonnees, .block-mdp, .block-cours
+.block-coordonnees, .block-mdp, .block-cours, .block-avis
 {
 	padding: 30px 80px;
 
@@ -163,7 +164,139 @@ label, legend
 	.opensansL();
 }
 
-.block-cours p
+.block-cours p, .block-avis p
 {
 	.opensans();
+}
+
+.cours-membre
+{
+	background-color: white;
+	border: 1px solid #E1DAD4;
+	border-radius: 10px;
+	padding: 20px;
+	margin-bottom: 10px;
+}
+
+.btn-annuler
+{
+	background-color: @myblue;
+	.opensans();
+	font-size: 0.7rem;
+	border: none;
+
+	&:hover, &:focus, &:active
+	{
+		background-color: @hoverblue;
+	}
+}
+
+.cours-membre .fa-chevron-right
+{
+	font-size: 0.6rem;
+	color: @hoverblue;
+	margin-right: 5px;
+}
+
+.cours-date
+{
+	.opensansSB();
+	font-size: 0.9rem;
+	color: @hoverblue;
+}
+
+.cours-nom
+{
+	.opensansSB();
+	color: @hoverblue;
+}
+
+.cours-info
+{
+	font-size: 0.9rem;
+	color: grey;
+}
+
+.reglement-link
+{
+	.opensans();
+	color: @hoverblue;
+	font-size: 0.8rem;
+	font-style: italic;
+
+	&:hover
+	{
+		text-decoration: underline;
+		color: @hoverblue;
+	}
+}
+
+.suppr-avis
+{
+	text-align: right;
+	color: @myred;
+	.opensansSB();
+	font-size: 0.8rem;
+
+	&:hover
+	{
+		text-decoration: underline;
+		color: @myred;
+		cursor: pointer;
+	}
+}
+
+#suppr-avis-confirmation p
+{
+	font-size: 0.9rem;
+	margin-top: 30px;
+	font-style: italic;
+}
+
+.team-link
+{
+	.opensansSB();
+	color: @myblue;
+
+	&:hover
+	{
+		color: @hoverblue;
+		text-decoration: none;
+	}
+}
+
+.suppr-compte
+{
+	.opensansSB();
+	color: red;
+
+	&:hover
+	{
+		text-decoration: underline;
+		color: red;
+		cursor: pointer;
+	}
+}
+
+.suppr-compte-row
+{
+	margin-bottom: 100px;
+}
+
+#confirmation-suppression p
+{
+	.opensans();
+	font-size: 0.8rem;
+	margin-top: 30px;
+}
+
+#confirmation-suppression label
+{
+	.opensansSB();
+}
+
+// cacher la partie "confirmation de suppression du compte", qui s'affiche qu'au clic du lien "supprimer compte"
+.hidden
+{
+	display: none;
 }
