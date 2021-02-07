@@ -1,0 +1,169 @@
+// -----------PAGES ESPACE PERSONNEL----------//
+
+.espace-content
+{
+	margin-top: 50px;
+}
+
+.menu-left, .block-coordonnees, .block-mdp, .block-cours
+{
+	background-color: @lightcream;
+	.shadow();
+	border-radius: 10px;
+	margin: 10px 20px 50px 20px;
+}
+
+.menu-left
+{
+	padding: 30px 10px;
+}
+
+.col-left
+{
+	padding-right: 0;
+
+	@media (max-width: 768px) { padding: 15px;  }
+}
+
+.col-right
+{
+	padding-left: 0;
+
+	@media (max-width: 768px) { padding: 15px; }
+}
+
+.menu-left p
+{
+	.opensansB();
+	color: @myblue;
+	padding-bottom: 30px;
+	font-size: 1.1rem;
+	margin-top: 20px;
+}
+
+.btn-menu-left, .btn-admin, .btn-red
+{
+	.opensans();
+	font-size: 0.7rem;
+	color: white;
+	border: none;
+	position: relative;
+
+	&:hover, &:active, &:focus
+	{
+		
+		outline: none;
+	}
+}
+
+.btn-menu-left
+{
+	width: 90%;
+	padding: 10px;
+	background-color: @myblue;
+	margin-bottom: 10px;
+
+	&:hover, &:active, &:focus
+	{
+		background-color: @hoverblue !important;
+	}
+}
+
+.btn-admin
+{
+	width: 90%;
+	padding: 10px;
+	background-color: #E27310;
+
+	&:hover, &:active, &:focus
+	{
+		background-color: #F6923A;
+	}
+}
+
+.fa-caret-right
+{
+	position: absolute;
+	top: 35%;
+	right: 7%;
+}
+
+.btn-red
+{
+	background-color: @myred;
+	margin-top: 30px;
+	padding: 10px 20px;
+
+	&:hover, &:active, &:focus
+	{
+		background-color: @hoverred !important;
+	}
+}
+
+.block-coordonnees, .block-mdp, .block-cours
+{
+	padding: 30px 80px;
+
+	@media (max-width: 992px) { padding: 30px; }
+}
+
+.block-coordonnees
+{
+	position: relative;
+}
+
+h1
+{
+	text-align: center;
+	.opensansB();
+	color: @myblue;
+	font-size: 1.5rem;
+	.spacing50();
+	.mgdown50();
+}
+
+label, legend
+{
+	.lato();
+	font-size: 0.9rem;
+}
+
+.info-p
+{
+	.latoB(); 
+	color: @myblue;
+}
+
+.yoga4
+{
+	position: absolute;
+	top: 86.3%;
+	right: 10%;
+
+	@media (max-width: 992px) { top: 91.7%; right: 39%; }
+}
+
+.block-coordonnees .btn-red
+{
+	@media (max-width: 992px) { margin-bottom: 80px; }
+}
+
+.mdp-input
+{
+	width: 50%;
+	margin-bottom: 15px;
+
+	@media (max-width: 992px) { width: 90%; }
+}
+
+.block-mdp input::placeholder
+{
+	font-style: italic;
+	color: grey;
+	.opensansL();
+}
+
+.block-cours p
+{
+	.opensans();
+}

@@ -73,7 +73,7 @@
 
 				<div class="col col-right">
 					
-					<div class="block-coordonnees">
+					<form class="block-coordonnees" action="#" method="#">
 
 						<h1>MES COORDONNEES</h1>
 
@@ -81,15 +81,20 @@
 
 							<div class="col-12 col-lg-6">
 								
-								<label for="">Civilité :</label>
-								<p class="info-p">Mme</p>
+								<legend>Civilité :</legend>
+
+								<input type="radio" name="genre" id="femme" value="Mme" required>
+								<label for="femme">Mme</label>
+
+								<input type="radio" name="genre" id="homme" value="Mr">
+								<label for="homme">Mr</label>
 
 							</div>
 
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Date de naissance :</label>
-								<p class="info-p">11/05/1994</p>
+								<input type="date" name="" class="form-control">
 
 							</div>
 							
@@ -101,14 +106,14 @@
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Prénom :</label>
-								<p class="info-p">Anaïs</p>
+								<input type="text" name="" class="form-control">
 
 							</div>
 
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Nom :</label>
-								<p class="info-p">Bironneau</p>
+								<input type="text" name="" class="form-control">
 
 							</div>
 							
@@ -119,14 +124,14 @@
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Email :</label>
-								<p class="info-p">monadressemail@gmail.com</p>
+								<input type="email" name="" class="form-control">
 
 							</div>
 
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Téléphone :</label>
-								<p class="info-p">06 66 66 66 66</p>
+								<input type="tel" name="" class="form-control">
 
 							</div>
 
@@ -137,44 +142,44 @@
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Code postal :</label>
-								<p class="info-p">37000</p>
+								<input type="number" name="" class="form-control">
 
 							</div>
 
 							<div class="col-12 col-lg-6">
 
 								<label for="">Ville :</label>
-								<p class="info-p">Tours</p>
+								<input type="text" name="" class="form-control">
 
 							</div>
 
 						</div>
 
-						<div class="row">
+						<div class="row align-items-center">
 							
 							<div class="col">
 								
 								<label for="">Adresse :</label>
-								<p class="info-p">288bis rue des Acacias, bâtiment B</p>
+								<input type="text" name="" class="form-control">
 
 							</div>
 
 							<div class="col">
 								
 								<legend>Newsletter :</legend>
-								
-								<p class="info-p">Pas encore inscrit</p>
+
+								<input type="checkbox" name="" id="newsletter">
+								<label for="newsletter">Je souhaite m'inscrire à la newsletter</label>
 
 							</div>
 
 						</div>
 
-
 						<div class="row">
 
 							<div class="col text-center">
 	
-								<a href="espace-personnel-form.php" class="btn btn-primary btn-red shadow-none">MODIFIER MES INFORMATIONS</a>
+								<input type="submit" class="btn btn-primary btn-red shadow-none" value="VALIDER">
 
 							</div>
 
@@ -182,10 +187,10 @@
 
 						<img src="assets/icons/yoga4.png" class="yoga4" height="100" width="100"/>
 						
-					</div> <!-- fin div block-coordonnees -->
+					</form> <!-- fin div block-coordonnees -->
 
 
-					<div class="block-mdp">
+					<form class="block-mdp" action="#" method="#">
 
 						<h1>CHANGER DE MOT DE PASSE</h1>
 
@@ -227,12 +232,9 @@
 
 							</div>
 
-						</div>
+						</div>	
 
-						
-						
-
-					</div>
+					</form>
 
 
 					<div class="block-cours text-center row">
@@ -243,7 +245,7 @@
 
 							<p>Vous n'avez pas encore effectué de réservations sur un cours à venir.</p>
 
-							<a href="#" class="btn btn-primary btn-red shadow-none">ACCEDER AU PLANNING</a>
+							<a href="planning.php" class="btn btn-primary btn-red shadow-none">ACCEDER AU PLANNING</a>
 
 						</div>
 						

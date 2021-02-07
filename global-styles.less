@@ -111,6 +111,11 @@
 	margin-right: 10px;
 }
 
+.header-info span
+{
+	margin: 0 30px;
+}
+
 
 
 /* NAVBAR */
@@ -127,7 +132,7 @@
 	.center();
 	position: relative; // en lien avec les logos absolute
 
-	@media (max-width: 400px) { width: 100% ;}
+	@media (max-width: 1500px) { width: 100% ;}
 }
 
 .rs-logos
@@ -195,7 +200,7 @@ nav ul
 
 	/*fin effet underline au survol */
 
-	@media (max-width: 1360px) { font-size: 0.8rem; } /* resize la taille de police pr moyens écrans */
+	@media (max-width: 1510px) { font-size: 0.9rem; } /* resize la taille de police pr moyens écrans */
 }
 
 .navbar-light .navbar-nav .active .nav-link
@@ -229,6 +234,8 @@ nav ul
 		background-color: @hoverblue !important;
 		outline: none;
 	}
+
+	@media (max-width: 1510px) { margin-left: 0; font-size: 0.7rem; padding: 10px;}
 
 }
 

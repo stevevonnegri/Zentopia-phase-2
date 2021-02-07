@@ -67,7 +67,7 @@
 
 						<!-- si session non active : affiche ESPACE MEMEBRE et lien vers la page de connexion 
 							 si session active : affiche MON ESPACE et lien vers la pace "Espace personnel" -->
-						<li><a href="espace-personnel.php" class="btn btn-primary btn-espace-membre shadow-none">ESPACE MEMBRE</a></li>
+						<li><a href="connexion.php" class="btn btn-primary btn-espace-membre shadow-none">ESPACE MEMBRE</a></li>
 						
 
 					</ul>
