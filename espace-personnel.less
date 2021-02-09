@@ -5,7 +5,7 @@
 	margin-top: 50px;
 }
 
-.menu-left, .block-coordonnees, .block-mdp, .block-cours, .block-avis
+.menu-left, .block-coordonnees, .block-mdp, .block-cours, .block-avis, .block-moderation
 {
 	background-color: @lightcream;
 	.shadow();
@@ -101,7 +101,7 @@
 	}
 }
 
-.block-coordonnees, .block-mdp, .block-cours, .block-avis
+.block-coordonnees, .block-mdp, .block-cours, .block-avis, .block-moderation
 {
 	padding: 30px 80px;
 
@@ -169,7 +169,7 @@ label, legend
 	.opensans();
 }
 
-.cours-membre
+.cours-membre, .avis-client-inner
 {
 	background-color: white;
 	border: 1px solid #E1DAD4;
@@ -231,7 +231,7 @@ label, legend
 	}
 }
 
-.suppr-avis
+.suppr-avis, .afficher-liste
 {
 	text-align: right;
 	color: @myred;
@@ -300,3 +300,37 @@ label, legend
 {
 	display: none;
 }
+
+// INTERFACE MODERATEUR //
+.block-moderation .btn-admin
+{
+	width: 60%;
+}
+
+h2
+{
+	.opensansSB();
+	font-size: 1.3rem;
+	color: @myblue;
+	margin-top: 50px;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.avis-client
+{
+	.opensans();
+	.mgdown50();
+}
+
+.avis-client-inner p
+{
+	font-size: 0.8rem;
+}
+
+.avis-client .btn-admin
+{
+	width: 70%;
+	margin-top: 20px;
+}
+

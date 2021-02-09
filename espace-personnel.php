@@ -78,6 +78,7 @@
 
 				<div class="col col-right">
 					
+					<!-- BLOCK COORDONNEES -->
 					<div class="block-coordonnees">
 
 						<h1>MES COORDONNEES</h1>
@@ -190,6 +191,7 @@
 					</div> <!-- fin div block-coordonnees -->
 
 
+					<!-- BLOCK CHANGER DE MOT DE PASSE -->
 					<div class="block-mdp">
 
 						<h1>CHANGER DE MOT DE PASSE</h1>
@@ -234,12 +236,10 @@
 
 						</div>
 
-						
-						
-
 					</div>
 
 
+					<!-- BLOCK MES COURS -->
 					<div class="block-cours text-center row">
 
 						<div class="col">
@@ -333,6 +333,7 @@
 					</div>
 
 
+					<!-- BLOCK MON AVIS CLIENT -->
 					<div class="block-avis text-center row">
 
 						<div class="col">
