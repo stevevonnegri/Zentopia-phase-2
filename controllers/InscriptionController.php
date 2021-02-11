@@ -21,7 +21,7 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 		$user->setCours_decouverte(true);
 	}
 
-	//var_dump($user);
+	$user->Add($user);
 }
 
 $smarty->display('templates/inscription.tpl');

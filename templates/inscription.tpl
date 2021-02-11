@@ -39,7 +39,7 @@
 					
 						<h1>CREEZ VOTRE COMPTE</h1>
 
-						<form method="POST" action="">
+						<form method="POST" action="#">
 							
 							<legend>VOS IDENTIFIANTS</legend>
 
@@ -54,14 +54,14 @@
 
 							<div class="form-check form-check-inline inscription-radio">
 
-								<input type="radio" name="genre" id="femme" value="Mme" class="form-check-input" required>
+								<input type="radio" name="genre" id="femme" value="Femme" class="form-check-input" required>
 								<label for="femme" class="form-check-label">Mme</label>
 
 							</div>
 
 							<div class="form-check form-check-inline inscription-radio">
 
-								<input type="radio" name="genre" id="homme" class="form-check-input" value="Mr">
+								<input type="radio" name="genre" id="homme" class="form-check-input" value="Homme">
 								<label for="homme" class="form-check-label">Mr</label>
 
 							</div>

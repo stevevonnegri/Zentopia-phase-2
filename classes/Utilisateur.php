@@ -33,7 +33,7 @@
         $this->_prenom_utilisateur = $prenom;
     }
     public function setDate_de_naissance($dateDeNaissance){
-        $this->_nombre_de_place = $dateDeNaissance;
+        $this->_date_de_naissance = $dateDeNaissance;
     }
     public function setAdresse_rue($adresseRue){
         $this->_adresse_rue = $adresseRue;
@@ -100,6 +100,23 @@
     }
     public function getRang(){
         return $this->_rang;
+    }
+
+    //modification fonction Add pour ajouter un utlisateur
+    public function Add($objet){
+        $champs = '';
+        $valeurs = '';
+        foreach($objet as $key => $value){
+            if($value){
+                $champs .= substr($key,1).' , ';
+                $valeurs .= '"'.$value.'" , ';
+            }
+        }
+        $valeurs = substr($valeurs,0,-2);
+        $champs = substr($champs,0,-2);
+
+        $sql = $this->_bdd->prepare('INSERT INTO '.$this->_table.'('.$champs.') VALUES ('.$valeurs.')');
+        $sql->execute();
     }
 
 }
