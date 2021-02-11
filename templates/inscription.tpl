@@ -43,11 +43,11 @@
 							
 							<legend>VOS IDENTIFIANTS</legend>
 
-							<input type="email" name="" class="inscription-input form-control" placeholder="Email">
+							<input type="email" name="email" class="inscription-input form-control" placeholder="Email">
 
-							<input type="password" name="" class="inscription-input form-control" placeholder="Mot de passe">
+							<input type="password" name="mot_de_passe" class="inscription-input form-control" placeholder="Mot de passe">
 
-							<input type="password" name="" class="inscription-input form-control" placeholder="Confirmation">
+							<input type="password" name="_mot_de_passe_verif" class="inscription-input form-control" placeholder="Confirmation">
 
 
 							<legend>VOS INFORMATIONS PERSONNELLES</legend>
@@ -66,31 +66,31 @@
 
 							</div>
 
-							<input type="text" name="" class="inscription-input form-control" placeholder="Prénom">
+							<input type="text" name="prenom" class="inscription-input form-control" placeholder="Prénom">
 
-							<input type="text" name="" class="inscription-input form-control" placeholder="Nom">
+							<input type="text" name="nom" class="inscription-input form-control" placeholder="Nom">
 
-							<input type="date" name="" class="inscription-input form-control" placeholder="dklskd">
+							<input type="date" name="date_de_naissance" class="inscription-input form-control">
 
 
 							<legend>VOS COORDONNEES</legend>
 
-							<textarea class="inscription-input form-control" placeholder="Adresse (rue)"></textarea>
+							<textarea class="inscription-input form-control" placeholder="Adresse (rue)" name="adresse_rue"></textarea>
 
-							<input type="number" name="" class="inscription-input form-control" placeholder="Code postal">
+							<input type="number" name="adresse_code_postal" class="inscription-input form-control" placeholder="Code postal">
 
-							<input type="text" name="" class="inscription-input form-control" placeholder="Ville">
+							<input type="text" name="adresse_ville" class="inscription-input form-control" placeholder="Ville">
 
-							<input type="tel" name="" class="inscription-input form-control" placeholder="Téléphone">
+							<input type="tel" name="telephone" class="inscription-input form-control" placeholder="Téléphone">
 
 							<div class="form-check">
 
-								<input type="checkbox" name="" id="newsletter-inscription" class="form-check-input">
+								<input type="checkbox" name="newsletter" id="newsletter-inscription" class="form-check-input">
 								<label for="newsletter-inscription" class="form-check-label newsletter-label">J'accepte de recevoir les actualités de Zentopia par mail, à hauteur d'un ou deux par mois. </label>
 
 							</div>
 
-							<input type="submit" name="" value="NOUS REJOINDRE" class="btn btn-primary btn-red">
+							<input type="submit" name="NOUS_REJOINDRE" value="NOUS REJOINDRE" class="btn btn-primary btn-red">
 
 						</form>
 

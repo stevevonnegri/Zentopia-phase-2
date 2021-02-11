@@ -16,8 +16,8 @@
     protected $_cours_decouverte;
     protected $_rang;
     
-    protected $_table = "utilisateur"
-    protected $_cle = "id_utilisateur"
+    protected $_table = "utilisateur";
+    protected $_cle = "id_utilisateur";
 
     //setters
     public function setId_utilisateur(int $id){

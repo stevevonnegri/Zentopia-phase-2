@@ -4,7 +4,7 @@
 	
 	//autoloader
 	function chargerClass($class) {
-	require('classe/'.$class.'.php');
+	require('classes/'.$class.'.php');
 	}
 	spl_autoload_register('chargerClass');
 	

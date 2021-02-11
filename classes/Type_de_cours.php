@@ -9,8 +9,8 @@
     protected $_image_type_de_cours;
     protected $_icone_type_de_cours;
 
-    protected $_table = "type_de_cours"
-    protected $_cle = "id_type_de_cours"
+    protected $_table = "type_de_cours";
+    protected $_cle = "id_type_de_cours";
 
     //setters
     public function setId_type_de_cours(int $id){

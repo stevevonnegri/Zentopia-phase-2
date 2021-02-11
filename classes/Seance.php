@@ -9,8 +9,8 @@
     protected $_id_type_de_cours;
     protected $_id_professeur;
     
-    protected $_table = "seance"
-    protected $_cle = "id_seance"
+    protected $_table = "seance";
+    protected $_cle = "id_seance";
 
     //setters
     public function setId_seance(int $id){

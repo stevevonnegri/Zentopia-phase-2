@@ -7,8 +7,8 @@
     protected $_approuve;
     protected $_id_utilisateur;
 
-    protected $_table = "avis"
-    protected $_cle = "id_avis"
+    protected $_table = "avis";
+    protected $_cle = "id_avis";
 
     //setters
     public function setId_avis(int $id){

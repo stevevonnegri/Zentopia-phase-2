@@ -6,8 +6,8 @@
     protected $_photo;
     protected $_id_utilisateur;
 
-    protected $_table = "professeur"
-    protected $_cle = "id_professeur"
+    protected $_table = "professeur";
+    protected $_cle = "id_professeur";
 
     //setters
     public function setId_professeur(int $id){

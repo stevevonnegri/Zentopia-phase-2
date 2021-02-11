@@ -5,8 +5,8 @@
     protected $_url_image;
     protected $_id_utilisateur;
 
-    protected $_table = "image"
-    protected $_cle = "id_image"
+    protected $_table = "image";
+    protected $_cle = "id_image";
 
     //setters
     public function setId_image(int $id){
