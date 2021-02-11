@@ -68,19 +68,28 @@
 
 
 
+		<!-- section planning dynamique, qui doit être adapté en smarty/php pour afficher les éléments selon la recherche, selon les actions du membre, du prof ou de l'admin -->
 		<div class="container">
 
 			<div class="planning-dynamique">
 			
-				<div class="row planning-head">
+				<div class="row planning-head justify-content-around align-items-center">
 						
-					<div class="col">
+					<div class="col text-left">
 						
-						<p>Trouver un cours</p>
+						<p class="titre-head">Trouver un cours</p>
 
 					</div>
 
-					<div class="col">
+
+					<!-- à afficher seulement pour les admins !-->
+					<div class="col-3">
+						
+						<button class="btn btn-primary btn-admin shadow-none">+ AJOUTER UN COURS</button>
+
+					</div>
+
+					<div class="col text-right">
 						
 						<a href="#">Mon compte</a>
 
@@ -88,15 +97,16 @@
 
 				</div>
 
-				<div class="row">
+				<div class="row background-light align-items-center planning-search">
 					
-					<div class="col">
+					<div class="col-3">
 						
-						<a href="#">SEMAINE ACTUELLE</a>
+						<!-- optionnel: implémenter une règle 'active' (avec border-bottom qui souligne) pour indiquer où on se trouve dans les pages du planning (SEMAINE ACTUELLE + Page "1" ou Page "2" ou Page "3") -->
+						<a href="#" class="semaine-actuelle">SEMAINE ACTUELLE</a>
 
 					</div>
 
-					<div class="col">
+					<div class="col-2">
 						
 						<a href="#">1</a>
 						<a href="#">2</a>
@@ -104,11 +114,12 @@
 
 					</div>
 
-					<div class="col">
+					<div class="col-7 text-right">
 						
 						<form method="post" accept="">
 							
 							<label for="">Type de cours :</label>
+
 							<select>
 									
 								<option value="">Tous</option>
@@ -127,9 +138,87 @@
 
 				</div>
 
-			</div>	
+				<div class="row background-jour">
+					
+					<div class="col">
+						
+						<p>lundi 25 janvier</p>
 
-		</div>
+					</div>
+
+				</div>
+
+				<div class="row background-light align-items-center">
+					
+					<div class="col">
+						
+						<p>8h30 - 10h</p>
+
+					</div>
+
+					<div class="col">
+						
+						<p>SLOW YOGA <br/>
+							<a href="#" class="voir-description">> voir description</a> </p>
+
+					</div>
+
+					<div class="col">
+						
+						<p>avec Marie</p>
+
+					</div>
+
+					<div class="col">
+						
+						<p class="places-dispo">places disponibles</p>
+
+					</div>
+
+					<div class="col">
+						
+						<button class="btn btn-primary shadow-none btn-reserver">RESERVER</button>
+
+					</div>
+
+
+					<!-- à afficher si le membre a effectué une réservation sur ce cours -->
+					<!--<div class="col-12">
+						
+						<p class="confirmation-reservation">La séance a bien été réservée. Retrouvez toutes les informations dans l'e-mail de confirmation que nous vous avons envoyé.</p>
+
+					</div> -->
+
+
+					<div class="">
+						
+
+
+					</div>
+
+
+				</div>
+
+
+				<div class="row planning-footer justify-content-around">
+						
+					<div class="col text-left">
+						
+						<p class="titre-head">Trouver un cours</p>
+
+					</div>
+
+					<div class="col text-right">
+						
+						<a href="#">Mon compte</a>
+
+					</div>
+
+				</div>
+
+			</div>	<!-- fin div planning-dynamique -->
+
+		</div> <!-- fin div container -->
 
 
 

@@ -70,19 +70,122 @@
 
 
 /* SECTION PLANNING DYNAMIQUE */
-
 .planning-dynamique
 {
-	background-color: @lightcream;
-	.shadow();
-	border-radius: 10px;
-	padding: 30px;
-	margin-bottom: 80px;
+	margin-bottom: 100px;
+	.latoL();
 }
 
 .planning-head
 {
-	background-color: grey;
+	background-color: #CBCBCB;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	padding: 30px;
+	.shadow();
+}
+
+.planning-footer
+{
+	background-color: #CBCBCB;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	padding: 30px;
+	.shadow();
+}
+
+.titre-head
+{
+	.latoB();
+	color: @mygrey;
+}
+
+.planning-head a, .planning-footer a
+{
+	color: black;
+
+	&:hover
+	{
+		text-decoration: none;
+		.latoB();
+	}
+}
+
+.planning-dynamique p
+{
+	margin-bottom: 0;
+}
+
+.background-light
+{
+	background-color: @lightcream;
+	padding: 30px;
+	border-bottom: 1px solid #CBCBCB;
+	border-right: 1px solid #CBCBCB;
+	border-left: 1px solid #CBCBCB;
+	.shadow();
+}
+
+.background-jour
+{
+	background-color: #CBCBCB;
+	padding: 30px;
+	.shadow();
+}
+
+.planning-dynamique select
+{
+	padding: 5px;
+	border-radius: 5px;
+	margin-left: 5px;
+}
+
+.planning-search a
+{
+	color: @myred;
+	.latoB();
+
+	&:hover
+	{
+		border-bottom: 2px solid @myred;
+		text-decoration: none;
+	}
+}
+
+.background-jour p
+{
+	.latoB();
+	color: @myblue;
+}
+
+.planning-dynamique .voir-description
+{
+	color: @hoverblue;
+	.latoB();
+}
+
+.places-dispo
+{
+	font-style: italic;
+}
+
+.planning-dynamique .btn-reserver
+{
+	background-color: @myblue;
+	.opensans();
+	font-size: 0.9rem;
+	border: none;
+
+	&:hover, &:focus, &:active
+	{
+		background-color: @hoverblue !important;
+	}
+}
+
+.confirmation-reservation
+{
+	margin-top: 20px;
+	.latoB();
 }
 
 
