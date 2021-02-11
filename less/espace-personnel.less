@@ -1,0 +1,336 @@
+// -----------PAGES ESPACE PERSONNEL----------//
+
+.espace-content
+{
+	margin-top: 50px;
+}
+
+.menu-left, .block-coordonnees, .block-mdp, .block-cours, .block-avis, .block-moderation
+{
+	background-color: @lightcream;
+	.shadow();
+	border-radius: 10px;
+	margin: 10px 20px 50px 20px;
+}
+
+.menu-left
+{
+	padding: 30px 10px;
+}
+
+.col-left
+{
+	padding-right: 0;
+
+	@media (max-width: 768px) { padding: 15px;  }
+}
+
+.col-right
+{
+	padding-left: 0;
+
+	@media (max-width: 768px) { padding: 15px; }
+}
+
+.menu-left p
+{
+	.opensansB();
+	color: @myblue;
+	padding-bottom: 30px;
+	font-size: 1.1rem;
+	margin-top: 20px;
+}
+
+.btn-menu-left, .btn-admin, .btn-red
+{
+	.opensans();
+	font-size: 0.7rem;
+	color: white;
+	border: none;
+	position: relative;
+
+	&:hover, &:active, &:focus
+	{
+		
+		outline: none;
+	}
+}
+
+.btn-menu-left
+{
+	width: 90%;
+	padding: 10px;
+	background-color: @myblue;
+	margin-bottom: 10px;
+
+	&:hover, &:active, &:focus
+	{
+		background-color: @hoverblue !important;
+	}
+}
+
+.btn-admin
+{
+	width: 90%;
+	padding: 10px;
+	background-color: #E27310;
+	margin-bottom: 10px;
+
+	&:hover, &:active, &:focus
+	{
+		background-color: #F6923A;
+	}
+}
+
+.fa-caret-right
+{
+	position: absolute;
+	top: 35%;
+	right: 7%;
+}
+
+.btn-red
+{
+	background-color: @myred;
+	margin-top: 30px;
+	padding: 10px 20px;
+
+	&:hover, &:active, &:focus
+	{
+		background-color: @hoverred !important;
+	}
+}
+
+.block-coordonnees, .block-mdp, .block-cours, .block-avis, .block-moderation
+{
+	padding: 30px 80px;
+
+	@media (max-width: 992px) { padding: 30px; }
+}
+
+.block-coordonnees
+{
+	position: relative;
+}
+
+.espace-content h1
+{
+	text-align: center;
+	.opensansB();
+	color: @myblue;
+	font-size: 1.5rem;
+	.spacing50();
+	.mgdown50();
+}
+
+label, legend
+{
+	.lato();
+	font-size: 0.9rem;
+}
+
+.info-p
+{
+	.latoB(); 
+	color: @myblue;
+}
+
+.yoga4
+{
+	position: absolute;
+	top: 86.3%;
+	right: 10%;
+
+	@media (max-width: 992px) { top: 91.7%; right: 39%; }
+}
+
+.block-coordonnees .btn-red
+{
+	@media (max-width: 992px) { margin-bottom: 80px; }
+}
+
+.mdp-input
+{
+	width: 50%;
+	margin-bottom: 15px;
+
+	@media (max-width: 992px) { width: 90%; }
+}
+
+.block-mdp input::placeholder
+{
+	font-style: italic;
+	color: grey;
+	.opensansL();
+}
+
+.block-cours p, .block-avis p
+{
+	.opensans();
+}
+
+.cours-membre, .avis-client-inner
+{
+	background-color: white;
+	border: 1px solid #E1DAD4;
+	border-radius: 10px;
+	padding: 20px;
+	margin-bottom: 10px;
+}
+
+.btn-annuler
+{
+	background-color: @myblue;
+	.opensans();
+	font-size: 0.7rem;
+	border: none;
+
+	&:hover, &:focus, &:active
+	{
+		background-color: @hoverblue;
+	}
+}
+
+.cours-membre .fa-chevron-right
+{
+	font-size: 0.6rem;
+	color: @hoverblue;
+	margin-right: 5px;
+}
+
+.cours-date
+{
+	.opensansSB();
+	font-size: 0.9rem;
+	color: @hoverblue;
+}
+
+.cours-nom
+{
+	.opensansSB();
+	color: @hoverblue;
+}
+
+.cours-info
+{
+	font-size: 0.9rem;
+	color: grey;
+}
+
+.reglement-link
+{
+	.opensans();
+	color: @hoverblue;
+	font-size: 0.8rem;
+	font-style: italic;
+
+	&:hover
+	{
+		text-decoration: underline;
+		color: @hoverblue;
+	}
+}
+
+.suppr-avis, .afficher-liste
+{
+	text-align: right;
+	color: @myred;
+	.opensansSB();
+	font-size: 0.8rem;
+
+	&:hover
+	{
+		text-decoration: underline;
+		color: @myred;
+		cursor: pointer;
+	}
+}
+
+#suppr-avis-confirmation p
+{
+	font-size: 0.9rem;
+	margin-top: 30px;
+	font-style: italic;
+}
+
+.team-link
+{
+	.opensansSB();
+	color: @myblue;
+
+	&:hover
+	{
+		color: @hoverblue;
+		text-decoration: none;
+	}
+}
+
+.suppr-compte
+{
+	.opensansSB();
+	color: red;
+
+	&:hover
+	{
+		text-decoration: underline;
+		color: red;
+		cursor: pointer;
+	}
+}
+
+.suppr-compte-row
+{
+	margin-bottom: 100px;
+}
+
+#confirmation-suppression p
+{
+	.opensans();
+	font-size: 0.8rem;
+	margin-top: 30px;
+}
+
+#confirmation-suppression label
+{
+	.opensansSB();
+}
+
+// cacher la partie "confirmation de suppression du compte", qui s'affiche qu'au clic du lien "supprimer compte"
+.hidden
+{
+	display: none;
+}
+
+// INTERFACE MODERATEUR //
+.block-moderation .btn-admin
+{
+	width: 60%;
+}
+
+.espace-content h2
+{
+	.opensansSB();
+	font-size: 1.3rem;
+	color: @myblue;
+	margin-top: 50px;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.avis-client
+{
+	.opensans();
+	.mgdown50();
+}
+
+.avis-client-inner p
+{
+	font-size: 0.8rem;
+}
+
+.avis-client .btn-admin
+{
+	width: 70%;
+	margin-top: 20px;
+}
+
