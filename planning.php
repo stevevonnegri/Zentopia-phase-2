@@ -68,46 +68,66 @@
 
 
 
-		<!-- SECTION A VENIR -->
-		<div class="a-venir">
+		<div class="container">
 
-			<img src="assets/icons/medit2.png" class="medit2-planning" width="60" height="60" alt="" />
+			<div class="planning-dynamique">
 			
-			<div class="container text-center">
+				<div class="row planning-head">
+						
+					<div class="col">
+						
+						<p>Trouver un cours</p>
 
-				<h1>A VENIR</h1>
+					</div>
 
-				<div class="row justify-content-center">
-
-					<div class="col col-md-10">
-
-						<p>Nous travaillons actuellement sur notre site web afin de nous proposer la possibilité de réserver vos cours directement en ligne. 
-
-						<br/><br/>
-						Pour être prévenu de l'arrivée de ce nouveau service, rejoignez notre newsletter et recevez votre invitation à l'une de <span>nos séances découverte</span>* :</p>
+					<div class="col">
+						
+						<a href="#">Mon compte</a>
 
 					</div>
 
 				</div>
 
-				<div class="row justify-content-center">
-				
-					<div class="col newsletter-planning">
+				<div class="row">
+					
+					<div class="col">
 						
-						<form class="form-inline justify-content-center">
+						<a href="#">SEMAINE ACTUELLE</a>
+
+					</div>
+
+					<div class="col">
+						
+						<a href="#">1</a>
+						<a href="#">2</a>
+						<a href="#">3</a>
+
+					</div>
+
+					<div class="col">
+						
+						<form method="post" accept="">
 							
-							<input type="email" name="email" placeholder="saisir mon email">
-							<button type="submit" class="btn btn-primary shadow-none">M'INSCRIRE</button>
+							<label for="">Type de cours :</label>
+							<select>
+									
+								<option value="">Tous</option>
+								<option value="hatha">Hatha</option>
+								<option value="vinyasa">Vinyasa</option>
+								<option value="slow-yoga">Slow yoga</option>
+								<option value="kid-yoga">Kid yoga</option>
+								<option value="meditation-guidee">Méditation guidée</option>
+								<option value="meditation-tibetaine">Méditation tibétaine</option>	
+
+							</select>
 
 						</form>
 
 					</div>
 
-					<p class="newsletter-planning-disclaimer">*Offre valable pour tout.e nouvel.le élève s'inscrivant à la newsletter, sur l'une des six séances découvertes proposées par Zentopia sur l'année, plus d'informations dans le mail de confirmation de la newsletter.</p>
-
 				</div>
 
-			</div>
+			</div>	
 
 		</div>
 

@@ -119,6 +119,55 @@
 
 						</div>
 
+						<h2>Gérer les avis clients</h2>
+
+
+						<!-- à afficher s'il y a des avis en attente de modération-->
+						<p>Avis en attente de modération :</p>
+						
+						<div class="avis-client">
+
+							<div class="avis-client-inner">
+								
+								<p>Auteur : Florence</p>
+								<p>Note : 4/5</p>
+								<p>Avis : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
+
+							</div>
+
+							<div class="row justify-content-start">
+								
+								<div class="col-3">
+
+									<button class="btn btn-primary btn-admin shadow-none">VALIDER</button>
+
+								</div>
+
+								<div class="col-3">
+									
+									<button class="btn btn-primary btn-admin shadow-none">REFUSER</button>
+
+								</div>
+
+							</div>
+
+						</div>
+
+
+						<!-- à afficher lorsqu'il n'y a pas d'avis en attente-->
+						<!--<p class="text-center">Il n'y a pas d'avis client en attente de modération.</p> -->
+
+
+
+						<div class="col text-right">
+
+
+							<!-- bouton qui va charger la liste de TOUS les avis, à commencer par ceux qui sont encore en attente de modération s'il y en a, puis les autres du plus récent au plus ancien -->
+							<!-- pour le html/css, récupérer la même structure que les avis en attente de modération -->
+							<a href="#" class="afficher-liste">Afficher la totalité des avis</a>
+
+						</div>
+
 					</div> <!-- fin block modération -->
 
 				</div>
@@ -126,6 +175,14 @@
 			</div>
 
 		</div>
+
+
+
+
+		
+
+
+
 
 
 

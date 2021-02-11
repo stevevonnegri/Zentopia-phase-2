@@ -2,7 +2,7 @@
 <html lang="fr-FR">
 	<head>
 
-		<title>Interface modérateur - Zentopia</title>
+		<title>Interface administrateur - Zentopia</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"/>
 
@@ -119,6 +119,188 @@
 
 						</div>
 
+						<h2>Rechercher un membre</h2>
+
+						<form method="post" action="" class="form-recherche">
+
+							<legend>Spécifiez au moins un critère de recherche :</legend>
+
+							<div class="form-row">
+								
+								<div class="col">
+									
+									<input type="text" name="nom" placeholder="Nom" class="form-control input-membre">
+
+								</div>
+
+								<div class="col">
+									
+									<input type="text" name="prenom" placeholder="Prénom" class="form-control input-membre">
+
+								</div>
+
+								<div class="col">
+									
+									<input type="telephone" name="telephone" placeholder="Téléphone" class="form-control input-membre">
+
+								</div>
+
+								<div class="col">
+									
+									<select name="rang" class="form-control">
+										
+										<option value="">--Rang--</option>
+										<option value="membre">Membre</option>
+										<option value="moderateur">Modérateur</option>
+										<option value="admin">Admin</option>
+
+									</select>
+
+								</div>
+
+							</div>
+
+
+							<div class="row">
+								
+								<div class="col text-center">
+									
+									<button type="submit" class="btn btn-primary btn-red text-center">RECHERCHER</button>
+
+								</div>
+
+							</div>	
+
+						</form>
+
+						<div class="resultat-recherche">
+
+							<p>Résultat de la recherche :</p>
+
+							<!-- formulaire à pré-remplir avec les informations du membre -->
+							<form class="membre-trouve">
+
+								<div class="row">
+
+									<div class="col-12 col-lg-6">
+										
+										<legend>Civilité :</legend>
+
+										<input type="radio" name="genre" id="femme" value="Mme" required checked>
+										<label for="femme">Mme</label>
+
+										<input type="radio" name="genre" id="homme" value="Mr">
+										<label for="homme">Mr</label>
+
+									</div>
+
+									<div class="col-12 col-lg-6">
+										
+										<label for="">Date de naissance :</label>
+										<input type="date" name="" class="form-control" value="1994-05-11">
+
+									</div>
+									
+
+								</div>
+
+								<div class="row">
+
+									<div class="col-12 col-lg-6">
+										
+										<label for="">Prénom :</label>
+										<input type="text" name="" class="form-control" value="">
+
+									</div>
+
+									<div class="col-12 col-lg-6">
+										
+										<label for="">Nom :</label>
+										<input type="text" name="" class="form-control" value="">
+
+									</div>
+									
+								</div>
+
+								<div class="row">
+									
+									<div class="col-12 col-lg-6">
+										
+										<label for="">Email :</label>
+										<input type="email" name="" class="form-control" value="">
+
+									</div>
+
+									<div class="col-12 col-lg-6">
+										
+										<label for="">Téléphone :</label>
+										<input type="tel" name="" class="form-control" value="">
+
+									</div>
+
+								</div>
+
+								<div class="row">
+									
+									<div class="col-12 col-lg-6">
+										
+										<label for="">Code postal :</label>
+										<input type="number" name="" class="form-control" value="">
+
+									</div>
+
+									<div class="col-12 col-lg-6">
+
+										<label for="">Ville :</label>
+										<input type="text" name="" class="form-control" value="">
+
+									</div>
+
+								</div>
+
+								<div class="row align-items-center">
+									
+									<div class="col">
+										
+										<label for="">Adresse :</label>
+										<input type="text" name="" class="form-control" value="">
+
+									</div>
+
+								</div>
+
+								<div class="row align-items-center">
+
+									<div class="col">
+										
+										<select name="rang" class="form-control">
+										
+										<option value="">--Rang--</option>
+										<option value="membre">Membre</option>
+										<option value="moderateur">Modérateur</option>
+										<option value="admin">Admin</option>
+
+									</select>
+
+									</div>
+									
+								</div>
+								
+
+								<div class="row">
+
+									<div class="col text-center">
+			
+										<input type="submit" class="btn btn-primary btn-red shadow-none" value="VALIDER">
+
+									</div>
+
+								</div>
+
+							</form> <!-- fin div élément trouvé -->
+
+						</div>
+						
 					</div> <!-- fin block modération -->
 
 				</div>
@@ -126,6 +308,14 @@
 			</div>
 
 		</div>
+
+
+
+
+		
+
+
+
 
 
 

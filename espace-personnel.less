@@ -113,7 +113,7 @@
 	position: relative;
 }
 
-h1
+.espace-content h1
 {
 	text-align: center;
 	.opensansB();
@@ -169,7 +169,7 @@ label, legend
 	.opensans();
 }
 
-.cours-membre, .avis-client-inner
+.cours-membre, .avis-client-inner, .galerie-inner
 {
 	background-color: white;
 	border: 1px solid #E1DAD4;
@@ -283,14 +283,14 @@ label, legend
 	margin-bottom: 100px;
 }
 
-#confirmation-suppression p
+#confirmation-suppression p, #confirmation-suppr-membre p
 {
 	.opensans();
 	font-size: 0.8rem;
 	margin-top: 30px;
 }
 
-#confirmation-suppression label
+#confirmation-suppression label, #confirmation-suppr-membre label
 {
 	.opensansSB();
 }
@@ -301,13 +301,21 @@ label, legend
 	display: none;
 }
 
-// INTERFACE MODERATEUR //
+
+// INTERFACE MODERATEUR // 
+
+// AVIS CLIENTS
+.block-moderation
+{
+	margin-bottom: 100px;
+}
+
 .block-moderation .btn-admin
 {
 	width: 60%;
 }
 
-h2
+.espace-content h2
 {
 	.opensansSB();
 	font-size: 1.3rem;
@@ -334,3 +342,72 @@ h2
 	margin-top: 20px;
 }
 
+
+// GERER GALERIE
+.galerie-inner
+{
+	padding-top: 50px;
+}
+
+.suppr-img
+{
+	border: none;
+	background-color: transparent;
+	//.opensans();
+	font-size: 0.9rem;
+	color: red;
+	margin-bottom: 30px;
+
+	&:hover, &:focus, &:active
+	{
+		text-decoration: underline;
+		outline: none;
+	}
+} 
+
+#ajout-img-form
+{
+	margin-top: 40px;
+}
+
+
+// RECHERCHER MEMBRE
+.form-recherche legend
+{
+	.opensans();
+}
+
+.input-membre
+{
+	margin-right: 10px;
+}
+
+.resultat-recherche
+{
+	margin-top: 50px;
+}
+
+.membre-trouve
+{
+	border: 1px solid #E1DAD4;
+	border-radius: 10px;
+	padding: 20px;
+	margin-bottom: 10px;
+}
+
+.membre-trouve span
+{
+	.opensansSB();
+	color: @myblue;
+	font-size: 0.9rem;
+}
+
+.membre-trouve .btn-admin
+{
+	margin-top: 30px;
+}
+
+.membre-trouve select
+{
+	margin-top: 30px;
+}

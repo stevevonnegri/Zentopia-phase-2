@@ -119,6 +119,93 @@
 
 						</div>
 
+						<h2>Rechercher un membre</h2>
+
+						<form method="post" action="" class="form-recherche">
+
+							<legend>Spécifiez au moins un critère de recherche :</legend>
+
+							<div class="form-row">
+								
+								<div class="col">
+									
+									<input type="text" name="nom" placeholder="Nom" class="form-control input-membre">
+
+								</div>
+
+								<div class="col">
+									
+									<input type="text" name="prenom" placeholder="Prénom" class="form-control input-membre">
+
+								</div>
+
+								<div class="col">
+									
+									<input type="telephone" name="telephone" placeholder="Téléphone" class="form-control input-membre">
+
+								</div>
+
+							</div>
+
+
+							<div class="row">
+								
+								<div class="col text-center">
+									
+									<button type="submit" class="btn btn-primary btn-red text-center">RECHERCHER</button>
+
+								</div>
+
+							</div>	
+
+						</form>
+
+						<div class="resultat-recherche">
+
+							<p>Résultat de la recherche :</p>
+							
+							<!-- à afficher lorsque la recherche ne retourne aucun résultat -->
+							<!--<p class="text-center">Aucun membre trouvé. Veuillez vérifier les informations de recherche.</p>-->
+
+							<!-- à afficher lorsque la recherche retourne des éléments de la BDD -->
+							<div class="membre-trouve">
+
+								<div class="row">
+									
+									<div class="col">
+										
+										<span>Nom :</span> Bironneau
+
+									</div>
+
+									<div class="col">
+										
+										<span>Prénom :</span> Anaïs
+
+									</div>
+
+								</div>
+
+								<div class="row">
+									
+									<div class="col">
+										
+										<span>E-mail :</span> monadressemail@gmail.com
+
+									</div>
+
+									<div class="col">
+										
+										<span>Téléphone :</span> 0677777777
+
+									</div>
+
+								</div>
+
+							</div> <!-- fin div élément trouvé -->
+
+						</div>
+						
 					</div> <!-- fin block modération -->
 
 				</div>
@@ -126,6 +213,14 @@
 			</div>
 
 		</div>
+
+
+
+
+		
+
+
+
 
 
 

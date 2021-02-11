@@ -119,6 +119,110 @@
 
 						</div>
 
+						<h2>Images de la galerie</h2>
+
+						<div class="galerie-inner">
+							
+							<div class="row">
+								
+								<div class="col text-center">
+									
+									<img src="assets/images/slideshow3.jpg" width="100"/>
+
+									<button class="suppr-img">Supprimer</button>
+
+								</div>
+
+								<div class="col text-center">
+									
+									<img src="assets/images/slideshow3.jpg" width="100"/>
+
+									<button class="suppr-img">Supprimer</button>
+
+								</div>
+
+								<div class="col text-center">
+									
+									<img src="assets/images/slideshow3.jpg" width="100"/>
+
+									<button class="suppr-img">Supprimer</button>
+
+								</div>
+
+								<div class="col text-center">
+									
+									<img src="assets/images/slideshow3.jpg" width="100"/>
+
+									<button class="suppr-img">Supprimer</button>
+
+								</div>
+
+							</div>
+
+							<div class="row">
+								
+								<div class="col text-center">
+									
+									<img src="assets/images/slideshow3.jpg" width="100"/>
+
+									<button class="suppr-img">Supprimer</button>
+
+								</div>
+
+								<div class="col text-center">
+									
+									<img src="assets/images/slideshow3.jpg" width="100"/>
+
+									<button class="suppr-img">Supprimer</button>
+
+								</div>
+
+								<div class="col text-center">
+									
+									<img src="assets/images/slideshow3.jpg" width="100"/>
+
+									<button class="suppr-img">Supprimer</button>
+
+								</div>
+
+								<div class="col text-center">
+									
+									<img src="assets/images/slideshow3.jpg" width="100"/>
+
+									<button class="suppr-img">Supprimer</button>
+
+								</div>
+
+							</div>
+
+							<div class="row justify-content-center">
+							
+								<div class="col-6 text-center">
+									
+									<button class="btn btn-primary btn-admin shadow-none" onclick="ajoutImg();">+ AJOUTER UNE PHOTO</button>
+
+								</div>
+
+							</div>
+
+							<div class="hidden" id="ajout-img-form">
+								
+								<form method="post" action="interface-mode-gerer-galerie.php">
+									
+									<input type="file" name="" accept="image/jpeg, image/jpg" required>
+									<button type="submit">ENVOYER</button>
+
+								</form>
+
+							</div>
+
+						</div>
+
+
+
+						
+						
+
 					</div> <!-- fin block modération -->
 
 				</div>
@@ -126,6 +230,14 @@
 			</div>
 
 		</div>
+
+
+
+
+		
+
+
+
 
 
 
@@ -163,6 +275,14 @@
 		        scrollTop : 0                       // remonter jusqu'en haut
 		    }, 500);
 		});
+
+
+		// afficher le form pour ajouter une photo à la galerie
+		function ajoutImg() {
+
+			let x = document.getElementById('ajout-img-form');
+			x.classList.toggle('hidden');
+		}	
 
 		
 	</script>
