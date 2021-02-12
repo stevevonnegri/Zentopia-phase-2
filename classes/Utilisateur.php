@@ -56,8 +56,8 @@
     public function setNewsletter($newsletter){
         $this->_newsletter = $newsletter;
     }
-    public function setCours_decouverte($coursDecouverte){
-        $this->_cours_decouverte = $coursDecouverte;
+    public function setSeance_decouverte($seanceDecouverte){
+        $this->_seance_decouverte = $seanceDecouverte;
     }
     public function setRang($rang){
         $this->_rang = $rang;
@@ -101,8 +101,8 @@
     public function getNewsletter(){
         return $this->_newsletter;
     }
-    public function getCours_decouverte(){
-        return $this->_cours_decouverte;
+    public function getSeance_decouverte(){
+        return $this->_seance_decouverte;
     }
     public function getRang(){
         return $this->_rang;
@@ -124,6 +124,19 @@
         }
 
         $sql->execute();
+    //Count le nombre d'email egal a l'entre dans la BDD
+    public function checkEmail($email) {
+        $sql = $this->_bdd->query('SELECT COUNT(*) FROM '.$this->_table.' WHERE email = "'.$email.'"');
+        $nb = $sql->fetchColumn();
+        return $nb;
+    }
+
+    //Recupere les informations de l'utilisateur qui sont egal à l'email et les stocks dans un objet
+    public function getUserByMail($mail) {
+        $sql = $this->_bdd->query('SELECT * FROM '.$this->_table.' WHERE email = "'.$mail.'"');
+        $utilisateur = $sql->fetch();
+        $utilisateur = new Utilisateur($utilisateur);
+        return $utilisateur;
     }
 
     /**

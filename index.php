@@ -1,5 +1,18 @@
 <?php
 
+/*if (!isset($_SESSION)){
+    //Verifier si dans le cookie existe
+    if(isset($_COOKIE)) {
+        //Verifie si email+mdp match
+
+        //Faire la connexion ensuite
+
+        session_start;
+    }
+}*/
+
+$smarty->assign('_SESSION', $_SESSION);
+
 require('functions/function.php');
 require('config.php');
 

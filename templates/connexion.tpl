@@ -26,6 +26,8 @@
 
 		</header> 
 
+		
+
 
 		<div class="container connexion-content">
 			
@@ -38,12 +40,22 @@
 						<img src="assets/icons/yoga2.png" width="100" height="100" class="yoga2">
 						
 						<h1>CONNECTEZ-VOUS</h1>
+						
+						{if isset($error)}
+							{$error}
+						{/if}
 
-						<form action="" method="">
+						<form action="" method="post">
 
-							<input type="email" name="" class="form-control connexion-input" placeholder="Email">
+							<input type="email" name="email_connexion" class="form-control connexion-input" placeholder="Email">
+							{if isset($erroremail)}
+								{$erroremail}
+							{/if}
 
-							<input type="password" name="" class="form-control connexion-input" placeholder="Mot de passe">
+							<input type="password" name="password_connexion" class="form-control connexion-input" placeholder="Mot de passe">
+							{if isset($errormdp)}
+								{$errormdp}
+							{/if}
 
 							<div class="row">
 								
@@ -61,14 +73,14 @@
 
 								<div class="col text-left">
 
-									<input type="checkbox" name="" id="stay-connected">
+									<input type="checkbox" name="reste_connection" id="stay-connected" value="1">
 									<label for="stay-connected">Rester connecté</label>
 
 								</div>
 
 							</div>
 
-							<input type="submit" name="" class="btn btn-primary btn-red shadow-none" value="SE CONNECTER">
+							<button type="submit" name="connexion" class="btn btn-primary btn-red shadow-none">SE CONNECTER</button>
 
 						</form>
 
