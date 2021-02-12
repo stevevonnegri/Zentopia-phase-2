@@ -46,7 +46,7 @@
 
 
 		<!-- SECTION PLANNING -->
-		<div class="container text-center">
+		<div class="container planning-type text-center">
 				
 			<p class="quote-planning">&laquo; Le yoga nous enseigne à guérir ce qui n’a pas besoin d’être enduré, et à endurer ce qui ne peut pas être guéri &raquo; <br/>- B.K.S. Iyengar</p>
 
@@ -58,18 +58,35 @@
 
 			</div>
 
-			<p class="planning-p">Vous pouvez télécharger notre planning <a href="assets/images/planning.jpg" download>ici</a>.</p>
+		</div>
 
-			<p class="planning-p">Avant toute nouvelle inscription, prenez bien soin de lire notre <a href="reglement-interieur.php">règlement intérieur</a>.</p>
 
-			<a href="contact.php" class="btn btn-lg btn-primary shadow-none button-rejoindre">REJOIGNEZ-NOUS !</a>
+		<div class="planning-infos-background">
+
+			<div class="container planning-infos text-center">
+
+				<p class="planning-p">L'emploi du temps est le même chaque semaine, vous pouvez donc télécharger notre planning type <a href="assets/images/planning.jpg" download>ici</a>.</p>
+
+				<p class="planning-p">Pour tout cours occasionnellement annulé, nous prévenons tous les participants par mail directement et nous vous tenons à jour en temps réel sur notre <a href="#">Instagram</a>.</p>
+
+				<img src="assets/icons/yoga1.png" class="yoga1" height="100" width="100"/>
+
+			</div>
 
 		</div>
 
 
 
 		<!-- section planning dynamique, qui doit être adapté en smarty/php pour afficher les éléments selon la recherche, selon les actions du membre, du prof ou de l'admin -->
-		<div class="container">
+		<div class="container planning-dynamique-title">
+
+			<h1>RESERVATION EN LIGNE</h1>
+
+			<!-- Animation arrow -->
+			<div class="anim-arrow">
+				<i class="fas fa-angle-double-down"></i>
+			</div>
+
 
 			<div class="planning-dynamique">
 			
@@ -85,7 +102,8 @@
 					<!-- à afficher seulement pour les admins !-->
 					<div class="col-3">
 						
-						<button class="btn btn-primary btn-admin shadow-none">+ AJOUTER UN COURS</button>
+						<!-- affiche le formulaire d'ajout de cours au clic -->
+						<button class="btn btn-primary btn-admin shadow-none" onclick="showElement('ajouter-seance');">+ AJOUTER UN COURS</button>
 
 					</div>
 
@@ -96,6 +114,81 @@
 					</div>
 
 				</div>
+
+				<!-- formulaire d'ajout de cours qui ne s'affiche qu'au clic du bouton -->
+				<div class="row hidden " id="ajouter-seance">
+					
+					<form method="post" action="">
+						
+						<div class="form-row align-items-end">
+							
+							<div class="col">
+								
+								<label for="date-seance">Date :</label>
+								<input type="date" name="date-seance" class="form-control">
+
+							</div>
+
+							<div class="col">
+								
+								<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
+								<label for="type-cours">Type de cours :</label>
+								<select class="form-control">
+									
+									<option value="hatha">Hatha</option>
+									<option value="vinyasa">Vinyasa</option>
+									<option value="slow-yoga">Slow yoga</option>
+									<option value="kid-yoga">Kid yoga</option>
+									<option value="meditation-guidee">Méditation guidée</option>
+									<option value="meditation-tibetaine">Méditation tibétaine</option>
+
+								</select>
+
+							</div>
+
+							<div class="col">
+								
+								<!-- optionnel : récupérer les profs dynamiquement pour les afficher dans le select -->
+								<label for="type-cours">Enseignant :</label>
+								<select class="form-control">
+									
+									<option value="olenna">Olenna</option>
+									<option value="morgane">Morgane</option>
+									<option value="helene">Hélène</option>
+									<option value="lena">Léna</option>
+									<option value="marie">Marie</option>
+									<option value="bastien">Bastien</option>
+
+								</select>
+
+							</div>
+
+							<div class="col">
+								
+								<label for="heure-debut">Heure de début :</label>
+								<input type="time" name="heure-debut" class="form-control">
+
+							</div>
+
+							<div class="col">
+								
+								<label for="heure-debut">Heure de fin :</label>
+								<input type="time" name="heure-fin" class="form-control">
+
+							</div>
+
+							<div class="col">
+								
+								<button class="btn btn-primary btn-admin shadow-none" type="submit">AJOUTER</button>
+
+							</div>
+
+						</div>
+
+					</form>
+
+				</div>
+
 
 				<div class="row background-light align-items-center planning-search">
 					
@@ -114,10 +207,13 @@
 
 					</div>
 
-					<div class="col-7 text-right">
+					<div class="col-7">
 						
 						<form method="post" accept="">
+
+							<div class="form-row align-items-center justify-content-end">
 							
+							<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
 							<label for="">Type de cours :</label>
 
 							<select>
@@ -131,6 +227,8 @@
 								<option value="meditation-tibetaine">Méditation tibétaine</option>	
 
 							</select>
+
+							<button class="btn btn-primary btn-reserver shadow-none">FILTRER</button></div>
 
 						</form>
 
@@ -148,7 +246,7 @@
 
 				</div>
 
-				<div class="row background-light align-items-center">
+				<div class="row background-light align-items-center seance-element">
 					
 					<div class="col">
 						
@@ -159,7 +257,8 @@
 					<div class="col">
 						
 						<p>SLOW YOGA <br/>
-							<a href="#" class="voir-description">> voir description</a> </p>
+							<!-- ajouter l'ancre menant au type de cours à l'url -->
+							<a href="enseignement.php" class="voir-description">> voir description</a> </p>
 
 					</div>
 
@@ -179,6 +278,9 @@
 						
 						<button class="btn btn-primary shadow-none btn-reserver">RESERVER</button>
 
+						<!-- à afficher seulement pour les admins et les profs/modé dont c'est le cours -->
+						<button class="btn btn-primary btn-admin shadow-none" onclick="showElement('admin-seance');"><i class="fas fa-user-cog"></i></button>
+
 					</div>
 
 
@@ -189,15 +291,267 @@
 
 					</div> -->
 
+				</div>
 
-					<div class="">
+
+				<!-- à afficher seulement pour les admins OU le prof concerné par le cours, s'il est modérateur -->
+				<div class="admin-seance row justify-content-start background-light hidden" id="admin-seance">
+					
+					<div class="col-3">
 						
+						<button class="btn btn-primary shadow-none btn-admin" onclick="showElement('liste-participants');">VOIR LES PARTICIPANTS</button>
 
+					</div>
+
+					<div class="col-3">
+						
+						<button class="btn btn-primary shadow-none btn-admin" onclick="showElement('modif-seance');">MODIFIER LA SEANCE</button>
+
+					</div>
+
+					<div class="col-3">
+						
+						<button class="btn btn-primary shadow-none btn-admin" onclick="showElement('annuler-seance');">ANNULER LA SEANCE</button>
+
+					</div>
+
+				</div>
+
+				<!-- à afficher au clic de l'admin sur le bouton "Voir les participants" -->
+				<div class="row hidden background-light" id="liste-participants">
+
+					<div class="col-12">
+						
+						<p>Liste des participants :</p>
+
+					</div>
+					
+					<div class="col-12">
+						
+						<!-- à remplacer par les données de la BDD -->
+						<ul class="list-style-none">
+
+							<!-- bouton doit supprimer le participant de la séance -->
+							<li>Jordan Herth <button class="btn-link">Supprimer de la liste</button></li>
+
+							<li>Emilien Fuchs <button class="btn-link">Supprimer de la liste</button></li>
+						</ul>
+
+					</div>
+
+					<div class="col-12">
+						
+						<button class="btn-link" onclick="showElement('ajouter-participant');">+ Ajouter un participant</button>
 
 					</div>
 
 
+					<!-- à afficher lorsque l'admin clique sur "Ajouter un participant" -->
+					<div class="col-12 hidden" id="ajouter-participant">
+
+						<div class="col-6">
+						
+						<form method="post" action="" class="form-recherche">
+
+							<legend>Remplissez au moins un champ de recherche :</legend>
+
+							<div class="form-row">
+								
+								<div class="col">
+									
+									<input type="email" name="email" placeholder="E-mail" class="form-control form-control-sm input-membre">
+
+								</div>
+
+								<div class="col">
+									
+									<input type="tel" name="telephone" placeholder="Téléphone" class="form-control form-control-sm input-membre">
+
+								</div>
+
+								<div class="col">
+									
+									<button type="submit" class="btn btn-primary btn-reserver text-center">RECHERCHER</button>
+
+								</div>
+
+							</div>
+
+						</form></div>
+
+
+
+						<!-- résultats de la recherche pour Ajouter un participant à la séance -->
+						<div class="col-12 resultat-recherche">
+							
+							<p>Résultat de la recherche :</p>
+								
+							<!-- à afficher lorsque la recherche ne retourne aucun résultat -->
+							<!--<p class="text-center">Aucun membre trouvé. Veuillez vérifier les informations de recherche.</p>-->
+
+							<!-- à afficher lorsque la recherche retourne des éléments de la BDD -->
+							<div class="membre-trouve">
+
+								<div class="row">
+									
+									<div class="col">
+										
+										<span>Nom :</span> Bironneau
+
+									</div>
+
+									<div class="col">
+										
+										<span>Prénom :</span> Anaïs
+
+									</div>
+
+								</div>
+
+								<div class="row">
+									
+									<div class="col">
+										
+										<span>E-mail :</span> monadressemail@gmail.com
+
+									</div>
+
+									<div class="col">
+										
+										<span>Téléphone :</span> 0677777777
+
+									</div>
+
+								</div>
+
+								<div class="row">
+									
+
+									<!-- au clic du bouton, ajout du membre trouvé à la liste des participants de la séance -->
+									<div class="col text-center">
+										
+										<button class="btn btn-primary btn-reserver shadow-none">AJOUTER</button>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div> <!-- fin div résultat de la recherche -->
+
+					</div> <!-- fin div "Ajouter un participant" -->
+
+				</div> <!-- fin div "Voir les participants" -->
+
+
+
+				<!-- à afficher au clic de l'admin sur le bouton "Modifier la séance" -->
+				<div class="row hidden background-light align-items-center" id="modif-seance">
+					
+					<!-- form à pré-remplir avec les informations de la séance concernée -->
+					<form method="post" action="">
+						
+						<div class="form-row align-items-end">
+							
+							<div class="col">
+								
+								<label for="date-seance">Date :</label>
+								<input type="date" name="date-seance" class="form-control">
+
+							</div>
+
+							<div class="col">
+								
+								<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
+								<label for="type-cours">Type de cours :</label>
+								<select class="form-control">
+									
+									<option value="hatha">Hatha</option>
+									<option value="vinyasa">Vinyasa</option>
+									<option value="slow-yoga">Slow yoga</option>
+									<option value="kid-yoga">Kid yoga</option>
+									<option value="meditation-guidee">Méditation guidée</option>
+									<option value="meditation-tibetaine">Méditation tibétaine</option>
+
+								</select>
+
+							</div>
+
+							<div class="col">
+								
+								<!-- optionnel : récupérer les profs dynamiquement pour les afficher dans le select -->
+								<label for="type-cours">Enseignant :</label>
+								<select class="form-control">
+									
+									<option value="olenna">Olenna</option>
+									<option value="morgane">Morgane</option>
+									<option value="helene">Hélène</option>
+									<option value="lena">Léna</option>
+									<option value="marie">Marie</option>
+									<option value="bastien">Bastien</option>
+
+								</select>
+
+							</div>
+
+							<div class="col">
+								
+								<label for="heure-debut">Heure de début :</label>
+								<input type="time" name="heure-debut" class="form-control">
+
+							</div>
+
+							<div class="col">
+								
+								<label for="heure-debut">Heure de fin :</label>
+								<input type="time" name="heure-fin" class="form-control">
+
+							</div>
+
+							<div class="col">
+								
+								<button class="btn btn-primary btn-admin shadow-none" type="submit">MODIFIER</button>
+
+							</div>
+
+						</div>
+
+					</form>
+
 				</div>
+
+
+
+				<!-- à afficher au clic de l'admin sur le bouton "Annuler la séance" -->
+				<div class="row hidden background-light align-items-center justify-content-start" id="annuler-seance">
+
+					<div class="col">
+						
+						<form method="post" action="">
+
+							<div class="form-row">
+							
+							<input type="checkbox" name="annuler-seance" class="form-check-input">
+							<label for="annuler-seance" class="form-check-label">J'annule cette séance. Tous les participants seront informés de l'annulation. </label></div>
+
+						</form>
+
+					</div>
+
+					<div class="col-2 text-center">
+						
+						<!-- au clic du bouton, supprimer la séance concernée de la BDD -->
+						<button class="btn btn-primary btn-admin shadow-none">ANNULER LA SEANCE</button>
+
+					</div>
+					
+					
+
+				</div>
+
+
+				<!-- fin affichage dynamique du planning -->
 
 
 				<div class="row planning-footer justify-content-around">
@@ -239,25 +593,7 @@
 	<!-- lien Font Awesome -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" integrity="sha512-F5QTlBqZlvuBEs9LQPqc1iZv2UMxcVXezbHzomzS6Df4MZMClge/8+gXrKw2fl5ysdk4rWjR0vKS7NNkfymaBQ==" crossorigin="anonymous"></script>
 
-
-	<!-- script pour la scroll-top -->
-	<script>
-		
-		$(window).scroll(function() {
-		    if ($(this).scrollTop() >= 200) {        // Si on scroll à + de 200px
-		        $('#scroll-top').fadeIn(200);    // faire apparaître
-		    } else {
-		        $('#scroll-top').fadeOut(200);   // sinon faire disparaître
-		    }
-		});
-
-		$('#scroll-top').click(function() {      // au clic
-		    $('body,html').animate({
-		        scrollTop : 0                       // remonter jusqu'en haut
-		    }, 500);
-		});
-
-	</script>
+	<script type="text/javascript" src="js/script.js"></script>
 
 	</body>
 </html>

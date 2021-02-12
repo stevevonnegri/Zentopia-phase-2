@@ -365,7 +365,7 @@
 
 								</div>
 
-								<p class="suppr-avis" onclick="supprAvis();">Supprimer mon avis</p>
+								<p class="suppr-avis" onclick="showElement('suppr-avis-confirmation');">Supprimer mon avis</p>
 
 								<div class="hidden" id="suppr-avis-confirmation">
 
@@ -385,7 +385,7 @@
 						
 						<div class="col-8 mx-auto text-center">
 							
-							<p class="suppr-compte mx-auto" onclick="supprCompte();">Supprimer mon compte</p>
+							<p class="suppr-compte mx-auto" onclick="showElement('confirmation-suppression');">Supprimer mon compte</p>
 
 							<div id="confirmation-suppression" class="hidden">
 
@@ -443,44 +443,8 @@
 	<!-- lien Font Awesome -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" integrity="sha512-F5QTlBqZlvuBEs9LQPqc1iZv2UMxcVXezbHzomzS6Df4MZMClge/8+gXrKw2fl5ysdk4rWjR0vKS7NNkfymaBQ==" crossorigin="anonymous"></script>
 
+	<script type="text/javascript" src="js/script.js"></script>
 
-	<script>
-		
-		// SCROLL TOP SCRIPT
-		$(window).scroll(function() {
-		    if ($(this).scrollTop() >= 200) {        // Si on scroll à + de 200px
-		        $('#scroll-top').fadeIn(200);    // faire apparaître
-		    } else {
-		        $('#scroll-top').fadeOut(200);   // sinon faire disparaître
-		    }
-		});
-
-		$('#scroll-top').click(function() {      // au clic
-		    $('body,html').animate({
-		        scrollTop : 0                       // remonter jusqu'en haut
-		    }, 500);
-		});
-
-
-
-		// afficher la confirmation de suppression de l'avis client
-		function supprAvis() {
-
-			let x = document.getElementById('suppr-avis-confirmation');
-			x.classList.toggle('hidden');
-		}	
-
-
-		// afficher la confirmation de suppression du compte
-		function supprCompte() {
-
-			let x = document.getElementById('confirmation-suppression');
-			x.classList.toggle('hidden');
-		}
-
-		
-
-	</script>
 
 	</body>
 </html>

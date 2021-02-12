@@ -18,7 +18,7 @@
 
 		<div class="row justify-content-center footer-line1">
 			
-			&copy;2021 Zentopia. Tous droits réservés
+			&copy; <?php echo date("Y"); ?> Zentopia. Tous droits réservés
 
 		</div>
 

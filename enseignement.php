@@ -109,6 +109,7 @@
 		</div>
 
 		
+		<!-- à afficher dynamiquement via la table type de cours de la BDD -->
 
 		<!-- SECTION COURS DE YOGA -->
 		<div class="cours-bg">
@@ -135,7 +136,8 @@
 
 					<div class="col text-center order-2">
 						
-						<h2 class="text-right nom-cours">HATHA YOGA</h2>
+						<!-- ancre doit être également affichée dynamiquement (lien du planning menant à la description des cours sur cette page) -->
+						<h2 class="text-right nom-cours" id="hatha">HATHA YOGA</h2>
 
 						<p class="text-justify">Le hatha yoga est l'une des formes les plus traditionnelles du yoga. C'est une pratique lente, détendue afin de se recentrer sur soi et d'être à l'écoute de son corps.
 						<br/><br/>
@@ -360,25 +362,7 @@
 	<!-- lien Font Awesome -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" integrity="sha512-F5QTlBqZlvuBEs9LQPqc1iZv2UMxcVXezbHzomzS6Df4MZMClge/8+gXrKw2fl5ysdk4rWjR0vKS7NNkfymaBQ==" crossorigin="anonymous"></script>
 
-
-	<!-- script pour la scroll-top -->
-	<script>
-		
-		$(window).scroll(function() {
-		    if ($(this).scrollTop() >= 200) {        // Si on scroll à + de 200px
-		        $('#scroll-top').fadeIn(200);    // faire apparaître
-		    } else {
-		        $('#scroll-top').fadeOut(200);   // sinon faire disparaître
-		    }
-		});
-
-		$('#scroll-top').click(function() {      // au clic
-		    $('body,html').animate({
-		        scrollTop : 0                       // remonter jusqu'en haut
-		    }, 500);
-		});
-
-	</script>
+	<script type="text/javascript" src="js/script.js"></script>
 
 	</body>
 </html>

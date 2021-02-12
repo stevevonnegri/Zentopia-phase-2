@@ -67,27 +67,83 @@
 	}
 }
 
+.planning-dynamique-title h1
+{
+	text-align: center;
+	.opensansB();
+	color: @myblue;
+	font-size: 1.8rem;
+	.spacing50();
+	.mgdown50();
+}
+
+.planning-infos-background
+{
+	background-color: @lightcream;
+	margin-top: 50px;
+	margin-bottom: 100px;
+	padding-top: 30px;
+	padding-bottom: 50px;
+	position: relative;
+}
+
+.planning-infos-background .yoga1
+{
+	position: absolute;
+	bottom: -6%;
+	left: 47%;
+}
 
 
 /* SECTION PLANNING DYNAMIQUE */
+
+@keyframes scroll-down { from { margin-top: -30px; opacity: 1; } to { margin-bottom: 50px; opacity: 0; } }
+/* simple animation d'invitation au scroll avec effet fade */
+
+.anim-arrow
+{
+	animation: 1.5s linear 0s infinite normal scroll-down;
+	position: absolute;
+	left: -1%;
+	right: 0;
+	.center();
+	width: 10px;
+	font-size: 2.5rem;
+	color: @myblue;
+}
+
+
 .planning-dynamique
 {
+	margin-top: 150px;
 	margin-bottom: 100px;
 	.latoL();
 }
 
 .planning-head
 {
-	background-color: #CBCBCB;
+	background-color: @lightcreamdarker;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	padding: 30px;
 	.shadow();
 }
 
+#ajouter-seance
+{
+	background-color: @lightcreamdarker;
+	padding: 30px;
+	.shadow();
+}
+
+#ajouter-seance button
+{
+	margin-bottom: 0;
+}
+
 .planning-footer
 {
-	background-color: #CBCBCB;
+	background-color: @lightcreamdarker;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	padding: 30px;
@@ -120,15 +176,15 @@
 {
 	background-color: @lightcream;
 	padding: 30px;
-	border-bottom: 1px solid #CBCBCB;
-	border-right: 1px solid #CBCBCB;
-	border-left: 1px solid #CBCBCB;
+	border-bottom: 1px solid @lightcreamdarker;
+	border-right: 1px solid @lightcreamdarker;
+	border-left: 1px solid @lightcreamdarker;
 	.shadow();
 }
 
 .background-jour
 {
-	background-color: #CBCBCB;
+	background-color: @lightcreamdarker;
 	padding: 30px;
 	.shadow();
 }
@@ -152,10 +208,27 @@
 	}
 }
 
+.planning-search label, #modif-seance button
+{
+	margin-bottom: 0;
+}
+
+.planning-search button
+{
+	margin-left: 15px;
+}
+
 .background-jour p
 {
 	.latoB();
 	color: @myblue;
+}
+
+.seance-element .btn-admin
+{
+	width: auto;
+	margin-bottom: 0;
+	margin-left: 10px;
 }
 
 .planning-dynamique .voir-description
@@ -187,6 +260,46 @@
 	margin-top: 20px;
 	.latoB();
 }
+
+#liste-participants
+{
+	.opensansSB();
+	font-size: 0.9rem;
+}
+
+#liste-participants li
+{
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+#liste-participants .btn-link
+{
+	margin-left: 10px;
+	background-color: transparent;
+	border: none;
+	color: @myblue;
+	text-decoration: underline;
+
+	&:hover, &:focus, &:active
+	{
+		.opensansB();
+		outline: none;
+	}
+}
+
+#ajouter-participant, #ajouter-participant .resultat-recherche
+{
+	margin-top: 30px;
+}
+
+#ajouter-participant .membre-trouve button
+{
+	margin-top: 30px;
+}
+
+
+
 
 
 /* TARIFS */

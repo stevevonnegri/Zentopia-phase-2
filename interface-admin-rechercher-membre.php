@@ -275,7 +275,7 @@
 
 									<div class="col text-center">
 										
-										<button class="btn btn-primary btn-admin shadow-none" onclick="supprMembre();">SUPPRIMER LE MEMBRE</button>
+										<button class="btn btn-primary btn-admin shadow-none" onclick="showElement('confirmation-suppr-membre');">SUPPRIMER LE MEMBRE</button>
 
 									</div>
 
@@ -346,35 +346,7 @@
 	<!-- lien Font Awesome -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" integrity="sha512-F5QTlBqZlvuBEs9LQPqc1iZv2UMxcVXezbHzomzS6Df4MZMClge/8+gXrKw2fl5ysdk4rWjR0vKS7NNkfymaBQ==" crossorigin="anonymous"></script>
 
-
-	<script>
-		
-		// SCROLL TOP SCRIPT
-		$(window).scroll(function() {
-		    if ($(this).scrollTop() >= 200) {        // Si on scroll à + de 200px
-		        $('#scroll-top').fadeIn(200);    // faire apparaître
-		    } else {
-		        $('#scroll-top').fadeOut(200);   // sinon faire disparaître
-		    }
-		});
-
-		$('#scroll-top').click(function() {      // au clic
-		    $('body,html').animate({
-		        scrollTop : 0                       // remonter jusqu'en haut
-		    }, 500);
-		});
-
-
-		// afficher la confirmation de suppression du compte du membre
-		function supprMembre() {
-
-			let x = document.getElementById('confirmation-suppr-membre');
-			x.classList.toggle('hidden');
-		}
-
-
-		
-	</script>
+	<script type="text/javascript" src="js/script.js"></script>
 
 	</body>
 </html>

@@ -272,8 +272,7 @@
 
 				</div>
 
-
-			</div>
+			</div> <!-- fin div testimonial -->
 
 		</div>
 
@@ -298,77 +297,7 @@
 	<!-- lien Slick -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
-
-	<!-- slideshow BX (images) -->
-  	<script>
-
-  		$('.slider').slick({
-		  infinite: true,
-		  dots: true,
-		  slidesToShow: 1,
-		  slidesToScroll: 1,
-		  speed: 500,
-		  fade: true,
-		  cssEase: 'linear',
-		  autoplay: true,
- 		  autoplaySpeed: 2000
-		  });
-
-	</script>
-
-
-	<!-- slideshow Slick (testimonial) -->
-	<script>
-
-		$('.testimonial').slick({
-		  infinite: true,
-		  dots: true,
-		  slidesToShow: 4,
-		  slidesToScroll: 1,
-		  responsive: [
-    {
-      breakpoint: 1300,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 1
-      }
-    },
-    {
-      breakpoint: 800,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1
-      }
-    },
-    {
-      breakpoint: 580,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-  	]
-	});
-
-	</script>
-
-
-	<!-- script pour la scroll-top -->
-	<script>
-		
-		$(window).scroll(function() {
-		    if ($(this).scrollTop() >= 200) {        // Si on scroll à + de 200px
-		        $('#scroll-top').fadeIn(200);    // faire apparaître
-		    } else {
-		        $('#scroll-top').fadeOut(200);   // sinon faire disparaître
-		    }
-		});
-
-		$('#scroll-top').click(function() {      // au clic
-		    $('body,html').animate({
-		        scrollTop : 0                       // remonter jusqu'en haut
-		    }, 500);
-		});
+	<script type="text/javascript" src="js/script.js"></script>
 
 	</script>
 
