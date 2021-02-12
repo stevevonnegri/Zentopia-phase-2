@@ -135,4 +135,49 @@
         $sql =$this->_bdd->query('SELECT COUNT(*) FROM utilisateur where email = "'.$this->getEmail().'"');
         return $sql->fetchColumn();
     }
+
+    //Recupere les informations de l'utilisateur qui sont egal à l'email et les stocks dans un objet
+    public function getUserByMail($mail) {
+        $sql = $this->_bdd->query('SELECT * FROM '.$this->_table.' WHERE email = "'.$mail.'"');
+        $utilisateur = $sql->fetch();
+        $utilisateur = new Utilisateur($utilisateur);
+        return $utilisateur;
+    }
+
+    //a tester : fonction d'ouverture de session.
+    /**
+     * verifie si le mail de l'aobjet est bien dans la BDD
+     * recupere les information coresspondant au mail
+     * ouvre une session et set les info dans les variable de session
+     *
+     * @return     <booleen> si la session est ouverte ou pas
+     */
+    public function OpenSession {
+        //si l'objet appelant la fonction possede un email dans la BDD
+        if ($this->countItemByEmail() == 1) {
+
+            //recupere les info don on a besion dans la bdd en fonction de l'email
+            $utilisateur = $this->getUserByMail();
+
+            //on ouvre la session et on set les variable de session
+            session_start();
+            $_SESSION['id_utilisateur'] = $utilisateur->getId_utilisateur();
+            $_SESSION['nom'] = $utilisateur->getNom_utilisateur();
+            $_SESSION['prenom'] = $utilisateur->getPrenom_utilisateur();
+            $_SESSION['genre'] = $utilisateur->getGenre();
+            $_SESSION['date_de_naissance'] = $utilisateur->getDate_de_naissance();
+            $_SESSION['adresse_rue'] = $utilisateur->getAdresse_rue();
+            $_SESSION['adresse_code_postal'] = $utilisateur->getAdresse_code_postal();
+            $_SESSION['adresse_ville'] = $utilisateur->getAdresse_ville();
+            $_SESSION['telephone'] = $utilisateur->getTelephone();
+            $_SESSION['email'] = $utilisateur->getEmail();
+            $_SESSION['newsletter'] = $utilisateur->getNewsletter();
+            $_SESSION['seance_decouverte'] = $utilisateur->getSeance_decouverte();
+            $_SESSION['rang'] = $utilisateur->getRang();
+
+            return true;
+        }
+
+        return false
+    }
 }

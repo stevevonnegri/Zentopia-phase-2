@@ -10,8 +10,9 @@
 
 	</head>
 	<body>
-
-
+		{if isset($test)}
+			{$test}
+		{/if}
 
 		<!-- SECTION HEADER (contient le bandeau d'info, la navbar et sa background-img + la scroll arrow) -->
 		<header class="header-all"> 
@@ -38,7 +39,7 @@
 						<img src="assets/icons/yoga-male.png" class="img-fluid"/>
 
 						<!-- à remplacer par une variable prénom de l'utilisateur -->
-						<p>Bonjour Anaïs</p>
+						<p>Bonjour {$prenom_utilisateur}</p>
 
 						<a href="?action=espace_personnel" class="btn btn-primary btn-menu-left shadow-none">MES INFORMATIONS <i class="fas fa-caret-right text-right"></i></a>
 
@@ -47,13 +48,17 @@
 						<a href="#mon-avis" class="btn btn-primary btn-menu-left shadow-none">MON AVIS CLIENT<i class="fas fa-caret-right text-right"></i></a>
 
 						<!-- afficher seulement si modérateur -->
+						{if $rang == moderateur}
 						<a href="?action=interface_moderateur" class="btn btn-primary btn-admin shadow-none">MODERATION<i class="fas fa-caret-right text-right"></i></a>
+						{/if}
 
+						{if $rang == admin}
 						<!-- afficher seulement si admin -->
 						<a href="?action=interface_admin" class="btn btn-primary btn-admin shadow-none">ADMINISTRATION<i class="fas fa-caret-right text-right"></i></a>	
+						{/if}
 
 						<!-- déconnecter la session et quitter la page au clic -->
-						<a href="" class="btn btn-primary btn-red shadow-none">DECONNEXION</a>
+						<a href="?action=espace_personnel&deconnexion=true" class="btn btn-primary btn-red shadow-none">DECONNEXION</a>
 
 					</div>
 
@@ -71,14 +76,14 @@
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Civilité :</label>
-								<p class="info-p">Mme</p>
+								<p class="info-p">{$genre}</p>
 
 							</div>
 
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Date de naissance :</label>
-								<p class="info-p">11/05/1994</p>
+								<p class="info-p">{$date_de_naissance}</p>
 
 							</div>
 							
@@ -90,14 +95,14 @@
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Prénom :</label>
-								<p class="info-p">Anaïs</p>
+								<p class="info-p">{$prenom_utilisateur}</p>
 
 							</div>
 
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Nom :</label>
-								<p class="info-p">Bironneau</p>
+								<p class="info-p">{$nom_utilisateur}</p>
 
 							</div>
 							
@@ -108,14 +113,14 @@
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Email :</label>
-								<p class="info-p">monadressemail@gmail.com</p>
+								<p class="info-p">{$email}</p>
 
 							</div>
 
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Téléphone :</label>
-								<p class="info-p">06 66 66 66 66</p>
+								<p class="info-p">{$telephone}</p>
 
 							</div>
 
@@ -126,14 +131,14 @@
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Code postal :</label>
-								<p class="info-p">37000</p>
+								<p class="info-p">{$adresse_code_postal}</p>
 
 							</div>
 
 							<div class="col-12 col-lg-6">
 
 								<label for="">Ville :</label>
-								<p class="info-p">Tours</p>
+								<p class="info-p">{$adresse_ville}</p>
 
 							</div>
 
@@ -144,7 +149,7 @@
 							<div class="col">
 								
 								<label for="">Adresse :</label>
-								<p class="info-p">288bis rue des Acacias, bâtiment B</p>
+								<p class="info-p">{$adresse_rue}</p>
 
 							</div>
 
@@ -152,7 +157,13 @@
 								
 								<legend>Newsletter :</legend>
 								
-								<p class="info-p">Pas encore inscrit</p>
+								<p class="info-p">
+								{if $newsletter == false}
+									Pas encore inscrit
+								{else}
+									Deja inscrit
+								{/if}
+								</p>
 
 							</div>
 
@@ -175,7 +186,7 @@
 
 
 					<!-- BLOCK CHANGER DE MOT DE PASSE -->
-					<div class="block-mdp">
+					<form method="POST" action="" class="block-mdp">
 
 						<h1>CHANGER DE MOT DE PASSE</h1>
 
@@ -213,13 +224,13 @@
 							
 							<div class="col text-center">
 								
-								<input type="submit" name="" class="btn btn-primary btn-red shadow-none" value="METTRE A JOUR">
+								<input type="submit" name="mettre_a_jour" class="btn btn-primary btn-red shadow-none" value="METTRE A JOUR">
 
 							</div>
 
 						</div>
 
-					</div>
+					</form>
 
 
 					<!-- BLOCK MES COURS -->

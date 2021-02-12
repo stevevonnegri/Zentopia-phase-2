@@ -107,7 +107,7 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 			//on formatte les 2 date pour pouvoir les commparer.
 			$date_limite = date("Y-m-d", $date_limite);
 			$date_naissance = date("Y-m-d", $date_naissance);
-
+			
 			//on verifie si l'utilisateur a plus de 18 ans.
 			if ($date_naissance > $date_limite) {
 				
@@ -142,7 +142,14 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 		//si pas d'erreur : envoie de toute les information dans la BDD et redirige vers l'espace personnel.
 	if ($erreur === false) {
 		$user->AddUtilisateur();
-		header('Location: ?action=espace_personnel');
+
+		//ajouter les variable de SESSION ici.
+		if ($user->OpenSession() == true) {
+			header('Location: ?action=espace_personnel');
+		} else {
+			echo('Compte crée mais erreur dans l\'ouverture de session.');
+		}
+	
 	} else {
 
 		echo('VOUS AVEZ UNE ERREUR !');
