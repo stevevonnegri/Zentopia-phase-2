@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.38, created on 2021-02-12 09:36:05
+/* Smarty version 3.1.38, created on 2021-02-12 12:32:40
   from 'D:\MAMP\htdocs\zentopia\templates\footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.38',
-  'unifunc' => 'content_60264c05ecb198_33536855',
+  'unifunc' => 'content_602675684d7348_76619332',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_60264c05ecb198_33536855 (Smarty_Internal_Template $_smarty_tpl) {
+function content_602675684d7348_76619332 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!-- Animation scroll-top avec icône -->
 <a href="javascript:" id="scroll-top"><i class="fas fa-long-arrow-alt-up"></i></a>

@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.38, created on 2021-02-12 09:36:05
+/* Smarty version 3.1.38, created on 2021-02-12 12:32:40
   from 'D:\MAMP\htdocs\zentopia\templates\navbar.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.38',
-  'unifunc' => 'content_60264c05ebbdd6_86248558',
+  'unifunc' => 'content_602675684c7458_83495273',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_60264c05ebbdd6_86248558 (Smarty_Internal_Template $_smarty_tpl) {
+function content_602675684c7458_83495273 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!-- contenu de la basile header (qui a les classes header-homepage et header-all pour différencier les background) -->
 

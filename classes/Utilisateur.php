@@ -56,8 +56,8 @@
     public function setNewsletter($newsletter){
         $this->_newsletter = $newsletter;
     }
-    public function setCours_decouverte($coursDecouverte){
-        $this->_cours_decouverte = $coursDecouverte;
+    public function setSeance_decouverte($seanceDecouverte){
+        $this->_seance_decouverte = $seanceDecouverte;
     }
     public function setRang($rang){
         $this->_rang = $rang;
@@ -101,18 +101,11 @@
     public function getNewsletter(){
         return $this->_newsletter;
     }
-    public function getCours_decouverte(){
-        return $this->_cours_decouverte;
+    public function getSeance_decouverte(){
+        return $this->_seance_decouverte;
     }
     public function getRang(){
         return $this->_rang;
-    }
-
-    //Count & return le nbre d'entrer dans une table
-    public function checkUser(){
-        $sql = $this->_bdd->query('SELECT COUNT(*) FROM '.$this->_table);
-        $nb = $sql->fetchColumn();
-        return $nb;
     }
 
     //Count le nombre d'email egal a l'entre dans la BDD

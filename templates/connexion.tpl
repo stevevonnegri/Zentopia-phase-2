@@ -48,8 +48,14 @@
 						<form action="" method="post">
 
 							<input type="email" name="email_connexion" class="form-control connexion-input" placeholder="Email">
+							{if isset($erroremail)}
+								{$erroremail}
+							{/if}
 
 							<input type="password" name="password_connexion" class="form-control connexion-input" placeholder="Mot de passe">
+							{if isset($errormdp)}
+								{$errormdp}
+							{/if}
 
 							<div class="row">
 								
@@ -67,7 +73,7 @@
 
 								<div class="col text-left">
 
-									<input type="checkbox" name="" id="stay-connected">
+									<input type="checkbox" name="reste_connection" id="stay-connected" value="1">
 									<label for="stay-connected">Rester connecté</label>
 
 								</div>

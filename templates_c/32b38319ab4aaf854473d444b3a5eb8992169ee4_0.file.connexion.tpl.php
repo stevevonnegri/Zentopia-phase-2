@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.38, created on 2021-02-12 10:06:33
+/* Smarty version 3.1.38, created on 2021-02-12 14:36:52
   from 'D:\MAMP\htdocs\zentopia\templates\connexion.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.38',
-  'unifunc' => 'content_602653295ead91_86519914',
+  'unifunc' => 'content_60269284ccc702_21875824',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '32b38319ab4aaf854473d444b3a5eb8992169ee4' => 
     array (
       0 => 'D:\\MAMP\\htdocs\\zentopia\\templates\\connexion.tpl',
-      1 => 1613124388,
+      1 => 1613140607,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_602653295ead91_86519914 (Smarty_Internal_Template $_smarty_tpl) {
+function content_60269284ccc702_21875824 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="fr-FR">
 	<head>
@@ -83,8 +83,16 @@ include("navbar.php") <?php echo '?>';?>
 						<form action="" method="post">
 
 							<input type="email" name="email_connexion" class="form-control connexion-input" placeholder="Email">
+							<?php if ((isset($_smarty_tpl->tpl_vars['erroremail']->value))) {?>
+								<?php echo $_smarty_tpl->tpl_vars['erroremail']->value;?>
+
+							<?php }?>
 
 							<input type="password" name="password_connexion" class="form-control connexion-input" placeholder="Mot de passe">
+							<?php if ((isset($_smarty_tpl->tpl_vars['errormdp']->value))) {?>
+								<?php echo $_smarty_tpl->tpl_vars['errormdp']->value;?>
+
+							<?php }?>
 
 							<div class="row">
 								
@@ -102,7 +110,7 @@ include("navbar.php") <?php echo '?>';?>
 
 								<div class="col text-left">
 
-									<input type="checkbox" name="" id="stay-connected">
+									<input type="checkbox" name="reste_connection" id="stay-connected" value="0">
 									<label for="stay-connected">Rester connecté</label>
 
 								</div>

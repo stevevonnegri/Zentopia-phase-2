@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.38, created on 2021-02-12 09:36:05
+/* Smarty version 3.1.38, created on 2021-02-12 13:24:35
   from 'D:\MAMP\htdocs\zentopia\templates\index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.38',
-  'unifunc' => 'content_60264c05e840d4_31955504',
+  'unifunc' => 'content_60268193d2d745_98644132',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '579d3f1ba4196e1c5bd6456195d624664927e206' => 
     array (
       0 => 'D:\\MAMP\\htdocs\\zentopia\\templates\\index.tpl',
-      1 => 1613120413,
+      1 => 1613136265,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_60264c05e840d4_31955504 (Smarty_Internal_Template $_smarty_tpl) {
+function content_60268193d2d745_98644132 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="fr-FR">
 	<head>
@@ -74,7 +74,7 @@ include("navbar.php") <?php echo '?>';?>
 
 				<div class="col col-md-9 col-lg-7 text-center">
 
-					Découvrez notre pratique du yoga et de la méditation selon nos trois principes :
+Découvrez notre pratique du yoga et de la méditation selon nos trois principes : <?php if ($_smarty_tpl->tpl_vars['rang']->value == 'membre') {?> ok membre <?php }?>
 
 				</div>
 
