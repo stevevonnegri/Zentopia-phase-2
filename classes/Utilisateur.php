@@ -78,7 +78,7 @@
         return $this->_prenom_utilisateur;
     }
     public function getDate_de_naissance(){
-        return $this->$_date_de_naissance;
+        return $this->_date_de_naissance;
     }
     public function getAdresse_rue(){
         return $this->_adresse_rue;
@@ -88,6 +88,12 @@
     }
     public function getAdresse_ville(){
         return $this->_adresse_ville;
+    }
+    public function getTelephone(){
+        return $this->_telephone;
+    }
+    public function getEmail() {
+        return $this->_email;
     }
     public function getMot_de_passe(){
         return $this->_mot_de_passe;
@@ -102,21 +108,26 @@
         return $this->_rang;
     }
 
-    //modification fonction Add pour ajouter un utlisateur
-    public function Add($objet){
-        $champs = '';
-        $valeurs = '';
-        foreach($objet as $key => $value){
-            if($value){
-                $champs .= substr($key,1).' , ';
-                $valeurs .= '"'.$value.'" , ';
-            }
-        }
-        $valeurs = substr($valeurs,0,-2);
-        $champs = substr($champs,0,-2);
+    //Count & return le nbre d'entrer dans une table
+    public function checkUser(){
+        $sql = $this->_bdd->query('SELECT COUNT(*) FROM '.$this->_table);
+        $nb = $sql->fetchColumn();
+        return $nb;
+    }
 
-        $sql = $this->_bdd->prepare('INSERT INTO '.$this->_table.'('.$champs.') VALUES ('.$valeurs.')');
-        $sql->execute();
+    //Count le nombre d'email egal a l'entre dans la BDD
+    public function checkEmail($email) {
+        $sql = $this->_bdd->query('SELECT COUNT(*) FROM '.$this->_table.' WHERE email = "'.$email.'"');
+        $nb = $sql->fetchColumn();
+        return $nb;
+    }
+
+    //Recupere les informations de l'utilisateur qui sont egal à l'email et les stocks dans un objet
+    public function getUserByMail($mail) {
+        $sql = $this->_bdd->query('SELECT * FROM '.$this->_table.' WHERE email = "'.$mail.'"');
+        $utilisateur = $sql->fetch();
+        $utilisateur = new Utilisateur($utilisateur);
+        return $utilisateur;
     }
 
 }
