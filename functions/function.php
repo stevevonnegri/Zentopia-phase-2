@@ -7,5 +7,5 @@
 	require('classes/'.$class.'.php');
 	}
 	spl_autoload_register('chargerClass');
-	
+
 ?>

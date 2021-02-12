@@ -78,7 +78,7 @@
         return $this->_prenom_utilisateur;
     }
     public function getDate_de_naissance(){
-        return $this->$_date_de_naissance;
+        return $this->_date_de_naissance;
     }
     public function getAdresse_rue(){
         return $this->_adresse_rue;
@@ -88,6 +88,12 @@
     }
     public function getAdresse_ville(){
         return $this->_adresse_ville;
+    }
+    public function getTelephone(){
+        return $this->_telephone;
+    }
+    public function getEmail(){
+        return $this->_email;
     }
     public function getMot_de_passe(){
         return $this->_mot_de_passe;
@@ -102,21 +108,31 @@
         return $this->_rang;
     }
 
-    //modification fonction Add pour ajouter un utlisateur
-    public function Add($objet){
-        $champs = '';
-        $valeurs = '';
-        foreach($objet as $key => $value){
-            if($value){
-                $champs .= substr($key,1).' , ';
-                $valeurs .= '"'.$value.'" , ';
-            }
-        }
-        $valeurs = substr($valeurs,0,-2);
-        $champs = substr($champs,0,-2);
+    
+    /**
+     * fonction pour ajouter l'objet utilisateur dans la BDD
+     */
+    public function AddUtilisateur() {
+        //test si la personne veux s'inscrire a la newletter si oui, envoie le booleen true pour les colonne 
+        //"newsletter" et "seance_decouverte" -> la personne venant de s'inscrire, il n'y a pas besoin de tester si elle a deja fait des cours puisque cela n'est pas possible.
+         if ($this->getNewsletter() != 1) {
+            $sql = $this->_bdd->prepare('INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, genre, date_de_naissance, adresse_rue, adresse_code_postal, adresse_ville, telephone, email, mot_de_passe) VALUES ("'.$this->getNom_utilisateur().'", "'.$this->getPrenom_utilisateur().'", "'.$this->getGenre().'", "'.$this->getDate_de_naissance().'", "'.$this->getAdresse_rue().'", "'.$this->getAdresse_code_postal().'", "'.$this->getAdresse_ville().'", "'.$this->getTelephone().'", "'.$this->getEmail().'", "'.$this->getMot_de_passe().'")');
 
-        $sql = $this->_bdd->prepare('INSERT INTO '.$this->_table.'('.$champs.') VALUES ('.$valeurs.')');
+        } else {
+            $sql = $this->_bdd->prepare('INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, genre, date_de_naissance, adresse_rue, adresse_code_postal, adresse_ville, telephone, email, mot_de_passe, newsletter, seance_decouverte) VALUES ("'.$this->getNom_utilisateur().'", "'.$this->getPrenom_utilisateur().'", "'.$this->getGenre().'", "'.$this->getDate_de_naissance().'", "'.$this->getAdresse_rue().'", "'.$this->getAdresse_code_postal().'", "'.$this->getAdresse_ville().'", "'.$this->getTelephone().'", "'.$this->getEmail().'", "'.$this->getMot_de_passe().'", 1, 1)');
+
+        }
+
         $sql->execute();
     }
 
+    /**
+     * compte le nombre d'utilisateur avec le mail de l'objet appelant la fonction.
+     *
+     * @return     <int>  nombre d'entrer ayant l'email donnée.
+     */
+    public function countItemByEmail() {
+        $sql =$this->_bdd->query('SELECT COUNT(*) FROM utilisateur where email = "'.$this->getEmail().'"');
+        return $sql->fetchColumn();
+    }
 }

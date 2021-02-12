@@ -18,7 +18,7 @@
 
 			<!-- Le bandeau contenant les coordonnées -->
 			<!-- <?php include("banner-coordonnees.php") ?>-->
-			{include file = 'banner-coordonnees.tpl'}
+			{include file = 'banner_coordonnees.tpl'}
 
 			<!-- La navbar -->
 			<!-- <?php include("navbar.php") ?> -->
@@ -43,12 +43,20 @@
 							
 							<legend>VOS IDENTIFIANTS</legend>
 
-							<input type="email" name="email" class="inscription-input form-control" placeholder="Email">
+							<input type="email" name="email" class="inscription-input form-control" placeholder="Email" required>
+							{if isset($error_email_message)}
+								{$error_email_message}
+							{/if}
 
-							<input type="password" name="mot_de_passe" class="inscription-input form-control" placeholder="Mot de passe">
-
-							<input type="password" name="_mot_de_passe_verif" class="inscription-input form-control" placeholder="Confirmation">
-
+							<input type="password" name="mot_de_passe" class="inscription-input form-control" placeholder="Mot de passe" required>
+							{if isset($error_mot_de_passe_message)}
+								{$error_mot_de_passe_message}
+							{/if}
+							
+							<input type="password" name="mot_de_passe_verif" class="inscription-input form-control" placeholder="Confirmation" required>
+							{if isset($error_verif_mot_de_passe_message)}
+								{$error_verif_mot_de_passe_message}
+							{/if}
 
 							<legend>VOS INFORMATIONS PERSONNELLES</legend>
 
@@ -66,26 +74,43 @@
 
 							</div>
 
-							<input type="text" name="prenom" class="inscription-input form-control" placeholder="Prénom">
+							<input type="text" name="prenom" class="inscription-input form-control" placeholder="Prénom" required>
+							{if isset($error_prenom_utilisateur_message)}
+								{$error_prenom_utilisateur_message}
+							{/if}
 
-							<input type="text" name="nom" class="inscription-input form-control" placeholder="Nom">
-
-							<input type="date" name="date_de_naissance" class="inscription-input form-control">
-
+							<input type="text" name="nom" class="inscription-input form-control" placeholder="Nom" required>
+							{if isset($error_nom_utilisateur_message)}
+								{$error_nom_utilisateur_message}
+							{/if}
+							
+							<input type="date" name="date_de_naissance" class="inscription-input form-control" required>
+							{if isset($error_date_naissance_message)}
+								{$error_date_naissance_message}
+							{/if}
 
 							<legend>VOS COORDONNEES</legend>
 
-							<textarea class="inscription-input form-control" placeholder="Adresse (rue)" name="adresse_rue"></textarea>
+							<textarea class="inscription-input form-control" placeholder="Adresse (rue)" name="adresse_rue" required></textarea>
 
-							<input type="number" name="adresse_code_postal" class="inscription-input form-control" placeholder="Code postal">
+							<input type="number" name="adresse_code_postal" class="inscription-input form-control" placeholder="Code postal" required>
+							{if isset($error_Adresse_code_postal_message)}
+								{$error_Adresse_code_postal_message}
+							{/if}
 
-							<input type="text" name="adresse_ville" class="inscription-input form-control" placeholder="Ville">
+							<input type="text" name="adresse_ville" class="inscription-input form-control" placeholder="Ville" required>
+							{if isset($error_Adresse_ville_message)}
+								{$error_Adresse_ville_message}
+							{/if}
 
-							<input type="tel" name="telephone" class="inscription-input form-control" placeholder="Téléphone">
+							<input type="tel" name="telephone" class="inscription-input form-control" placeholder="Téléphone" required>
+							{if isset($error_telephone_message)}
+								{$error_telephone_message}
+							{/if}
 
 							<div class="form-check">
 
-								<input type="checkbox" name="newsletter" id="newsletter-inscription" class="form-check-input">
+								<input type="checkbox" value="1" name="newsletter" id="newsletter-inscription" class="form-check-input">
 								<label for="newsletter-inscription" class="form-check-label newsletter-label">J'accepte de recevoir les actualités de Zentopia par mail, à hauteur d'un ou deux par mois. </label>
 
 							</div>

@@ -22,7 +22,7 @@
 
 			<!-- Le bandeau contenant les coordonnées -->
 			<!-- <?php include("banner-coordonnees.php") ?>-->
-			{include file = 'banner-coordonnees.tpl'}
+			{include file = 'banner_coordonnees.tpl'}
 
 			<!-- La navbar -->
 			<!-- <?php include("navbar.php") ?> -->
@@ -91,9 +91,23 @@
 
 					<p class="quote">&laquo; Celui qui est le maître de lui-même est plus grand que celui qui est le maître du monde &raquo; -Bouddha</p>
 
+					<div class="row team-member-block">
+	
+						<div class="col-12 col-md-4">
+							
+							<img src="assets/images/prof/olenna.png" alt="Portrait d'un professeur" class="img-fluid img-prof">
 
-					<!-- INSERTION DE LA PARTIE DYNAMIQUE PROF, HTML DEJA CREE -->
-					<?php include('front-end/prof-description.php'); ?>
+						</div>
+
+						<div class="col">
+							
+							<p class="nom-prof">Olenna, 39 ans</p>
+
+							<p class="description-prof">L'histoire de Zentopia commence comme bon nombre, par la rencontre de deux êtres singuliers. Née en Ukraine soviétique dans les années 80, Olenna émigre en France en 2011 et s'installe à Paris, avant d'intégrer l'université de Tours. C'est là qu'elle fera la rencontre de Morgane, originaire d'Orléans.</p>
+
+						</div>
+
+					</div>
 
 				</div>
 

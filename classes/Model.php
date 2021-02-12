@@ -1,6 +1,5 @@
 <?php
 
-
 class Model {
 	protected $_bdd;
 
@@ -43,8 +42,11 @@ class Model {
 	}
 
 
-
-	//supprimer un élément 
+	//
+	// supprimer un élément de la BDD avec l'id
+	//
+	// @param      int   $id     l'id l'element
+	//
 	public function Delete(int $id){
 		$this->_bdd->exec('DELETE FROM '.$this->_table.' WHERE id_'.$this->_table.' = '.$id);
 	}
