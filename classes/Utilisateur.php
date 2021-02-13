@@ -152,32 +152,41 @@
      *
      * @return     <booleen> si la session est ouverte ou pas
      */
-    public function OpenSession {
+    public function OpenSession() {
         //si l'objet appelant la fonction possede un email dans la BDD
         if ($this->countItemByEmail() == 1) {
 
             //recupere les info don on a besion dans la bdd en fonction de l'email
-            $utilisateur = $this->getUserByMail();
+            $utilisateur = $this->getUserByMail($this->getEmail());
 
-            //on ouvre la session et on set les variable de session
-            session_start();
-            $_SESSION['id_utilisateur'] = $utilisateur->getId_utilisateur();
-            $_SESSION['nom'] = $utilisateur->getNom_utilisateur();
-            $_SESSION['prenom'] = $utilisateur->getPrenom_utilisateur();
-            $_SESSION['genre'] = $utilisateur->getGenre();
-            $_SESSION['date_de_naissance'] = $utilisateur->getDate_de_naissance();
-            $_SESSION['adresse_rue'] = $utilisateur->getAdresse_rue();
-            $_SESSION['adresse_code_postal'] = $utilisateur->getAdresse_code_postal();
-            $_SESSION['adresse_ville'] = $utilisateur->getAdresse_ville();
-            $_SESSION['telephone'] = $utilisateur->getTelephone();
-            $_SESSION['email'] = $utilisateur->getEmail();
-            $_SESSION['newsletter'] = $utilisateur->getNewsletter();
-            $_SESSION['seance_decouverte'] = $utilisateur->getSeance_decouverte();
-            $_SESSION['rang'] = $utilisateur->getRang();
+            //on verifie le mot de passe
+            if ($this->getMot_de_passe() == $utilisateur->getMot_de_passe()) {
 
-            return true;
+                //on ouvre la session et on set les variable de session
+                session_start();
+                $_SESSION['id_utilisateur'] = $utilisateur->getId_utilisateur();
+                $_SESSION['nom'] = $utilisateur->getNom_utilisateur();
+                $_SESSION['prenom'] = $utilisateur->getPrenom_utilisateur();
+                $_SESSION['genre'] = $utilisateur->getGenre();
+                $_SESSION['date_de_naissance'] = $utilisateur->getDate_de_naissance();
+                $_SESSION['adresse_rue'] = $utilisateur->getAdresse_rue();
+                $_SESSION['adresse_code_postal'] = $utilisateur->getAdresse_code_postal();
+                $_SESSION['adresse_ville'] = $utilisateur->getAdresse_ville();
+                $_SESSION['telephone'] = $utilisateur->getTelephone();
+                $_SESSION['email'] = $utilisateur->getEmail();
+                $_SESSION['newsletter'] = $utilisateur->getNewsletter();
+                $_SESSION['seance_decouverte'] = $utilisateur->getSeance_decouverte();
+                $_SESSION['rang'] = $utilisateur->getRang();
+
+                return true;
+            }
+
+            return 'MDP';
+            
+        } else {
+
+            return 'EMAIL';
+            
         }
-
-        return false
     }
 }
