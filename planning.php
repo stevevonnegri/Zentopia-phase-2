@@ -78,9 +78,9 @@
 
 
 		<!-- section planning dynamique, qui doit être adapté en smarty/php pour afficher les éléments selon la recherche, selon les actions du membre, du prof ou de l'admin -->
-		<div class="container planning-dynamique-title">
+		<div class="container planning-dynamique-title" id="planning-dynamique">
 
-			<h1>RESERVATION EN LIGNE</h1>
+			<h1 id="reservation">RESERVATION EN LIGNE</h1>
 
 			<!-- Animation arrow -->
 			<div class="anim-arrow">
@@ -109,7 +109,7 @@
 
 					<div class="col text-right">
 						
-						<a href="#">Mon compte</a>
+						<a href="espace-personnel.php">Mon compte</a>
 
 					</div>
 
@@ -275,8 +275,17 @@
 					</div>
 
 					<div class="col">
-						
-						<button class="btn btn-primary shadow-none btn-reserver">RESERVER</button>
+
+						<!-- à afficher seulement si le membre est connecté et ne participe pas à la séance -->
+						<!-- au clic du bouton, le membre doit être ajouté à la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation, il faudra peut-être intégrer la redirection dans le Modal?)-->
+						<button class="btn btn-primary shadow-none btn-reserver" data-toggle="modal" data-target="#confirmation-reservation">RESERVER</button>
+
+						<!-- à afficher seulement si le membre est connecté et est un participant de la séance -->
+						<!-- au clic du bouton, le membre doit être retiré de la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation d'annulation, il faudra peut-être intégrer la redirection dans le Modal?)-->
+						<!--<button class="btn btn-primary shadow-none btn-reserver" data-toggle="modal" data-target="#confirmation-annulation">ANNULER</button>-->
+
+						<!-- à afficher seulement si le membre n'est pas connecté/inscrit -->
+						<a href="connexion.php" class="btn btn-primary shadow-none btn-reserver">SE CONNECTER</a>
 
 						<!-- à afficher seulement pour les admins et les profs/modé dont c'est le cours -->
 						<button class="btn btn-primary btn-admin shadow-none" onclick="showElement('admin-seance');"><i class="fas fa-user-cog"></i></button>
@@ -284,12 +293,79 @@
 					</div>
 
 
-					<!-- à afficher si le membre a effectué une réservation sur ce cours -->
-					<!--<div class="col-12">
-						
-						<p class="confirmation-reservation">La séance a bien été réservée. Retrouvez toutes les informations dans l'e-mail de confirmation que nous vous avons envoyé.</p>
+					<!-- Modal de confirmation de réservation à afficher lors que le membre clique sur le bouton RESERVER -->
+					<div class="modal fade" id="confirmation-reservation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					  
+						<div class="modal-dialog modal-dialog-centered" role="document">
 
-					</div> -->
+					    	<div class="modal-content">
+
+					    		<div class="modal-header">
+
+					        		<h5 class="modal-title" id="exampleModalLongTitle">Confirmation de réservation</h5>
+
+					        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+					          			<span aria-hidden="true">&times;</span>
+
+					        		</button>
+
+					      		</div>
+
+					      		<div class="modal-body">
+
+					        		Votre séance a bien été réservée. Vous allez bientôt recevoir un mail de confirmation.
+
+					      		</div>
+
+					      		<div class="modal-footer">
+
+					        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+					      		</div>
+
+					    	</div>
+
+					  	</div>
+
+					</div> <!-- fin div modal -->
+
+					<!-- Modal de confirmation d'annulation à afficher lors que le membre clique sur le bouton ANNULER sur une séance où il participe -->
+					<div class="modal fade" id="confirmation-annulation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					  
+						<div class="modal-dialog modal-dialog-centered" role="document">
+
+					    	<div class="modal-content">
+
+					    		<div class="modal-header">
+
+					        		<h5 class="modal-title" id="exampleModalLongTitle">Confirmation d'annulation</h5>
+
+					        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+					          			<span aria-hidden="true">&times;</span>
+
+					        		</button>
+
+					      		</div>
+
+					      		<div class="modal-body">
+
+					        		La réservation à cette séance a bien été annulée. Vous allez bientôt recevoir un mail de confirmation.
+
+					      		</div>
+
+					      		<div class="modal-footer">
+
+					        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+					      		</div>
+
+					    	</div>
+
+					  	</div>
+
+					</div> <!-- fin div modal -->
 
 				</div>
 
@@ -564,7 +640,7 @@
 
 					<div class="col text-right">
 						
-						<a href="#">Mon compte</a>
+						<a href="espace-personnel.php">Mon compte</a>
 
 					</div>
 

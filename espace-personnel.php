@@ -44,6 +44,9 @@
 		</header> 
 
 
+		<!-- REDIRECTION vers page de Connexion si arrivée d'un utilisateur non connecté/non inscrit sur cette page. L'utilisateur peut notamment arriver du lien "Mon compte" qui est sur le planning dynamique -->
+
+
 		<div class="container espace-content">
 
 			<div class="row">

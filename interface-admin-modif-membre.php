@@ -119,6 +119,8 @@
 
 						</div>
 
+						
+
 						<h2>Rechercher un membre</h2>
 
 						<form method="post" action="" class="form-recherche">

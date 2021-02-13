@@ -128,6 +128,7 @@
 
 				<h2 class="text-center">Nos plus belles réalisations, capturées sur l'instant...</h2>
 
+				<!-- à afficher de façon dynamique avec les images contenues dans la BDD -->
 				<div class="slider">
 					<div><img src="assets/images/slideshow1.jpg" class="img-fluid" alt="Personnes en train de faire du yoga" /></div>
 					<div><img src="assets/images/slideshow2.jpg" class="img-fluid" alt="Personnes en train de faire du yoga" /></div>
@@ -274,7 +275,92 @@
 
 			</div> <!-- fin div testimonial -->
 
-		</div>
+
+			<!-- section Ajouter un avis -->
+			<div class="ajouter-avis-block text-center">
+				
+				<h3>Partagez vous aussi votre expérience Zentopia !</h3>
+
+				<button class="btn-lg btn-primary shadow-none" onclick="showElement('ajouter-avis');">DEPOSEZ VOTRE AVIS</button>
+
+				<!-- partie cachée tant que le membre n'a pas cliqué sur le bouton ci-dessus -->
+				<div class="hidden" id="ajouter-avis">
+					
+					<div class="ajouter-avis-inner">
+
+						
+						<!-- à afficher si le membre n'a pas encore écrit un avis -->
+						<form method="post" action="">
+
+							<div class="form-row">
+
+								<div class="col-12 text-left">
+									
+									<label for="avis-contenu">Votre avis :</label>
+									<textarea class="form-control" name="avis-contenu"></textarea>
+
+								</div>
+
+								<div class="col-2 text-left">
+									
+									<label for="note">Votre note :</label>
+									<select class="form-control">
+										
+										<option value="">--Note--</option>
+										<option value="5">5/5</option>
+										<option value="4">4/5</option>
+										<option value="3">3/5</option>
+										<option value="2">2/5</option>
+										<option value="1">1/5</option>
+
+									</select>
+
+								</div>
+								
+								
+								<!-- à l'envoi du formulaire, envoyer le contenu de l'avis et la note, l'id utilisateur et approuvé set sur false à la BDD pour qu'il puisse ensuite apparaître dans la liste consultable par les modérateurs/admin -->
+							</div><button type="submit" class="btn-lg btn-primary shadow-none">SOUMETTRE</button>
+							
+
+						</form>
+
+
+						<!-- à afficher lors que le membre n'est pas connecté ou inscrit -->
+						<!--<p>Vous devez posséder un compte pour laisser un avis client sur notre site.</p>
+
+						<div class="row">
+							
+							<div class="col compte-manquant">
+								
+								<a href="connexion.php" class="btn btn-primary shadow-none">SE CONNECTER</a>
+								<a href="inscription.php" class="btn btn-primary shadow-none">S'INSCRIRE</a>
+
+							</div>
+
+						</div>-->
+
+
+						<!-- à afficher lorsque le membre a déjà déposé un avis -->
+						<!--<div class="row avis-depose">
+							
+							<div class="col">
+								
+								<p>Vous avez déjà déposé votre avis client. Vous pouvez le consulter directement dans votre <a href="espace-personnel.php#mon-avis">espace personnel.</a></p>
+
+							</div>
+
+						</div>-->
+
+
+					</div>
+
+				</div>
+
+			</div>
+
+			
+
+		</div> <!-- fin div section avis -->
 
 
 		<!-- Scroll top + footer -->
