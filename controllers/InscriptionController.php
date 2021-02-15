@@ -27,67 +27,56 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 
 				if ($user->countItemByEmail() != 0) {
 					
-					$error_email_message = '<p class="error-form">Cet email existe deja, merci de vous connecter (ou cliquer ici pour vous connecter).</p>';
+					$error_email_message = '<p class="alert-danger">Cet email existe deja, merci de vous connecter (ou cliquer ici pour vous connecter).</p>';
 					$erreur = true;
 
 				}
 
 			} else {
 
-				$error_email_message = '<p class="error-form"> format de l\'email invalide.</p>';
+				$error_email_message = '<p class="alert-danger"> format de l\'email invalide.</p>';
 				$erreur = true;
 				
 			}
 		//Verifie la validité et que les mot de passe est identique et si oui le hash
 
 			// verifie si le mot de passe est valide (entre 8 et 30 caractères ET avec au moins une lettre et un chiffre)
-			if (strlen($_POST['mot_de_passe']) < 8) {
+
+			$verif = VerifMot_De_PasseConforme($_POST['mot_de_passe']);
+
+			if ($verif !== true ) {
+
+				$error_mot_de_passe_message = $verif;
+				$erreur = true;
+			}
 			
-				$error_mot_de_passe_message = '<p class="error-form">Votre Mot de passe fait moins de 8 caractères.</p>';
-				$erreur = true;
+			//verifie si les mot de passe sont identique
 
-			} elseif (strlen($_POST['mot_de_passe']) > 30) {
+			$verif = VerifMot_De_PasseIndetique($_POST['mot_de_passe'], $_POST['mot_de_passe_verif']);
 
-				$error_mot_de_passe_message = '<p class="error-form">Votre Mot de passe fait plus de 30 caractères</p>';
-				$erreur = true;
-
-			} elseif (!preg_match("/[a-z]+/", $_POST['mot_de_passe'])) {
-			 
-				$error_mot_de_passe_message = '<p class="error-form">Votre Mot de passe doit inclure au moins une lettre</p>';
-				$erreur = true;
-				
-			} elseif (!preg_match("/[0-9]+/", $_POST['mot_de_passe'])) {
-		 
-				$error_mot_de_passe_message = '<p class="error-form">Votre Mot de passe doit inclure au moins un chiffre</p>';
-				$erreur = true;
-
-
-			// verifie si les mot de passe sont identique
-
-			} elseif ($_POST['mot_de_passe'] != $_POST['mot_de_passe_verif']) {
-			
-				$error_verif_mot_de_passe_message = '<p class="error-form">Vos mots de passe ne correspondent pas.</p>';
+			if ($verif === false) {
+				$error_verif_mot_de_passe_message = '<p class="alert-danger">Vos mots de passe ne correspondent pas.</p>';
 				$erreur = true;
 
 			} else {
 
-				$user->setMot_de_passe(password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT));
-
+				$user->setMot_de_passe($verif);
 			}
+
 
 
 		//verifie que le nom et le prenom n'on pas de charactere speciaux
 			//le nom en 1er
 			if (!preg_match("/^[a-zéèêëïüA-Z-' ]*$/", $user->getNom_utilisateur())) {
 
-				$error_nom_utilisateur_message = '<p class="error-form">Votre Nom à des caractere non valide.</p>';
+				$error_nom_utilisateur_message = '<p class="alert-danger">Votre Nom à des caractere non valide.</p>';
 				$erreur = true;
 
 			}
 			//Ensuite le prenom
 			if (!preg_match("/^[a-zéèêëïüA-Z-' ]*$/", $user->getPrenom_utilisateur())) {
 
-				$error_prenom_utilisateur_message = '<p class="error-form">Votre Prénom à des caractere non valide.</p>';
+				$error_prenom_utilisateur_message = '<p class="alert-danger">Votre Prénom à des caractere non valide.</p>';
 				$erreur = true;
 
 			}
@@ -111,14 +100,14 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 			//on verifie si l'utilisateur a plus de 18 ans.
 			if ($date_naissance > $date_limite) {
 				
-				$error_date_naissance_message = '<p class="error-form">Vous devez avoir au moins 18 ans pour vous inscrire.</p>';
+				$error_date_naissance_message = '<p class="alert-danger">Vous devez avoir au moins 18 ans pour vous inscrire.</p>';
 				$erreur = true;
 			}
 
 		//Verification que le code postal fasse bien 5 chiffre.
 			if (!preg_match("#^[0-9]{5}$#", $user->getAdresse_code_postal())) {
 
-					$error_Adresse_code_postal_message = '<p class="error-form">Votre code postal doit etre composé de 5 chiffres.</p>';
+					$error_Adresse_code_postal_message = '<p class="alert-danger">Votre code postal doit etre composé de 5 chiffres.</p>';
 					$erreur = true;
 
 			}
@@ -126,14 +115,14 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 		//Verification qu'il n'y ai pas de chiffre dans le nom de la ville
 			if (preg_match("/[0-9]+/", $user->getAdresse_ville())) {
 
-			 	$error_Adresse_ville_message = '<p class="error-form">Le nom de votre ville ne doit contenir de chiffres.</p>';
+			 	$error_Adresse_ville_message = '<p class="alert-danger">Le nom de votre ville ne doit contenir de chiffres.</p>';
 					$erreur = true;
 			 }
 
 		//Verification du num de tel
 			if (!preg_match("#[0-9]{10}$#", $user->getTelephone())) {
 
-			 	$error_telephone_message = '<p class="error-form">Votre numero de téléphone doit contenir au moins 10 chiffres et pas de lettre.</p>';
+			 	$error_telephone_message = '<p class="alert-danger">Votre numero de téléphone doit contenir au moins 10 chiffres et pas de lettre.</p>';
 					$erreur = true;
 			 }
 

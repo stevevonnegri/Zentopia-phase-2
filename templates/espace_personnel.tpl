@@ -10,9 +10,7 @@
 
 	</head>
 	<body>
-		{if isset($test)}
-			{$test}
-		{/if}
+
 
 		<!-- SECTION HEADER (contient le bandeau d'info, la navbar et sa background-img + la scroll arrow) -->
 		<header class="header-all"> 
@@ -39,7 +37,7 @@
 						<img src="assets/icons/yoga-male.png" class="img-fluid"/>
 
 						<!-- à remplacer par une variable prénom de l'utilisateur -->
-						<p>Bonjour {$prenom_utilisateur}</p>
+						<p>Bonjour {$_SESSION.prenom_utilisateur}</p>
 
 						<a href="?action=espace_personnel" class="btn btn-primary btn-menu-left shadow-none">MES INFORMATIONS <i class="fas fa-caret-right text-right"></i></a>
 
@@ -48,11 +46,11 @@
 						<a href="#mon-avis" class="btn btn-primary btn-menu-left shadow-none">MON AVIS CLIENT<i class="fas fa-caret-right text-right"></i></a>
 
 						<!-- afficher seulement si modérateur -->
-						{if $rang == moderateur}
+						{if $_SESSION.rang == moderateur}
 						<a href="?action=interface_moderateur" class="btn btn-primary btn-admin shadow-none">MODERATION<i class="fas fa-caret-right text-right"></i></a>
 						{/if}
 
-						{if $rang == admin}
+						{if $_SESSION.rang == admin}
 						<!-- afficher seulement si admin -->
 						<a href="?action=interface_admin" class="btn btn-primary btn-admin shadow-none">ADMINISTRATION<i class="fas fa-caret-right text-right"></i></a>	
 						{/if}
@@ -76,14 +74,14 @@
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Civilité :</label>
-								<p class="info-p">{$genre}</p>
+								<p class="info-p">{$_SESSION.genre}</p>
 
 							</div>
 
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Date de naissance :</label>
-								<p class="info-p">{$date_de_naissance}</p>
+								<p class="info-p">{$_SESSION.date_de_naissance}</p>
 
 							</div>
 							
@@ -95,14 +93,14 @@
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Prénom :</label>
-								<p class="info-p">{$prenom_utilisateur}</p>
+								<p class="info-p">{$_SESSION.prenom_utilisateur}</p>
 
 							</div>
 
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Nom :</label>
-								<p class="info-p">{$nom_utilisateur}</p>
+								<p class="info-p">{$_SESSION.nom_utilisateur}</p>
 
 							</div>
 							
@@ -113,14 +111,14 @@
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Email :</label>
-								<p class="info-p">{$email}</p>
+								<p class="info-p">{$_SESSION.email}</p>
 
 							</div>
 
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Téléphone :</label>
-								<p class="info-p">{$telephone}</p>
+								<p class="info-p">{$_SESSION.telephone}</p>
 
 							</div>
 
@@ -131,14 +129,14 @@
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Code postal :</label>
-								<p class="info-p">{$adresse_code_postal}</p>
+								<p class="info-p">{$_SESSION.adresse_code_postal}</p>
 
 							</div>
 
 							<div class="col-12 col-lg-6">
 
 								<label for="">Ville :</label>
-								<p class="info-p">{$adresse_ville}</p>
+								<p class="info-p">{$_SESSION.adresse_ville}</p>
 
 							</div>
 
@@ -149,7 +147,7 @@
 							<div class="col">
 								
 								<label for="">Adresse :</label>
-								<p class="info-p">{$adresse_rue}</p>
+								<p class="info-p">{$_SESSION.adresse_rue}</p>
 
 							</div>
 
@@ -158,7 +156,7 @@
 								<legend>Newsletter :</legend>
 								
 								<p class="info-p">
-								{if $newsletter == false}
+								{if $_SESSION.newsletter == false}
 									Pas encore inscrit
 								{else}
 									Deja inscrit
@@ -194,7 +192,10 @@
 
 							<div class="col text-center">
 
-								<input type="password" class="form-control mx-auto mdp-input" name="" placeholder="Mot de passe actuel">
+								<input type="password" class="form-control mx-auto mdp-input" name="mot_de_passe_actuel" placeholder="Mot de passe actuel">
+								{if isset($error_mauvais_mot_de_passe)}
+									{$error_mauvais_mot_de_passe}
+								{/if}
 
 							</div>
 
@@ -204,8 +205,10 @@
 
 							<div class="col text-center">
 
-								<input type="password" class="form-control mx-auto mdp-input" name="" placeholder="Nouveau mot de passe">
-
+								<input type="password" class="form-control mx-auto mdp-input" name="new_mot_de_passe" placeholder="Nouveau mot de passe">
+								{if isset($error_mot_de_passe_message)}
+									{$error_mot_de_passe_message}
+								{/if}
 							</div>
 
 						</div>
@@ -214,8 +217,10 @@
 
 							<div class="col text-center">
 
-								<input type="password" class="form-control mx-auto mdp-input" name="" placeholder="Confirmation">
-
+								<input type="password" class="form-control mx-auto mdp-input" name="new_mot_de_passe_verif" placeholder="Confirmation">
+								{if isset($error_verif_mot_de_passe_message)}
+									{$error_verif_mot_de_passe_message}
+								{/if}
 							</div>
 
 						</div>

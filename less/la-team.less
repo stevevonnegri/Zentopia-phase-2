@@ -291,3 +291,70 @@
   color: @myblue !important;
   //background-color: #eee;
 } 
+
+.ajouter-avis-block h3
+{
+	margin-top: 60px;
+	.mgdown50();
+	.opensansSB();
+	color: @myblue;
+	font-size: 1.5rem;
+}
+
+.ajouter-avis-block button, .compte-manquant a
+{
+	background-color: @myblue;
+	border: none;
+	.opensansL();
+
+	&:hover, &:focus, &:active
+	{
+		outline: none;
+		background-color: @hoverblue !important;
+	}
+}
+
+.ajouter-avis-inner
+{
+	background-color: @lightcream;
+	.shadow();
+	border: 1px solid #E1DCDA;
+	border-radius: 10px;
+	padding: 30px 50px;
+	margin-top: 50px;
+}
+
+.ajouter-avis-inner label
+{
+	margin-top: 30px;
+	.opensansSB();
+	color: @myred;
+}
+
+.ajouter-avis-inner p
+{
+	.opensans();
+	font-size: 1rem;
+	margin-bottom: 30px;
+}
+
+.avis-depose p
+{
+	margin-bottom: 0;
+}
+
+.avis-depose a
+{
+	.opensansSB();
+	color: @myblue;
+}
+
+.ajouter-avis-inner textarea
+{
+	height: 200px;
+}
+
+.ajouter-avis-inner select
+{
+	.mgdown50();
+}

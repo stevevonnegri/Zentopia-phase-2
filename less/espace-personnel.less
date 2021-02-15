@@ -169,13 +169,23 @@ label, legend
 	.opensans();
 }
 
-.cours-membre, .avis-client-inner
+.cours-membre, .avis-client-inner, .galerie-inner
 {
 	background-color: white;
 	border: 1px solid #E1DAD4;
 	border-radius: 10px;
 	padding: 20px;
 	margin-bottom: 10px;
+}
+
+.col-block-cours
+{
+	@media (max-width: 992px) { padding-right: 0; padding-left: 0; }
+}
+
+.cours-membre .col-btn
+{
+	@media (max-width: 992px) { text-align: center !important; margin-bottom: 30px; }
 }
 
 .btn-annuler
@@ -283,14 +293,14 @@ label, legend
 	margin-bottom: 100px;
 }
 
-#confirmation-suppression p
+#confirmation-suppression p, #confirmation-suppr-membre p
 {
 	.opensans();
 	font-size: 0.8rem;
 	margin-top: 30px;
 }
 
-#confirmation-suppression label
+#confirmation-suppression label, #confirmation-suppr-membre label
 {
 	.opensansSB();
 }
@@ -301,10 +311,20 @@ label, legend
 	display: none;
 }
 
-// INTERFACE MODERATEUR //
+
+// INTERFACE MODERATEUR // 
+
+// AVIS CLIENTS
+.block-moderation
+{
+	margin-bottom: 100px;
+}
+
 .block-moderation .btn-admin
 {
 	width: 60%;
+
+	@media (max-width: 992px) { width: 100%; }
 }
 
 .espace-content h2
@@ -330,7 +350,86 @@ label, legend
 
 .avis-client .btn-admin
 {
-	width: 70%;
+	width: 100%;
 	margin-top: 20px;
 }
 
+
+// GERER GALERIE
+.galerie-inner
+{
+	padding-top: 50px;
+}
+
+.suppr-img
+{
+	border: none;
+	background-color: transparent;
+	//.opensans();
+	font-size: 0.9rem;
+	color: red;
+	margin-bottom: 30px;
+
+	&:hover, &:focus, &:active
+	{
+		text-decoration: underline;
+		outline: none;
+	}
+} 
+
+#ajout-img-form
+{
+	margin-top: 40px;
+}
+
+
+// RECHERCHER MEMBRE
+.form-recherche legend
+{
+	.opensans();
+}
+
+.input-membre
+{
+	margin-right: 10px;
+}
+
+.resultat-recherche
+{
+	margin-top: 50px;
+}
+
+.membre-trouve
+{
+	border: 1px solid #E1DAD4;
+	border-radius: 10px;
+	padding: 20px;
+	margin-bottom: 10px;
+}
+
+.membre-trouve span
+{
+	.opensansSB();
+	color: @myblue;
+	font-size: 0.9rem;
+}
+
+.membre-trouve .row-btn
+{
+	margin-top: 30px;
+}
+
+.membre-trouve select
+{
+	margin-top: 30px;
+}
+
+.form-recherche .form-row .input-membre
+{
+	@media (max-width: 992px) { margin-bottom: 10px; }
+}
+
+.resultat-recherche .membre-trouve
+{
+	@media (max-width: 576px) { font-size: 0.8rem; }
+}

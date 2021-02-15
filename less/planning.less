@@ -67,108 +67,298 @@
 	}
 }
 
+.planning-dynamique-title h1
+{
+	text-align: center;
+	.opensansB();
+	color: @myblue;
+	font-size: 1.8rem;
+	.spacing50();
+	.mgdown50();
+}
 
-
-/* SECTION A VENIR */
-
-.a-venir
+.planning-infos-background
 {
 	background-color: @lightcream;
+	margin-top: 50px;
+	margin-bottom: 100px;
+	padding-top: 30px;
+	padding-bottom: 50px;
 	position: relative;
 }
 
-.medit2-planning
+.planning-infos-background .yoga1
 {
 	position: absolute;
-	top: -57px;
-	right: 27%;
+	bottom: -6%;
+	left: 47%;
 }
 
-.a-venir h1
+
+/* SECTION PLANNING DYNAMIQUE */
+
+@keyframes scroll-down { from { margin-top: -30px; opacity: 1; } to { margin-bottom: 50px; opacity: 0; } }
+/* simple animation d'invitation au scroll avec effet fade */
+
+.anim-arrow
 {
-	padding-top: 50px;
-	padding-bottom: 15px;
-	.opensansSB();
-	.spacing100();
+	animation: 1.5s linear 0s infinite normal scroll-down;
+	position: absolute;
+	left: -1%;
+	right: 0;
+	.center();
+	width: 10px;
+	font-size: 2.5rem;
 	color: @myblue;
-	font-size: 2rem;
-	border-bottom: 4px solid rgba(0, 78, 100, 0.2);
 }
 
-.a-venir p
+
+.planning-dynamique
 {
+	margin-top: 150px;
+	margin-bottom: 100px;
 	.latoL();
-	.spacing100();
-	color: @mygrey;
-	font-size: 1.4rem;
-	margin: 70px auto;
-
-	@media (max-width: 768px) { font-size: 1.2rem; }
-	@media (max-width: 576px) { font-size: 1rem; }
 }
 
-.a-venir span
+.planning-head
+{
+	background-color: @lightcreamdarker;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	padding: 30px;
+	.shadow();
+
+	@media (max-width: 576px) { padding: 30px 0; }
+}
+
+.ajouter-seance-btn
+{
+	margin-top: 30px;
+}
+
+#ajouter-seance
+{
+	background-color: @lightcreamdarker;
+	padding: 30px;
+	.shadow();
+
+	@media (max-width: 576px) { padding: 30px 0; }
+}
+
+#ajouter-seance form, #modif-seance form
+{
+	@media (max-width: 576px) { margin-right: 5px; margin-left: 5px; }
+}
+
+#ajouter-seance label, #modif-seance label
+{
+	margin-top: 10px;
+}
+
+#ajouter-seance button
+{
+	margin-bottom: 0;
+}
+
+#ajouter-seance .btn-col button, #modif-seance .btn-col button
+{
+	@media (max-width: 768px) { width: 100%; margin-top: 15px; }
+}
+
+.planning-search .form-row
+{
+	@media (max-width: 768px) { align-items: flex-end !important; }
+	@media (max-width: 992px) { margin-top: 30px; }
+}
+
+.planning-search .form-row .col-search
+{
+	@media (max-width: 992px) { text-align: center !important; }
+}
+
+.planning-footer
+{
+	background-color: @lightcreamdarker;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	padding: 30px;
+	.shadow();
+
+	@media (max-width: 576px) { padding: 30px 0; }
+}
+
+.titre-head
 {
 	.latoB();
+	color: @mygrey;
 }
 
-.newsletter-planning input
+.planning-head a, .planning-footer a
 {
-	margin-right: -2px;
-	padding-left: 20px;
-	height: 50px;
-	width: 450px;
-	border-bottom-left-radius: 5px;
-	border-top-left-radius: 5px;
-	border: 1.8px solid #9F9F9F;
-
-	@media (max-width: 1200px) { width: 40%; }
-	@media (max-width: 1000px) { width: 45%; }
-	@media (max-width: 770px) { width: 50%; }
-	@media (max-width: 440px) { width: 60%; }
-}
-
-.newsletter-planning input::placeholder
-{
-	.opensansL();
-	.spacing100();
-	opacity: 0.8;
-}
-
-.newsletter-planning .btn-primary
-{
-	background-color: @myblue;
-	border: none;
-	height: 50px;
-	border-bottom-left-radius: 0;
-	border-top-left-radius: 0;
-	width: 200px;
-	.opensansSB();
-	font-size: 0.7rem;
+	color: black;
 
 	&:hover
 	{
-		background-color: @hoverblue;
+		text-decoration: none;
+		.latoB();
 	}
+}
 
-	&:focus, &:active
+.planning-dynamique p
+{
+	margin-bottom: 0;
+}
+
+.background-light
+{
+	background-color: @lightcream;
+	padding: 30px;
+	border-bottom: 1px solid @lightcreamdarker;
+	border-right: 1px solid @lightcreamdarker;
+	border-left: 1px solid @lightcreamdarker;
+	.shadow();
+
+	@media (max-width: 576px) { padding: 30px 0; }
+}
+
+.background-jour
+{
+	background-color: @lightcreamdarker;
+	padding: 30px;
+	.shadow();
+
+	@media (max-width: 576px) { padding: 30px 0; }
+}
+
+.planning-dynamique select
+{
+	padding: 5px;
+	border-radius: 5px;
+	margin-left: 5px;
+}
+
+.planning-search a
+{
+	color: @myred;
+	.latoB();
+
+	&:hover
+	{
+		border-bottom: 2px solid @myred;
+		text-decoration: none;
+	}
+}
+
+.planning-search label, #modif-seance button
+{
+	margin-bottom: 0;
+}
+
+.planning-search button
+{
+	margin-left: 15px;
+}
+
+.background-jour p
+{
+	.latoB();
+	color: @myblue;
+}
+
+.seance-element .btn-admin
+{
+	width: auto;
+	margin-bottom: 0;
+	margin-left: 10px;
+}
+
+.seance-element .col-below
+{
+	@media (max-width: 992px) { margin-top: 30px; }
+}
+
+.planning-dynamique .voir-description
+{
+	color: @hoverblue;
+	.latoB();
+}
+
+.places-dispo
+{
+	font-style: italic;
+}
+
+.planning-dynamique .btn-reserver
+{
+	background-color: @myblue;
+	.opensans();
+	font-size: 0.9rem;
+	border: none;
+
+	&:hover, &:focus, &:active
 	{
 		background-color: @hoverblue !important;
 	}
-
-	@media (max-width: 1200px) { width: 20%; }
-	@media (max-width: 1000px) { width: 25%; }
-	@media (max-width: 770px) { width: 30%; }
-	@media (max-width: 440px) { width: 40%; }
 }
 
-.a-venir .newsletter-planning-disclaimer
+.confirmation-reservation
 {
-	.mgdown50();
-	.opensans();
-	font-size: 0.7rem;
-	letter-spacing: 0;
+	margin-top: 20px;
+	.latoB();
 }
+
+#admin-seance .btn-admin
+{
+	width: 100%;
+}
+
+#liste-participants
+{
+	.opensansSB();
+	font-size: 0.9rem;
+}
+
+#liste-participants li
+{
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+#liste-participants .btn-link
+{
+	margin-left: 10px;
+	background-color: transparent;
+	border: none;
+	color: @myblue;
+	text-decoration: underline;
+
+	&:hover, &:focus, &:active
+	{
+		.opensansB();
+		outline: none;
+	}
+}
+
+#ajouter-participant, #ajouter-participant .resultat-recherche
+{
+	margin-top: 30px;
+}
+
+#ajouter-participant .membre-trouve button
+{
+	margin-top: 30px;
+}
+
+#ajouter-participant .form-recherche .col-btn
+{
+	@media (max-width: 768px) { margin-top: 10px; text-align: center !important }
+}
+
+#annuler-seance .form-row
+{
+	@media (max-width: 576px) { margin-left: 30px; margin-bottom: 20px; }	
+}
+
 
 
 /* TARIFS */

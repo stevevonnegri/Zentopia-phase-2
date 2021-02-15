@@ -13,7 +13,7 @@
     protected $_email;
     protected $_mot_de_passe;
     protected $_newsletter;
-    protected $_cours_decouverte;
+    protected $_seance_decouverte;
     protected $_rang;
     
     protected $_table = "utilisateur";
@@ -56,8 +56,8 @@
     public function setNewsletter($newsletter){
         $this->_newsletter = $newsletter;
     }
-    public function setCours_decouverte($coursDecouverte){
-        $this->_cours_decouverte = $coursDecouverte;
+    public function setSeance_decouverte($coursDecouverte){
+        $this->_seance_decouverte = $coursDecouverte;
     }
     public function setRang($rang){
         $this->_rang = $rang;
@@ -101,8 +101,8 @@
     public function getNewsletter(){
         return $this->_newsletter;
     }
-    public function getCours_decouverte(){
-        return $this->_cours_decouverte;
+    public function getSeance_decouverte(){
+        return $this->_seance_decouverte;
     }
     public function getRang(){
         return $this->_rang;
@@ -150,13 +150,13 @@
      * recupere les information coresspondant au mail
      * ouvre une session et set les info dans les variable de session
      *
-     * @return     <booleen> si la session est ouverte ou pas
+     * @return     true si la session est ouverte, 'MDP' si le mot de passe donnée et celui de la BDD ne corresponde pas, 'EMAIL' si l'email n'existe pas dans la BDD.
      */
     public function OpenSession() {
         //si l'objet appelant la fonction possede un email dans la BDD
         if ($this->countItemByEmail() == 1) {
 
-            //recupere les info don on a besion dans la bdd en fonction de l'email
+            //recupere les info don on a besoin dans la bdd en fonction de l'email
             $utilisateur = $this->getUserByMail($this->getEmail());
 
             //on verifie le mot de passe
@@ -165,8 +165,8 @@
                 //on ouvre la session et on set les variable de session
                 session_start();
                 $_SESSION['id_utilisateur'] = $utilisateur->getId_utilisateur();
-                $_SESSION['nom'] = $utilisateur->getNom_utilisateur();
-                $_SESSION['prenom'] = $utilisateur->getPrenom_utilisateur();
+                $_SESSION['nom_utilisateur'] = $utilisateur->getNom_utilisateur();
+                $_SESSION['prenom_utilisateur'] = $utilisateur->getPrenom_utilisateur();
                 $_SESSION['genre'] = $utilisateur->getGenre();
                 $_SESSION['date_de_naissance'] = $utilisateur->getDate_de_naissance();
                 $_SESSION['adresse_rue'] = $utilisateur->getAdresse_rue();
@@ -183,10 +183,9 @@
 
             return 'MDP';
             
-        } else {
+        } 
 
-            return 'EMAIL';
+        return 'EMAIL';
             
-        }
     }
 }

@@ -70,7 +70,7 @@
 
 				<p>Toutes deux professeures de yoga depuis des années, Olenna et Morgane sont spécialisées dans le hatha yoga, et dispensent plusieurs cours par semaine, ainsi que des cours particuliers à domicile. Morgane dispense également des cours de méditation tibétaine depuis 2019.</p>
 
-				<a href="?action=enseignement" class="btn btn-outline-light">NOTRE ENSEIGNEMENT</a>
+				<a href="enseignement.php" class="btn btn-outline-light">NOTRE ENSEIGNEMENT</a>
 				
 				</div>
 
@@ -91,23 +91,9 @@
 
 					<p class="quote">&laquo; Celui qui est le maître de lui-même est plus grand que celui qui est le maître du monde &raquo; -Bouddha</p>
 
-					<div class="row team-member-block">
-	
-						<div class="col-12 col-md-4">
-							
-							<img src="assets/images/prof/olenna.png" alt="Portrait d'un professeur" class="img-fluid img-prof">
 
-						</div>
-
-						<div class="col">
-							
-							<p class="nom-prof">Olenna, 39 ans</p>
-
-							<p class="description-prof">L'histoire de Zentopia commence comme bon nombre, par la rencontre de deux êtres singuliers. Née en Ukraine soviétique dans les années 80, Olenna émigre en France en 2011 et s'installe à Paris, avant d'intégrer l'université de Tours. C'est là qu'elle fera la rencontre de Morgane, originaire d'Orléans.</p>
-
-						</div>
-
-					</div>
+					<!-- INSERTION DE LA PARTIE DYNAMIQUE PROF, HTML DEJA CREE -->
+					<?php include('front-end/prof-description.php'); ?>
 
 				</div>
 
@@ -126,6 +112,7 @@
 
 				<h2 class="text-center">Nos plus belles réalisations, capturées sur l'instant...</h2>
 
+				<!-- à afficher de façon dynamique avec les images contenues dans la BDD -->
 				<div class="slider">
 					<div><img src="assets/images/slideshow1.jpg" class="img-fluid" alt="Personnes en train de faire du yoga" /></div>
 					<div><img src="assets/images/slideshow2.jpg" class="img-fluid" alt="Personnes en train de faire du yoga" /></div>
@@ -270,71 +257,102 @@
 
 				</div>
 
+			</div> <!-- fin div testimonial -->
+
+
+			<!-- section Ajouter un avis -->
+			<div class="ajouter-avis-block text-center">
+				
+				<h3>Partagez vous aussi votre expérience Zentopia !</h3>
+
+				<button class="btn-lg btn-primary shadow-none" onclick="showElement('ajouter-avis');">DEPOSEZ VOTRE AVIS</button>
+
+				<!-- partie cachée tant que le membre n'a pas cliqué sur le bouton ci-dessus -->
+				<div class="hidden" id="ajouter-avis">
+					
+					<div class="ajouter-avis-inner">
+
+						
+						<!-- à afficher si le membre n'a pas encore écrit un avis -->
+						<form method="post" action="">
+
+							<div class="form-row">
+
+								<div class="col-12 text-left">
+									
+									<label for="avis-contenu">Votre avis :</label>
+									<textarea class="form-control" name="avis-contenu"></textarea>
+
+								</div>
+
+								<div class="col-12 col-md-6 col-lg-2 text-left">
+									
+									<label for="note">Votre note :</label>
+									<select class="form-control">
+										
+										<option value="">--Note--</option>
+										<option value="5">5/5</option>
+										<option value="4">4/5</option>
+										<option value="3">3/5</option>
+										<option value="2">2/5</option>
+										<option value="1">1/5</option>
+
+									</select>
+
+								</div>
+								
+								
+								<!-- à l'envoi du formulaire, envoyer le contenu de l'avis et la note, l'id utilisateur et approuvé set sur false à la BDD pour qu'il puisse ensuite apparaître dans la liste consultable par les modérateurs/admin -->
+							</div><button type="submit" class="btn-lg btn-primary shadow-none">SOUMETTRE</button>
+							
+
+						</form>
+
+
+						<!-- à afficher lors que le membre n'est pas connecté ou inscrit -->
+						<!--<p>Vous devez posséder un compte pour laisser un avis client sur notre site.</p>
+
+						<div class="row">
+							
+							<div class="col compte-manquant">
+								
+								<a href="connexion.php" class="btn btn-primary shadow-none">SE CONNECTER</a>
+								<a href="inscription.php" class="btn btn-primary shadow-none">S'INSCRIRE</a>
+
+							</div>
+
+						</div>-->
+
+
+						<!-- à afficher lorsque le membre a déjà déposé un avis -->
+						<!--<div class="row avis-depose">
+							
+							<div class="col">
+								
+								<p>Vous avez déjà déposé votre avis client. Vous pouvez le consulter directement dans votre <a href="espace-personnel.php#mon-avis">espace personnel.</a></p>
+
+							</div>
+
+						</div>-->
+
+
+					</div>
+
+				</div>
 
 			</div>
 
-		</div>
+			
+
+		</div> <!-- fin div section avis -->
 
 
 		<!-- Scroll top + footer -->
 		<!-- <?php include("footer.php"); ?> -->
 		{include file = 'footer.tpl'}
-
-	<!-- lien Slick -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-
-
-	<!-- slideshow BX (images) -->
-  	<script>
-
-  		$('.slider').slick({
-		  infinite: true,
-		  dots: true,
-		  slidesToShow: 1,
-		  slidesToScroll: 1,
-		  speed: 500,
-		  fade: true,
-		  cssEase: 'linear',
-		  autoplay: true,
- 		  autoplaySpeed: 2000
-		  });
+		
 
 	</script>
 
-
-	<!-- slideshow Slick (testimonial) -->
-	<script>
-
-		$('.testimonial').slick({
-		  infinite: true,
-		  dots: true,
-		  slidesToShow: 4,
-		  slidesToScroll: 1,
-		  responsive: [
-    {
-      breakpoint: 1300,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 1
-      }
-    },
-    {
-      breakpoint: 800,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1
-      }
-    },
-    {
-      breakpoint: 580,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-  	]
-	});
-
-	</script>
 	</body>
 </html>
