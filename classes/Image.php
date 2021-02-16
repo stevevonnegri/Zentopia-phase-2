@@ -25,4 +25,32 @@
         return $this->_url_image;
     }
 
+
+    public function resizeImage($image_source, $hauteur, $nom) {
+
+
+        $hauteur = (int) $hauteur;
+
+        $source = imagecreatefromjpeg($image_source); 
+
+        $reduction = ( ($hauteur * 100)/imagesx($source));
+        $largeur = ((imagesy($source) * $reduction)/100 );
+
+
+        $image_destination = imagecreatetruecolor($largeur, $hauteur); 
+
+        imagecopyresampled($image_destination, $source, 0, 0, 0, 0, imagesx($image_destination), imagesy($image_destination), imagesx($source), imagesy($source)); //rezise
+
+
+        $nom = str_replace(" ", "-", $nom);
+        
+        $nouvelle_image = imagejpeg($image_destination, "assets/images/slider/".$hauteur."-".$nom);
+
+    }
+
+
+    public static function GetImageLink($largeur, $nom){
+
+        return ('assets/images/slider/'.$largeur.'-'.$nom);
+    }
 }

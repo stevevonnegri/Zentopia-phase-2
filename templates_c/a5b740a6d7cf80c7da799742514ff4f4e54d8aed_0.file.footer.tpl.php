@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.38, created on 2021-02-16 08:58:35
+/* Smarty version 3.1.38, created on 2021-02-16 12:52:14
   from 'D:\MAMP\htdocs\zentopia\templates\footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.38',
-  'unifunc' => 'content_602b893baddbe0_82438713',
+  'unifunc' => 'content_602bbffec9df05_13513802',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a5b740a6d7cf80c7da799742514ff4f4e54d8aed' => 
     array (
       0 => 'D:\\MAMP\\htdocs\\zentopia\\templates\\footer.tpl',
-      1 => 1613120262,
+      1 => 1613467010,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,10 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_602b893baddbe0_82438713 (Smarty_Internal_Template $_smarty_tpl) {
+function content_602bbffec9df05_13513802 (Smarty_Internal_Template $_smarty_tpl) {
+$_smarty_tpl->_checkPlugins(array(0=>array('file'=>'D:\\MAMP\\htdocs\\zentopia\\libs\\plugins\\modifier.date_format.php','function'=>'smarty_modifier_date_format',),));
 ?>
+
 <!-- Animation scroll-top avec icône -->
 <a href="javascript:" id="scroll-top"><i class="fas fa-long-arrow-alt-up"></i></a>
 
@@ -41,7 +43,8 @@ function content_602b893baddbe0_82438713 (Smarty_Internal_Template $_smarty_tpl)
 
 		<div class="row justify-content-center footer-line1">
 			
-			&copy;2021 Zentopia. Tous droits réservés
+			&copy;<?php echo smarty_modifier_date_format(time(),"%Y");?>
+ Zentopia. Tous droits réservés
 
 		</div>
 
@@ -94,25 +97,12 @@ function content_602b893baddbe0_82438713 (Smarty_Internal_Template $_smarty_tpl)
  src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" integrity="sha512-F5QTlBqZlvuBEs9LQPqc1iZv2UMxcVXezbHzomzS6Df4MZMClge/8+gXrKw2fl5ysdk4rWjR0vKS7NNkfymaBQ==" crossorigin="anonymous"><?php echo '</script'; ?>
 >
 
-
-<!-- script pour la scroll-top -->
+<!-- lien Slick -->
 <?php echo '<script'; ?>
+ src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"><?php echo '</script'; ?>
 >
-	
-	$(window).scroll(function() {
-	    if ($(this).scrollTop() >= 200) {        // Si on scroll à + de 200px
-	        $('#scroll-top').fadeIn(200);    // faire apparaître
-	    } else {
-	        $('#scroll-top').fadeOut(200);   // sinon faire disparaître
-	    }
-	});
 
-	$('#scroll-top').click(function() {      // au clic
-	    $('body,html').animate({
-	        scrollTop : 0                       // remonter jusqu'en haut
-	    }, 500);
-	});
-
-<?php echo '</script'; ?>
+<?php echo '<script'; ?>
+ type="text/javascript" src="js/script.js"><?php echo '</script'; ?>
 ><?php }
 }

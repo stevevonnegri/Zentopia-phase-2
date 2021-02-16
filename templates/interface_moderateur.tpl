@@ -76,7 +76,7 @@
 							
 							<div class="col text-center">
 									
-									<a href="#" class="btn btn-primary btn-admin shadow-none">GERER LA GALERIE</a>
+									<a href="?action=interface_mode_gerer_galerie" class="btn btn-primary btn-admin shadow-none">GERER LA GALERIE</a>
 
 							</div>
 

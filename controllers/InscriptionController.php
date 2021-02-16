@@ -141,7 +141,7 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 		
 		//ajouter les variable de SESSION ici.
 		if ($user->OpenSession() == true) {
-			//header('Location: ?action=espace_personnel');
+			header('Location: ?action=espace_personnel');
 		} else {
 			echo('Compte crée mais erreur dans l\'ouverture de session.');
 		}

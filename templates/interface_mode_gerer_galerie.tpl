@@ -139,6 +139,9 @@
 									<button class="suppr-img">Supprimer</button>
 
 								</div>
+								{foreach from=$imagesAll item="image"}
+									<div><img src="{Image::GetImageLink(65,$image->getUrl_image())}"></div>
+								{/foreach}
 
 							</div>
 
@@ -155,11 +158,15 @@
 							</div>
 
 							<div class="hidden" id="ajout-img-form">
+
+								{if isset($error)}
+									{$error}
+								{/if}
 								
-								<form method="post" action="interface-mode-gerer-galerie.php">
+								<form method="post" enctype="multipart/form-data" action="?action=interface_mode_gerer_galerie">
 									
-									<input type="file" name="" accept="image/jpeg, image/jpg" required>
-									<button type="submit">ENVOYER</button>
+									<input type="file" name="image" accept="image/jpeg, image/jpg" required>
+									<input type="submit" name="image_add" value="ENVOYER">
 
 								</form>
 

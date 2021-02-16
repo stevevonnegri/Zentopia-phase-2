@@ -12,7 +12,7 @@ if(isset($_POST['connexion'])) {
 
     //Verifie selon le retour de la fonction OpenSession, si != de true, renvoie une erreur sinon redirige vers l'espace personnel
     if($resultat === true) {
-        echo ('<script>document.location.href="http://localhost/zentopia/index.php?action=espace_personnel"</script>');
+        echo ('<script>document.location.href="?action=espace_personnel"</script>');
     } elseif($resultat === 'ErrorMDP') {
         $smarty->assign('error', '<p class="alert-danger">Mot de passe incorrect</p>');
     } elseif($resultat === 'ErrorEMAIL') {

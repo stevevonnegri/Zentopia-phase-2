@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.38, created on 2021-02-16 09:01:27
+/* Smarty version 3.1.38, created on 2021-02-16 12:52:14
   from 'D:\MAMP\htdocs\zentopia\templates\navbar.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.38',
-  'unifunc' => 'content_602b89e7f12479_90543449',
+  'unifunc' => 'content_602bbffec212c1_03491713',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cbc8f04833fdab426153b9b2a52cafb0d03ab5af' => 
     array (
       0 => 'D:\\MAMP\\htdocs\\zentopia\\templates\\navbar.tpl',
-      1 => 1613466078,
+      1 => 1613472902,
       2 => 'file',
     ),
   ),
@@ -20,14 +20,13 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_602b89e7f12479_90543449 (Smarty_Internal_Template $_smarty_tpl) {
+function content_602bbffec212c1_03491713 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!-- contenu de la basile header (qui a les classes header-homepage et header-all pour différencier les background) -->
 
 <div class="nav-bg"> <!-- set le bandeau de la nav -->
 
 	<div class="container-fluid"> <!-- set les marges intérieures du bandeau -->
-
 
 		<div class="rs-logos"> 
 			<a href="#"><i class="fab fa-youtube"></i></a>

@@ -46,11 +46,11 @@
 						<a href="#mon-avis" class="btn btn-primary btn-menu-left shadow-none">MON AVIS CLIENT<i class="fas fa-caret-right text-right"></i></a>
 
 						<!-- afficher seulement si modérateur -->
-						{if $_SESSION.rang == moderateur}
+						{if !$_SESSION.rang == 'membre'}
 						<a href="?action=interface_moderateur" class="btn btn-primary btn-admin shadow-none">MODERATION<i class="fas fa-caret-right text-right"></i></a>
 						{/if}
 
-						{if $_SESSION.rang == admin}
+						{if $_SESSION.rang == 'admin'}
 						<!-- afficher seulement si admin -->
 						<a href="?action=interface_admin" class="btn btn-primary btn-admin shadow-none">ADMINISTRATION<i class="fas fa-caret-right text-right"></i></a>	
 						{/if}

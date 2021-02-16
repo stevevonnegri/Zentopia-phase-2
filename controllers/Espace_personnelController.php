@@ -78,9 +78,9 @@
 //affichage de l'avis client de l'utilisateur.
 
 
-if(isset($_GET['deconnection'])) {
+if(isset($_GET['deconnexion'])) {
     session_destroy();
-    echo ('<script>document.location.href="http://localhost/zentopia/index.php"</script>');
+	header('Location: index.php');
 }
 
 //$smarty->assign('active', 'espace_membre');

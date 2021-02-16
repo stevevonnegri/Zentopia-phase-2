@@ -30,6 +30,7 @@ class Model {
 		while($donnees = $sql->fetch(PDO::FETCH_ASSOC)){
 			$lists[] = new $this->_table($donnees);
 		}
+		
 		return $lists; 
 	} 
 
@@ -51,20 +52,25 @@ class Model {
 		$this->_bdd->exec('DELETE FROM '.$this->_table.' WHERE id_'.$this->_table.' = '.$id);
 	}
 
-	public function Add($objet){
+	public function Add(array $data){
+
 		$champs = '';
 		$valeurs = '';
-		foreach($objet as $key => $value){
+
+		foreach($data as $key => $value){
 			if($value){
-				$champs .= substr($key,1).' , ';
+				$champs .= $key.' , ';
 				$valeurs .= '"'.$value.'" , ';
 			}
 		}
+
 		$valeurs = substr($valeurs,0,-2);
 		$champs = substr($champs,0,-2);
 
 		$sql = $this->_bdd->prepare('INSERT INTO '.$this->_table.'('.$champs.') VALUES ('.$valeurs.')');
+		
 		$sql->execute();
+
 	}
 
 	
