@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.38, created on 2021-02-16 09:01:35
+/* Smarty version 3.1.38, created on 2021-02-16 09:24:38
   from 'D:\MAMP\htdocs\zentopia\templates\espace_personnel.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.38',
-  'unifunc' => 'content_602b89ef627059_59522626',
+  'unifunc' => 'content_602b8f56c56894_19804650',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6938e47c17c5a486c7328e13146492b98bc6c27b' => 
     array (
       0 => 'D:\\MAMP\\htdocs\\zentopia\\templates\\espace_personnel.tpl',
-      1 => 1613465363,
+      1 => 1613467416,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_602b89ef627059_59522626 (Smarty_Internal_Template $_smarty_tpl) {
+function content_602b8f56c56894_19804650 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="fr-FR">
 	<head>
@@ -38,7 +38,6 @@ function content_602b89ef627059_59522626 (Smarty_Internal_Template $_smarty_tpl)
 
 	</head>
 	<body>
-
 
 
 		<!-- SECTION HEADER (contient le bandeau d'info, la navbar et sa background-img + la scroll arrow) -->
@@ -72,7 +71,8 @@ include("navbar.php") <?php echo '?>';?>
 						<img src="assets/icons/yoga-male.png" class="img-fluid"/>
 
 						<!-- à remplacer par une variable prénom de l'utilisateur -->
-						<p>Bonjour Anaïs</p>
+						<p>Bonjour <?php echo $_smarty_tpl->tpl_vars['_SESSION']->value['prenom_utilisateur'];?>
+</p>
 
 						<a href="?action=espace_personnel" class="btn btn-primary btn-menu-left shadow-none">MES INFORMATIONS <i class="fas fa-caret-right text-right"></i></a>
 
@@ -81,13 +81,17 @@ include("navbar.php") <?php echo '?>';?>
 						<a href="#mon-avis" class="btn btn-primary btn-menu-left shadow-none">MON AVIS CLIENT<i class="fas fa-caret-right text-right"></i></a>
 
 						<!-- afficher seulement si modérateur -->
+						<?php if ($_smarty_tpl->tpl_vars['_SESSION']->value['rang'] == 'moderateur') {?>
 						<a href="?action=interface_moderateur" class="btn btn-primary btn-admin shadow-none">MODERATION<i class="fas fa-caret-right text-right"></i></a>
+						<?php }?>
 
+						<?php if ($_smarty_tpl->tpl_vars['_SESSION']->value['rang'] == 'admin') {?>
 						<!-- afficher seulement si admin -->
 						<a href="?action=interface_admin" class="btn btn-primary btn-admin shadow-none">ADMINISTRATION<i class="fas fa-caret-right text-right"></i></a>	
+						<?php }?>
 
 						<!-- déconnecter la session et quitter la page au clic -->
-						<a href="?action=espace_personnel&deconnection=true" class="btn btn-primary btn-red shadow-none">DECONNEXION</a>
+						<a href="?action=espace_personnel&deconnexion=true" class="btn btn-primary btn-red shadow-none">DECONNEXION</a>
 
 					</div>
 
@@ -105,14 +109,16 @@ include("navbar.php") <?php echo '?>';?>
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Civilité :</label>
-								<p class="info-p">Mme</p>
+								<p class="info-p"><?php echo $_smarty_tpl->tpl_vars['_SESSION']->value['genre'];?>
+</p>
 
 							</div>
 
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Date de naissance :</label>
-								<p class="info-p">11/05/1994</p>
+								<p class="info-p"><?php echo $_smarty_tpl->tpl_vars['_SESSION']->value['date_de_naissance'];?>
+</p>
 
 							</div>
 							
@@ -124,14 +130,16 @@ include("navbar.php") <?php echo '?>';?>
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Prénom :</label>
-								<p class="info-p">Anaïs</p>
+								<p class="info-p"><?php echo $_smarty_tpl->tpl_vars['_SESSION']->value['prenom_utilisateur'];?>
+</p>
 
 							</div>
 
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Nom :</label>
-								<p class="info-p">Bironneau</p>
+								<p class="info-p"><?php echo $_smarty_tpl->tpl_vars['_SESSION']->value['nom_utilisateur'];?>
+</p>
 
 							</div>
 							
@@ -142,14 +150,16 @@ include("navbar.php") <?php echo '?>';?>
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Email :</label>
-								<p class="info-p">monadressemail@gmail.com</p>
+								<p class="info-p"><?php echo $_smarty_tpl->tpl_vars['_SESSION']->value['email'];?>
+</p>
 
 							</div>
 
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Téléphone :</label>
-								<p class="info-p">06 66 66 66 66</p>
+								<p class="info-p"><?php echo $_smarty_tpl->tpl_vars['_SESSION']->value['telephone'];?>
+</p>
 
 							</div>
 
@@ -160,14 +170,16 @@ include("navbar.php") <?php echo '?>';?>
 							<div class="col-12 col-lg-6">
 								
 								<label for="">Code postal :</label>
-								<p class="info-p">37000</p>
+								<p class="info-p"><?php echo $_smarty_tpl->tpl_vars['_SESSION']->value['adresse_code_postal'];?>
+</p>
 
 							</div>
 
 							<div class="col-12 col-lg-6">
 
 								<label for="">Ville :</label>
-								<p class="info-p">Tours</p>
+								<p class="info-p"><?php echo $_smarty_tpl->tpl_vars['_SESSION']->value['adresse_ville'];?>
+</p>
 
 							</div>
 
@@ -178,7 +190,8 @@ include("navbar.php") <?php echo '?>';?>
 							<div class="col">
 								
 								<label for="">Adresse :</label>
-								<p class="info-p">288bis rue des Acacias, bâtiment B</p>
+								<p class="info-p"><?php echo $_smarty_tpl->tpl_vars['_SESSION']->value['adresse_rue'];?>
+</p>
 
 							</div>
 
@@ -186,7 +199,13 @@ include("navbar.php") <?php echo '?>';?>
 								
 								<legend>Newsletter :</legend>
 								
-								<p class="info-p">Pas encore inscrit</p>
+								<p class="info-p">
+								<?php if ($_smarty_tpl->tpl_vars['_SESSION']->value['newsletter'] == false) {?>
+									Pas encore inscrit
+								<?php } else { ?>
+									Deja inscrit
+								<?php }?>
+								</p>
 
 							</div>
 
@@ -209,7 +228,7 @@ include("navbar.php") <?php echo '?>';?>
 
 
 					<!-- BLOCK CHANGER DE MOT DE PASSE -->
-					<div class="block-mdp">
+					<form method="POST" action="" class="block-mdp">
 
 						<h1>CHANGER DE MOT DE PASSE</h1>
 
@@ -217,7 +236,11 @@ include("navbar.php") <?php echo '?>';?>
 
 							<div class="col text-center">
 
-								<input type="password" class="form-control mx-auto mdp-input" name="" placeholder="Mot de passe actuel">
+								<input type="password" class="form-control mx-auto mdp-input" name="mot_de_passe_actuel" placeholder="Mot de passe actuel">
+								<?php if ((isset($_smarty_tpl->tpl_vars['error_mauvais_mot_de_passe']->value))) {?>
+									<?php echo $_smarty_tpl->tpl_vars['error_mauvais_mot_de_passe']->value;?>
+
+								<?php }?>
 
 							</div>
 
@@ -227,8 +250,11 @@ include("navbar.php") <?php echo '?>';?>
 
 							<div class="col text-center">
 
-								<input type="password" class="form-control mx-auto mdp-input" name="" placeholder="Nouveau mot de passe">
+								<input type="password" class="form-control mx-auto mdp-input" name="new_mot_de_passe" placeholder="Nouveau mot de passe">
+								<?php if ((isset($_smarty_tpl->tpl_vars['error_mot_de_passe_message']->value))) {?>
+									<?php echo $_smarty_tpl->tpl_vars['error_mot_de_passe_message']->value;?>
 
+								<?php }?>
 							</div>
 
 						</div>
@@ -237,8 +263,11 @@ include("navbar.php") <?php echo '?>';?>
 
 							<div class="col text-center">
 
-								<input type="password" class="form-control mx-auto mdp-input" name="" placeholder="Confirmation">
+								<input type="password" class="form-control mx-auto mdp-input" name="new_mot_de_passe_verif" placeholder="Confirmation">
+								<?php if ((isset($_smarty_tpl->tpl_vars['error_verif_mot_de_passe_message']->value))) {?>
+									<?php echo $_smarty_tpl->tpl_vars['error_verif_mot_de_passe_message']->value;?>
 
+								<?php }?>
 							</div>
 
 						</div>
@@ -247,13 +276,13 @@ include("navbar.php") <?php echo '?>';?>
 							
 							<div class="col text-center">
 								
-								<input type="submit" name="" class="btn btn-primary btn-red shadow-none" value="METTRE A JOUR">
+								<input type="submit" name="mettre_a_jour" class="btn btn-primary btn-red shadow-none" value="METTRE A JOUR">
 
 							</div>
 
 						</div>
 
-					</div>
+					</form>
 
 
 					<!-- BLOCK MES COURS -->

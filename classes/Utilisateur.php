@@ -116,13 +116,14 @@
         //test si la personne veux s'inscrire a la newletter si oui, envoie le booleen true pour les colonne 
         //"newsletter" et "seance_decouverte" -> la personne venant de s'inscrire, il n'y a pas besoin de tester si elle a deja fait des cours puisque cela n'est pas possible.
          if ($this->getNewsletter() != 1) {
-            $sql = $this->_bdd->prepare('INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, genre, date_de_naissance, adresse_rue, adresse_code_postal, adresse_ville, telephone, email, mot_de_passe) VALUES ("'.$this->getNom_utilisateur().'", "'.$this->getPrenom_utilisateur().'", "'.$this->getGenre().'", "'.$this->getDate_de_naissance().'", "'.$this->getAdresse_rue().'", "'.$this->getAdresse_code_postal().'", "'.$this->getAdresse_ville().'", "'.$this->getTelephone().'", "'.$this->getEmail().'", "'.$this->getMot_de_passe().'")');
-
+            $sql = $this->_bdd->prepare('INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, genre, date_de_naissance, adresse_rue, adresse_code_postal, adresse_ville, telephone, email, mot_de_passe) 
+            VALUES ("'.$this->getNom_utilisateur().'", "'.$this->getPrenom_utilisateur().'", "'.$this->getGenre().'", "'.$this->getDate_de_naissance().'", "'.$this->getAdresse_rue().'",
+             "'.$this->getAdresse_code_postal().'", "'.$this->getAdresse_ville().'", "'.$this->getTelephone().'", "'.$this->getEmail().'", "'.$this->getMot_de_passe().'")');
         } else {
             $sql = $this->_bdd->prepare('INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, genre, date_de_naissance, adresse_rue, adresse_code_postal, adresse_ville, telephone, email, mot_de_passe, newsletter, seance_decouverte) VALUES ("'.$this->getNom_utilisateur().'", "'.$this->getPrenom_utilisateur().'", "'.$this->getGenre().'", "'.$this->getDate_de_naissance().'", "'.$this->getAdresse_rue().'", "'.$this->getAdresse_code_postal().'", "'.$this->getAdresse_ville().'", "'.$this->getTelephone().'", "'.$this->getEmail().'", "'.$this->getMot_de_passe().'", 1, 1)');
 
         }
-
+        
         $sql->execute();
     }
 

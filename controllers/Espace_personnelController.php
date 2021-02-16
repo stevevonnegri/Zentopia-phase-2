@@ -1,10 +1,4 @@
 <?php
-session_start();
-//l'id_utilisateur est dans les variable de session, envoie a smarty les information a afficher dans l'espace membre en fonction des variable de session.
-if (isset($_SESSION['id_utilisateur'])) {
-	$smarty->assign('_SESSION', $_SESSION);
-}
-
 
 //verifie si une session est ouverte, et redirige vers la page de connexion dans le cas contraire.
 

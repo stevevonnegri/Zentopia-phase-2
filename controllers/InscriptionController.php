@@ -138,10 +138,10 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 
 		//on remet le mot de passe non hash dans l'objet user pour le mettre en variable de session.
 		$user->setMot_de_passe($mdp);
-
+		
 		//ajouter les variable de SESSION ici.
 		if ($user->OpenSession() == true) {
-			header('Location: ?action=espace_personnel');
+			//header('Location: ?action=espace_personnel');
 		} else {
 			echo('Compte crée mais erreur dans l\'ouverture de session.');
 		}
