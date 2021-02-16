@@ -340,41 +340,64 @@
 							<h1 id="mon-avis">MON AVIS CLIENT</h1>
 
 							<!-- affichage par défaut, si le membre n'a pas encore écrit d'avis qui a été validé -->
-							<!--<p>Vous n'avez pas encore donné votre avis sur notre établissement.</p>
+							{if $avisUtilisateur == false}
+								<p>Vous n'avez pas encore donné votre avis sur notre établissement.</p>
 
-							<a href="#" class="btn btn-primary btn-red shadow-none">ECRIRE MON AVIS</a>-->
+								<a href="?action=la_team" class="btn btn-primary btn-red shadow-none">ECRIRE MON AVIS</a>
 
+							{elseif $avisUtilisateur->getApprouve() == 0}
 
-							<!-- affichage si le membre a déposé un avis qui est encore en attente de modération -->
-							<!--<p>Votre avis est en attente de modération. Il sera consultable ici et sur <a href="la-team.php#testimonial" class="team-link">cette page</a> une fois approuvé.</p> -->
+								<!-- affichage si le membre a déposé un avis qui est encore en attente de modération -->
+								<p>Votre avis est en attente de modération. Il sera consultable ici et sur <a href="?action=la_team#testimonial" class="team-link">cette page</a> une fois approuvé.</p>
 
-
+							{else}
 							<!-- affichage si le membre a un avis validé et publié sur le site -->
-							<div class="avis-client text-center">
+								<div class="avis-client text-center">
 
-								<p>&laquo; J'adore venir au centre Zentopia méditer après mes parties de jeux vidéos ! Une fois posé au centre de la salle, assis en tailleur, j'oublie tout le stress et la rage que me procurent ces infâmes jeux et je renaît tel un homme nouveau... &raquo;</p>
+									<p>&laquo; {$avisUtilisateur->getContenu_avis()} &raquo;</p>
 
-								<div class="row">
-									
-									<div class="col">
+									<div class="row">
 										
-										<img src="assets/icons/fivestar.png" class="avis-stars" width="150" height="36" alt="5 étoiles"/>
+										<div class="col">
+
+											{if $avisUtilisateur->getNiveau_avis() == 1}
+
+											    <img src="assets/icons/onestar.png" class="avis-stars" width="150" height="36" alt="1 étoiles"/>
+
+											{elseif $avisUtilisateur->getNiveau_avis() == 2}
+
+											    <img src="assets/icons/twostar.png" class="avis-stars" width="150" height="36" alt="2 étoiles"/>
+
+											{elseif $avisUtilisateur->getNiveau_avis() == 3}
+
+											    <img src="assets/icons/threestar.png" class="avis-stars" width="150" height="36" alt="3 étoiles"/>
+
+											{elseif $avisUtilisateur->getNiveau_avis() == 4}
+
+											    <img src="assets/icons/fourstar.png" class="avis-stars" width="150" height="36" alt="4 étoiles"/>
+
+											{elseif $avisUtilisateur->getNiveau_avis() == 5}
+
+											    <img src="assets/icons/fivestar.png" class="avis-stars" width="150" height="36" alt="5 étoiles"/>
+
+											{/if}
+							
+										</div>
 
 									</div>
 
-								</div>
+									<p class="suppr-avis" onclick="supprAvis();">Supprimer mon avis</p>
 
-								<p class="suppr-avis" onclick="supprAvis();">Supprimer mon avis</p>
+									<div class="hidden" id="suppr-avis-confirmation">
 
-								<div class="hidden" id="suppr-avis-confirmation">
+										<p>En cliquant sur le bouton SUPPRIMER ci-dessous, je supprime définitivement mon avis client du site. Il ne sera donc plus consultable dans la liste des avis.</p>
+										
+										<a href="#" class="btn btn-primary btn-red" >SUPPRIMER</a>
 
-									<p>En cliquant sur le bouton SUPPRIMER ci-dessous, je supprime définitivement mon avis client du site. Il ne sera donc plus consultable dans la liste des avis.</p>
-									
-									<a href="#" class="btn btn-primary btn-red" >SUPPRIMER</a>
+									</div>
 
-								</div>
-
-							</div> <!-- fin div avis client si membre a écrit un avis -->
+								</div> <!-- fin div avis client si membre a écrit un avis -->
+							{/if}
 
 						</div>
 						

@@ -73,15 +73,22 @@
 
 
 //affichage des cours deja reserver.
+	//creation de l'objet seance
+$seance = new Seance($dbh);
+
+
 
 
 //affichage de l'avis client de l'utilisateur.
+	//creation de l'objet avis
+$avis = new Avis($dbh);
 
+	//recuperation de l'avis de l'utilisateur connecté
+$avisUtilisateur = $avis->getitem($_SESSION['id_utilisateur'], 'id_utilisateur');
 
-if(isset($_GET['deconnection'])) {
-    session_destroy();
-    echo ('<script>document.location.href="http://localhost/zentopia/index.php"</script>');
-}
+	//envoie la variable a smarty.
+$smarty->assign('avisUtilisateur', $avisUtilisateur);
+
 
 //$smarty->assign('active', 'espace_membre');
 $smarty->display('templates/espace_personnel.tpl');
