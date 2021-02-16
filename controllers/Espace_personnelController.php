@@ -56,7 +56,7 @@
 			$user->Update($donnée, $_SESSION['id_utilisateur']);
 			//puis actualise la page.
 			header('Location: ?action=espace_personnel');
-// A FAIRE 	afficher un message de succes sur la prochaine fenetre.
+	// A FAIRE 	afficher un message de succes sur la prochaine fenetre.
 		
 		} else {
 
@@ -72,22 +72,47 @@
 	}
 
 
-//affichage des cours deja reserver.
+//affichage des seance deja reserver.
 	//creation de l'objet seance
-$seance = new Seance($dbh);
+	$seance = new Seance($dbh);
 
+	//supression d'une reservation
+	if (isset($_GET['adminDelSeanceId'])) {
+		$seance->DeleteReservationById($_GET['adminDelSeanceId'], $_SESSION['id_utilisateur']);
+	}
+
+	//recuperation des seance reserver par l'utilisateur.
+	$seances = $seance->getSseanceById($_SESSION['id_utilisateur']);
+
+	//TEST avec utilisateur 14
+	//$seances = $seance->getSseanceById(14);
+
+	//envoie des donnée a smarty
+	$smarty->assign(array(
+		'ObjetSeance' => $seance,
+		'seances' => $seances
+	));
 
 
 
 //affichage de l'avis client de l'utilisateur.
 	//creation de l'objet avis
-$avis = new Avis($dbh);
+	$avis = new Avis($dbh);
+	
+	//suppression de son avis client
+	//a faire avant l'affiche pour eviter une redirection.
+	if ($_GET['avis'] == 'delete') {
+
+		$avis->Delete($_SESSION['id_utilisateur'], 'id_utilisateur');
+	}
 
 	//recuperation de l'avis de l'utilisateur connecté
-$avisUtilisateur = $avis->getitem($_SESSION['id_utilisateur'], 'id_utilisateur');
+	$avisUtilisateur = $avis->getitem($_SESSION['id_utilisateur'], 'id_utilisateur');
 
 	//envoie la variable a smarty.
-$smarty->assign('avisUtilisateur', $avisUtilisateur);
+	$smarty->assign('avisUtilisateur', $avisUtilisateur);
+
+
 
 
 //$smarty->assign('active', 'espace_membre');

@@ -244,11 +244,12 @@
 						<div class="col">
 
 							<h1 id="mes-cours">MES COURS</h1>
-
+							{if $seances == NULL}
 							<!-- affichage par défaut, si le membre n'a pas de réservation active -->
-							<!-- <p>Vous n'avez pas encore effectué de réservations sur un cours à venir.</p> -->
+							<p>Vous n'avez pas encore effectué de réservations sur un cours à venir.</p>
 
-
+							{else}
+								{foreach from=$seances item=$seance}
 							<!-- affichage des cours à venir si le membre a effectué une ou plusieurs réservations -->
 							<div class="cours-membre">
 								
@@ -256,13 +257,13 @@
 
 									<div class="col text-left">		
 
-										<p class="cours-date"><i class="fas fa-chevron-right"></i>Lundi 23 mars :</p>
+										<p class="cours-date"><i class="fas fa-chevron-right"></i>{$seance['date_seance']|date_format:"%A %e %B :"|utf8_encode}</p>
 
 									</div>
 
 									<div class="col text-right">
 										
-										<a href="#" class="btn btn-primary btn-annuler shadow-none">ANNULER LA RESERVATION</a>
+										<a href="?action=espace_personnel&adminDelSeanceId={$seance['id_seance']}" class="btn btn-primary btn-annuler shadow-none">ANNULER LA RESERVATION</a>
 
 									</div>
 
@@ -273,56 +274,21 @@
 
 									<div class="col">
 										
-										<p class="cours-info"><span class="cours-nom">HATHA YOGA</span> avec Marie</p>
+										<p class="cours-info"><span class="cours-nom">{$seance['nom_type_de_cours']|upper} </span>avec  {$ObjetSeance->getProfesseurNameById($seance['id_professeur'])}</p>
 
 									</div>
 
 									<div class="col">
 										
-										<p class="cours-info">de 8h à 9h15</p>
+										<p class="cours-info">de {$seance['heure_debut_seance']|date_format:"%kh%M"} à {$seance['heure_fin_seance']|date_format:"%kh%M"}</p>
 
 									</div>
 
 								</div>
 
 							</div>
-
-							<div class="cours-membre">
-								
-								<div class="row">
-
-									<div class="col text-left">		
-
-										<p class="cours-date"><i class="fas fa-chevron-right"></i>Lundi 23 mars :</p>
-
-									</div>
-
-									<div class="col text-right">
-										
-										<a href="#" class="btn btn-primary btn-annuler shadow-none">ANNULER LA RESERVATION</a>
-
-									</div>
-
-
-								</div>
-
-								<div class="row">
-
-									<div class="col">
-										
-										<p class="cours-info"><span class="cours-nom">HATHA YOGA</span> avec Marie</p>
-
-									</div>
-
-									<div class="col">
-										
-										<p class="cours-info">de 8h à 9h15</p>
-
-									</div>
-
-								</div>
-
-							</div>
+								{/foreach}
+							{/if}
 
 							<a href="?action=planning" class="btn btn-primary btn-red shadow-none">ACCEDER AU PLANNING</a>
 
@@ -392,7 +358,7 @@
 
 										<p>En cliquant sur le bouton SUPPRIMER ci-dessous, je supprime définitivement mon avis client du site. Il ne sera donc plus consultable dans la liste des avis.</p>
 										
-										<a href="#" class="btn btn-primary btn-red" >SUPPRIMER</a>
+										<a href="?action=espace_personnel&avis=delete" class="btn btn-primary btn-red" >SUPPRIMER</a>
 
 									</div>
 

@@ -61,13 +61,21 @@ class Model {
 	}
 
 
+
 	/**
-	* supprimer un élément de la BDD avec l'id
+	* fonction suppriment un élément d'une BDD selon un ID et un nom de colonne.
 	*
-	* @param      int   $id     l'id l'element
+	*@param      <int>   	$id     	l'id l'element
+	*@param      <string>   $colonne    nom de la colonne
+	*
 	**/
-	public function Delete(int $id){
-		$this->_bdd->exec('DELETE FROM '.$this->_table.' WHERE id_'.$this->_table.' = '.$id);
+	public function Delete($id, $colonne = NULL){
+
+		if ($colonne == NULL) {
+			$colonne = $this->_cle;
+		}
+
+		$this->_bdd->exec('DELETE FROM '.$this->_table.' WHERE '.$colonne.' = "'.$id.'"');
 	}
 
 	public function Add($objet){
