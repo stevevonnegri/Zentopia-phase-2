@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.38, created on 2021-02-12 13:41:33
+/* Smarty version 3.1.38, created on 2021-02-16 09:01:35
   from 'D:\MAMP\htdocs\zentopia\templates\espace_personnel.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.38',
-  'unifunc' => 'content_6026858d9819b6_20793332',
+  'unifunc' => 'content_602b89ef627059_59522626',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6938e47c17c5a486c7328e13146492b98bc6c27b' => 
     array (
       0 => 'D:\\MAMP\\htdocs\\zentopia\\templates\\espace_personnel.tpl',
-      1 => 1613120397,
+      1 => 1613465363,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_6026858d9819b6_20793332 (Smarty_Internal_Template $_smarty_tpl) {
+function content_602b89ef627059_59522626 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="fr-FR">
 	<head>
@@ -87,7 +87,7 @@ include("navbar.php") <?php echo '?>';?>
 						<a href="?action=interface_admin" class="btn btn-primary btn-admin shadow-none">ADMINISTRATION<i class="fas fa-caret-right text-right"></i></a>	
 
 						<!-- déconnecter la session et quitter la page au clic -->
-						<a href="" class="btn btn-primary btn-red shadow-none">DECONNEXION</a>
+						<a href="?action=espace_personnel&deconnection=true" class="btn btn-primary btn-red shadow-none">DECONNEXION</a>
 
 					</div>
 

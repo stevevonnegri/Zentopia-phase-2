@@ -53,7 +53,7 @@
 						<a href="?action=interface_admin" class="btn btn-primary btn-admin shadow-none">ADMINISTRATION<i class="fas fa-caret-right text-right"></i></a>	
 
 						<!-- déconnecter la session et quitter la page au clic -->
-						<a href="" class="btn btn-primary btn-red shadow-none">DECONNEXION</a>
+						<a href="?action=espace_personnel&deconnection=true" class="btn btn-primary btn-red shadow-none">DECONNEXION</a>
 
 					</div>
 

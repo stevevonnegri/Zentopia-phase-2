@@ -40,7 +40,7 @@
 
 				<div class="col col-md-9 col-lg-7 text-center">
 
-Découvrez notre pratique du yoga et de la méditation selon nos trois principes : {if $rang== membre} ok membre {/if}
+Découvrez notre pratique du yoga et de la méditation selon nos trois principes :
 
 				</div>
 

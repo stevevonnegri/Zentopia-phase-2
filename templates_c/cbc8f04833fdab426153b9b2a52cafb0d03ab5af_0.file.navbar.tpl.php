@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.38, created on 2021-02-12 12:32:40
+/* Smarty version 3.1.38, created on 2021-02-16 09:01:27
   from 'D:\MAMP\htdocs\zentopia\templates\navbar.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.38',
-  'unifunc' => 'content_602675684c7458_83495273',
+  'unifunc' => 'content_602b89e7f12479_90543449',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cbc8f04833fdab426153b9b2a52cafb0d03ab5af' => 
     array (
       0 => 'D:\\MAMP\\htdocs\\zentopia\\templates\\navbar.tpl',
-      1 => 1613120262,
+      1 => 1613466078,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_602675684c7458_83495273 (Smarty_Internal_Template $_smarty_tpl) {
+function content_602b89e7f12479_90543449 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!-- contenu de la basile header (qui a les classes header-homepage et header-all pour différencier les background) -->
 
@@ -80,7 +80,12 @@ function content_602675684c7458_83495273 (Smarty_Internal_Template $_smarty_tpl)
 
 						<!-- si session non active : affiche ESPACE MEMEBRE et lien vers la page de connexion 
 							 si session active : affiche MON ESPACE et lien vers la pace "Espace personnel" -->
-						<li><a href="?action=connexion" class="btn btn-primary btn-espace-membre shadow-none">ESPACE MEMBRE</a></li>
+
+						<?php if (!(isset($_smarty_tpl->tpl_vars['_SESSION']->value['id_utilisateur']))) {?>
+							<li><a href="?action=connexion" class="btn btn-primary btn-espace-membre shadow-none">CONNEXION</a></li>
+						<?php } else { ?>
+							<li><a href="?action=espace_personnel" class="btn btn-primary btn-espace-membre shadow-none">ESPACE MEMBRE</a></li>
+						<?php }?>
 						
 
 					</ul>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.38, created on 2021-02-12 16:22:53
+/* Smarty version 3.1.38, created on 2021-02-16 09:01:27
   from 'D:\MAMP\htdocs\zentopia\templates\connexion.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.38',
-  'unifunc' => 'content_6026ab5df244e1_21768657',
+  'unifunc' => 'content_602b89e7ef43c1_77922631',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '32b38319ab4aaf854473d444b3a5eb8992169ee4' => 
     array (
       0 => 'D:\\MAMP\\htdocs\\zentopia\\templates\\connexion.tpl',
-      1 => 1613146299,
+      1 => 1613463056,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ),false)) {
-function content_6026ab5df244e1_21768657 (Smarty_Internal_Template $_smarty_tpl) {
+function content_602b89e7ef43c1_77922631 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="fr-FR">
 	<head>
@@ -83,14 +83,14 @@ include("navbar.php") <?php echo '?>';?>
 						<form action="" method="post">
 
 							<input type="email" name="email_connexion" class="form-control connexion-input" placeholder="Email" required>
-							<?php if ((isset($_smarty_tpl->tpl_vars['erroremail']->value))) {?>
-								<?php echo $_smarty_tpl->tpl_vars['erroremail']->value;?>
+							<?php if ((isset($_smarty_tpl->tpl_vars['ErrorEMAIL']->value))) {?>
+								<?php echo $_smarty_tpl->tpl_vars['ErrorEMAIL']->value;?>
 
 							<?php }?>
 
 							<input type="password" name="password_connexion" class="form-control connexion-input" placeholder="Mot de passe" required>
-							<?php if ((isset($_smarty_tpl->tpl_vars['errormdp']->value))) {?>
-								<?php echo $_smarty_tpl->tpl_vars['errormdp']->value;?>
+							<?php if ((isset($_smarty_tpl->tpl_vars['ErrorMDP']->value))) {?>
+								<?php echo $_smarty_tpl->tpl_vars['ErrorMDP']->value;?>
 
 							<?php }?>
 

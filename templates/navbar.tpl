@@ -5,7 +5,6 @@
 
 	<div class="container-fluid"> <!-- set les marges intérieures du bandeau -->
 
-
 		<div class="rs-logos"> 
 			<a href="#"><i class="fab fa-youtube"></i></a>
 			<a href="#"><i class="fab fa-instagram-square"></i></a>
@@ -57,7 +56,12 @@
 
 						<!-- si session non active : affiche ESPACE MEMEBRE et lien vers la page de connexion 
 							 si session active : affiche MON ESPACE et lien vers la pace "Espace personnel" -->
-						<li><a href="?action=connexion" class="btn btn-primary btn-espace-membre shadow-none">ESPACE MEMBRE</a></li>
+
+						{if !isset($_SESSION['id_utilisateur'])}
+							<li><a href="?action=connexion" class="btn btn-primary btn-espace-membre shadow-none">CONNEXION</a></li>
+						{else}
+							<li><a href="?action=espace_personnel" class="btn btn-primary btn-espace-membre shadow-none">ESPACE MEMBRE</a></li>
+						{/if}
 						
 
 					</ul>

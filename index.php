@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 /*if (!isset($_SESSION)){
     //Verifier si dans le cookie existe
     if(isset($_COOKIE)) {
