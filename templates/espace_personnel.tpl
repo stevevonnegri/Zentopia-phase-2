@@ -52,7 +52,7 @@
 
 						{if $_SESSION.rang == 'admin'}
 						<!-- afficher seulement si admin -->
-						<a href="?action=interface_admin" class="btn btn-primary btn-admin shadow-none">ADMINISTRATION<i class="fas fa-caret-right text-right"></i></a>	
+						<a href="?action=interface_moderateur" class="btn btn-primary btn-admin shadow-none">ADMINISTRATION<i class="fas fa-caret-right text-right"></i></a>	
 						{/if}
 
 						<!-- déconnecter la session et quitter la page au clic -->

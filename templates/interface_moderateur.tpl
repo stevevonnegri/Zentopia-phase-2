@@ -2,7 +2,15 @@
 <html lang="fr-FR">
 	<head>
 
-		<title>Interface modérateur - Zentopia</title>
+		<title>
+		{if $_SESSION.rang == 'moderateur'}
+		Interface modérateur - Zentopia
+		{/if}
+
+		{if $_SESSION.rang == 'admin'}
+		Interface administrateur - Zentopia
+		{/if}
+		</title>
 
 		<meta name="description" content="Le centre Zentopia à Tours vous propose des cours de yoga et de méditation en centre ville, à deux pas de la place Anatole France. Inscrivez-vous dès maintenant pour une séance découverte."/>
 
@@ -47,10 +55,21 @@
 						<a href="?action=espace_personnel#mon-avis" class="btn btn-primary btn-menu-left shadow-none">MON AVIS CLIENT<i class="fas fa-caret-right text-right"></i></a>
 
 						<!-- afficher seulement si modérateur / admin -->
-						<a href="?action=interface_admin" class="btn btn-primary btn-admin shadow-none">MODERATION<i class="fas fa-caret-right text-right"></i></a>
+						<a href="?action=interface_moderateur" class="btn btn-primary btn-admin shadow-none">
+
+							{if $_SESSION.rang == 'moderateur'}
+							MODERATION
+							{/if}
+
+							{if $_SESSION.rang == 'admin'}
+							ADMINISTRATION
+							{/if}							
+							
+
+							<i class="fas fa-caret-right text-right"></i></a>
 
 						<!-- déconnecter la session et quitter la page au clic -->
-						<a href="" class="btn btn-primary btn-red shadow-none">DECONNEXION</a>
+						<a href="?action=interface_moderateur&deconnexion=true" class="btn btn-primary btn-red shadow-none">DECONNEXION</a>
 
 					</div>
 
@@ -60,13 +79,23 @@
 					
 					<div class="block-moderation">
 						
-						<h1>MODERATION</h1>
+						<h1>
+
+						{if $_SESSION.rang == 'moderateur'}
+						MODERATION
+						{/if}
+
+						{if $_SESSION.rang == 'admin'}
+						ADMINISTRATION
+						{/if}
+
+						</h1>
 
 						<div class="row">
 							
 							<div class="col text-center">
 									
-									<a href="#" class="btn btn-primary btn-admin shadow-none">GERER LES AVIS CLIENTS</a>
+									<a href="?action=interface_moderateur&amp;avis=true" class="btn btn-primary btn-admin shadow-none">GERER LES AVIS CLIENTS</a>
 
 							</div>
 
@@ -86,7 +115,17 @@
 							
 							<div class="col text-center">
 									
-									<a href="#" class="btn btn-primary btn-admin shadow-none">GERER LES MEMBRES</a>
+									<a href="#" class="btn btn-primary btn-admin shadow-none">
+
+									{if $_SESSION.rang == 'admin'}
+									GERER LES MEMBRES
+									{/if}
+
+									{if $_SESSION.rang == 'moderateur'}
+									RECHERCHER UN MEMBRE
+									{/if}
+
+									</a>
 
 							</div>
 
@@ -102,75 +141,67 @@
 
 						</div>
 
-						<h2>Gérer les avis clients</h2>
+					
 
-						<p>Avis en attente de modération :</p>
 
-						<div class="avis-client">
+						<!-- BLOC AVIS CLIENT -->
+						<!-- apparaît si le modé/admin a cliqué sur "Gérer les avis client"-->
+						{if isset($gerer_avis)}
 
-							<div class="avis-client-inner">
-								
-								<p>Auteur : Florence</p>
-								<p>Note : 4/5</p>
-								<p>Avis : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
+							<h2>Gérer les avis clients</h2>
 
-							</div>
 
-							<div class="row justify-content-start">
-								
-								<div class="col-3">
+							<!-- à afficher s'il y a des avis en attente de modération-->
+							{if isset($avis_en_attente)}
+							<p>Avis en attente de modération :</p>
 
-									<button class="btn btn-primary btn-admin shadow-none">VALIDER</button>
+							{foreach from=$avis_en_attente item=avis}
+							<div class="avis-client">
 
-								</div>
-
-								<div class="col-3">
+								<div class="avis-client-inner">
 									
-									<button class="btn btn-primary btn-admin shadow-none">REFUSER</button>
+									<p>Auteur : {$avis.prenom_utilisateur}, x ans</p>
+									<p>Note : {$avis.niveau_avis}/5</p>
+									<p>Avis : {$avis.contenu_avis}</p>
 
 								</div>
 
-							</div>
-
-						</div>
-
-						<div class="avis-client">
-
-							<div class="avis-client-inner">
-								
-								<p>Auteur : Florence</p>
-								<p>Note : 4/5</p>
-								<p>Avis : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
-
-							</div>
-
-							<div class="row justify-content-start">
-								
-								<div class="col-3">
-
-									<button class="btn btn-primary btn-admin shadow-none">VALIDER</button>
-
-								</div>
-
-								<div class="col-3">
+								<div class="row justify-content-start">
 									
-									<button class="btn btn-primary btn-admin shadow-none">REFUSER</button>
+									<div class="col-6 col-lg-3">
+
+										<button class="btn btn-primary btn-admin shadow-none">VALIDER</button>
+
+									</div>
+
+									<div class="col-6 col-lg-3">
+										
+										<button class="btn btn-primary btn-admin shadow-none">REFUSER</button>
+
+									</div>
 
 								</div>
 
 							</div>
-
-						</div>
-
-
-
-						<div class="col text-right">
+							{/foreach}
+							{/if}
 
 
-							<!-- bouton qui va charger la liste de TOUS les avis, à commencer par ceux qui sont encore en attente de modération s'il y en a, puis les autres du plus récent au plus ancien -->
-							<a href="#" class="afficher-liste">Afficher la totalité des avis</a>
+							<!-- à afficher lorsqu'il n'y a pas d'avis en attente-->
+							<!--<p class="text-center">Il n'y a pas d'avis client en attente de modération.</p> -->
 
-						</div>
+
+
+							<div class="col text-right">
+
+
+								<!-- bouton qui va charger la liste de TOUS les avis, à commencer par ceux qui sont encore en attente de modération s'il y en a, puis les autres du plus récent au plus ancien -->
+								<!-- pour le html/css, récupérer la même structure que les avis en attente de modération -->
+								<a href="#" class="afficher-liste">Afficher la totalité des avis</a>
+
+							</div>
+
+						{/if}
 
 					</div> <!-- fin block modération -->
 

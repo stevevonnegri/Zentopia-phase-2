@@ -56,7 +56,7 @@
 			$user->Update($donnée, $_SESSION['id_utilisateur']);
 			//puis actualise la page.
 			header('Location: ?action=espace_personnel');
-// A FAIRE 	afficher un message de succes sur la prochaine fenetre.
+			// A FAIRE 	afficher un message de succes sur la prochaine fenetre.
 		
 		} else {
 
@@ -77,11 +77,6 @@
 
 //affichage de l'avis client de l'utilisateur.
 
-
-if(isset($_GET['deconnection'])) {
-    session_destroy();
-    echo ('<script>document.location.href="http://localhost/zentopia/index.php"</script>');
-}
 
 //$smarty->assign('active', 'espace_membre');
 $smarty->display('templates/espace_personnel.tpl');

@@ -34,7 +34,7 @@ if(isset($_GET['action'])){
 }
 
 else {
-	echo('BOUH');
+    
     require('controllers/IndexController.php');
 }
 ?>
