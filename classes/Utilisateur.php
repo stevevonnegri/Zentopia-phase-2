@@ -108,11 +108,15 @@
         return $this->_rang;
     }
 
-    //Count le nombre d'email egal a l'entre dans la BDD
-    public function checkEmail($email) {
-        $sql = $this->_bdd->query('SELECT COUNT(*) FROM '.$this->_table.' WHERE email = "'.$email.'"');
-        $nb = $sql->fetchColumn();
-        return $nb;
+
+    /**
+     * compte le nombre d'utilisateur avec le mail de l'objet appelant la fonction.
+     *
+     * @return     <int>  nombre d'entrer ayant l'email donnée.
+     */
+    public function countItemByEmail() {
+        $sql =$this->_bdd->query('SELECT COUNT(*) FROM utilisateur where email = "'.$this->getEmail().'"');
+        return $sql->fetchColumn();
     }
 
     //Recupere les informations de l'utilisateur qui sont egal à l'email et les stocks dans un objet
@@ -122,5 +126,43 @@
         $utilisateur = new Utilisateur($utilisateur);
         return $utilisateur;
     }
+    
+    public function OpenSession() {
+        //si l'objet appelant la fonction possede un email dans la BDD
+        if ($this->countItemByEmail() == 1) {
+
+
+            //recupere les info dont on a besion dans la bdd en fonction de l'email
+            $utilisateur = $this->getUserByMail($this->getEmail());
+
+            //on verifie le mot de passe
+            if (password_verify($this->getMot_de_passe(), $utilisateur->getMot_de_passe())) {
+
+                //on ouvre la session et on set les variable de session
+                session_start();
+                $_SESSION['id_utilisateur'] = $utilisateur->getId_utilisateur();
+                $_SESSION['nom'] = $utilisateur->getNom_utilisateur();
+                $_SESSION['prenom'] = $utilisateur->getPrenom_utilisateur();
+                $_SESSION['genre'] = $utilisateur->getGenre();
+                $_SESSION['date_de_naissance'] = $utilisateur->getDate_de_naissance();
+                $_SESSION['adresse_rue'] = $utilisateur->getAdresse_rue();
+                $_SESSION['adresse_code_postal'] = $utilisateur->getAdresse_code_postal();
+                $_SESSION['adresse_ville'] = $utilisateur->getAdresse_ville();
+                $_SESSION['telephone'] = $utilisateur->getTelephone();
+                $_SESSION['email'] = $utilisateur->getEmail();
+                $_SESSION['newsletter'] = $utilisateur->getNewsletter();
+                $_SESSION['seance_decouverte'] = $utilisateur->getSeance_decouverte();
+                $_SESSION['rang'] = $utilisateur->getRang();
+                
+                return true;
+
+            }
+
+                return 'ErrorMDP';
+
+        }
+
+            return 'ErrorEMAIL';
+    } 
 
 }

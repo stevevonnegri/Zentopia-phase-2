@@ -47,14 +47,14 @@
 
 						<form action="" method="post">
 
-							<input type="email" name="email_connexion" class="form-control connexion-input" placeholder="Email">
-							{if isset($erroremail)}
-								{$erroremail}
+							<input type="email" name="email_connexion" class="form-control connexion-input" placeholder="Email" required>
+							{if isset($ErrorEMAIL)}
+								{$ErrorEMAIL}
 							{/if}
 
-							<input type="password" name="password_connexion" class="form-control connexion-input" placeholder="Mot de passe">
-							{if isset($errormdp)}
-								{$errormdp}
+							<input type="password" name="password_connexion" class="form-control connexion-input" placeholder="Mot de passe" required>
+							{if isset($ErrorMDP)}
+								{$ErrorMDP}
 							{/if}
 
 							<div class="row">

@@ -8,17 +8,22 @@
         //Faire la connexion ensuite
 
         session_start;
+
     }
 }*/
-
-$smarty->assign('_SESSION', $_SESSION);
 
 require('functions/function.php');
 require('config.php');
 
+$smarty = new Smarty();
+
+$smarty->assign('_SESSION', $_SESSION);
+
+
+
 setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
 
-$smarty = new Smarty();
+
 
 if(isset($_GET['action'])){
 
