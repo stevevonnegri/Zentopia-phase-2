@@ -7,7 +7,7 @@
 	}
 
 //si clic sur le bouton deconnexion, detruit la session et redirige vers l'accueil
-	if ($_GET['deconnexion'] === true) {
+	if ($_GET['deconnexion'] == true) {
 		session_destroy();
 		header('Location: index.php');
 	}

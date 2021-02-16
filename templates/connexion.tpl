@@ -40,10 +40,6 @@
 						<img src="assets/icons/yoga2.png" width="100" height="100" class="yoga2">
 						
 						<h1>CONNECTEZ-VOUS</h1>
-						
-						{if isset($error)}
-							{$error}
-						{/if}
 
 						<form action="" method="post">
 

@@ -8,15 +8,14 @@ if(isset($_POST['connexion'])) {
     $user->setEmail($_POST['email_connexion']);
     $user->setMot_de_passe($_POST['password_connexion']);
     $resultat = $user->OpenSession();
-    var_dump($resultat);
 
     //Verifie selon le retour de la fonction OpenSession, si != de true, renvoie une erreur sinon redirige vers l'espace personnel
     if($resultat === true) {
-        echo ('<script>document.location.href="http://localhost/zentopia/index.php?action=espace_personnel"</script>');
-    } elseif($resultat === 'ErrorMDP') {
-        $smarty->assign('error', '<p class="alert-danger">Mot de passe incorrect</p>');
-    } elseif($resultat === 'ErrorEMAIL') {
-        $smarty->assign('error', '<p class="alert-danger">Email incorrect</p>');
+        echo ('<script>document.location.href="?action=espace_personnel"</script>');
+    } elseif($resultat === 'MDP') {
+        $smarty->assign('ErrorMDP', '<p class="alert-danger">Mot de passe incorrect</p>');
+    } elseif($resultat === 'EMAIL') {
+        $smarty->assign('ErrorEMAIL', '<p class="alert-danger">Email incorrect</p>');
     }
 
 }

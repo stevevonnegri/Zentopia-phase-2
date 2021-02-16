@@ -58,9 +58,9 @@
 							 si session active : affiche MON ESPACE et lien vers la pace "Espace personnel" -->
 
 						{if !isset($_SESSION['id_utilisateur'])}
-							<li><a href="?action=connexion" class="btn btn-primary btn-espace-membre shadow-none">CONNEXION</a></li>
+							<li><a href="?action=connexion" class="btn btn-primary btn-espace-membre shadow-none">ESPACE PERSONNEL</a></li>
 						{else}
-							<li><a href="?action=espace_personnel" class="btn btn-primary btn-espace-membre shadow-none">ESPACE MEMBRE</a></li>
+							<li><a href="?action=espace_personnel" class="btn btn-primary btn-espace-membre shadow-none">MON ESPACE</a></li>
 						{/if}
 						
 
