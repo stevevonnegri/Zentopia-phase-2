@@ -56,8 +56,8 @@
     public function setNewsletter($newsletter){
         $this->_newsletter = $newsletter;
     }
-    public function setSeance_decouverte($coursDecouverte){
-        $this->_seance_decouverte = $coursDecouverte;
+    public function setSeance_decouverte($seanceDecouverte){
+        $this->_seance_decouverte = $seanceDecouverte;
     }
     public function setRang($rang){
         $this->_rang = $rang;

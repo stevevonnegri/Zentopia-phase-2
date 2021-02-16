@@ -1,11 +1,31 @@
 <?php
 
+session_start();
+
+/*if (!isset($_SESSION)){
+    //Verifier si dans le cookie existe
+    if(isset($_COOKIE)) {
+        //Verifie si email+mdp match
+
+        //Faire la connexion ensuite
+
+        session_start;
+
+    }
+}*/
+
 require('functions/function.php');
 require('config.php');
 
+$smarty = new Smarty();
+
+$smarty->assign('_SESSION', $_SESSION);
+
+
+
 setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
 
-$smarty = new Smarty();
+
 
 if(isset($_GET['action'])){
 

@@ -1,10 +1,10 @@
 <?php
         
     //information de la connexion à la bdd
-	$bdd = 'desdgfco_olivier';
+	$bdd = 'zentopia-start';
 	$server = '127.0.0.1';
-    $user = 'desdgfco_usolivier';
-    $password = '3c.L;X5eI%D9';
+    $user = 'root';
+    $password = 'root';
 
 
     //connexion à la bdd
