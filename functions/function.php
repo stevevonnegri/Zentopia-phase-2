@@ -45,7 +45,7 @@
 	/**
 	* Fonction qui verifie si une chaine est bien egale a une autre.
 	*
-	*@return <booleen> false si ce n'est pas le cas, renvoie le hash du mot de passe dans le cas contraire.
+	*@return <booleen> false si ce n'est pas le cas, true si il sont identique.
 	*
 	**/
 	function VerifMot_De_PasseIndetique($mot_de_passe, $mot_de_passe_verif) {
@@ -57,7 +57,7 @@
 
 			} else {
 
-				return password_hash($mot_de_passe, PASSWORD_DEFAULT);
+				return true;
 		}
 	}
 ?>

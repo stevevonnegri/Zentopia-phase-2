@@ -137,6 +137,11 @@
     }
 
     //Recupere les informations de l'utilisateur qui sont egal à l'email et les stocks dans un objet
+    /**
+    * recupere les information de la BDD en fonction d'un email.
+    *
+    *@return retourne un objet utilisateur qui correspond a l'email envoyer
+    **/
     public function getUserByMail($mail) {
         $sql = $this->_bdd->query('SELECT * FROM '.$this->_table.' WHERE email = "'.$mail.'"');
         $utilisateur = $sql->fetch();
@@ -160,7 +165,8 @@
             $utilisateur = $this->getUserByMail($this->getEmail());
 
             //on verifie le mot de passe
-            if ($this->getMot_de_passe() == $utilisateur->getMot_de_passe()) {
+
+            if (password_verify($this->getMot_de_passe(), $utilisateur->getMot_de_passe())) {
 
                 //on ouvre la session et on set les variable de session
                 session_start();

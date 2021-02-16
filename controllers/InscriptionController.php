@@ -5,7 +5,7 @@ $user = new Utilisateur($dbh);
 if (isset($_POST['NOUS_REJOINDRE'])) {
 	$erreur = false;
 
-	//recuperation des donnée du formulaire sauf le mot de passe que l'on hashra apres.
+	//recuperation des donnée du formulaire sauf le mot de passe que l'on hashera apres.
 	$user->setEmail($_POST['email']);
 
 	$user->setGenre($_POST['genre']);
@@ -60,7 +60,7 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 
 			} else {
 
-				$user->setMot_de_passe($verif);
+				$user->setMot_de_passe($_POST['mot_de_passe']);
 			}
 
 
@@ -130,7 +130,14 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 
 		//si pas d'erreur : envoie de toute les information dans la BDD et redirige vers l'espace personnel.
 	if ($erreur === false) {
+		//on hash le mot de passe avant de l'envoyer vers la BDD
+		$mdp = $user->getMot_de_passe();
+
+		$user->setMot_de_passe(password_hash($mdp, PASSWORD_DEFAULT));
 		$user->AddUtilisateur();
+
+		//on remet le mot de passe non hash dans l'objet user pour le mettre en variable de session.
+		$user->setMot_de_passe($mdp);
 
 		//ajouter les variable de SESSION ici.
 		if ($user->OpenSession() == true) {
