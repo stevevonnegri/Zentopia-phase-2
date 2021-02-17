@@ -153,56 +153,92 @@
 
 							<!-- à afficher s'il y a des avis en attente de modération-->
 							{if isset($avis_en_attente)}
-							<p>Avis en attente de modération :</p>
+								<p>Avis en attente de modération :</p>
 
 							{foreach from=$avis_en_attente item=avis}
-							<div class="avis-client">
+								<div class="avis-client">
 
-								<div class="avis-client-inner">
-									
-									<p>Auteur : {$avis.prenom_utilisateur}, {$avis.age} ans</p>
-									<p>Note : {$avis.niveau_avis}/5</p>
-									<p>Avis : {$avis.contenu_avis}</p>
-
-								</div>
-
-								<div class="row justify-content-start">
-									
-									<div class="col-6 col-lg-3">
-
-										<a href="?action=interface_moderateur&amp;avis=true&amp;valider=true" class="btn btn-primary btn-admin shadow-none">VALIDER</a>
-
-									</div>
-
-									<div class="col-6 col-lg-3">
+									<div class="avis-client-inner">
 										
-										<button class="btn btn-primary btn-admin shadow-none">REFUSER</button>
+										<p>Auteur : {$avis.prenom_utilisateur}, {$avis.age} ans</p>
+										<p>Note : {$avis.niveau_avis}/5</p>
+										<p>Avis : {$avis.contenu_avis}</p>
+
+									</div>
+
+									<div class="row justify-content-start">
+										
+										<div class="col-6 col-lg-3">
+
+											<a href="?action=interface_moderateur&amp;avis=true&amp;valider=true&amp;id={$avis.id_avis}" class="btn btn-primary btn-admin shadow-none">VALIDER</a>
+
+										</div>
+
+										<div class="col-6 col-lg-3">
+											
+											<a href="?action=interface_moderateur&amp;avis=true&amp;refuser=true&amp;id={$avis.id_avis}" class="btn btn-primary btn-admin shadow-none">REFUSER</a>
+
+										</div>
 
 									</div>
 
 								</div>
-
-							</div>
 							{/foreach}
+
+
+							{if isset($liste_avis)}
+
+								<p>Avis validés :</p>
+
+								{foreach from=$avis_valides item=avis}
+									<div class="avis-client">
+
+										<div class="avis-client-inner">
+											
+											<p>Auteur : {$avis.prenom_utilisateur}, {$avis.age} ans</p>
+											<p>Note : {$avis.niveau_avis}/5</p>
+											<p>Avis : {$avis.contenu_avis}</p>
+
+										</div>
+
+										<div class="row justify-content-start">
+											
+
+											<div class="col-6 col-lg-3">
+												
+												<a href="?action=interface_moderateur&amp;avis=true&amp;supprimer=true&amp;id={$avis.id_avis}" class="btn btn-primary btn-admin shadow-none">SUPPRIMER</a>
+
+											</div>
+
+										</div>
+
+									</div>
+								{/foreach}
+
+							{/if}
 							
 
 
 							<!-- à afficher lorsqu'il n'y a pas d'avis en attente-->
 							{else}
-							<p class="text-center">Il n'y a pas d'avis client en attente de modération.</p>
+								<p class="text-center">Il n'y a pas d'avis client en attente de modération.</p>
 
 							{/if}
+
+
+
 
 							<div class="col text-right">
 
 
 								<!-- bouton qui va charger la liste de TOUS les avis, à commencer par ceux qui sont encore en attente de modération s'il y en a, puis les autres du plus récent au plus ancien -->
 								<!-- pour le html/css, récupérer la même structure que les avis en attente de modération -->
-								<a href="#" class="afficher-liste">Afficher la totalité des avis</a>
+								<a href="?action=interface_moderateur&amp;avis=true&amp;liste=true" class="afficher-liste">Afficher la totalité des avis</a>
 
 							</div>
 
 						{/if}
+
 
 					</div> <!-- fin block modération -->
 

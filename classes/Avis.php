@@ -66,4 +66,28 @@
 
     }
 
+    /**
+     * récupère les avis en attente de modération et les infos liés à leurs auteurs via la table utilisateur
+     *
+     * @return     un tableau contenant les infos de l'avis et de l'utilisateur lié
+     */
+    public function getAvisApprouves() {
+        
+        $avis = [];
+        $sql = $this->_bdd->query(
+            'SELECT id_avis, contenu_avis, niveau_avis, prenom_utilisateur, date_de_naissance 
+            FROM '.$this->_table.' 
+            NATURAL JOIN utilisateur 
+            WHERE approuve = 1');
+
+        while($donnees = $sql->fetch(PDO::FETCH_ASSOC)){
+
+            $avis[] = $donnees;
+            
+            }
+            
+            return $avis; 
+
+    }
+
 }

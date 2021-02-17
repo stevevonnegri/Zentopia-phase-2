@@ -24,6 +24,7 @@ if (isset($_GET['avis'])) {
 	$avis_en_attente = $avis->getAvisNonApprouves();
 
 
+
 	// vérifie que la méthode getAvisNonApprouvés retourne bien des résultats
 	if (isset($avis_en_attente) && (!empty($avis_en_attente))) {	
 
@@ -41,17 +42,69 @@ if (isset($_GET['avis'])) {
 
 		}
 
-		// envoie les données à SMARTY
+		// envoie les données des avis en attente à SMARTY
 		$smarty->assign('avis_en_attente', $avis_en_attente);
+
+		// SECTION VOIR TOUS LES AVIS
+		// vérifie si on a cliqué sur "Voir la totalité des avis"
+		if (isset($_GET['liste'])) {
+
+			$avis_valides = $avis->getAvisApprouves();
+
+
+			// calcule l'âge de l'utilisateur en fonction de sa date de naissance
+			$id_tableau = 0;
+
+			foreach ($avis_valides as $key => $value) {
+			
+				$jour_actuel = new DateTime();
+				$jour_naissance = new DateTime($value['date_de_naissance']);
+				$interval = $jour_actuel->diff($jour_naissance);
+				$avis_valides[$id_tableau]['age'] = $interval->format('%y');
+
+				$id_tableau +=1;
+
+			}
+
+			$smarty->assign('liste_avis', 'liste_avis');
+
+			if (isset($avis_valides) && (!empty($avis_valides))) {
+
+				$smarty->assign('avis_valides', $avis_valides);
+			}
+
+		}
 
 
 
 		// check si l'admin a cliqué sur le bouton pour valider l'avis
-		if (isset($_GET['valider'])) {
+		if (isset($_GET['valider']) && isset($_GET['id'])) {
 
-			echo "test valider";
+			$id = $_GET['id'];
+			$id = (int)$id;
+
+			$donnees['approuve'] = 1;
+
+			$avis->Update($donnees, $id);
+
+			header('Location: ?action=interface_moderateur&avis=true&valider=true');
 
 		}
+
+		// check si l'admin a cliqué sur le bouton pour supprimer l'avis
+		if (isset($_GET['refuser']) && isset($_GET['id'])) {
+
+			$id = $_GET['id'];
+			$id = (int)$id;
+
+			$avis->Delete($id);
+
+			header('Location: ?action=interface_moderateur&avis=true&valider=true');
+
+		}
+
+
+
 
 	} 
 	
