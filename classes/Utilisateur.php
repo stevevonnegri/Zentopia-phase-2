@@ -195,4 +195,69 @@
         return 'EMAIL';
             
     }
+
+    //PARTIE VERIFICATION DES INFO INSCRIPTION/MODIFICATION
+    //VERIFICATION DE L'EMAIL
+
+    /**
+    * verifie si l'email est present dans la BDD et si il est au bon format
+    *
+    *@return string 'ok' si tout va bien, sinon revoie le message d'erreur correspondant.
+    **/
+    public function EmailBonFormat($) {
+            //on set la variable $error_email_message a OK
+            $error_email_message = 'ok';
+            //email au bon format
+            if (filter_var($this->getEmail(), FILTER_VALIDATE_EMAIL)) {
+
+                //test si l'email est deja dans la BDD
+
+                if ($this->countItemByEmail() != 0) {
+                    
+                    $error_email_message = '<p class="alert-danger">Cet email existe deja, merci de vous connecter (ou cliquer ici pour vous connecter).</p>';
+
+                } 
+
+            } else {
+
+                $error_email_message = '<p class="alert-danger"> format de l\'email invalide.</p>';
+                
+            }
+
+        return $error_email_message;
+    }
+
+    /**
+    * verifie si l'age de l'utilisateur est superieur a 18 ans
+    *
+    *@return true si il a 18ans ou plus, false dans le cas contraire.
+    **/
+    public function VerifPlusDe18ans() {
+        //verification que l'utilisateur a plus de 18 ans
+
+            //on recupere l'age et on le separe en Jour, Mois, Année
+            $date_naissance = date_parse($this->getDate_de_naissance());
+
+            //on recupere la date du jour en mktime,
+            //a laquel on retranche 18(notre limite d'age)
+            $date_limite = mktime(0, 0, 0, date("m")  , date("d"), date("Y")-18);
+
+            //on convertit date_naissance en mktime
+            $date_naissance = mktime(0, 0, 0, $date_naissance["month"] , $date_naissance["day"], $date_naissance["year"]);
+
+            //on formatte les 2 date pour pouvoir les commparer.
+            $date_limite = date("Y-m-d", $date_limite);
+            $date_naissance = date("Y-m-d", $date_naissance);
+            
+            //on verifie si l'utilisateur a plus de 18 ans.
+            if ($date_naissance > $date_limite) {
+                
+                return true;
+                
+            } else {
+
+                return false;
+
+            }
+    }
 }

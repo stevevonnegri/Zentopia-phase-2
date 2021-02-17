@@ -63,8 +63,10 @@
 				</div>
 
 				<div class="col col-right">
-					
-					<!-- BLOCK COORDONNEES -->
+					{if $form == active}
+						{include file = 'espace_personnel_form.tpl'}
+					{else}
+					<!-- BLOCK COORDONNEES AFFICHAGE-->
 					<div class="block-coordonnees">
 
 						<h1>MES COORDONNEES</h1>
@@ -172,7 +174,7 @@
 
 							<div class="col text-center">
 	
-								<a href="?action=espace_personnel_form" class="btn btn-primary btn-red shadow-none">MODIFIER MES INFORMATIONS</a>
+								<a href="?action=espace_personnel&form=active" class="btn btn-primary btn-red shadow-none">MODIFIER MES INFORMATIONS</a>
 
 							</div>
 
@@ -181,7 +183,7 @@
 						<img src="assets/icons/yoga4.png" class="yoga4" height="100" width="100"/>
 						
 					</div> <!-- fin div block-coordonnees -->
-
+					{/if}<!--fin du if affichage/modification des données-->
 
 					<!-- BLOCK CHANGER DE MOT DE PASSE -->
 					<form method="POST" action="" class="block-mdp">
@@ -379,12 +381,12 @@
 
 								<p>Attention, cette action est irrémédiable. Une fois votre compte supprimé, vous ne pourrez plus réserver de séances sans vous inscrire à nouveau.</p>
 
-								<form action="" method="" class="form-check">
+								<form action="?action=espace_personnel" method="POST" class="form-check">
 									
-										<input type="checkbox" name="" id="confirmation-suppression-compte" class="form-check-input">
+										<input type="checkbox" name="" id="confirmation-suppression-compte" class="form-check-input" required>
 										<label for="confirmation-suppression-compte" class="form-check-label newsletter-label">En validant cette action, je comprends que les données de mon compte seront définitivement supprimées, et que je ne recevrai plus aucun e-mail de la part de Zentopia. </label>
 
-										<input type="submit" name="" class="btn btn-primary btn-red" value="SUPPRIMER MON COMPTE">
+										<input type="submit" name="CompteDelete" class="btn btn-primary btn-red" value="SUPPRIMER MON COMPTE">
 
 								</form>
 								
