@@ -35,22 +35,46 @@ class Model {
 	} 
 
 
-	// recupère un seul personnage en fonction de l'id
-	public function getItem(int $id){
-		$sql =$this->_bdd->query('SELECT * FROM '.$this->_table.' where id_'.$this->_table.' = '.$id);
-		$donnees = $sql->fetch(PDO::FETCH_ASSOC);
-		return new $this->_table($donnees);
-	}
+	/**
+    * fonction recuperant un élément d'une BDD selon un ID et un nom de colonne.
+    *
+    *@param      <int>       $id         l'id l'element
+    *@param      <string>   $colonne    nom de la colonne
+    *
+    *@return     <object>     retourne un objet avec les information de la BDD.
+    **/
+    public function getItem($id, $colonne = NULL){
+
+        if ($colonne == NULL) {
+            $colonne = $this->_cle;
+        }
+
+        $sql =$this->_bdd->query('SELECT * FROM '.$this->_table.' where '.$colonne.' = "'.$id.'"');
+        $donnees = $sql->fetch(PDO::FETCH_ASSOC);
+
+        //test si le SELECT a recupere des info ou non
+        if ($donnees == false) {
+            return false;
+        }
+        //retourne l'objet si la requete a recupere des info
+        return new $this->_table($donnees);
+    }
 
 
-	//
-	// supprimer un élément de la BDD avec l'id
-	//
-	// @param      int   $id     l'id l'element
-	//
-	public function Delete(int $id){
-		$this->_bdd->exec('DELETE FROM '.$this->_table.' WHERE id_'.$this->_table.' = '.$id);
-	}
+	/**
+	* supprimer un élément de la BDD avec l'id
+	*
+	*@param      int   $id     l'id l'element
+	*@param      <string>   $colonne    nom de la colonne
+	**/
+	public function Delete($id, $colonne = NULL){
+
+        if ($colonne == NULL) {
+            $colonne = $this->_cle;
+        }
+
+        $this->_bdd->exec('DELETE FROM '.$this->_table.' WHERE '.$colonne.' = "'.$id.'"');
+    }
 
 	public function Add(array $data){
 
@@ -86,4 +110,11 @@ class Model {
 		$sql = $this->_bdd->prepare('UPDATE '.$this->_table.' SET '.$valeurs.' WHERE id_'.$this->_table.' = '.$id);
 		$sql->execute();
 	}
+
+	public function Count() {
+		
+        $sql = $this->_bdd->query('SELECT count(*) FROM '.$this->_table);
+        
+        return $sql->fetchColumn();
+    }
 }

@@ -66,7 +66,7 @@
 							
 							<div class="col text-center">
 									
-									<a href="interface-mode-avis-client.php" class="btn btn-primary btn-admin shadow-none">GERER LES AVIS CLIENTS</a>
+									<a href="interface_mode_avis_client.php" class="btn btn-primary btn-admin shadow-none">GERER LES AVIS CLIENTS</a>
 
 							</div>
 
@@ -76,7 +76,7 @@
 							
 							<div class="col text-center">
 									
-									<a href="interface-mode-gerer-galerie.php" class="btn btn-primary btn-admin shadow-none">GERER LA GALERIE</a>
+									<a href="interface_mode_gerer_galerie.php" class="btn btn-primary btn-admin shadow-none">GERER LA GALERIE</a>
 
 							</div>
 
@@ -86,7 +86,7 @@
 							
 							<div class="col text-center">
 									
-									<a href="interface-mode-rechercher-membre.php" class="btn btn-primary btn-admin shadow-none">RECHERCHER UN MEMBRE</a>
+									<a href="interface_mode_rechercher_membre.php" class="btn btn-primary btn-admin shadow-none">RECHERCHER UN MEMBRE</a>
 
 							</div>
 
@@ -107,40 +107,12 @@
 						<div class="galerie-inner">
 							
 							<div class="row">
-								
-								<div class="col-12 col-sm-6 col-md-4 col-lg-3 text-center">
-									
-									<img src="assets/images/slideshow3.jpg" class="img-fluid" />
 
-									<button class="suppr-img">Supprimer</button>
-
-								</div>
-
-								<div class="col-12 col-sm-6 col-md-4 col-lg-3 text-center">
-									
-									<img src="assets/images/slideshow3.jpg" class="img-fluid" />
-
-									<button class="suppr-img">Supprimer</button>
-
-								</div>
-
-								<div class="col-12 col-sm-6 col-md-4 col-lg-3 text-center">
-									
-									<img src="assets/images/slideshow3.jpg" class="img-fluid" />
-
-									<button class="suppr-img">Supprimer</button>
-
-								</div>
-
-								<div class="col-12 col-sm-6 col-md-4 col-lg-3 text-center">
-									
-									<img src="assets/images/slideshow3.jpg" class="img-fluid" />
-
-									<button class="suppr-img">Supprimer</button>
-
-								</div>
 								{foreach from=$imagesAll item="image"}
-									<div><img src="{Image::GetImageLink(65,$image->getUrl_image())}"></div>
+									<div class="col-12 col-sm-6 col-md-4 col-lg-3 text-center">
+										<img src="{Image::GetImageLink(100,$image->getUrl_image())}" class="img-fluid" />
+										<a class="suppr-img" href="?action=interface_mode_gerer_galerie&id={$image->getId_image()}&nom={$image->getUrl_image()}">Supprimer</a>
+									</div>
 								{/foreach}
 
 							</div>
@@ -149,7 +121,10 @@
 
 							<div class="row justify-content-center">
 							
-								<div class="col-12 col-lg-6 text-center">
+								<div class="col-12 col-lg-6 text-center">								
+								{if isset($error)}
+									{$error}
+								{/if}
 									
 									<button class="btn btn-primary btn-admin shadow-none" onclick="showElement('ajout-img-form');">+ AJOUTER UNE PHOTO</button>
 
@@ -159,9 +134,7 @@
 
 							<div class="hidden" id="ajout-img-form">
 
-								{if isset($error)}
-									{$error}
-								{/if}
+
 								
 								<form method="post" enctype="multipart/form-data" action="?action=interface_mode_gerer_galerie">
 									
