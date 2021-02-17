@@ -15,31 +15,49 @@ if ($_GET['deconnexion'] == true) {
 // vérifie si on a cliqué sur "Gérer les avis clients"
 if (isset($_GET['avis'])) {
 
-	//passe la variable concernée à SMARTY pour qu'il affiche le bloc Avis client
+	// passe la variable concernée à SMARTY pour qu'il affiche le bloc Avis client
 	$smarty->assign('gerer_avis', 'gerer_avis');
 
 
-	//récupère les avis en attente de modération
+	// récupère les avis en attente de modération
 	$avis = new Avis($dbh);
 	$avis_en_attente = $avis->getAvisNonApprouves();
 
-	foreach ($avis_en_attente as $key => $value) {
 
-		echo $value['date_de_naissance'];
+	// vérifie que la méthode getAvisNonApprouvés retourne bien des résultats
+	if (isset($avis_en_attente) && (!empty($avis_en_attente))) {	
 
-	}
-	
-	//var_dump($avis_en_attente[0]);
+		// calcule l'âge de l'utilisateur en fonction de sa date de naissance
+		$id_tableau = 0;
 
-	if (isset($avis_en_attente)) {
+		foreach ($avis_en_attente as $key => $value) {
+		
+			$jour_actuel = new DateTime();
+			$jour_naissance = new DateTime($value['date_de_naissance']);
+			$interval = $jour_actuel->diff($jour_naissance);
+			$avis_en_attente[$id_tableau]['age'] = $interval->format('%y');
 
+			$id_tableau +=1;
+
+		}
+
+		// envoie les données à SMARTY
 		$smarty->assign('avis_en_attente', $avis_en_attente);
 
-	}
+
+
+		// check si l'admin a cliqué sur le bouton pour valider l'avis
+		if (isset($_GET['valider'])) {
+
+			echo "test valider";
+
+		}
+
+	} 
 	
-
-
 }
+
+
 
 
 

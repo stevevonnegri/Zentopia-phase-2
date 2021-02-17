@@ -160,7 +160,7 @@
 
 								<div class="avis-client-inner">
 									
-									<p>Auteur : {$avis.prenom_utilisateur}, x ans</p>
+									<p>Auteur : {$avis.prenom_utilisateur}, {$avis.age} ans</p>
 									<p>Note : {$avis.niveau_avis}/5</p>
 									<p>Avis : {$avis.contenu_avis}</p>
 
@@ -170,7 +170,7 @@
 									
 									<div class="col-6 col-lg-3">
 
-										<button class="btn btn-primary btn-admin shadow-none">VALIDER</button>
+										<a href="?action=interface_moderateur&amp;avis=true&amp;valider=true" class="btn btn-primary btn-admin shadow-none">VALIDER</a>
 
 									</div>
 
@@ -184,13 +184,14 @@
 
 							</div>
 							{/foreach}
-							{/if}
+							
 
 
 							<!-- à afficher lorsqu'il n'y a pas d'avis en attente-->
-							<!--<p class="text-center">Il n'y a pas d'avis client en attente de modération.</p> -->
+							{else}
+							<p class="text-center">Il n'y a pas d'avis client en attente de modération.</p>
 
-
+							{/if}
 
 							<div class="col text-right">
 
