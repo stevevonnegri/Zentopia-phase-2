@@ -159,7 +159,7 @@
 								
 								<p class="info-p">
 								{if $_SESSION.newsletter == false}
-									Pas encore inscrit
+									Pas inscrit
 								{else}
 									Deja inscrit
 								{/if}

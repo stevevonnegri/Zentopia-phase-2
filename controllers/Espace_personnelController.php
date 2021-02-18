@@ -1,5 +1,4 @@
 <?php
-
 //verifie si une session est ouverte, et redirige vers la page de connexion dans le cas contraire.
 
 	if (!isset($_SESSION['id_utilisateur'])) {
@@ -98,39 +97,17 @@
 			$userModif->setAdresse_code_postal($_POST['adresse_code_postal']);
 			$userModif->setAdresse_ville($_POST['adresse_ville']);
 			$userModif->setTelephone($_POST['telephone']);
-			$userModif->setNewsletter($_POST['newsletter']);
+
+			if (isset($_POST['newsletter'])) {
+
+				$userModif->setNewsletter($_POST['newsletter']);
+
+			}
 
 			//ETAPE VERIFIACTION
 				//verification de l'email
 
-/* /!\ */		$error_email_message = $userModif->EmailBonFormat()
-
-				//Verifie la validité et que les mot de passe est identique et si oui le hash
-
-					// verifie si le mot de passe est valide (entre 8 et 30 caractères ET avec au moins une lettre et un chiffre)
-
-					$verif = VerifMot_De_PasseConforme($_POST['mot_de_passe']);
-
-					if ($verif !== true ) {
-
-						$error_mot_de_passe_message = $verif;
-						$erreur = true;
-
-					}
-					
-					//verifie si les mot de passe sont identique
-
-					$verif = VerifMot_De_PasseIndetique($_POST['mot_de_passe'], $_POST['mot_de_passe_verif']);
-
-					if ($verif === false) {
-
-						$error_verif_mot_de_passe_message = '<p class="alert-danger">Vos mots de passe ne correspondent pas.</p>';
-						$erreur = true;
-
-					} else {
-
-						$userModif->setMot_de_passe($_POST['mot_de_passe']);
-					}
+/* /!\ */		$error_email_message = $userModif->EmailBonFormat('MODIF');
 
 				//verifie que le nom et le prenom n'on pas de charactere speciaux
 					//le nom en 1er
@@ -153,6 +130,9 @@
 					
 					$error_date_naissance_message = '<p class="alert-danger">Vous devez être majeur pour profiter de vos avantage client.</p>';
 					
+				} else {
+
+					$error_date_naissance_message = 'ok';
 				}
 
 				//Verification que le code postal fasse bien 5 chiffre.
@@ -164,33 +144,43 @@
 				}
 
 				//Verification qu'il n'y ai pas de chiffre dans le nom de la ville
-					if (preg_match("/[0-9]+/", $userModif->getAdresse_ville())) {
+				if (preg_match("/[0-9]+/", $userModif->getAdresse_ville())) {
 
-					 	$error_Adresse_ville_message = '<p class="alert-danger">Le nom de votre ville ne doit contenir de chiffres.</p>';
-							$erreur = true;
-					 }
+				 	$error_Adresse_ville_message = '<p class="alert-danger">Le nom de votre ville ne doit contenir de chiffres.</p>';
+						$erreur = true;
+				 }
 
 				//Verification du num de tel
-					if (!preg_match("#[0-9]{10}$#", $userModif->getTelephone())) {
+				if (!preg_match("#(0|\+33|0033)[1-9][0-9]{8}#", $userModif->getTelephone())) {
 
-					 	$error_telephone_message = '<p class="alert-danger">Votre numero de téléphone doit contenir au moins 10 chiffres et pas de lettre.</p>';
-							$erreur = true;
-					 }
-//A FAIRE VERIFIER SI NEWSLETTER = 1
-	//si elle est egalement a 1 dans la BDD
-	//si il a deja participer a une seance
+				 	$error_telephone_message = '<p class="alert-danger">Votre numero de téléphone n\'est pas valide.</p>';
+					$erreur = true;
+				 }
+
+				//verifier si newsletter et pas de seance reserver : set seance decouverte a 1 sinon la set à 0
+				 
+				if ($userModif->getNewsletter() == 'inscription' ) {
+					$userModif->setNewsletter(1);
+					if ($userModif->countReserverByEmail() == 0) {
+
+						$userModif->setSeance_decouverte(1);
+
+					} else {
+						$userModif->setSeance_decouverte(0);
+					}
+				} elseif ($userModif->getNewsletter() == 'desinscription' ) {
+
+					$userModif->setNewsletter(0);
+
+				}
 
 
 			//FIN VERIFICATION
 
 			//test si pas d'erreur
-			if ($error === false AND $error_email_message == 'ok' AND !isset($error_date_naissance_message)) {
+			if ($erreur === false AND $error_email_message === 'ok' AND $error_date_naissance_message === 'ok') {
 				//envoie le tout dans la BDD et redirige vers l'espace perso
-				//EN COUR //
-				//on hash le mot de passe avant de l'envoyer vers la BDD
-					$mdp = $userModif->getMot_de_passe();
-
-					$userModif->setMot_de_passe(password_hash($mdp, PASSWORD_DEFAULT));
+				
 					//on crée un tableau pour la fonction Update
 					$donnees = [
 						'genre' => $userModif->getGenre(),
@@ -202,35 +192,34 @@
 						'adresse_ville' => $userModif->getAdresse_ville(),
 						'telephone' => $userModif->getTelephone(),
 						'email' => $userModif->getEmail(),
-						'mot_de_passe' => $userModif->getMot_de_passe(),
 						'newsletter' => $userModif->getNewsletter(),
 						'seance_decouverte' => $userModif->getSeance_decouverte()
 					];
 
 					$userModif->Update($donnees, $_SESSION['id_utilisateur']);
 
-					//on remet le mot de passe non hash dans l'objet user pour le mettre en variable de session.
-					$userModif->setMot_de_passe($mdp);
-					
-					//on relance la session avec les nouvelle variable ici.
-					session_destroy();
+					//on recupere les nouvelle information de connexion pour actualiser les information de session.
+					$userModif = $userModif->getUserByMail($userModif->getEmail());
+					$userModif->setBddTableau($dbh);
 
-					if ($userModif->OpenSession() == true) {
-						header('Location: ?action=espace_personnel');
-					} else {
-						echo('<p class="center alert-danger">Compte crée mais erreur dans l\'ouverture de session.</p>');
-					}
-				//FIN EN COUR //
+					//on relance la session avec les nouvelle variable ici.
+
+					$userModif->addVariableSession();
+					header('Location: ?action=espace_personnel');
 
 			} else {
+				//si les 2 variable ne sont pas sur ok, les envoie a smarty
+				if ($error_email_message !== 'ok') {
+					$smarty->assign('error_email_message', $error_email_message);
+				}
+
+				if ($error_date_naissance_message !== 'ok') {
+					$smarty->assign('error_date_naissance_message', $error_date_naissance_message);
+				}
 				//envoie les message d'erreur a smarty
 				$smarty->assign(array(
-					'error_email_message' => $error_email_message,
-					'error_mot_de_passe_message' => $error_mot_de_passe_message,
-					'error_verif_mot_de_passe_message' => $error_verif_mot_de_passe_message,
 					'error_nom_utilisateur_message' => $error_nom_utilisateur_message,
 					'error_prenom_utilisateur_message' => $error_prenom_utilisateur_message,
-					'error_date_naissance_message' => $error_date_naissance_message,
 					'error_Adresse_code_postal_message' => $error_Adresse_code_postal_message,
 					'error_Adresse_ville_message' => $error_Adresse_ville_message,
 					'error_telephone_message' => $error_telephone_message

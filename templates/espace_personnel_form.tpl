@@ -11,11 +11,11 @@
 				<legend>Civilité :</legend>
 
 				<input checked="{if $_SESSION.genre == Femme}checked{/if}"
-				type="radio" name="genre" id="femme" value="Mme" required>
+				type="radio" name="genre" id="femme" value="Femme" required>
 				<label for="femme">Mme</label>
 
 				<input checked="{if $_SESSION.genre == Homme}checked{/if}"
-				type="radio" name="genre" id="homme" value="Mr">
+				type="radio" name="genre" id="homme" value="Homme">
 				<label for="homme">Mr</label>
 
 			</div>
@@ -25,6 +25,9 @@
 				<label for="">Date de naissance :</label>
 				<input value="{$_SESSION.date_de_naissance}"
 				type="date" name="date_de_naissance" class="form-control">
+				{if isset($error_date_naissance_message)}
+					{$error_date_naissance_message}
+				{/if}
 
 			</div>
 			
@@ -38,6 +41,9 @@
 				<label for="">Prénom :</label>
 				<input value="{$_SESSION.prenom_utilisateur}"
 				type="text" name="prenom" class="form-control">
+				{if isset($error_prenom_utilisateur_message)}
+					{$error_prenom_utilisateur_message}
+				{/if}
 
 			</div>
 
@@ -46,6 +52,9 @@
 				<label for="">Nom :</label>
 				<input value="{$_SESSION.nom_utilisateur}"
 				type="text" name="nom" class="form-control">
+				{if isset($error_nom_utilisateur_message)}
+					{$error_nom_utilisateur_message}
+				{/if}
 
 			</div>
 			
@@ -57,7 +66,10 @@
 				
 				<label for="">Email :</label>
 				<input value="{$_SESSION.email}"
-				type="email" name="" class="form-control">
+				type="email" name="email" class="form-control">
+				{if isset($error_email_message)}
+					{$error_email_message}
+				{/if}
 
 			</div>
 
@@ -66,7 +78,9 @@
 				<label for="">Téléphone :</label>
 				<input value="{$_SESSION.telephone}"
 				type="tel" name="telephone" class="form-control">
-
+				{if isset($error_telephone_message)}
+					{$error_telephone_message}
+				{/if}
 			</div>
 
 		</div>
@@ -78,6 +92,9 @@
 				<label for="">Code postal :</label>
 				<input value="{$_SESSION.adresse_code_postal}"
 				type="number" name="adresse_code_postal" class="form-control">
+				{if isset($error_Adresse_code_postal_message)}
+					{$error_Adresse_code_postal_message}
+				{/if}
 
 			</div>
 
@@ -86,6 +103,9 @@
 				<label for="">Ville :</label>
 				<input value="{$_SESSION.adresse_ville}"
 				type="text" name="adresse_ville" class="form-control">
+				{if isset($error_Adresse_ville_message)}
+					{$error_Adresse_ville_message}
+				{/if}
 
 			</div>
 
@@ -104,13 +124,13 @@
 			<div class="col">
 				
 				<legend>Newsletter :</legend>
-				{if {$_SESSION.newsletter} == false}
+				{if ($_SESSION.newsletter == false)}
 					<!-- si le membre n'est pas encore inscrit à la newsletter on lui propose de le faire -->
-					<input type="checkbox" name="newsletter" id="newsletter" value="1">
+					<input type="checkbox" name="newsletter" id="newsletter" value="inscription">
 					<label for="newsletter">Je souhaite m'inscrire à la newsletter</label>
 				{else}
 					<!-- si le membre est déjà inscrit à la newsletter, il peut s'en désabonner -->
-					<input type="checkbox" name="newsletter" id="newsletter" value="0">
+					<input type="checkbox" name="newsletter" id="newsletter" value="desinscription">
 					<label for="newsletter">Je souhaite me désinscrire de la newsletter</label>
 				{/if}
 

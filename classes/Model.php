@@ -23,7 +23,16 @@ class Model {
 		$this->_bdd = $bdd;
 	}
 
-    
+
+    public function setBddTableau($bdd) {
+		foreach ($bdd as $attribut => $valeur) {	
+			$method = 'set'.ucfirst($attribut); 
+			if(method_exists($this, $method)){ 
+				$this->$method($valeur);
+			}
+		}
+	}
+
 	public function getList(){
 		$lists = [];
 		$sql = $this->_bdd->query('SELECT * FROM '.$this->_table);
@@ -41,7 +50,7 @@ class Model {
 	*@param      <int>   	$id     	l'id l'element
 	*@param      <string>   $colonne    nom de la colonne
 	*
-	*@return 	<object> 	retourne un objet avec les information de la BDD.
+	*@return 	<object> 	retourne UN objet avec les information de la BDD.
 	**/
 	public function getItem($id, $colonne = NULL){
 
@@ -96,14 +105,14 @@ class Model {
 
 	
 	public function Update(array $data, $id){
-
         $valeurs = '';
 		foreach($data as $key => $value) {
-			if($value) {
+			if(!is_null($value)) {
 				$valeurs .= $key.' = "'.$value.'" , ';
 			}
 		}
 		$valeurs = substr($valeurs,0,-2);
+
 		$sql = $this->_bdd->prepare('UPDATE '.$this->_table.' SET '.$valeurs.' WHERE id_'.$this->_table.' = '.$id);
 		$sql->execute();
 	}
