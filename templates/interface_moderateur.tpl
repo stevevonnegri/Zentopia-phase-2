@@ -115,7 +115,7 @@
 							
 							<div class="col text-center">
 									
-									<a href="#" class="btn btn-primary btn-admin shadow-none">
+									<a href="?action=interface_moderateur&amp;membres=true" class="btn btn-primary btn-admin shadow-none">
 
 									{if $_SESSION.rang == 'admin'}
 									GERER LES MEMBRES
@@ -236,7 +236,126 @@
 
 							</div>
 
+						{/if} <!-- FIN BLOCK AVIS CLIENT -->
+
+
+
+						<!-- BLOC AVIS CLIENT -->
+						<!-- apparaît si le modé/admin a cliqué sur "Gérer les avis client"-->
+						{if isset($rechercher_membre)}
+
+							<h2>Rechercher un membre</h2>
+
+							<form method="post" action="" class="form-recherche">
+
+								<legend>Spécifiez au moins un critère de recherche :</legend>
+
+								<div class="form-row">
+									
+									<div class="col-12 col-lg">
+										
+										<input type="text" name="nom" placeholder="Nom" class="form-control input-membre">
+
+									</div>
+
+									<div class="col-12 col-lg">
+										
+										<input type="text" name="prenom" placeholder="Prénom" class="form-control input-membre">
+
+									</div>
+
+									<div class="col-12 col-lg">
+										
+										<input type="telephone" name="telephone" placeholder="Téléphone" class="form-control input-membre">
+
+									</div>
+
+								</div>
+
+
+								<div class="row">
+									
+									<div class="col text-center">
+										
+										<button type="submit" class="btn btn-primary btn-red text-center">RECHERCHER</button>
+
+										{if isset($champs_vides)}
+
+											<p class="error">Veuillez spécifier au moins un champ de recherche.</p>
+
+										{/if}
+
+									</div>
+
+								</div>	
+
+							</form>
+
+
+							{if isset($resultat_vide)}
+
+								<p>Résultat de la recherche :</p>
+
+								<p class="error text-center">Aucun membre trouvé.</p>
+
+							{/if}
+
+
+							{if isset($users)}
+
+							<div class="resultat-recherche">
+
+								<p>Résultat de la recherche :</p>
+
+								
+								{foreach from=$users item=user}
+
+									<!-- à afficher lorsque la recherche retourne des éléments de la BDD -->
+									<div class="membre-trouve">
+
+										<div class="row">
+											
+											<div class="col-12 col-lg">
+												
+												<span>Nom :</span> {$user->getNom_utilisateur()}
+
+											</div>
+
+											<div class="col-12 col-lg">
+												
+												<span>Prénom :</span> {$user->getPrenom_utilisateur()}
+
+											</div>
+
+										</div>
+
+										<div class="row">
+											
+											<div class="col-12 col-lg">
+												
+												<span>E-mail :</span> {$user->getEmail()}
+
+											</div>
+
+											<div class="col-12 col-lg">
+												
+												<span>Téléphone :</span> {$user->getTelephone()}
+
+											</div>
+
+										</div>
+
+									</div> <!-- fin div élément trouvé -->
+
+								</div>
+
+								{/foreach}
+
+							{/if}
+
 						{/if}
+
+
 
 
 					</div> <!-- fin block modération -->

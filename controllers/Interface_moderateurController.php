@@ -127,6 +127,86 @@ if (isset($_GET['avis'])) {
 	
 }
 
+// SECTION RECHERCHER LES MEMBRES
+// vérifie si on a cliqué sur "Rechercher un membre"
+if (isset($_GET['membres'])) {
+
+	// passe la variable concernée à SMARTY pour qu'il affiche le bloc Rechercher un membre
+	$smarty->assign('rechercher_membre', 'rechercher_membre');
+
+	// vérifie si le formulaire a été envoyé
+	if (isset($_POST['nom']) OR isset($_POST['prenom']) OR isset($_POST['telephone'])) {
+		
+		// vérifie que au moins un des trois champs contient des données 
+		if ($_POST['nom'] != '' OR $_POST['prenom'] != '' OR $_POST['telephone'] != '') {
+
+
+			// si le champ est vide, la variable est initialitée à NULL (on en a besoin dans la méthode getRechercheMembre plus bas )
+
+			if ($_POST['nom'] == '') {
+
+				$nom = NULL;
+
+			} else {
+
+				$nom = $_POST['nom'];
+			}
+
+
+
+			if ($_POST['prenom'] == '') {
+
+				$prenom = NULL;
+
+			} else {
+
+				$prenom = $_POST['prenom'];
+			}
+
+
+
+			if ($_POST['telephone'] == '') {
+
+				$tel = NULL;
+
+			} else {
+
+				$tel = $_POST['telephone'];
+			}
+
+
+			// récupère les résultats de la recherche des membres
+			$user = new Utilisateur($dbh);
+			$users = $user->getRechercheMembre($nom, $prenom, $tel);
+
+
+			// si la requête renvoie des données, on les envoie à SMARTY
+			if (!empty($users)) {
+
+				$smarty->assign('users', $users);
+
+			} else {
+
+				$smarty->assign('resultat_vide', 'resultat_vide');
+
+				echo "resultat_vide";
+
+			}
+
+		
+		// si aucun champ n'a été saisi on prévient SMARTY	
+		} else {
+
+			$smarty->assign('champs_vides', 'champs_vides');
+		}
+
+
+	}
+
+
+
+}
+
 
 
 
