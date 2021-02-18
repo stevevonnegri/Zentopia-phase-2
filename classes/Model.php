@@ -92,7 +92,7 @@ class Model {
 		$champs = substr($champs,0,-2);
 
 		$sql = $this->_bdd->prepare('INSERT INTO '.$this->_table.'('.$champs.') VALUES ('.$valeurs.')');
-		
+
 		$sql->execute();
 
 	}
@@ -111,6 +111,11 @@ class Model {
 		$sql->execute();
 	}
 
+
+	/**
+	 * Compte le nombre d'entrer dans la table
+	 * @return sql la quantite d'entre dans une table
+	 */
 	public function Count() {
 		
         $sql = $this->_bdd->query('SELECT count(*) FROM '.$this->_table);

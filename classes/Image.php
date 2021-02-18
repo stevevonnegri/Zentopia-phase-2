@@ -25,7 +25,11 @@
         return $this->_url_image;
     }
 
-
+/**
+ * @param image_source lien de l'image a resize
+ * @param largeur cible pour la taille de l'image
+ * @param nom de l'image
+ */
     public function resizeImage($image_source, $largeur, $nom) {
 
 
@@ -48,10 +52,21 @@
 
     }
 
+    /**
+     * @param largeur de l'image
+     * @param nom de l'image
+     * @return le chemin d'une image avec la largeur + nom d'une image
+     */
     public static function GetImageLink($largeur, $nom){
         return ('assets/images/slider/'.$largeur.'-'.$nom);
     }
 
+    /**
+     * Supprime les photos du slider du serveur puis de la bdd
+     * @param id de l'image 
+     * @param nom de l'image
+     * @return resultat de la requete
+     */
     public function deleteImage($id, $nom) {
         unlink('assets/images/'.$nom);
         unlink('assets/images/slider/100-'.$nom);
