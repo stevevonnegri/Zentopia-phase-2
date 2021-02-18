@@ -155,35 +155,41 @@
 							{if isset($avis_en_attente)}
 								<p>Avis en attente de modération :</p>
 
-							{foreach from=$avis_en_attente item=avis}
-								<div class="avis-client">
+								{foreach from=$avis_en_attente item=avis}
+									<div class="avis-client">
 
-									<div class="avis-client-inner">
-										
-										<p>Auteur : {$avis.prenom_utilisateur}, {$avis.age} ans</p>
-										<p>Note : {$avis.niveau_avis}/5</p>
-										<p>Avis : {$avis.contenu_avis}</p>
-
-									</div>
-
-									<div class="row justify-content-start">
-										
-										<div class="col-6 col-lg-3">
-
-											<a href="?action=interface_moderateur&amp;avis=true&amp;valider=true&amp;id={$avis.id_avis}" class="btn btn-primary btn-admin shadow-none">VALIDER</a>
-
-										</div>
-
-										<div class="col-6 col-lg-3">
+										<div class="avis-client-inner">
 											
-											<a href="?action=interface_moderateur&amp;avis=true&amp;refuser=true&amp;id={$avis.id_avis}" class="btn btn-primary btn-admin shadow-none">REFUSER</a>
+											<p>Auteur : {$avis.prenom_utilisateur}, {$avis.age} ans</p>
+											<p>Note : {$avis.niveau_avis}/5</p>
+											<p>Avis : {$avis.contenu_avis}</p>
+
+										</div>
+
+										<div class="row justify-content-start">
+											
+											<div class="col-6 col-lg-3">
+
+												<a href="?action=interface_moderateur&amp;avis=true&amp;valider=true&amp;id={$avis.id_avis}" class="btn btn-primary btn-admin shadow-none">VALIDER</a>
+
+											</div>
+
+											<div class="col-6 col-lg-3">
+												
+												<a href="?action=interface_moderateur&amp;avis=true&amp;refuser=true&amp;id={$avis.id_avis}" class="btn btn-primary btn-admin shadow-none">REFUSER</a>
+
+											</div>
 
 										</div>
 
 									</div>
+								{/foreach}
 
-								</div>
-							{/foreach}
+							<!-- à afficher lorsqu'il n'y a pas d'avis en attente-->
+							{else}
+								<p class="text-center">Il n'y a pas d'avis client en attente de modération.</p>
+
+							{/if}
 
 
 							{if isset($liste_avis)}
@@ -206,7 +212,7 @@
 
 											<div class="col-6 col-lg-3">
 												
-												<a href="?action=interface_moderateur&amp;avis=true&amp;supprimer=true&amp;id={$avis.id_avis}" class="btn btn-primary btn-admin shadow-none">SUPPRIMER</a>
+												<a href="?action=interface_moderateur&amp;avis=true&amp;liste=true&amp;supprimer=true&amp;id={$avis.id_avis}" class="btn btn-primary btn-admin shadow-none">SUPPRIMER</a>
 
 											</div>
 
@@ -217,13 +223,6 @@
 
 							{/if}
 							
-
-
-							<!-- à afficher lorsqu'il n'y a pas d'avis en attente-->
-							{else}
-								<p class="text-center">Il n'y a pas d'avis client en attente de modération.</p>
-
-							{/if}
 
 
 
