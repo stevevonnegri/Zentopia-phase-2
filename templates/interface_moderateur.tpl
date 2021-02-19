@@ -224,11 +224,7 @@
 							{/if}
 							
 
-
-
-
 							<div class="col text-right">
-
 
 								<!-- bouton qui va charger la liste de TOUS les avis, à commencer par ceux qui sont encore en attente de modération s'il y en a, puis les autres du plus récent au plus ancien -->
 								<!-- pour le html/css, récupérer la même structure que les avis en attente de modération -->
@@ -240,8 +236,8 @@
 
 
 
-						<!-- BLOC AVIS CLIENT -->
-						<!-- apparaît si le modé/admin a cliqué sur "Gérer les avis client"-->
+						<!-- BLOC RECHERCHER UN MEMBRE -->
+						<!-- apparaît si le modé/admin a cliqué sur "Rechercher un membre"-->
 						{if isset($rechercher_membre)}
 
 							<h2>Rechercher un membre</h2>
@@ -269,6 +265,23 @@
 										<input type="telephone" name="telephone" placeholder="Téléphone" class="form-control input-membre">
 
 									</div>
+
+									{if isset($admin)}
+
+										<div class="col-12 col-lg">
+										
+											<select name="rang" class="form-control">
+												
+												<option value="">--Rang--</option>
+												<option value="membre">Membre</option>
+												<option value="moderateur">Modérateur</option>
+												<option value="admin">Admin</option>
+
+											</select>
+
+										</div>
+
+									{/if}
 
 								</div>
 
@@ -303,59 +316,283 @@
 
 							{if isset($users)}
 
-							<div class="resultat-recherche">
+								<div class="resultat-recherche">
 
-								<p>Résultat de la recherche :</p>
+									<p>Résultat de la recherche :</p>
 
-								
-								{foreach from=$users item=user}
+									
+									{foreach from=$users item=user}
 
-									<!-- à afficher lorsque la recherche retourne des éléments de la BDD -->
-									<div class="membre-trouve">
+										<!-- à afficher lorsque la recherche retourne des éléments de la BDD -->
+										<div class="membre-trouve">
 
-										<div class="row">
+											<div class="row">
+												
+												<div class="col-12 col-lg">
+													
+													<span>Nom :</span> {$user->getNom_utilisateur()}
+
+												</div>
+
+												<div class="col-12 col-lg">
+													
+													<span>Prénom :</span> {$user->getPrenom_utilisateur()}
+
+												</div>
+
+											</div>
+
+											<div class="row">
+												
+												<div class="col-12 col-lg">
+													
+													<span>E-mail :</span> {$user->getEmail()}
+
+												</div>
+
+												<div class="col-12 col-lg">
+													
+													<span>Téléphone :</span> {$user->getTelephone()}
+
+												</div>
+
+											</div>
+
+											{if isset($admin)}
+
+												<div class="row">
 											
-											<div class="col-12 col-lg">
-												
-												<span>Nom :</span> {$user->getNom_utilisateur()}
+													<div class="col-12 col-lg">
+														
+														<span>Genre :</span> {$user->getGenre()}
 
-											</div>
+													</div>
 
-											<div class="col-12 col-lg">
-												
-												<span>Prénom :</span> {$user->getPrenom_utilisateur()}
+													<div class="col-12 col-lg">
+														
+														<span>Date de naissance :</span> {$user->getDate_de_naissance()}
 
-											</div>
+													</div>
 
-										</div>
+												</div>
 
-										<div class="row">
+												<div class="row">
+													
+													<div class="col-12 col-lg">
+														
+														<span>Adresse (rue) :</span> {$user->getAdresse_rue()}
+
+													</div>
+
+													<div class="col-12 col-lg">
+														
+														<span>Code postal :</span> {$user->getAdresse_code_postal()}
+
+													</div>
+
+												</div>
+
+												<div class="row">
+													
+													<div class="col-12 col-lg">
+														
+														<span>Ville :</span> {$user->getAdresse_ville()}
+
+													</div>
+
+													<div class="col-12 col-lg">
+														
+														<span>Rang :</span> {$user->getRang()}
+
+													</div>
+
+												</div>
+
+
+												<div class="row row-btn">
 											
-											<div class="col-12 col-lg">
+													<div class="col-12 col-lg text-center">
+														
+														<a href="?action=interface_moderateur&amp;membres=true&amp;id_modif={$user->getId_utilisateur()}" class="btn btn-primary btn-admin shadow-none">MODIFIER</a>
+
+													</div>
+
+													<div class="col-12 col-lg text-center">
+														
+														<button class="btn btn-primary btn-admin shadow-none" onclick="showElement('confirmation-suppr-membre');">SUPPRIMER LE MEMBRE</button>
+
+													</div>
+
+												</div>
+
+												<!-- confirmation de suppression du compte du membre, ne s'affiche qu'au clic de l'admin sur le bouton supprimer compte -->
+												<div id="confirmation-suppr-membre" class="hidden">
+
+													<p>Attention, cette action est irrémédiable. Une fois le compte supprimé, vous ne pourrez plus le récupérer.</p>
+
+													<form action="" method="" class="form-check">
+														
+														<input type="checkbox" name="" class="form-check-input">
+														<label for="confirmation-suppression-compte" class="form-check-label">Je souhaite supprimer définitivement ce compte. </label>
+
+														<div class="row justify-content-center">
+
+															<div class="row text-center">
+																
+																<input type="submit" name="supprimer-membre" class="btn btn-primary btn-red" value="SUPPRIMER LE COMPTE">
+
+															</div>
+
+														</div>
+
+													</form>
 												
-												<span>E-mail :</span> {$user->getEmail()}
+												</div>
 
-											</div>
+											{/if}
 
-											<div class="col-12 col-lg">
-												
-												<span>Téléphone :</span> {$user->getTelephone()}
+										</div> <!-- fin div élément trouvé -->
 
-											</div>
-
-										</div>
-
-									</div> <!-- fin div élément trouvé -->
+									{/foreach}
 
 								</div>
-
-								{/foreach}
 
 							{/if}
 
 						{/if}
 
 
+
+						<!-- BLOC MODIFIER LES INFOS MEMBRES -->
+						<!-- apparaît si l'admin a cliqué sur "Modifier" pour modifier les infos d'un membre-->
+						{if isset($modif_form) && isset($user_modif)}
+
+							<form class="membre-trouve">
+
+								<div class="row">
+
+									<div class="col-12 col-lg-6">
+										
+										<legend>Civilité :</legend>
+
+										<input type="radio" name="genre" id="femme" value="Mme" required 
+										{if $user_modif->getGenre() == 'Femme' } checked {/if}>
+
+										<label for="femme">Mme</label>
+
+										<input type="radio" name="genre" id="homme" value="Mr"
+										{if $user_modif->getGenre() == 'Homme' } checked {/if}>
+
+										<label for="homme">Mr</label>
+
+									</div>
+
+									<div class="col-12 col-lg-6">
+										
+										<label for="">Date de naissance :</label>
+										<input type="date" name="" class="form-control" value="{$user_modif->getDate_de_naissance()}">
+
+									</div>
+									
+
+								</div>
+
+								<div class="row">
+
+									<div class="col-12 col-lg-6">
+										
+										<label for="">Prénom :</label>
+										<input type="text" name="" class="form-control" value="" placeholder="{$user_modif->getPrenom_utilisateur()}">
+
+									</div>
+
+									<div class="col-12 col-lg-6">
+										
+										<label for="">Nom :</label>
+										<input type="text" name="" class="form-control" value="" placeholder="{$user_modif->getNom_utilisateur()}">
+
+									</div>
+									
+								</div>
+
+								<div class="row">
+									
+									<div class="col-12 col-lg-6">
+										
+										<label for="">Email :</label>
+										<input type="email" name="" class="form-control" value="" placeholder="{$user_modif->getEmail()}">
+
+									</div>
+
+									<div class="col-12 col-lg-6">
+										
+										<label for="">Téléphone :</label>
+										<input type="tel" name="" class="form-control" value="" placeholder="{$user_modif->getTelephone()}">
+
+									</div>
+
+								</div>
+
+								<div class="row">
+									
+									<div class="col-12 col-lg-6">
+										
+										<label for="">Code postal :</label>
+										<input type="number" name="" class="form-control" value="" placeholder="{$user_modif->getAdresse_code_postal()}">
+
+									</div>
+
+									<div class="col-12 col-lg-6">
+
+										<label for="">Ville :</label>
+										<input type="text" name="" class="form-control" value="" placeholder="{$user_modif->getAdresse_ville()}">
+
+									</div>
+
+								</div>
+
+								<div class="row align-items-center">
+									
+									<div class="col">
+										
+										<label for="">Adresse :</label>
+										<input type="text" name="" class="form-control" value="" placeholder="{$user_modif->getAdresse_rue()}">
+
+									</div>
+
+								</div>
+
+								<div class="row align-items-center">
+
+									<div class="col">
+										
+										<select name="rang" class="form-control">
+										
+										<option value="">--Rang--</option>
+										<option value="membre">Membre</option>
+										<option value="moderateur">Modérateur</option>
+										<option value="admin">Admin</option>
+
+									</select>
+
+									</div>
+									
+								</div>
+								
+
+								<div class="row">
+
+									<div class="col text-center">
+			
+										<input type="submit" class="btn btn-primary btn-red shadow-none" value="VALIDER">
+
+									</div>
+
+								</div>
+
+							</form>
+
+						{/if}
 
 
 					</div> <!-- fin block modération -->

@@ -196,7 +196,7 @@
             
     }
 
-    public function getRechercheMembre($nom = NULL, $prenom = NULL, $tel = NULL){
+    public function getRechercheMembre($nom = NULL, $prenom = NULL, $tel = NULL, $rang = NULL){
 
         $lists = [];
         $where = '';
@@ -216,9 +216,11 @@
             $where .= 'AND telephone = "' .$tel. '" '; 
         }
 
-        //echo "<br/>";
-        //var_dump($where);
-        //echo "<br/>";
+        if ($rang) {
+            
+            $where .= 'AND rang = "' .$rang. '" '; 
+        }
+
 
 
         $where = substr($where, 4);
@@ -226,8 +228,6 @@
 
         $sql = $this->_bdd->query(
             'SELECT * FROM '.$this->_table.' WHERE '.$where);
-
-        //var_dump($sql);
 
         while($donnees = $sql->fetch(PDO::FETCH_ASSOC)){
             $lists[] = new $this->_table($donnees);
