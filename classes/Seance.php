@@ -48,4 +48,64 @@
         return $this->_annule;
     }
 
+    /**
+    *@param id de l'utilisateur
+    *
+    * fonction qui recupere la liste des information nécessaire a l'affichage des seance reserver 
+    * dans l'espace personnel
+    *
+    *@return array un tableau contenant la liste des sceance et leur information
+    **/
+    public function getSseanceById(int $id) {
+
+        $sql = $this->_bdd->query('
+            SELECT seance.id_seance, date_seance, heure_debut_seance, heure_fin_seance, nom_type_de_cours, professeur.id_professeur
+            FROM '.$this->_table.' 
+            INNER JOIN type_de_cours ON seance.id_type_de_cours = type_de_cours.id_type_de_cours
+            INNER JOIN professeur ON seance.id_professeur = professeur.id_professeur
+            INNER JOIN reserver ON seance.id_seance = reserver.id_seance
+            INNER JOIN utilisateur ON reserver.id_utilisateur = utilisateur.id_utilisateur
+            WHERE utilisateur.id_utilisateur = '.$id
+        );
+
+        $lists = [];
+        while($donnees = $sql->fetch(PDO::FETCH_ASSOC)){
+
+            array_push($lists, $donnees);
+
+        }
+
+        return $lists;
+    }
+
+    /**
+    *@param int l'id du professeur
+    *
+    * fonction qui trouve et renvoie le prenom dun professeur avec son id
+    *
+    *@return string le prenom d'un professeur
+    **/
+    public function getProfesseurNameById(int $id) {
+        $sql = $this->_bdd->query('SELECT prenom_utilisateur 
+            FROM utilisateur 
+            NATURAL JOIN professeur
+            WHERE id_professeur = '.$id
+            );
+
+        return $sql->fetchColumn();
+    }
+    /**
+    * @param int l'id de la seance
+    * @param int l'id de l'utilisateur
+    *
+    * supprime la jointure entre une seance et l'utilisateur qui la reserver.
+    **/
+    public function DeleteReservationById(int $id_seance, int $id_utilisateur) {
+
+        $this->_bdd->exec('DELETE FROM reserver 
+            WHERE id_seance = '.$id_seance.' 
+            AND id_utilisateur = '.$id_utilisateur
+        );
+
+    }
 }

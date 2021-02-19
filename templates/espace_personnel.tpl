@@ -63,8 +63,10 @@
 				</div>
 
 				<div class="col col-right">
-					
-					<!-- BLOCK COORDONNEES -->
+					{if $form == active}
+						{include file = 'espace_personnel_form.tpl'}
+					{else}
+					<!-- BLOCK COORDONNEES AFFICHAGE-->
 					<div class="block-coordonnees">
 
 						<h1>MES COORDONNEES</h1>
@@ -157,7 +159,7 @@
 								
 								<p class="info-p">
 								{if $_SESSION.newsletter == false}
-									Pas encore inscrit
+									Pas inscrit
 								{else}
 									Deja inscrit
 								{/if}
@@ -172,7 +174,7 @@
 
 							<div class="col text-center">
 	
-								<a href="?action=espace_personnel_form" class="btn btn-primary btn-red shadow-none">MODIFIER MES INFORMATIONS</a>
+								<a href="?action=espace_personnel&form=active" class="btn btn-primary btn-red shadow-none">MODIFIER MES INFORMATIONS</a>
 
 							</div>
 
@@ -181,7 +183,7 @@
 						<img src="assets/icons/yoga4.png" class="yoga4" height="100" width="100"/>
 						
 					</div> <!-- fin div block-coordonnees -->
-
+					{/if}<!--fin du if affichage/modification des données-->
 
 					<!-- BLOCK CHANGER DE MOT DE PASSE -->
 					<form method="POST" action="" class="block-mdp">
@@ -244,11 +246,12 @@
 						<div class="col">
 
 							<h1 id="mes-cours">MES COURS</h1>
-
+							{if $seances == NULL}
 							<!-- affichage par défaut, si le membre n'a pas de réservation active -->
-							<!-- <p>Vous n'avez pas encore effectué de réservations sur un cours à venir.</p> -->
+							<p>Vous n'avez pas encore effectué de réservations sur un cours à venir.</p>
 
-
+							{else}
+								{foreach from=$seances item=$seance}
 							<!-- affichage des cours à venir si le membre a effectué une ou plusieurs réservations -->
 							<div class="cours-membre">
 								
@@ -256,13 +259,13 @@
 
 									<div class="col text-left">		
 
-										<p class="cours-date"><i class="fas fa-chevron-right"></i>Lundi 23 mars :</p>
+										<p class="cours-date"><i class="fas fa-chevron-right"></i>{$seance['date_seance']|date_format:"%A %e %B :"|utf8_encode}</p>
 
 									</div>
 
 									<div class="col text-right">
 										
-										<a href="#" class="btn btn-primary btn-annuler shadow-none">ANNULER LA RESERVATION</a>
+										<a href="?action=espace_personnel&adminDelSeanceId={$seance['id_seance']}" class="btn btn-primary btn-annuler shadow-none">ANNULER LA RESERVATION</a>
 
 									</div>
 
@@ -273,56 +276,21 @@
 
 									<div class="col">
 										
-										<p class="cours-info"><span class="cours-nom">HATHA YOGA</span> avec Marie</p>
+										<p class="cours-info"><span class="cours-nom">{$seance['nom_type_de_cours']|upper} </span>avec  {$ObjetSeance->getProfesseurNameById($seance['id_professeur'])}</p>
 
 									</div>
 
 									<div class="col">
 										
-										<p class="cours-info">de 8h à 9h15</p>
+										<p class="cours-info">de {$seance['heure_debut_seance']|date_format:"%kh%M"} à {$seance['heure_fin_seance']|date_format:"%kh%M"}</p>
 
 									</div>
 
 								</div>
 
 							</div>
-
-							<div class="cours-membre">
-								
-								<div class="row">
-
-									<div class="col text-left">		
-
-										<p class="cours-date"><i class="fas fa-chevron-right"></i>Lundi 23 mars :</p>
-
-									</div>
-
-									<div class="col text-right">
-										
-										<a href="#" class="btn btn-primary btn-annuler shadow-none">ANNULER LA RESERVATION</a>
-
-									</div>
-
-
-								</div>
-
-								<div class="row">
-
-									<div class="col">
-										
-										<p class="cours-info"><span class="cours-nom">HATHA YOGA</span> avec Marie</p>
-
-									</div>
-
-									<div class="col">
-										
-										<p class="cours-info">de 8h à 9h15</p>
-
-									</div>
-
-								</div>
-
-							</div>
+								{/foreach}
+							{/if}
 
 							<a href="?action=planning" class="btn btn-primary btn-red shadow-none">ACCEDER AU PLANNING</a>
 
@@ -340,41 +308,64 @@
 							<h1 id="mon-avis">MON AVIS CLIENT</h1>
 
 							<!-- affichage par défaut, si le membre n'a pas encore écrit d'avis qui a été validé -->
-							<!--<p>Vous n'avez pas encore donné votre avis sur notre établissement.</p>
+							{if $avisUtilisateur == false}
+								<p>Vous n'avez pas encore donné votre avis sur notre établissement.</p>
 
-							<a href="#" class="btn btn-primary btn-red shadow-none">ECRIRE MON AVIS</a>-->
+								<a href="?action=la_team" class="btn btn-primary btn-red shadow-none">ECRIRE MON AVIS</a>
 
+							{elseif $avisUtilisateur->getApprouve() == 0}
 
-							<!-- affichage si le membre a déposé un avis qui est encore en attente de modération -->
-							<!--<p>Votre avis est en attente de modération. Il sera consultable ici et sur <a href="la-team.php#testimonial" class="team-link">cette page</a> une fois approuvé.</p> -->
+								<!-- affichage si le membre a déposé un avis qui est encore en attente de modération -->
+								<p>Votre avis est en attente de modération. Il sera consultable ici et sur <a href="?action=la_team#testimonial" class="team-link">cette page</a> une fois approuvé.</p>
 
-
+							{else}
 							<!-- affichage si le membre a un avis validé et publié sur le site -->
-							<div class="avis-client text-center">
+								<div class="avis-client text-center">
 
-								<p>&laquo; J'adore venir au centre Zentopia méditer après mes parties de jeux vidéos ! Une fois posé au centre de la salle, assis en tailleur, j'oublie tout le stress et la rage que me procurent ces infâmes jeux et je renaît tel un homme nouveau... &raquo;</p>
+									<p>&laquo; {$avisUtilisateur->getContenu_avis()} &raquo;</p>
 
-								<div class="row">
-									
-									<div class="col">
+									<div class="row">
 										
-										<img src="assets/icons/fivestar.png" class="avis-stars" width="150" height="36" alt="5 étoiles"/>
+										<div class="col">
+
+											{if $avisUtilisateur->getNiveau_avis() == 1}
+
+											    <img src="assets/icons/onestar.png" class="avis-stars" width="150" height="36" alt="1 étoiles"/>
+
+											{elseif $avisUtilisateur->getNiveau_avis() == 2}
+
+											    <img src="assets/icons/twostar.png" class="avis-stars" width="150" height="36" alt="2 étoiles"/>
+
+											{elseif $avisUtilisateur->getNiveau_avis() == 3}
+
+											    <img src="assets/icons/threestar.png" class="avis-stars" width="150" height="36" alt="3 étoiles"/>
+
+											{elseif $avisUtilisateur->getNiveau_avis() == 4}
+
+											    <img src="assets/icons/fourstar.png" class="avis-stars" width="150" height="36" alt="4 étoiles"/>
+
+											{elseif $avisUtilisateur->getNiveau_avis() == 5}
+
+											    <img src="assets/icons/fivestar.png" class="avis-stars" width="150" height="36" alt="5 étoiles"/>
+
+											{/if}
+							
+										</div>
 
 									</div>
 
-								</div>
+									<p class="suppr-avis" onclick="supprAvis();">Supprimer mon avis</p>
 
-								<p class="suppr-avis" onclick="supprAvis();">Supprimer mon avis</p>
+									<div class="hidden" id="suppr-avis-confirmation">
 
-								<div class="hidden" id="suppr-avis-confirmation">
+										<p>En cliquant sur le bouton SUPPRIMER ci-dessous, je supprime définitivement mon avis client du site. Il ne sera donc plus consultable dans la liste des avis.</p>
+										
+										<a href="?action=espace_personnel&avis=delete" class="btn btn-primary btn-red" >SUPPRIMER</a>
 
-									<p>En cliquant sur le bouton SUPPRIMER ci-dessous, je supprime définitivement mon avis client du site. Il ne sera donc plus consultable dans la liste des avis.</p>
-									
-									<a href="#" class="btn btn-primary btn-red" >SUPPRIMER</a>
+									</div>
 
-								</div>
-
-							</div> <!-- fin div avis client si membre a écrit un avis -->
+								</div> <!-- fin div avis client si membre a écrit un avis -->
+							{/if}
 
 						</div>
 						
@@ -390,12 +381,12 @@
 
 								<p>Attention, cette action est irrémédiable. Une fois votre compte supprimé, vous ne pourrez plus réserver de séances sans vous inscrire à nouveau.</p>
 
-								<form action="" method="" class="form-check">
+								<form action="?action=espace_personnel" method="POST" class="form-check">
 									
-										<input type="checkbox" name="" id="confirmation-suppression-compte" class="form-check-input">
+										<input type="checkbox" name="" id="confirmation-suppression-compte" class="form-check-input" required>
 										<label for="confirmation-suppression-compte" class="form-check-label newsletter-label">En validant cette action, je comprends que les données de mon compte seront définitivement supprimées, et que je ne recevrai plus aucun e-mail de la part de Zentopia. </label>
 
-										<input type="submit" name="" class="btn btn-primary btn-red" value="SUPPRIMER MON COMPTE">
+										<input type="submit" name="CompteDelete" class="btn btn-primary btn-red" value="SUPPRIMER MON COMPTE">
 
 								</form>
 								

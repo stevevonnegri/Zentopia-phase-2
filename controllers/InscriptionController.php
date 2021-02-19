@@ -21,23 +21,9 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 	//ETAPE VERIFIACTION
 		//verification de l'email
 			//email au bon format
-			if (filter_var($user->getEmail(), FILTER_VALIDATE_EMAIL)) {
+			
+			$error_email_message = $user->EmailBonFormat();
 
-				//test si l'email est deja dans la BDD
-
-				if ($user->countItemByEmail() != 0) {
-					
-					$error_email_message = '<p class="alert-danger">Cet email existe deja, merci de vous connecter (ou cliquer ici pour vous connecter).</p>';
-					$erreur = true;
-
-				}
-
-			} else {
-
-				$error_email_message = '<p class="alert-danger"> format de l\'email invalide.</p>';
-				$erreur = true;
-				
-			}
 		//Verifie la validité et que les mot de passe est identique et si oui le hash
 
 			// verifie si le mot de passe est valide (entre 8 et 30 caractères ET avec au moins une lettre et un chiffre)
@@ -55,14 +41,13 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 			$verif = VerifMot_De_PasseIndetique($_POST['mot_de_passe'], $_POST['mot_de_passe_verif']);
 
 			if ($verif === false) {
+
 				$error_verif_mot_de_passe_message = '<p class="alert-danger">Vos mots de passe ne correspondent pas.</p>';
-				$erreur = true;
 
 			} else {
 
 				$user->setMot_de_passe($_POST['mot_de_passe']);
 			}
-
 
 
 		//verifie que le nom et le prenom n'on pas de charactere speciaux
@@ -82,26 +67,15 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 			}
 
 		//verification que l'utilisateur a plus de 18 ans
-
-			//on recupere l'age et on le separe en Jour, Mois, Année
-			$date_naissance = date_parse($user->getDate_de_naissance());
-
-			//on recupere la date du jour en mktime,
-			//a laquel on retranche 18(notre limite d'age)
-			$date_limite = mktime(0, 0, 0, date("m")  , date("d"), date("Y")-18);
-
-			//on convertit date_naissance en mktime
-			$date_naissance = mktime(0, 0, 0, $date_naissance["month"] , $date_naissance["day"], $date_naissance["year"]);
-
-			//on formatte les 2 date pour pouvoir les commparer.
-			$date_limite = date("Y-m-d", $date_limite);
-			$date_naissance = date("Y-m-d", $date_naissance);
 			
-			//on verifie si l'utilisateur a plus de 18 ans.
-			if ($date_naissance > $date_limite) {
+			if ($user->VerifPlusDe18ans()) {
 				
 				$error_date_naissance_message = '<p class="alert-danger">Vous devez avoir au moins 18 ans pour vous inscrire.</p>';
-				$erreur = true;
+
+			} else {
+
+				$error_date_naissance_message = 'ok';
+
 			}
 
 		//Verification que le code postal fasse bien 5 chiffre.
@@ -120,7 +94,7 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 			 }
 
 		//Verification du num de tel
-			if (!preg_match("#[0-9]{10}$#", $user->getTelephone())) {
+			if (!preg_match("#(0|\+33|0033)[1-9][0-9]{8}#", $user->getTelephone())) {
 
 			 	$error_telephone_message = '<p class="alert-danger">Votre numero de téléphone doit contenir au moins 10 chiffres et pas de lettre.</p>';
 					$erreur = true;
@@ -129,7 +103,7 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 	//FIN VERIFICATION
 
 		//si pas d'erreur : envoie de toute les information dans la BDD et redirige vers l'espace personnel.
-	if ($erreur === false) {
+	if ($erreur === false AND $error_email_message === 'ok' AND $error_date_naissance_message === 'ok') {
 		//on hash le mot de passe avant de l'envoyer vers la BDD
 		$mdp = $user->getMot_de_passe();
 
@@ -143,20 +117,25 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 		if ($user->OpenSession() == true) {
 			header('Location: ?action=espace_personnel');
 		} else {
-			echo('Compte crée mais erreur dans l\'ouverture de session.');
+			echo('<p class="center alert-danger">Compte crée mais erreur dans l\'ouverture de session.</p>');
 		}
 	
 	} else {
 
-		echo('VOUS AVEZ UNE ERREUR !');
+		if ($error_email_message !== 'ok') {
+			$smarty->assign('error_email_message', $error_email_message);
+		}
+
+		if ($error_date_naissance_message !== 'ok') {
+			$smarty->assign('error_date_naissance_message', $error_date_naissance_message);
+		}
+		
 		//on envoie toute les erreur a smary
 		$smarty->assign(array(
-			'error_email_message' => $error_email_message,
 			'error_mot_de_passe_message' => $error_mot_de_passe_message,
 			'error_verif_mot_de_passe_message' => $error_verif_mot_de_passe_message,
 			'error_nom_utilisateur_message' => $error_nom_utilisateur_message,
 			'error_prenom_utilisateur_message' => $error_prenom_utilisateur_message,
-			'error_date_naissance_message' => $error_date_naissance_message,
 			'error_Adresse_code_postal_message' => $error_Adresse_code_postal_message,
 			'error_Adresse_ville_message' => $error_Adresse_ville_message,
 			'error_telephone_message' => $error_telephone_message

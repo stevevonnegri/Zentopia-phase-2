@@ -13,7 +13,10 @@
 
 		<!-- SECTION HEADER (contient le bandeau d'info, la navbar et sa background-img + la scroll arrow) -->
 		<header class="header-homepage"> 
-			
+			<!--affichage du message de confirmation en cas de suppresion de compte-->
+			{if isset($CompteDelete)}
+				{$CompteDelete}
+			{/if}
 			<!-- Le bandeau contenant les coordonnées -->
 			<!-- <?php include("banner-coordonnees.php") ?>-->
 			{include file = 'banner_coordonnees.tpl'}
