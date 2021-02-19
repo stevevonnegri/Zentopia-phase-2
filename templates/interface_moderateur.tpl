@@ -105,7 +105,7 @@
 							
 							<div class="col text-center">
 									
-									<a href="?action=interface_mode_gerer_galerie" class="btn btn-primary btn-admin shadow-none">GERER LA GALERIE</a>
+									<a href="?action=interface_moderateur&amp;galerie=true" class="btn btn-primary btn-admin shadow-none">GERER LA GALERIE</a>
 
 							</div>
 
@@ -233,6 +233,21 @@
 							</div>
 
 						{/if} <!-- FIN BLOCK AVIS CLIENT -->
+
+
+
+						<!-- BLOC GALERIE -->
+						<!-- apparaît si le modé/admin a cliqué sur "Gérer les avis client"-->
+						{if isset($galerie)}
+							{include file="interface_mode_gerer_galerie.tpl"}
+						{/if}
+
+
+
+
+
+
+
 
 
 

@@ -92,7 +92,7 @@ class Model {
 		$valeurs = '';
 		foreach($objet as $key => $value){
 			if($value){
-				$champs .= substr($key,1).' , ';
+				$champs .= $key.' , ';
 				$valeurs .= '"'.$value.'" , ';
 			}
 		}
