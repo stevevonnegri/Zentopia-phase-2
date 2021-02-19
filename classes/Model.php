@@ -116,4 +116,15 @@ class Model {
 		$sql = $this->_bdd->prepare('UPDATE '.$this->_table.' SET '.$valeurs.' WHERE id_'.$this->_table.' = '.$id);
 		$sql->execute();
 	}
+
+	/**
+	 * Compte le nombre d'entrer dans la table
+	 * @return sql la quantite d'entre dans une table
+	 */
+	public function Count() {
+		
+        $sql = $this->_bdd->query('SELECT count(*) FROM '.$this->_table);
+        
+        return $sql->fetchColumn();
+    }
 }

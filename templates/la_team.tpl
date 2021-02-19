@@ -114,12 +114,12 @@
 
 				<!-- à afficher de façon dynamique avec les images contenues dans la BDD -->
 				<div class="slider">
-					<div><img src="assets/images/slideshow1.jpg" class="img-fluid" alt="Personnes en train de faire du yoga" /></div>
-					<div><img src="assets/images/slideshow2.jpg" class="img-fluid" alt="Personnes en train de faire du yoga" /></div>
-					<div><img src="assets/images/slideshow3.jpg" class="img-fluid" alt="Personnes en train de faire du yoga" /></div>
-					<div><img src="assets/images/slideshow4.jpg" class="img-fluid" alt="Personnes en train de faire du yoga" /></div>
-					<div><img src="assets/images/slideshow5.jpg" class="img-fluid" alt="Personnes en train de faire du yoga" /></div>
-					<div><img src="assets/images/slideshow6.jpg" class="img-fluid" alt="Personnes en train de faire du yoga" /></div>
+					
+					{foreach from=$imagesAll item="image"}
+						<div>
+							<img src="{Image::GetImageLink(770,$image->getUrl_image())}" class="img-fluid text-center" alt="Personnes en train de faire du yoga"/>
+						</div>
+					{/foreach}{**}
 				</div>
 
 			</div>
