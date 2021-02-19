@@ -198,6 +198,7 @@
         return 'EMAIL';
             
     }
+
     /**
      * crée ou met a jours les variable de session.
      */
@@ -283,4 +284,47 @@
 
             }
     }
+
+
+    public function getRechercheMembre($nom = NULL, $prenom = NULL, $tel = NULL, $rang = NULL){
+
+        $lists = [];
+        $where = '';
+
+        if ($nom) {
+            
+            $where .= 'AND nom_utilisateur = "' .$nom. '" '; 
+        }
+
+        if ($prenom) {
+            
+            $where .= 'AND prenom_utilisateur = "' .$prenom. '" '; 
+        }
+
+        if ($tel) {
+            
+            $where .= 'AND telephone = "' .$tel. '" '; 
+        }
+
+        if ($rang) {
+            
+            $where .= 'AND rang = "' .$rang. '" '; 
+        }
+
+
+
+        $where = substr($where, 4);
+
+
+        $sql = $this->_bdd->query(
+            'SELECT * FROM '.$this->_table.' WHERE '.$where);
+
+        while($donnees = $sql->fetch(PDO::FETCH_ASSOC)){
+            $lists[] = new $this->_table($donnees);
+        }
+
+        return $lists; 
+
+    } 
+
 }

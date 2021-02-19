@@ -5,13 +5,30 @@ if (!isset($_SESSION['id_utilisateur'])) {
 	header('Location: ?action=connexion');
 }
 
+// empêche l'accès à tous les membres qui ne sont pas admin ou modérateurs en les redigirant vers l'accueil 
+if ($_SESSION['rang'] != 'moderateur' && $_SESSION['rang'] != 'admin') {
+
+	header('Location: index.php');
+}
+
+
 // si clic sur le bouton déconnexion, detruit la session et redirige vers l'accueil
 if ($_GET['deconnexion'] == true) {
     session_destroy();
     header('Location: index.php');
 }
 
-// SECTION "GERER LES AVIS CLIENT"
+
+// détermine les parties supplémentaires à afficher à l'admin
+if ($_SESSION['rang'] == 'admin') {
+
+	$smarty->assign('admin', 'admin');
+}
+
+
+
+
+// SECTION "GERER LES AVIS CLIENT" (modérateur & admin)
 // vérifie si on a cliqué sur "Gérer les avis clients"
 if (isset($_GET['avis'])) {
 
@@ -125,6 +142,116 @@ if (isset($_GET['avis'])) {
 
 	}
 	
+}
+
+// SECTION RECHERCHER LES MEMBRES (modérateur & admin avec droits différents)
+// vérifie si on a cliqué sur "Rechercher un membre"
+if (isset($_GET['membres'])) {
+
+	// passe la variable concernée à SMARTY pour qu'il affiche le bloc Rechercher un membre
+	$smarty->assign('rechercher_membre', 'rechercher_membre');
+
+	// vérifie si le formulaire a été envoyé
+	if (isset($_POST['nom']) OR isset($_POST['prenom']) OR isset($_POST['telephone']) OR isset($_POST['rang'])) {
+		
+		// vérifie que au moins un des trois champs contient des données 
+		if ($_POST['nom'] != '' OR $_POST['prenom'] != '' OR $_POST['telephone'] != '' OR $_POST['rang'] != '') {
+
+
+			// si le champ est vide, la variable est initialitée à NULL (on en a besoin dans la méthode getRechercheMembre plus bas )
+
+			if ($_POST['nom'] == '') {
+
+				$nom = NULL;
+
+			} else {
+
+				$nom = $_POST['nom'];
+			}
+
+
+
+			if ($_POST['prenom'] == '') {
+
+				$prenom = NULL;
+
+			} else {
+
+				$prenom = $_POST['prenom'];
+			}
+
+
+
+			if ($_POST['telephone'] == '') {
+
+				$tel = NULL;
+
+			} else {
+
+				$tel = $_POST['telephone'];
+			}
+
+
+			if ($_POST['rang'] == '') {
+
+				$rang = NULL;
+
+			} else {
+
+				$rang = $_POST['rang'];
+			}
+
+
+			// récupère les résultats de la recherche des membres
+			$user = new Utilisateur($dbh);
+			$users = $user->getRechercheMembre($nom, $prenom, $tel, $rang);
+
+
+			// si la requête renvoie des données, on les envoie à SMARTY
+			if (!empty($users)) {
+
+				$smarty->assign('users', $users);
+
+			} else {
+
+				$smarty->assign('resultat_vide', 'resultat_vide');
+
+				echo "resultat_vide";
+
+			}
+
+
+
+
+		
+		// si aucun champ n'a été saisi on prévient SMARTY	
+		} else {
+
+			$smarty->assign('champs_vides', 'champs_vides');
+		}
+
+
+	}
+
+
+	// SECTION MODIFIER LES INFOS DU MEMBRE (admin)
+	// vérifie si on a cliqué sur "Rechercher un membre"
+	if ($_SESSION['rang'] == 'admin' && isset($_GET['id_modif'])) {
+
+	$id = $_GET['id_modif'];
+	$id = (int)$id;
+
+	$smarty->assign('modif_form', 'modif_form');	
+
+	$user = new Utilisateur($dbh);
+	$user_modif = $user->getItem($id);
+
+	$smarty->assign('user_modif', $user_modif);
+
+	}
+
+
+
 }
 
 
