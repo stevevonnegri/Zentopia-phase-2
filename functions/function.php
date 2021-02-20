@@ -27,7 +27,7 @@
 
 			return '<p class="alert-danger">Votre Mot de passe fait plus de 30 caractères</p>';
 			
-		} elseif (!preg_match("/[a-z]+/", $mot_de_passe)) {
+		} elseif (!preg_match("/[a-zA-Z]+/", $mot_de_passe)) {
 		 
 			return '<p class="alert-danger">Votre Mot de passe doit inclure au moins une lettre</p>';
 			
