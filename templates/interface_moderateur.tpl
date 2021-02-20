@@ -242,7 +242,7 @@
 
 							<h2>Rechercher un membre</h2>
 
-							<form method="post" action="" class="form-recherche">
+							<form method="post" action="?action=interface_moderateur&amp;membres=true" class="form-recherche">
 
 								<legend>Spécifiez au moins un critère de recherche :</legend>
 
@@ -250,19 +250,19 @@
 									
 									<div class="col-12 col-lg">
 										
-										<input type="text" name="nom" placeholder="Nom" class="form-control input-membre">
+										<input type="text" name="nom_search" placeholder="Nom" class="form-control input-membre">
 
 									</div>
 
 									<div class="col-12 col-lg">
 										
-										<input type="text" name="prenom" placeholder="Prénom" class="form-control input-membre">
+										<input type="text" name="prenom_search" placeholder="Prénom" class="form-control input-membre">
 
 									</div>
 
 									<div class="col-12 col-lg">
 										
-										<input type="telephone" name="telephone" placeholder="Téléphone" class="form-control input-membre">
+										<input type="telephone" name="telephone_search" placeholder="Téléphone" class="form-control input-membre">
 
 									</div>
 
@@ -270,7 +270,7 @@
 
 										<div class="col-12 col-lg">
 										
-											<select name="rang" class="form-control">
+											<select name="rang_search" class="form-control">
 												
 												<option value="">--Rang--</option>
 												<option value="membre">Membre</option>
@@ -467,7 +467,7 @@
 						<!-- apparaît si l'admin a cliqué sur "Modifier" pour modifier les infos d'un membre-->
 						{if isset($modif_form) && isset($user_modif)}
 
-							<form class="membre-trouve">
+							<form class="membre-trouve" method="post" action="?action=interface_moderateur&amp;membres=true&amp;id_modif={$user_modif->getId_utilisateur()}">
 
 								<div class="row">
 
@@ -475,12 +475,12 @@
 										
 										<legend>Civilité :</legend>
 
-										<input type="radio" name="genre" id="femme" value="Mme" required 
+										<input type="radio" name="genre" id="femme" value="Femme" required 
 										{if $user_modif->getGenre() == 'Femme' } checked {/if}>
 
 										<label for="femme">Mme</label>
 
-										<input type="radio" name="genre" id="homme" value="Mr"
+										<input type="radio" name="genre" id="homme" value="Homme"
 										{if $user_modif->getGenre() == 'Homme' } checked {/if}>
 
 										<label for="homme">Mr</label>
@@ -490,7 +490,7 @@
 									<div class="col-12 col-lg-6">
 										
 										<label for="">Date de naissance :</label>
-										<input type="date" name="" class="form-control" value="{$user_modif->getDate_de_naissance()}">
+										<input type="date" name="date_de_naissance" class="form-control" value="{$user_modif->getDate_de_naissance()}">
 
 									</div>
 									
@@ -502,14 +502,14 @@
 									<div class="col-12 col-lg-6">
 										
 										<label for="">Prénom :</label>
-										<input type="text" name="" class="form-control" value="" placeholder="{$user_modif->getPrenom_utilisateur()}">
+										<input type="text" name="prenom_utilisateur" class="form-control" value="{$user_modif->getPrenom_utilisateur()}">
 
 									</div>
 
 									<div class="col-12 col-lg-6">
 										
 										<label for="">Nom :</label>
-										<input type="text" name="" class="form-control" value="" placeholder="{$user_modif->getNom_utilisateur()}">
+										<input type="text" name="nom_utilisateur" class="form-control" value="{$user_modif->getNom_utilisateur()}">
 
 									</div>
 									
@@ -520,14 +520,14 @@
 									<div class="col-12 col-lg-6">
 										
 										<label for="">Email :</label>
-										<input type="email" name="" class="form-control" value="" placeholder="{$user_modif->getEmail()}">
+										<input type="email" name="email" class="form-control" value="{$user_modif->getEmail()}">
 
 									</div>
 
 									<div class="col-12 col-lg-6">
 										
 										<label for="">Téléphone :</label>
-										<input type="tel" name="" class="form-control" value="" placeholder="{$user_modif->getTelephone()}">
+										<input type="tel" name="telephone" class="form-control" value="{$user_modif->getTelephone()}">
 
 									</div>
 
@@ -538,14 +538,14 @@
 									<div class="col-12 col-lg-6">
 										
 										<label for="">Code postal :</label>
-										<input type="number" name="" class="form-control" value="" placeholder="{$user_modif->getAdresse_code_postal()}">
+										<input type="number" name="adresse_code_postal" class="form-control" value="{$user_modif->getAdresse_code_postal()}">
 
 									</div>
 
 									<div class="col-12 col-lg-6">
 
 										<label for="">Ville :</label>
-										<input type="text" name="" class="form-control" value="" placeholder="{$user_modif->getAdresse_ville()}">
+										<input type="text" name="adresse_ville" class="form-control" value="{$user_modif->getAdresse_ville()}">
 
 									</div>
 
@@ -556,7 +556,7 @@
 									<div class="col">
 										
 										<label for="">Adresse :</label>
-										<input type="text" name="" class="form-control" value="" placeholder="{$user_modif->getAdresse_rue()}">
+										<input type="text" name="adresse_rue" class="form-control" value="{$user_modif->getAdresse_rue()}">
 
 									</div>
 
@@ -568,10 +568,9 @@
 										
 										<select name="rang" class="form-control">
 										
-										<option value="">--Rang--</option>
-										<option value="membre">Membre</option>
-										<option value="moderateur">Modérateur</option>
-										<option value="admin">Admin</option>
+										<option value="membre" {if $user_modif->getRang() == 'membre' } selected {/if}>--Membre--</option>
+										<option value="moderateur" {if $user_modif->getRang() == 'moderateur' } selected {/if}>--Modérateur--</option>
+										<option value="admin" {if $user_modif->getRang() == 'admin' } selected {/if}>--Admin--</option>
 
 									</select>
 
@@ -583,8 +582,16 @@
 								<div class="row">
 
 									<div class="col text-center">
+
+										{if isset($champ_invalide)}
+
+											<p class="error">{$champ_invalide}</p>
+
+										{/if}
 			
 										<input type="submit" class="btn btn-primary btn-red shadow-none" value="VALIDER">
+
+
 
 									</div>
 
