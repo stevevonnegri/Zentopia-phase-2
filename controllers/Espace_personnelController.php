@@ -238,7 +238,7 @@
 	}
 
 	//recuperation des seance reserver par l'utilisateur.
-	$seances = $seance->getSseanceById($_SESSION['id_utilisateur']);
+	$seances = $seance->getSeanceById($_SESSION['id_utilisateur']);
 
 	//TEST avec utilisateur 14
 	//$seances = $seance->getSseanceById(14);
