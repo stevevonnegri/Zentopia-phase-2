@@ -316,7 +316,7 @@ if (isset($_GET['membres'])) {
 			'prenom_utilisateur' => $_POST['prenom_utilisateur'],
 			'genre' => $_POST['genre'],
 			'date_de_naissance' => $_POST['date_de_naissance'],
-			'adresse_rue' => $_POST['adresse_rue'],
+			'adresse_rue' => htmlspecialchars($_POST['adresse_rue']),
 			'adresse_code_postal' => $_POST['adresse_code_postal'],
 			'adresse_ville' => $_POST['adresse_ville'],
 			'telephone' => $_POST['telephone'],

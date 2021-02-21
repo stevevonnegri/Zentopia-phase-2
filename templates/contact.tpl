@@ -59,20 +59,27 @@
 					
 					<h1 class="nous-ecrire">NOUS ECRIRE</h1>
 
-					<form>
+					{if isset($alert_user)}
+
+						<p class="error text-center">{$alert_user}</p>
+
+					{/if}
+
+
+					<form method="post" action="?action=contact">
 						
 						<div class="form-row">
 
 							<div class="form-group col-12 col-sm-6 form-input">
 					
-								<input type="text" class="form-control" placeholder="Nom" required>
+								<input type="text" class="form-control" name="nom" placeholder="Nom" required>
 								<i class="fas fa-id-card form-icon"></i>
 
 							</div>
 
 							<div class="form-group col-12 col-sm-6 form-input">
 
-								<input type="email" class="form-control" placeholder="Email" required>
+								<input type="email" class="form-control" name="email" placeholder="Email" required>
 								<i class="fas fa-envelope form-icon"></i>
 
 							</div>
@@ -83,14 +90,14 @@
 
 							<div class="form-group col-12 col-sm-6 form-input">
 							
-								<input type="text" class="form-control" placeholder="Sujet" required>
+								<input type="text" class="form-control" name="sujet" placeholder="Sujet" required>
 								<i class="fas fa-comment-dots form-icon"></i>
 
 							</div>
 
 							<div class="form-group col-12 col-sm-6 form-input">
 
-								<input type="tel" class="form-control" placeholder="Téléphone" required>
+								<input type="tel" class="form-control" name="tel" placeholder="Téléphone" required>
 								<i class="fas fa-phone-square form-icon"></i>
 
 							</div>
@@ -101,7 +108,7 @@
 
 							<div class="form-group col form-input">
 							
-								<textarea rows="5" class="form-control" placeholder="Message" required></textarea>
+								<textarea rows="5" class="form-control" name="message" placeholder="Message" required></textarea>
 								<i class="fas fa-pen-square form-icon"></i>
 
 							</div>
