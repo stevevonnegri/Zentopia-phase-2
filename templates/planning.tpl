@@ -240,6 +240,9 @@
 
 				</div>
 
+
+				<!-- ==========================DEBUT MODIF steve (a annuler lors du merge si j'oublie) ======================== -->
+
 				<div class="row background-light align-items-center seance-element">
 					
 					<div class="col-12 col-sm-6 col-lg text-center col-below">
@@ -250,6 +253,7 @@
 
 					<div class="col-12 col-sm-6 col-lg text-center col-below">
 						
+					<!-- Pas a faire pour realiser la reservation steve -->
 						<p>SLOW YOGA, avec Marie <br/>
 							<!-- ajouter l'ancre menant au type de cours à l'url -->
 							<a href="enseignement.php" class="voir-description">> voir description</a> </p>
@@ -263,10 +267,10 @@
 					</div>
 
 					<div class="col-12 col-sm-6 col-lg text-center col-below">
-
+ 
 						<!-- à afficher seulement si le membre est connecté et ne participe pas à la séance -->
 						<!-- au clic du bouton, le membre doit être ajouté à la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation, il faudra peut-être intégrer la redirection dans le Modal?)-->
-						<button class="btn btn-primary shadow-none btn-reserver" data-toggle="modal" data-target="#confirmation-reservation">RESERVER</button>
+						<!--<a class="btn btn-primary shadow-none btn-reserver" href="?action=planning&id_reservation=2"  data-target="#confirmation-reservation">data-toggle="modal"RESERVER</a>-->
 
 						<!-- à afficher seulement si le membre est connecté et est un participant de la séance -->
 						<!-- au clic du bouton, le membre doit être retiré de la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation d'annulation, il faudra peut-être intégrer la redirection dans le Modal?)-->
@@ -275,10 +279,28 @@
 						<!-- à afficher seulement si le membre n'est pas connecté/inscrit -->
 						<!--<a href="connexion.php" class="btn btn-primary shadow-none btn-reserver">SE CONNECTER</a>-->
 
+						
+						{if !isset($_SESSION['id_utilisateur'])}
+							<!-- à afficher seulement si le membre n'est pas connecté/inscrit -->
+							<a href="?action=connexion" class="btn btn-primary shadow-none btn-reserver">SE CONNECTER</a>
+						{elseif $seanceReserver == true}
+							<!-- à afficher seulement si le membre est connecté et est un participant de la séance -->
+							<!-- au clic du bouton, le membre doit être retiré de la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation d'annulation, il faudra peut-être intégrer la redirection dans le Modal?)-->
+							<a class="btn btn-primary shadow-none btn-reserver" href="?action=planning&id_annuler=2" data-toggle="modal" data-target="#confirmation-annulation">ANNULER</a>
+						{else}
+							<!-- à afficher seulement si le membre est connecté et ne participe pas à la séance -->
+							<!-- au clic du bouton, le membre doit être ajouté à la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation, il faudra peut-être intégrer la redirection dans le Modal?)-->
+							<a class="btn btn-primary shadow-none btn-reserver" href="?action=planning&id_reservation=2" data-toggle="modal" data-target="#confirmation-reservation">RESERVER</a>
+						{/if}
+						
+
 						<!-- à afficher seulement pour les admins et les profs/modé dont c'est le cours -->
 						<button class="btn btn-primary btn-admin shadow-none" onclick="showElement('admin-seance');"><i class="fas fa-user-cog"></i></button>
 
 					</div>
+
+
+					<!-- ========================== FIN MODIF steve (a annuler lors du merge si j'oublie) ======================== -->
 
 
 					<!-- Modal de confirmation de réservation à afficher lors que le membre clique sur le bouton RESERVER -->

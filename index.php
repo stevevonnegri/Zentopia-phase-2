@@ -24,6 +24,7 @@ $smarty->assign('_SESSION', $_SESSION);
 
 
 setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
+date_default_timezone_set('Europe/Paris');
 
 
 

@@ -56,7 +56,7 @@
     *
     *@return array un tableau contenant la liste des sceance et leur information
     **/
-    public function getSseanceById(int $id) {
+    public function getSeanceById(int $id) {
 
         $sql = $this->_bdd->query('
             SELECT seance.id_seance, date_seance, heure_debut_seance, heure_fin_seance, nom_type_de_cours, professeur.id_professeur
@@ -108,4 +108,39 @@
         );
 
     }
+
+    
+    /**
+     * Ajoute une Reservation dans la table reserve
+     * 
+     * @param objet est un tableau qui dit avoir l'id d'une seance et l'id d'un utilisateur pour fonctioner
+     */
+    public function AddReservation($objet){
+		$champs = '';
+		$valeurs = '';
+		foreach($objet as $key => $value){
+			if($value){
+				$champs .= $key.' , ';
+				$valeurs .= '"'.$value.'" , ';
+			}
+		}
+		$valeurs = substr($valeurs,0,-2);
+		$champs = substr($champs,0,-2);
+
+		$sql = $this->_bdd->prepare('INSERT INTO reserver ('.$champs.') VALUES ('.$valeurs.')');
+        $sql->execute();
+	}
+
+    	/**
+	* fonction suppriment un élément d'une BDD selon un ID et un nom de colonne.
+	*
+	*@param      <int>   	$id     	l'id l'element
+	*@param      <string>   $colonne    nom de la colonne
+	*
+	**/
+	public function DeleteSeance($data){
+
+		$this->_bdd->exec('DELETE FROM reserver WHERE id_seance = '.$data['id_seance'].' AND id_utilisateur = '.$data['id_utilisateur']);
+        
+	}
 }
