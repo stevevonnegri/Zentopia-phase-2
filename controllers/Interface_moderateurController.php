@@ -162,53 +162,53 @@ if (isset($_GET['membres'])) {
 	$smarty->assign('rechercher_membre', 'rechercher_membre');
 
 	// vérifie si le formulaire a été envoyé
-	if (isset($_POST['nom']) OR isset($_POST['prenom']) OR isset($_POST['telephone']) OR isset($_POST['rang'])) {
+	if (isset($_POST['nom_search']) OR isset($_POST['prenom_search']) OR isset($_POST['telephone_search']) OR isset($_POST['rang_search'])) {
 		
 		// vérifie que au moins un des trois champs contient des données 
-		if ($_POST['nom'] != '' OR $_POST['prenom'] != '' OR $_POST['telephone'] != '' OR $_POST['rang'] != '') {
+		if ($_POST['nom_search'] != '' OR $_POST['prenom_search'] != '' OR $_POST['telephone_search'] != '' OR $_POST['rang_search'] != '') {
 
 
 			// si le champ est vide, la variable est initialitée à NULL (on en a besoin dans la méthode getRechercheMembre plus bas )
 
-			if ($_POST['nom'] == '') {
+			if ($_POST['nom_search'] == '') {
 
 				$nom = NULL;
 
 			} else {
 
-				$nom = $_POST['nom'];
+				$nom = $_POST['nom_search'];
 			}
 
 
 
-			if ($_POST['prenom'] == '') {
+			if ($_POST['prenom_search'] == '') {
 
 				$prenom = NULL;
 
 			} else {
 
-				$prenom = $_POST['prenom'];
+				$prenom = $_POST['prenom_search'];
 			}
 
 
 
-			if ($_POST['telephone'] == '') {
+			if ($_POST['telephone_search'] == '') {
 
 				$tel = NULL;
 
 			} else {
 
-				$tel = $_POST['telephone'];
+				$tel = $_POST['telephone_search'];
 			}
 
 
-			if ($_POST['rang'] == '') {
+			if ($_POST['rang_search'] == '') {
 
 				$rang = NULL;
 
 			} else {
 
-				$rang = $_POST['rang'];
+				$rang = $_POST['rang_search'];
 			}
 
 
@@ -226,12 +226,7 @@ if (isset($_GET['membres'])) {
 
 				$smarty->assign('resultat_vide', 'resultat_vide');
 
-				echo "resultat_vide";
-
 			}
-
-
-
 
 		
 		// si aucun champ n'a été saisi on prévient SMARTY	
@@ -245,22 +240,116 @@ if (isset($_GET['membres'])) {
 
 
 	// SECTION MODIFIER LES INFOS DU MEMBRE (admin)
-	// vérifie si on a cliqué sur "Rechercher un membre"
+	// vérifie si on a cliqué sur "MODIFIER" et si on a bien récupéré l'ID au passage
 	if ($_SESSION['rang'] == 'admin' && isset($_GET['id_modif'])) {
 
-	$id = $_GET['id_modif'];
-	$id = (int)$id;
+		$id = $_GET['id_modif'];
+		$id = (int)$id;
 
-	$smarty->assign('modif_form', 'modif_form');	
+		// envoie l'affichage du formulaire à SMARTY
+		$smarty->assign('modif_form', 'modif_form');	
 
-	$user = new Utilisateur($dbh);
-	$user_modif = $user->getItem($id);
-
-	$smarty->assign('user_modif', $user_modif);
+		// récupère les infos du membre via l'ID et envoi à SMARTY
+		$user = new Utilisateur($dbh);
+		$user_modif = $user->getItem($id);
+		$smarty->assign('user_modif', $user_modif);
 
 	}
 
 
+	// ENVOYER LES INFORMATIONS MODIFIEES (admi)
+	// vérifie qu'on a bien toute les données du formulaire de modification des infos 
+	if (isset($_POST['genre']) && isset($_POST['date_de_naissance']) && isset($_POST['prenom_utilisateur']) && isset($_POST['nom_utilisateur']) && isset($_POST['email']) && isset($_POST['telephone']) && isset($_POST['adresse_code_postal']) && isset($_POST['adresse_ville']) && isset($_POST['adresse_rue']) && isset($_POST['rang']) && isset($_GET['id_modif'])) {
+
+
+		$id = $_GET['id_modif'];
+		$id = (int)$id;
+
+		// récupère l'âge de l'utilisateur pour le vérifier plus bas
+		$jour_actuel = new DateTime();
+		$jour_naissance = new DateTime($_POST['date_de_naissance']);
+		$interval = $jour_actuel->diff($jour_naissance);
+		$age = (int)$interval->format('%y');
+
+		// vérification des données modifiées avant qu'elles soient envoyées à la BDD
+		if (!preg_match("/^[a-zéèêëïüA-Z-' ]*$/", $_POST['nom_utilisateur']) OR (strlen($_POST['nom_utilisateur']) > 50)) {
+
+			$smarty->assign('champ_invalide', 'Le nom renseigné n\'est pas valide.');
+
+		} elseif (!preg_match("/^[a-zéèêëïüA-Z-' ]*$/", $_POST['prenom_utilisateur']) OR (strlen($_POST['prenom_utilisateur']) > 50)) {
+
+			$smarty->assign('champ_invalide', 'Le prénom renseigné n\'est pas valide.');
+
+			
+		} elseif (strlen($_POST['adresse_rue']) > 100) {
+
+			$smarty->assign('champ_invalide', 'L\'adresse saisie est trop longue.');
+
+
+		} elseif ($age < 18) {
+
+			$smarty->assign('champ_invalide', 'Vous devez avoir plus de 18 ans pour profiter des services de Zentopia.');
+		
+
+		} elseif (!preg_match("#^[0-9]{5}$#", $_POST['adresse_code_postal'])) {
+
+			$smarty->assign('champ_invalide', 'Le code postal renseigné n\'est pas valide.');
+
+
+		} elseif (preg_match("/[0-9]+/", $_POST['adresse_ville']) OR !preg_match("/^[a-zéèêëïüA-Z-' ]*$/", $_POST['adresse_ville']) OR strlen($_POST['adresse_ville']) > 50) {
+
+			$smarty->assign('champ_invalide', 'La ville renseignée n\'est pas valide.');
+		}
+
+
+		elseif (!preg_match("#(0|\+33|0033)[1-9][0-9]{8}#", $_POST['telephone'])) {
+
+			$smarty->assign('champ_invalide', 'Le numéro de téléphone renseigné n\'est pas valide.');
+		
+		}
+
+		// si tout est valide, on stock les données dans un tableau et on les envoie
+		else {
+
+			$data = [
+			'nom_utilisateur' => $_POST['nom_utilisateur'],
+			'prenom_utilisateur' => $_POST['prenom_utilisateur'],
+			'genre' => $_POST['genre'],
+			'date_de_naissance' => $_POST['date_de_naissance'],
+			'adresse_rue' => $_POST['adresse_rue'],
+			'adresse_code_postal' => $_POST['adresse_code_postal'],
+			'adresse_ville' => $_POST['adresse_ville'],
+			'telephone' => $_POST['telephone'],
+			'email' => $_POST['email'],
+			'rang' => $_POST['rang']
+
+			];
+
+
+			$user->Update($data, $id);
+
+			$smarty->assign('modif_confirm', 'modif_confirm');
+
+			header('Location: ?action=interface_moderateur&membres=true');
+			exit();
+
+
+		}
+
+	} 
+
+
+	if ($_SESSION['rang'] == 'admin' && isset($_POST['suppr-compte'])) {
+
+		$id = $_GET['id_suppr'];
+		$id = (int)$id;
+
+		$user = new Utilisateur($dbh);
+		$user->Delete($id);
+
+		$smarty->assign('confirm_suppr', 'confirm_suppr');
+
+	}
 
 }
 
