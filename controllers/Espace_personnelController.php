@@ -151,7 +151,7 @@
 				 }
 
 				//Verification du num de tel
-				if (!preg_match("#(0|\+33|0033)[1-9][0-9]{8}#", $userModif->getTelephone())) {
+				if (!preg_match("#^(0|\+33|0033)[1-9][0-9]{8}$#", $userModif->getTelephone())) {
 
 				 	$error_telephone_message = '<p class="alert-danger">Votre numero de téléphone n\'est pas valide.</p>';
 					$erreur = true;

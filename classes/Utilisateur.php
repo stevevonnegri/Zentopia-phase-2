@@ -27,22 +27,22 @@
         $this->_genre = $genre;
     }
     public function setNom_utilisateur($nom){
-        $this->_nom_utilisateur = $nom;
+        $this->_nom_utilisateur = htmlspecialchars($nom);
     }
     public function setPrenom_utilisateur($prenom){
-        $this->_prenom_utilisateur = $prenom;
+        $this->_prenom_utilisateur = htmlspecialchars($prenom);
     }
     public function setDate_de_naissance($dateDeNaissance){
         $this->_date_de_naissance = $dateDeNaissance;
     }
     public function setAdresse_rue($adresseRue){
-        $this->_adresse_rue = $adresseRue;
+        $this->_adresse_rue = htmlspecialchars($adresseRue);
     }
     public function setAdresse_code_postal($adresseCodePostal){
         $this->_adresse_code_postal = $adresseCodePostal;
     }
     public function setAdresse_ville($adresseVille){
-        $this->_adresse_ville = $adresseVille;
+        $this->_adresse_ville = htmlspecialchars($adresseVille);
     }
     public function setTelephone($telephone){
         $this->_telephone = $telephone;
