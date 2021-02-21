@@ -198,6 +198,7 @@
         return 'EMAIL';
             
     }
+    
 
     /**
      * crée ou met a jours les variable de session.
@@ -218,6 +219,8 @@
         $_SESSION['seance_decouverte'] = $this->getSeance_decouverte();
         $_SESSION['rang'] = $this->getRang();
     }
+
+
 
     //PARTIE VERIFICATION DES INFO INSCRIPTION/MODIFICATION
     //VERIFICATION DE L'EMAIL
@@ -250,6 +253,8 @@
             return $error_email_message;
 
         }
+
+
 
     /**
     * verifie si l'age de l'utilisateur est superieur a 18 ans
@@ -285,6 +290,14 @@
             }
     }
 
+
+
+     /**
+     * Fonction de recherche de membre par critères
+     * construit la requête SQL en fonction des champs remplis avant de l'envoyer à la BDD
+     *
+     * @return     un tableau de données contenant les infos du ou des membres correspondant à la recherche
+     */
 
     public function getRechercheMembre($nom = NULL, $prenom = NULL, $tel = NULL, $rang = NULL){
 
