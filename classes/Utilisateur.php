@@ -195,7 +195,14 @@
         return 'EMAIL';
             
     }
+    
 
+     /**
+     * Fonction de recherche de membre par critères
+     * construit la requête SQL en fonction des champs remplis avant de l'envoyer à la BDD
+     *
+     * @return     un tableau de données contenant les infos du ou des membres correspondant à la recherche
+     */
     public function getRechercheMembre($nom = NULL, $prenom = NULL, $tel = NULL, $rang = NULL){
 
         $lists = [];

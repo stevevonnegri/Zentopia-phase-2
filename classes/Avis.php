@@ -67,7 +67,7 @@
     }
 
     /**
-     * récupère les avis en attente de modération et les infos liés à leurs auteurs via la table utilisateur
+     * récupère les avis déjà modérés et les infos liés à leurs auteurs via la table utilisateur
      *
      * @return     un tableau contenant les infos de l'avis et de l'utilisateur lié
      */

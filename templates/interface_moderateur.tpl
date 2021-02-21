@@ -298,6 +298,15 @@
 
 										{/if}
 
+
+										{if isset($confirm_suppr)}
+
+											<p class="error">Le compte client a bien été supprimé.</p>
+
+										{/if}
+
+
+
 									</div>
 
 								</div>	
@@ -419,20 +428,20 @@
 
 													<div class="col-12 col-lg text-center">
 														
-														<button class="btn btn-primary btn-admin shadow-none" onclick="showElement('confirmation-suppr-membre');">SUPPRIMER LE MEMBRE</button>
+														<button class="btn btn-primary btn-admin shadow-none" onclick="showElement('confirmation-suppr-membre-{$user->getId_utilisateur()}');">SUPPRIMER LE MEMBRE</button>
 
 													</div>
 
 												</div>
 
 												<!-- confirmation de suppression du compte du membre, ne s'affiche qu'au clic de l'admin sur le bouton supprimer compte -->
-												<div id="confirmation-suppr-membre" class="hidden">
+												<div id="confirmation-suppr-membre-{$user->getId_utilisateur()}" class="hidden">
 
-													<p>Attention, cette action est irrémédiable. Une fois le compte supprimé, vous ne pourrez plus le récupérer.</p>
+													<p class="error text-center">Attention, cette action est irrémédiable. Une fois le compte supprimé, vous ne pourrez plus le récupérer.</p>
 
-													<form action="" method="" class="form-check">
+													<form action="?action=interface_moderateur&amp;membres=true&amp;id_suppr={$user->getId_utilisateur()}" method="post" class="form-check">
 														
-														<input type="checkbox" name="" class="form-check-input">
+														<input type="checkbox" name="suppr-compte" class="form-check-input" required>
 														<label for="confirmation-suppression-compte" class="form-check-label">Je souhaite supprimer définitivement ce compte. </label>
 
 														<div class="row justify-content-center">

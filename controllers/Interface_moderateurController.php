@@ -216,8 +216,6 @@ if (isset($_GET['membres'])) {
 
 				$smarty->assign('resultat_vide', 'resultat_vide');
 
-				echo "resultat_vide";
-
 			}
 
 		
@@ -288,7 +286,7 @@ if (isset($_GET['membres'])) {
 			$smarty->assign('champ_invalide', 'Le code postal renseigné n\'est pas valide.');
 
 
-		} elseif (preg_match("/[0-9]+/", $_POST['adresse_ville']) && strlen($_POST['adresse_ville']) > 50) {
+		} elseif (preg_match("/[0-9]+/", $_POST['adresse_ville']) OR !preg_match("/^[a-zéèêëïüA-Z-' ]*$/", $_POST['adresse_ville']) OR strlen($_POST['adresse_ville']) > 50) {
 
 			$smarty->assign('champ_invalide', 'La ville renseignée n\'est pas valide.');
 		}
@@ -329,6 +327,19 @@ if (isset($_GET['membres'])) {
 		}
 
 	} 
+
+
+	if ($_SESSION['rang'] == 'admin' && isset($_POST['suppr-compte'])) {
+
+		$id = $_GET['id_suppr'];
+		$id = (int)$id;
+
+		$user = new Utilisateur($dbh);
+		$user->Delete($id);
+
+		$smarty->assign('confirm_suppr', 'confirm_suppr');
+
+	}
 
 }
 
