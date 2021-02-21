@@ -195,7 +195,7 @@
 
 					<div class="col-12 col-lg-7">
 						
-						<form method="post" accept="">
+						<form method="POST" action="?action=planning#reservation">
 
 							<div class="form-row align-items-center">
 
@@ -204,15 +204,15 @@
 									<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
 								<label for="">Type de cours :</label>
 
-								<select>
+								<select name="nom_cours">
 										
 									<option value="">Tous</option>
-									<option value="hatha">Hatha</option>
-									<option value="vinyasa">Vinyasa</option>
-									<option value="slow-yoga">Slow yoga</option>
-									<option value="kid-yoga">Kid yoga</option>
-									<option value="meditation-guidee">Méditation guidée</option>
-									<option value="meditation-tibetaine">Méditation tibétaine</option>	
+
+									{foreach from=$noms_des_cours item=nom_cours}
+
+										<option value="{$nom_cours}">{$nom_cours|capitalize}</option>
+
+									{/foreach}
 
 								</select>
 
@@ -220,7 +220,7 @@
 
 								<div class="col col-sm-2 text-left col-search">
 									
-									<button class="btn btn-primary btn-reserver shadow-none">FILTRER</button>
+									<button class="btn btn-primary btn-reserver shadow-none" name="filtre">FILTRER</button>
 
 								</div>
 
@@ -270,21 +270,32 @@
 
 						<div class="col-12 col-sm-6 col-lg text-center col-below">
 							
-							<p class="places-dispo">places disponibles : {$seance.nombre_de_places-$seance.nbr_place_prise}</p>
+							<p class="places-dispo">
+								{if ($seance.nombre_de_places-$seance.nbr_place_prise) == 0}
+									COMPLET
+								{else}
+									places disponibles : {$seance.nombre_de_places-$seance.nbr_place_prise}
+								{/if}
+							</p>
 
 						</div>
 
 						<div class="col-12 col-sm-6 col-lg text-center col-below">
 							{if isset($_SESSION['id_utilisateur'])}
-								<!-- à afficher seulement si le membre est connecté et ne participe pas à la séance -->
-								{if $seance.A_Reserver == false}
-									<!-- au clic du bouton, le membre doit être ajouté à la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation, il faudra peut-être intégrer la redirection dans le Modal?)-->
-									<button class="btn btn-primary shadow-none btn-reserver" data-toggle="modal" data-target="#confirmation-reservation">RESERVER</button>
-								{else}
+
+								{if $seance.A_Reserver == true}
 									<!-- à afficher seulement si le membre est connecté et est un participant de la séance -->
 									<!-- au clic du bouton, le membre doit être retiré de la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation d'annulation, il faudra peut-être intégrer la redirection dans le Modal?)-->
 									<button class="btn btn-primary shadow-none btn-reserver" data-toggle="modal" data-target="#confirmation-annulation">ANNULER</button>
+								{elseif ($seance.nombre_de_places-$seance.nbr_place_prise) == 0}
+									<!--Si la personne n'a pas reserver et que le cours est complet, affiche COMPLET-->
+									<button class="btn btn-primary shadow-none btn-reserver">COMPLET</button>
+								{else}
+									<!-- à afficher seulement si le membre est connecté et ne participe pas à la séance -->
+									<!-- au clic du bouton, le membre doit être ajouté à la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation, il faudra peut-être intégrer la redirection dans le Modal?)-->
+									<button class="btn btn-primary shadow-none btn-reserver" data-toggle="modal" data-target="#confirmation-reservation">RESERVER</button>
 								{/if}
+
 							{else}
 
 								<!-- à afficher seulement si le membre n'est pas connecté/inscrit -->
