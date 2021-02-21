@@ -116,7 +116,13 @@
      *
      * @return     un tableau avec toute les information utile sur les seance demander.
      */
-    public function getSeance($date = NULL) {
+    public function getSeance($date = NULL, $filtre = "") {
+        //ajoute un filtre selon le type de seance si option utiliser
+        $where = "";
+        if ($filtre != "") {
+            $where .= 'AND nom_type_de_cours = "'.$filtre.'"';
+        }
+
         //creation des variable utilisé
             //teste si $date est NULL
             if (!isset($date)) {
@@ -151,9 +157,9 @@
             NATURAL JOIN utilisateur
             WHERE date_seance BETWEEN "'.$jourActuel.'" AND "'.$jourLimite.'"
             AND NOT (date_seance = "'.$jourActuel.'" AND heure_debut_seance <= "'.$heureActuel.'")
+            '.$where.'
             ORDER BY date_seance ASC, heure_debut_seance ASC            
             ');
-
 
         $lists = [];
         while($donnees = $sql->fetch(PDO::FETCH_ASSOC)){
@@ -198,4 +204,25 @@
 
         return $lists;
     }
+
+
+    /**
+     * retourne sous forme de tableau simple tout les nom des type de cours present dans la BDD
+     *
+     * @return     array  retourne les nom des type de cours
+     */
+    public function allTypeDeCours() {
+
+        $sql = $this->_bdd->query('SELECT nom_type_de_cours FROM type_de_cours');
+
+        $lists = [];
+        while ($donnees = $sql->fetchColumn()) {
+            array_push($lists, $donnees);
+        }
+
+        return $lists;
+
+    }
+
+
 }
