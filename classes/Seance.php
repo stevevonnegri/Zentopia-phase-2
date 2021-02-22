@@ -113,7 +113,7 @@
     /**
      * Ajoute une Reservation dans la table reserve
      * 
-     * @param objet est un tableau qui dit avoir l'id d'une seance et l'id d'un utilisateur pour fonctioner
+     * @param objet est un tableau qui doit avoir l'id d'une seance et l'id d'un utilisateur pour fonctioner
      */
     public function AddReservation($objet){
 		$champs = '';
@@ -232,4 +232,35 @@
 
         return $lists;
     }
+    /**
+     * compte le nombre de participant a une seance
+     * 
+     * @param id l'id de la seance
+     * 
+     * @return sql return le nombre de participant à cette seance
+     */
+    public function CountParticipantSeance($id) {
+        $sql = $this->_bdd->query('SELECT count(*) FROM reserver WHERE id_'.$this->_table.' = '.$id);
+        return $sql->fetchColumn();
+    }
+
+    
+    /**
+     * compte le nombre de participant a une seance
+     * 
+     * @param id l'id de la seance
+     * 
+     * @return lists return un tableau avec l'id_utilisateur des membres inscrits sur cette seance 
+     */
+    public function getItemFromReserver($id, $colonne) {
+
+        $sql =$this->_bdd->query('SELECT id_utilisateur FROM reserver WHERE '.$colonne.' = "'.$id.'"');
+        while($donnees = $sql->fetch(PDO::FETCH_ASSOC)){
+			$lists[] = $donnees;
+		}
+		return $lists; 
+    }
+
+
+
 }

@@ -32,6 +32,13 @@
 		<!-- SECTION PLANNING -->
 		<div class="container planning-type text-center">
 				
+			{if isset($seancePleine)}
+				<p class="">La seance que vous avez choisi est deja complete</p>
+			{/if}
+			{if isset($seanceDejaReserver)}
+				<p class="">Vous avez deja reserver cette seance</p>
+			{/if}
+
 			<p class="quote-planning">&laquo; Le yoga nous enseigne à guérir ce qui n’a pas besoin d’être enduré, et à endurer ce qui ne peut pas être guéri &raquo; <br/>- B.K.S. Iyengar</p>
 
 			<div class="planning-img">
@@ -43,7 +50,6 @@
 			</div>
 
 		</div>
-
 
 		<div class="planning-infos-background">
 
@@ -282,12 +288,12 @@
 							{if isset($_SESSION['id_utilisateur'])}
 								<!-- à afficher seulement si le membre est connecté et ne participe pas à la séance -->
 								{if $seance.A_Reserver == false}
-									<!-- au clic du bouton, le membre doit être ajouté à la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation, il faudra peut-être intégrer la redirection dans le Modal?)-->
-									<a class="btn btn-primary shadow-none btn-reserver" href="?action=planning&id_reservation=2" data-toggle="modal" data-target="#confirmation-reservation">RESERVER</a>
+									<!-- au clic du bouton, le membre doit être ajouté à la liste des participants, et la page devrait se recharger. data-toggle="modal"  (à voir comment ça se comporte avec le Modal de confirmation, il faudra peut-être intégrer la redirection dans le Modal?)-->
+									<a class="btn btn-primary shadow-none btn-reserver" href="?action=planning&id_reservation=2" data-target="#confirmation-reservation">RESERVER</a>
 								{else}
 									<!-- à afficher seulement si le membre est connecté et est un participant de la séance -->
-									<!-- au clic du bouton, le membre doit être retiré de la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation d'annulation, il faudra peut-être intégrer la redirection dans le Modal?)-->
-									<a class="btn btn-primary shadow-none btn-reserver" href="?action=planning&id_annuler=2" data-toggle="modal" data-target="#confirmation-annulation">ANNULER</a>
+									<!-- au clic du bouton, le membre doit être retiré de la liste des participants, et la page devrait se recharger. data-toggle="modal" (à voir comment ça se comporte avec le Modal de confirmation d'annulation, il faudra peut-être intégrer la redirection dans le Modal?)-->
+									<a class="btn btn-primary shadow-none btn-reserver" href="?action=planning&id_annuler=2" data-target="#confirmation-annulation">ANNULER</a>
 								{/if}
 							{else}
 
