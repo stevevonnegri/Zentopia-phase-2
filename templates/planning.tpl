@@ -335,7 +335,7 @@
 
 						      		<div class="modal-body">
 
-						        		Votre séance a bien été réservée. Vous allez bientôt recevoir un mail de confirmation.
+						        		<p>Votre séance a bien été réservée. Vous allez bientôt recevoir un mail de confirmation.</p>
 
 						      		</div>
 
@@ -387,6 +387,18 @@
 						  	</div>
 
 						</div> <!-- fin div modal -->
+
+						{if isset($confirmationReservation)}
+						<div>
+							<p>Votre séance a bien été réservée. Vous allez bientôt recevoir un mail de confirmation.</p>
+						</div>
+						{/if}
+
+						{if isset($confirmationAnnulation)}
+						<div>
+							<p>La réservation à cette séance a bien été annulée. Vous allez bientôt recevoir un mail de confirmation.</p>
+						</div>
+						{/if}
 
 					</div>
 			{/foreach} {* DEBUT LIGNE 237 *}
