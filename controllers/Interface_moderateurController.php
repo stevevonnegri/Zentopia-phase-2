@@ -302,7 +302,7 @@ if (isset($_GET['membres'])) {
 		}
 
 
-		elseif (!preg_match("#(0|\+33|0033)[1-9][0-9]{8}#", $_POST['telephone'])) {
+		elseif (!preg_match("#^(0|\+33|0033)[1-9][0-9]{8}$#", $_POST['telephone'])) {
 
 			$smarty->assign('champ_invalide', 'Le numéro de téléphone renseigné n\'est pas valide.');
 		

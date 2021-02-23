@@ -133,7 +133,19 @@ Découvrez notre pratique du yoga et de la méditation selon nos trois principes
 			<div class="row justify-content-center">
 
 				<div class="col col-md-11 col-lg-9 col-xl-6 text-center newsletter-homepage-titre">
-					Inscrivez-vous à notre newsletter pour ne rien louper de nos actus et recevez votre invitation à l'une de <span>nos séances découverte</span>* !
+					Inscrivez-vous à notre newsletter pour ne rien louper de nos actus et recevez votre invitation
+
+					{if isset($seance_decouverte)}
+
+						à l'une de <span>nos séances découverte</span>* 
+
+					{else}
+						
+						!
+
+					{/if}
+
+					 
 				</div>
 
 			</div>
@@ -142,18 +154,30 @@ Découvrez notre pratique du yoga et de la méditation selon nos trois principes
 				
 				<div class="col">
 					
-					<form class="form-inline justify-content-center">
+					<form method="post" class="form-inline justify-content-center">
 						
-						<input type="email" name="email" placeholder="saisir mon email">
+						<input type="email" name="email" placeholder="saisir mon email" required>
 						<button type="submit" class="btn btn-primary shadow-none">M'INSCRIRE</button>
 
+
+
 					</form>
+
+					{if isset($alert_user)}
+
+						<p class="error">{$alert_user}</p>
+
+					{/if}
 
 				</div>
 
 			</div>
 
+			{if isset($seance_decouverte)}
+
 			<p class="newsletter-homepage-disclaimer">*Offre valable pour tout.e nouvel.le élève s'inscrivant à la newsletter, sur l'une des six séances découvertes proposées par Zentopia sur l'année, plus d'informations dans le mail de confirmation de la newsletter.</p>
+
+			{/if}
 
 		</div>
 

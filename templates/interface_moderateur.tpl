@@ -245,12 +245,6 @@
 
 
 
-
-
-
-
-
-
 						<!-- BLOC RECHERCHER UN MEMBRE -->
 						<!-- apparaît si le modé/admin a cliqué sur "Rechercher un membre"-->
 						{if isset($rechercher_membre)}
