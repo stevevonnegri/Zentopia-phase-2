@@ -150,7 +150,7 @@
      *
      * @return     un tableau avec toute les information utile sur les seance demander.
      */
-    public function getSeance($date = NULL, $filtre = "") {
+    public function getSeance($filtre = "", $date = NULL) {
         //ajoute un filtre selon le type de seance si option utiliser
         $where = "";
         if ($filtre != "") {
@@ -219,7 +219,7 @@
 
     
     public function getListParticipant() {
-
+        
     }
 
 
@@ -230,21 +230,24 @@
      */
     public function getReservationById_SESSION() {
         //modification de la varible de session pour faire des TEST
-        $save = $_SESSION['id_utilisateur'];
-        $_SESSION['id_utilisateur'] = 7;
-
-
-        $sql = $this->_bdd->query('SELECT id_seance FROM reserver WHERE id_utilisateur = '.$_SESSION['id_utilisateur']);
+        //$save = $_SESSION['id_utilisateur'];
+        //$_SESSION['id_utilisateur'] = 7;
         
         $lists = [];
-        while ($donnees = $sql->fetchColumn()) {
-            array_push($lists, $donnees);
+
+        if (isset($_SESSION['id_utilisateur'])) {
+            $sql = $this->_bdd->query('SELECT id_seance FROM reserver WHERE id_utilisateur = '.$_SESSION['id_utilisateur']);
+            
+            while ($donnees = $sql->fetchColumn()) {
+                array_push($lists, $donnees);
+            }
+
         }
 
-        $_SESSION['id_utilisateur'] = $save;
+            return $lists;
 
+        //$_SESSION['id_utilisateur'] = $save;
 
-        return $lists;
     }
 
 

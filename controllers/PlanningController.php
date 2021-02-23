@@ -27,9 +27,9 @@ $seance = new Seance($dbh);
 	//recuperation des information dans la BDD
 		//pour test avant le jour J, creation de la bonne date :
 
-		$BonneDate  = mktime(0, 0, 0, date("m")  , date("d")+9, date("Y"));
+		$BonneDate  = mktime(0, 0, 0, date("m")  , date("d")+5, date("Y"));
 
-		$seances = $seance->getSeance($BonneDate, $filtre);
+		$seances = $seance->getSeance($filtre, $BonneDate);
 
 	//envoie des information a smarty
 		$smarty->assign('seances', $seances);
@@ -42,6 +42,19 @@ $seance = new Seance($dbh);
 
 $seance_reservation = new Seance($dbh);
 $Type_de_cours_Reservation = new Type_de_cours($dbh);
+
+//affiche le message de confirmation de reservation.
+if (isset($_GET['confirmationReservation'])) {
+    //$smarty->assign('confirmationReservation', $_GET['confirmationReservation']);
+    $smarty->assign('confirmationReservation', '<script>alert(\'Votre séance a bien été réservée. Vous allez bientôt recevoir un mail de confirmation.\')</script>');
+}
+
+//affiche le message de confirmation de l'annulation.
+if (isset($_GET['confirmationAnnulation'])) {
+    //$smarty->assign('confirmationReservation', $_GET['confirmationReservation']);
+    $smarty->assign('confirmationAnnulation', '<script>alert(\'La réservation à cette séance a bien été annulée. Vous allez bientôt recevoir un mail de confirmation.\')</script>');
+}
+
 
 //Reserver une seance
 if(isset($_GET['id_reservation'])) {
@@ -61,8 +74,7 @@ if(isset($_GET['id_reservation'])) {
                 $data['id_seance'] = $_GET['id_reservation'];
                 $data['id_utilisateur'] = $_SESSION['id_utilisateur'];
                 $seance_reservation->AddReservation($data);
-                $smarty->assign('confirmationReservation', 'true');
-                echo ('<script>document.location.href="?action=planning"</script>');
+                echo ('<script>document.location.href="?action=planning&confirmationReservation=true"</script>');
                 
             } else {
                 //Renvoie une erreur smarty pour informer que la seance est pleine
@@ -86,8 +98,7 @@ if(isset($_GET['id_annuler'])) {
         $data['id_utilisateur'] = $_SESSION['id_utilisateur'];
         $seance_reservation->DeleteSeance($data);
 
-        $smarty->assign('confirmationAnnulation', 'true');
-        echo ('<script>document.location.href="?action=planning"</script>');
+        echo ('<script>document.location.href="?action=planning&confirmationAnnulation=true"</script>');
 
     } else{
     //Il faut se connecter pour annuler un cours

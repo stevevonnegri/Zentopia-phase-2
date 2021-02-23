@@ -234,6 +234,20 @@
 
 			{assign var=date value=1}
 
+			<!--affichage d'une alert pour la resa et l'annulation d'une seance-->
+			{if isset($confirmationReservation)}
+				{$confirmationReservation}
+			{/if}
+			{if isset($confirmationAnnulation)}
+				{$confirmationAnnulation}
+			{/if}
+			{if isset($seancePleine)}
+				{$seancePleine}
+			{/if}
+			{if isset($seanceDejaReserver)}
+				{$seanceDejaReserver}
+			{/if}
+
 			{foreach from=$seances item=seance} {*FIN LIGNE 661 *}
 					
 				{if $date != $seance.date_seance}
@@ -314,46 +328,33 @@
 						</div>
 
 
-						{if isset($confirmationReservation)}
-							<div>
-								<p>Votre séance a bien été réservée. Vous allez bientôt recevoir un mail de confirmation.</p>
-							</div>
-						{/if}
-
-						{if isset($confirmationAnnulation)}
-							<div>
-								<p>La réservation à cette séance a bien été annulée. Vous allez bientôt recevoir un mail de confirmation.</p>
-							</div>
-						{/if}
-
 					</div>
-			
 
 				<!-- à afficher seulement pour les admins OU le prof concerné par le cours, s'il est modérateur -->
 				<div class="admin-seance row justify-content-center background-light hidden" id="admin-seance-{$seance.id_seance}">
 					
 					<div class="col-12 col-lg-4">
 						
-						<button class="btn btn-primary shadow-none btn-admin" onclick="showElement('liste-participants');">VOIR LES PARTICIPANTS</button>
+						<button class="btn btn-primary shadow-none btn-admin" onclick="showElement('liste-participants-{$seance.id_seance}');">VOIR LES PARTICIPANTS</button>
 
 					</div>
 
 					<div class="col-12 col-lg-4">
 						
-						<button class="btn btn-primary shadow-none btn-admin" onclick="showElement('modif-seance');">MODIFIER LA SEANCE</button>
+						<button class="btn btn-primary shadow-none btn-admin" onclick="showElement('modif-seance-{$seance.id_seance}');">MODIFIER LA SEANCE</button>
 
 					</div>
 
 					<div class="col-12 col-lg-4">
 						
-						<button class="btn btn-primary shadow-none btn-admin" onclick="showElement('annuler-seance');">ANNULER LA SEANCE</button>
+						<button class="btn btn-primary shadow-none btn-admin" onclick="showElement('annuler-seance-{$seance.id_seance}');">ANNULER LA SEANCE</button>
 
 					</div>
 
 				</div>
 
 				<!-- à afficher au clic de l'admin sur le bouton "Voir les participants" -->
-				<div class="row hidden background-light" id="liste-participants">
+				<div class="row hidden background-light" id="liste-participants-{$seance.id_seance}">
 
 					<div class="col-12">
 						
@@ -482,7 +483,7 @@
 
 
 				<!-- à afficher au clic de l'admin sur le bouton "Modifier la séance" -->
-				<div class="row hidden background-light align-items-center justify-content-around" id="modif-seance">
+				<div class="row hidden background-light align-items-center justify-content-around" id="modif-seance-{$seance.id_seance}">
 					
 					<!-- form à pré-remplir avec les informations de la séance concernée -->
 					<form method="post" action="">
@@ -559,7 +560,7 @@
 
 
 				<!-- à afficher au clic de l'admin sur le bouton "Annuler la séance" -->
-				<div class="row hidden background-light align-items-center justify-content-start" id="annuler-seance">
+				<div class="row hidden background-light align-items-center justify-content-start" id="annuler-seance-{$seance.id_seance}">
 
 					<div class="col-12 col-sm-6">
 						
