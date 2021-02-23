@@ -1,12 +1,4 @@
 <?php
-/*if ($_GET['id_reservation'] == 2) {
-	echo('COUCOU');
-	die;
-}*/
-//affichage des sceaance de la semaine
-	//on recupere la date A:M:J
-		
-	//recuperation des information dans la BDD
 		$seance = new Seance($dbh);
 
 		//pour test avant le jour J, creation de la bonne date :
@@ -33,18 +25,10 @@ if(isset($_GET['id_reservation'])) {
     if(isset($_SESSION['id_utilisateur'])) {
 
         $donnees = $seance_reservation->getItemFromReserver($_GET['id_reservation'], 'id_seance');
-        var_dump($donnees);
-        echo '<br/>';
-        var_dump($_SESSION['id_utilisateur']);
-        echo '<br/>';
-        var_dump(in_array($_SESSION['id_utilisateur'], $donnees));
 
         //Verifier que l'on peut reserve qu'une seule fois la seance
         if(in_array($_SESSION['id_utilisateur'], $donnees) == false){
             
-            //var_dump($seance_reservation->CountParticipantSeance($_GET['id_reservation']));
-            //var_dump($Type_de_cours_Reservation->getItemForSeance($_GET['id_reservation']));
-            echo'<br/>test 152';
             //On verifie que la seance selectionner est encore de la place
             if($seance_reservation->CountParticipantSeance($_GET['id_reservation']) < $Type_de_cours_Reservation->getItemForSeance($_GET['id_reservation'])) {
 
@@ -52,7 +36,9 @@ if(isset($_GET['id_reservation'])) {
                 $data['id_seance'] = $_GET['id_reservation'];
                 $data['id_utilisateur'] = $_SESSION['id_utilisateur'];
                 $seance_reservation->AddReservation($data);
-                echo 'test';
+                $smarty->assign('confirmationConfirmation', 'true');
+                echo ('<script>document.location.href="?action=planning"</script>');
+
                 
             } else {
                 //Renvoie une erreur smarty pour informer que la seance est pleine
@@ -76,6 +62,7 @@ if(isset($_GET['id_annuler'])) {
         $data['id_utilisateur'] = $_SESSION['id_utilisateur'];
         $seance_reservation->DeleteSeance($data);
 
+        $smarty->assign('confirmationAnnulation', 'true');
         echo ('<script>document.location.href="?action=planning"</script>');
 
     } else{

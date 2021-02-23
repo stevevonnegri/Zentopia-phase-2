@@ -255,9 +255,11 @@
     public function getItemFromReserver($id, $colonne) {
 
         $sql =$this->_bdd->query('SELECT id_utilisateur FROM reserver WHERE '.$colonne.' = "'.$id.'"');
-        while($donnees = $sql->fetch(PDO::FETCH_ASSOC)){
-			$lists[] = $donnees;
-		}
+        
+        $lists = [];
+        while ($donnees = $sql->fetchColumn()) {
+            array_push($lists, $donnees);
+        }
 		return $lists; 
     }
 
