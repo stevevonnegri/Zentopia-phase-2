@@ -86,16 +86,14 @@
 					<!-- à afficher seulement pour les admins !-->
 					<div class="col-12 col-md-5 col-xl-3 order-3 order-md-2 text-center">
 						
-						{if $_SESSION['rang'] == admin}
-							<!-- affiche le formulaire d'ajout de cours au clic -->
-							<button class="btn btn-primary btn-admin shadow-none ajouter-seance-btn" onclick="showElement('ajouter-seance');">+ AJOUTER UN COURS</button>
-						{/if}
+						<!-- affiche le formulaire d'ajout de cours au clic -->
+						<button class="btn btn-primary btn-admin shadow-none ajouter-seance-btn" onclick="showElement('ajouter-seance');">+ AJOUTER UN COURS</button>
 
 					</div>
 
 					<div class="col text-right order-2 order-md-3">
 						
-						<a href="?action=espace_personnel">Mon compte</a>
+						<a href="espace-personnel.php">Mon compte</a>
 
 					</div>
 
@@ -181,15 +179,15 @@
 					<div class="col-9 col-lg-3">
 						
 						<!-- optionnel: implémenter une règle 'active' (avec border-bottom qui souligne) pour indiquer où on se trouve dans les pages du planning (SEMAINE ACTUELLE + Page "1" ou Page "2" ou Page "3") -->
-						<a href="?action=planning&page=1" class="semaine-actuelle {if $page == '1'}active{/if}" >SEMAINE ACTUELLE</a>
+						<a href="#" class="semaine-actuelle">SEMAINE ACTUELLE</a>
 
 					</div>
 
 					<div class="col-3 col-lg-1">
 						
-						<a href="?action=planning&page=1" class="{if $page == '1'}active{/if}">1</a>
-						<a href="?action=planning&page=2" class="{if $page == '2'}active{/if}">2</a>
-						<a href="?action=planning&page=3" class="{if $page == '3'}active{/if}">3</a>
+						<a href="#">1</a>
+						<a href="#">2</a>
+						<a href="#">3</a>
 
 					</div>
 
@@ -236,37 +234,27 @@
 
 			{foreach from=$seances item=seance} {*FIN LIGNE 661 *}
 					
-				{if $date != $seance.date_seance}
-
-					<div class="row background-jour">
+					<div class="col">
 						
-						<div class="col">
-							
-							<p>{$seance.date_seance|date_format:"%A %e %B"|utf8_encode}</p>
-
-						</div>
+						<p>lundi 25 janvier</p>
 
 					</div>
 
-				{/if}
+				</div>
 
-				{assign var=date value=$seance.date_seance}
+				<div class="row background-light align-items-center seance-element">
 					
-					<div class="row background-light align-items-center seance-element">
+					<div class="col-12 col-sm-6 col-lg text-center col-below">
 						
-						<div class="col-12 col-sm-6 col-lg text-center col-below">
-							
-							<p>{$seance.heure_debut_seance|date_format:"%Hh%M"|utf8_encode} - {$seance.heure_fin_seance|date_format:"%Hh%M"|utf8_encode}</p>
+						<p>8h30 - 10h</p>
 
-						</div>
+					</div>
 
-						<div class="col-12 col-sm-6 col-lg text-center col-below">
-							
-							<p>{$seance.nom_type_de_cours|upper}, avec {$seance.prenom_utilisateur|capitalize} <br/>
-								<!-- ajouter l'ancre menant au type de cours à l'url -->
-								<a href="?action=enseignement" class="voir-description">> voir description</a> </p>
-
-						</div>
+					<div class="col-12 col-sm-6 col-lg text-center col-below">
+						
+						<p>SLOW YOGA, avec Marie <br/>
+							<!-- ajouter l'ancre menant au type de cours à l'url -->
+							<a href="enseignement.php" class="voir-description">> voir description</a> </p>
 
 						<div class="col-12 col-sm-6 col-lg text-center col-below">
 							
@@ -278,7 +266,9 @@
 								{/if}
 							</p>
 
-						</div>
+					<div class="col-12 col-sm-6 col-lg text-center col-below">
+						
+						<p class="places-dispo">places disponibles</p>
 
 						<div class="col-12 col-sm-6 col-lg text-center col-below">
 							{if isset($_SESSION['id_utilisateur'])}
@@ -298,95 +288,98 @@
 
 							{else}
 
-								<!-- à afficher seulement si le membre n'est pas connecté/inscrit -->
-								<a href="?action=connexion" class="btn btn-primary shadow-none btn-reserver">SE CONNECTER</a>
+					<div class="col-12 col-sm-6 col-lg text-center col-below">
 
-							{/if}
+						<!-- à afficher seulement si le membre est connecté et ne participe pas à la séance -->
+						<!-- au clic du bouton, le membre doit être ajouté à la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation, il faudra peut-être intégrer la redirection dans le Modal?)-->
+						<button class="btn btn-primary shadow-none btn-reserver" data-toggle="modal" data-target="#confirmation-reservation">RESERVER</button>
 
-							<!-- à afficher seulement pour les admins et les profs/modé dont c'est le cours FAIT POUR ADMIN, a faire TODO for modo-->
+						<!-- à afficher seulement si le membre est connecté et est un participant de la séance -->
+						<!-- au clic du bouton, le membre doit être retiré de la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation d'annulation, il faudra peut-être intégrer la redirection dans le Modal?)-->
+						<!--<button class="btn btn-primary shadow-none btn-reserver" data-toggle="modal" data-target="#confirmation-annulation">ANNULER</button>-->
 
-							{if $_SESSION['rang'] == admin OR $_SESSION['id_utilisateur'] == $seance.id_utilisateur}
+						<!-- à afficher seulement si le membre n'est pas connecté/inscrit -->
+						<!--<a href="connexion.php" class="btn btn-primary shadow-none btn-reserver">SE CONNECTER</a>-->
 
-								<button class="btn btn-primary btn-admin shadow-none" onclick="showElement('admin-seance');"><i class="fas fa-user-cog"></i></button>
+						<!-- à afficher seulement pour les admins et les profs/modé dont c'est le cours -->
+						<button class="btn btn-primary btn-admin shadow-none" onclick="showElement('admin-seance');"><i class="fas fa-user-cog"></i></button>
 
-							{/if}
-
-						</div>
+					</div>
 
 
-						<!-- Modal de confirmation de réservation à afficher lors que le membre clique sur le bouton RESERVER -->
-						<div class="modal fade" id="confirmation-reservation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-						  
-							<div class="modal-dialog modal-dialog-centered" role="document">
+					<!-- Modal de confirmation de réservation à afficher lors que le membre clique sur le bouton RESERVER -->
+					<div class="modal fade" id="confirmation-reservation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					  
+						<div class="modal-dialog modal-dialog-centered" role="document">
 
-						    	<div class="modal-content">
+					    	<div class="modal-content">
 
-						    		<div class="modal-header">
+					    		<div class="modal-header">
 
-						        		<h5 class="modal-title" id="exampleModalLongTitle">Confirmation de réservation</h5>
+					        		<h5 class="modal-title" id="exampleModalLongTitle">Confirmation de réservation</h5>
 
-						        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 
-						          			<span aria-hidden="true">&times;</span>
+					          			<span aria-hidden="true">&times;</span>
 
-						        		</button>
+					        		</button>
 
-						      		</div>
+					      		</div>
 
-						      		<div class="modal-body">
+					      		<div class="modal-body">
 
 						        		<p>Votre séance a bien été réservée. Vous allez bientôt recevoir un mail de confirmation.</p>
 
-						      		</div>
+					      		<div class="modal-footer">
 
-						      		<div class="modal-footer">
+					        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
 
-						        		<a href="?action=planning#reservation" type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</a>
+					      		</div>
 
-						      		</div>
+					    	</div>
 
-						    	</div>
+					  	</div>
 
-						  	</div>
+					</div> <!-- fin div modal -->
 
-						</div> <!-- fin div modal -->
+					<!-- Modal de confirmation d'annulation à afficher lors que le membre clique sur le bouton ANNULER sur une séance où il participe -->
+					<div class="modal fade" id="confirmation-annulation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					  
+						<div class="modal-dialog modal-dialog-centered" role="document">
 
-						<!-- Modal de confirmation d'annulation à afficher lors que le membre clique sur le bouton ANNULER sur une séance où il participe -->
-						<div class="modal fade" id="confirmation-annulation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-						  
-							<div class="modal-dialog modal-dialog-centered" role="document">
+					    	<div class="modal-content">
 
-						    	<div class="modal-content">
+					    		<div class="modal-header">
 
-						    		<div class="modal-header">
+					        		<h5 class="modal-title" id="exampleModalLongTitle">Confirmation d'annulation</h5>
 
-						        		<h5 class="modal-title" id="exampleModalLongTitle">Confirmation d'annulation</h5>
+					        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 
-						        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          			<span aria-hidden="true">&times;</span>
 
-						          			<span aria-hidden="true">&times;</span>
+					        		</button>
 
-						        		</button>
+					      		</div>
 
-						      		</div>
+					      		<div class="modal-body">
 
-						      		<div class="modal-body">
+					        		La réservation à cette séance a bien été annulée. Vous allez bientôt recevoir un mail de confirmation.
 
-						        		La réservation à cette séance a bien été annulée. Vous allez bientôt recevoir un mail de confirmation.
+					      		</div>
 
-						      		</div>
+					      		<div class="modal-footer">
 
-						      		<div class="modal-footer">
+					        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
 
-						        		<a href="?action=planning#reservation" type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</a>
+					      		</div>
 
-						      		</div>
+					    	</div>
 
-						    	</div>
+					  	</div>
 
-						  	</div>
+					</div> <!-- fin div modal -->
 
-						</div> <!-- fin div modal -->
+				</div>
 
 						{if isset($confirmationReservation)}
 						<div>
@@ -673,7 +666,7 @@
 
 					<div class="col text-right">
 						
-						<a href="?action=espace_personnel">Mon compte</a>
+						<a href="espace-personnel.php">Mon compte</a>
 
 					</div>
 

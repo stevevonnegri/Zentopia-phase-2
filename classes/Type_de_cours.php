@@ -5,7 +5,7 @@
     protected $_nom_type_de_cours;
     protected $_description_type_de_cours;
     protected $_categorie_type_de_cours;
-    protected $_nombre_de_place;
+    protected $_nombre_de_places;
     protected $_image_type_de_cours;
     protected $_icone_type_de_cours;
 
@@ -25,8 +25,8 @@
     public function setCategorie_type_de_cours($categorie){
         $this->_categorie_type_de_cours = $categorie;
     }
-    public function setNombre_de_place(int $nombreDePlace){
-        $this->_nombre_de_place = $nombreDePlace;
+    public function setNombre_de_places(int $nombreDePlace){
+        $this->_nombre_de_places = $nombreDePlace;
     }
     public function setImage_type_de_cours($image){
         $this->_image_type_de_cours = $image;
@@ -50,14 +50,33 @@
     public function getCategorie_type_de_cours(){
         return $this->_categorie_type_de_cours;
     }
-    public function getNombre_de_place(){
-        return $this->_nombre_de_place;
+    public function getNombre_de_places(){
+        return $this->_nombre_de_places;
     }
     public function getImage_type_de_cours(){
         return $this->_image_type_de_cours;
     }
     public function getIcone_type_de_cours(){
         return $this->_icone_type_de_cours;
+    }
+
+    /**
+     * Cherhce le nombre de place d'une seance par rapport a son type de cours
+     * 
+     * @param id l'id d'une seance
+     * 
+     * @return sql renvoie le nombre de place pour la seance
+     */
+    public function getItemForSeance($id) {
+
+
+        $sql = $this->_bdd->query('SELECT nombre_de_places FROM type_de_cours NATURAL JOIN seance where id_seance = '.$id);
+		//test si le SELECT a recupere des info ou non
+		if ($sql == false) {
+			return false;
+		}        
+        return $sql->fetchColumn();
+
     }
 
 }

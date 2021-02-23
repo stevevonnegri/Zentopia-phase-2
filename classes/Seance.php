@@ -109,6 +109,40 @@
 
     }
 
+    
+    /**
+     * Ajoute une Reservation dans la table reserve
+     * 
+     * @param objet est un tableau qui doit avoir l'id d'une seance et l'id d'un utilisateur pour fonctioner
+     */
+    public function AddReservation($objet){
+		$champs = '';
+		$valeurs = '';
+		foreach($objet as $key => $value){
+			if($value){
+				$champs .= $key.' , ';
+				$valeurs .= '"'.$value.'" , ';
+			}
+		}
+		$valeurs = substr($valeurs,0,-2);
+		$champs = substr($champs,0,-2);
+
+		$sql = $this->_bdd->prepare('INSERT INTO reserver ('.$champs.') VALUES ('.$valeurs.')');
+        $sql->execute();
+	}
+
+    /**
+	* fonction suppriment un élément d'une BDD selon un ID et un nom de colonne.
+	*
+	*@param      data un tableau l'id seance et l'id utilisateur
+	*
+	**/
+	public function DeleteSeance($data){
+
+		$this->_bdd->exec('DELETE FROM reserver WHERE id_seance = '.$data['id_seance'].' AND id_utilisateur = '.$data['id_utilisateur']);
+        
+	}
+
     /**
      * Renvoie les seance depuis la date envoyer, jusqu'au dimanche suivant
      *
@@ -215,6 +249,38 @@
 
         $sql = $this->_bdd->query('SELECT nom_type_de_cours FROM type_de_cours');
 
+        $lists = [];
+        while ($donnees = $sql->fetchColumn()) {
+            array_push($lists, $donnees);
+        }
+
+        return $lists;
+
+    }
+    /**
+     * compte le nombre de participant a une seance
+     * 
+     * @param id l'id de la seance
+     * 
+     * @return sql return le nombre de participant à cette seance
+     */
+    public function CountParticipantSeance($id) {
+        $sql = $this->_bdd->query('SELECT count(*) FROM reserver WHERE id_'.$this->_table.' = '.$id);
+        return $sql->fetchColumn();
+    }
+
+    
+    /**
+     * compte le nombre de participant a une seance
+     * 
+     * @param id l'id de la seance
+     * 
+     * @return lists return un tableau avec l'id_utilisateur des membres inscrits sur cette seance 
+     */
+    public function getItemFromReserver($id, $colonne) {
+
+        $sql =$this->_bdd->query('SELECT id_utilisateur FROM reserver WHERE '.$colonne.' = "'.$id.'"');
+        
         $lists = [];
         while ($donnees = $sql->fetchColumn()) {
             array_push($lists, $donnees);
