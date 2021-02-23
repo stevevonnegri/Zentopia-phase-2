@@ -40,7 +40,6 @@ $seance = new Seance($dbh);
         
         
 
-//Sert a afficher une seance de la bdd pour dev le module
 $seance_reservation = new Seance($dbh);
 $Type_de_cours_Reservation = new Type_de_cours($dbh);
 
@@ -62,16 +61,15 @@ if(isset($_GET['id_reservation'])) {
                 $data['id_seance'] = $_GET['id_reservation'];
                 $data['id_utilisateur'] = $_SESSION['id_utilisateur'];
                 $seance_reservation->AddReservation($data);
-                $smarty->assign('confirmationConfirmation', 'true');
+                $smarty->assign('confirmationReservation', 'true');
                 echo ('<script>document.location.href="?action=planning"</script>');
-
                 
             } else {
                 //Renvoie une erreur smarty pour informer que la seance est pleine
-                $smarty->assign('seancePleine', 'Seance remplie');
+                $smarty->assign('seancePleine', '<script>alert(\'La seance que vous avez choisi est deja pleine\')</script>');
             }
         } else{
-            $smarty->assign('seanceDejaReserver', 'Seance remplie');
+            $smarty->assign('seanceDejaReserver', '<script>alert(\'Vous avez deja reserve cette seance, à bientot\')</script>');
         }
     } else {
         //Il faut se connecter pour reserve un cours
