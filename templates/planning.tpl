@@ -234,7 +234,7 @@
 
 			{assign var=date value=1}
 
-			{foreach from=$seances item=seance} {*FIN LIGNE 380 *}
+			{foreach from=$seances item=seance} {*FIN LIGNE 661 *}
 					
 				{if $date != $seance.date_seance}
 
@@ -401,7 +401,7 @@
 						{/if}
 
 					</div>
-			{/foreach} {* DEBUT LIGNE 237 *}
+			
 
 				<!-- à afficher seulement pour les admins OU le prof concerné par le cours, s'il est modérateur -->
 				<div class="admin-seance row justify-content-center background-light hidden" id="admin-seance">
@@ -658,7 +658,7 @@
 					
 
 				</div>
-
+			{/foreach} {* DEBUT LIGNE 237 *}
 
 				<!-- fin affichage dynamique du planning -->
 
