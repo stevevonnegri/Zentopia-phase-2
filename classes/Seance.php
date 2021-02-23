@@ -208,12 +208,20 @@
             //verifie si le membre connecter a deja reserver la seance et l'ajoute au tableau $données
             $donnees['A_Reserver'] = in_array($donnees['id_seance'], $this->getReservationById_SESSION());
 
+            //ajouter la liste des participant au cours
+
             array_push($lists, $donnees);
 
         }
 
         return $lists;
     }
+
+    
+    public function getListParticipant() {
+
+    }
+
 
     /**
      * recupere les id des seance reserver par le membre connecter
@@ -271,9 +279,9 @@
 
     
     /**
-     * compte le nombre de participant a une seance
+     * cherche les seance a laquel participe un utilisateur
      * 
-     * @param id l'id de la seance
+     * @param id l'id d'une colone et son nom dans la BDD 
      * 
      * @return lists return un tableau avec l'id_utilisateur des membres inscrits sur cette seance 
      */
@@ -289,6 +297,5 @@
         return $lists;
 
     }
-
 
 }

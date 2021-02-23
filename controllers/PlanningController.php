@@ -34,7 +34,11 @@ $seance = new Seance($dbh);
 	//envoie des information a smarty
 		$smarty->assign('seances', $seances);
 
-	
+	//Partie Admin Participant
+        //afficher la liste des participant
+        
+        
+        
 
 //Sert a afficher une seance de la bdd pour dev le module
 $seance_reservation = new Seance($dbh);
@@ -64,10 +68,10 @@ if(isset($_GET['id_reservation'])) {
                 
             } else {
                 //Renvoie une erreur smarty pour informer que la seance est pleine
-                $smarty->assign('seancePleine', 'Seance rempli');
+                $smarty->assign('seancePleine', 'Seance remplie');
             }
         } else{
-            $smarty->assign('seanceDejaReserver', 'Seance rempli');
+            $smarty->assign('seanceDejaReserver', 'Seance remplie');
         }
     } else {
         //Il faut se connecter pour reserve un cours
@@ -92,8 +96,7 @@ if(isset($_GET['id_annuler'])) {
     echo ('<script>document.location.href="?action=connexion"</script>');
     }
 }
-
-
+    
 //ajoute une variable pour determiner la partie "active" de la navbar.
 $smarty->assign('active', 'les_cours');
 
