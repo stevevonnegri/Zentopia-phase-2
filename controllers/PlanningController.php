@@ -47,15 +47,15 @@ $seance = new Seance($dbh);
         
             //onclick admin-seance
             $onclick_admin_seance = 
-            '<script>showElement("admin-seance-'.$_POST['id_seance'].'")</script';
+            '<script>showElement("admin-seance-'.$_POST['id_seance'].'");</script>';
             
             //onclick liste-participants
             $onclick_liste_participants = 
-            '<script>showElement("liste-participants-'.$_POST['id_seance'].'")</script';
+            '<script>showElement("liste-participants-'.$_POST['id_seance'].'");</script>';
 
             //onclick ajouter-participant
             $onclick_ajouter_participant = 
-            '<script>showElement("ajouter-participant-'.$_POST['id_seance'].'")</script';
+            '<script>showElement("ajouter-participant-'.$_POST['id_seance'].'");</script>';
 
         //on replace la personne au bon endroit sur la page et on envoie les variables a smarty
             //TODO les 2 dernier script s'affiche en claire et le 1er n'a pas l'air de marcher.
