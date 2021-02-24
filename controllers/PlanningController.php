@@ -14,6 +14,70 @@ $seance = new Seance($dbh);
 	//envoie de $page a smarty
 	$smarty->assign('page', $page);
 
+
+//recherche des membre pour les ajouter a une seance
+    if (isset($_POST['ajouter_participant'])) {
+        
+        //on recupere le contenu des champs dans des variable
+
+        if ($_POST['email_search'] == '') {
+
+                $email = NULL;
+
+            } else {
+
+                $email = $_POST['email_search'];
+            }
+
+        if ($_POST['tel_search'] == '') {
+
+                $tel = NULL;
+
+            } else {
+
+                $tel = $_POST['tel_search'];
+            }
+
+        //on envoie la requete sql avec nos variables
+            $user = new Utilisateur($dbh);
+
+            $users = $user->getRechercheMembre(NULL, NULL, $tel, NULL, $email);
+
+        //on ecrit les scripts et on les met dans des variables
+        
+            //onclick admin-seance
+            $onclick_admin_seance = 
+            '<script>showElement("admin-seance-'.$_POST['id_seance'].'")</script';
+            
+            //onclick liste-participants
+            $onclick_liste_participants = 
+            '<script>showElement("liste-participants-'.$_POST['id_seance'].'")</script';
+
+            //onclick ajouter-participant
+            $onclick_ajouter_participant = 
+            '<script>showElement("ajouter-participant-'.$_POST['id_seance'].'")</script';
+
+        //on replace la personne au bon endroit sur la page et on envoie les variables a smarty
+            //TODO les 2 dernier script s'affiche en claire et le 1er n'a pas l'air de marcher.
+            $smarty->assign(array(
+                'users' => $users,
+                'onclick_admin_seance' => $onclick_admin_seance,
+                'onclick_liste_participants' => $onclick_liste_participants,
+                'onclick_ajouter_participant' => $onclick_ajouter_participant
+            ));
+    }
+
+//suppresion d'un participant a une seance
+    //verifie les id dans l'url
+    if (isset($_GET['delete_seance_du_participant']) && isset($_GET['delete_participant_a_une_seance'])) {
+        //on transphorme les 2 valeur de GET en type number
+        $id_utilisateur = intval($_GET['delete_participant_a_une_seance']);
+        $id_seance = intval($_GET['delete_seance_du_participant']);
+
+        $seance->deleteParticipant($id_seance, $id_utilisateur);
+    }
+//ajoute un participant a une seance.
+
 //affichage des seance de la semaine
 	//teste si un filtre est actif ou non
 	$filtre = "";
@@ -78,7 +142,7 @@ if(isset($_GET['id_reservation'])) {
                 
             } else {
                 //Renvoie une erreur smarty pour informer que la seance est pleine
-                $smarty->assign('seancePleine', '<script>alert(\'La seance que vous avez choisi est deja pleine\')</script>');
+                $smarty->assign('seancePleine', '<script>alert(\'La seance que vous avez choisie est deja pleine\')</script>');
             }
         } else{
             $smarty->assign('seanceDejaReserver', '<script>alert(\'Vous avez deja reserve cette seance, à bientot\')</script>');

@@ -266,7 +266,7 @@
 
 				{assign var=date value=$seance.date_seance}
 					
-					<div class="row background-light align-items-center seance-element">
+					<div class="row background-light align-items-center seance-element" id="id-seance-{$seance.id_seance}">
 						
 						<div class="col-12 col-sm-6 col-lg text-center col-below">
 							
@@ -368,26 +368,31 @@
 						<ul class="list-style-none">
 
 							<!-- bouton doit supprimer le participant de la séance -->
-							<li>Jordan Herth <a class="btn-link" href="?action=planning&delete_seance={$seance.id_seance}">Supprimer de la liste</a></li>
+							{foreach from=$seance.participants item=participant}
 
-							<li>Emilien Fuchs <a class="btn-link" href="?action=planning&delete_seance={$seance.id_seance}">Supprimer de la liste</a></li>
+								<li>{$participant.prenom_utilisateur|capitalize} {$participant.nom_utilisateur|upper} 
+									<a class="btn-link" href="?action=planning&delete_seance_du_participant={$seance.id_seance}&delete_participant_a_une_seance={$participant.id_utilisateur}">Supprimer de la liste</a>
+								</li>
+
+							{/foreach}
+
 						</ul>
 
 					</div>
 
 					<div class="col-12">
 						
-						<button class="btn-link" onclick="showElement('ajouter-participant');">+ Ajouter un participant</button>
+						<button class="btn-link" onclick="showElement('ajouter-participant-{$seance.id_seance}');">+ Ajouter un participant</button>
 
 					</div>
 
 
 					<!-- à afficher lorsque l'admin clique sur "Ajouter un participant" -->
-					<div class="col-12 hidden" id="ajouter-participant">
+					<div class="col-12 hidden" id="ajouter-participant-{$seance.id_seance}">
 
 						<div class="col-12 col-lg-6">
 						
-						<form method="post" action="" class="form-recherche">
+						<form method="POST" action="?action=planning#id-seance-{$seance.id_seance}" class="form-recherche">
 
 							<legend>Remplissez au moins un champ de recherche :</legend>
 
@@ -395,19 +400,26 @@
 								
 								<div class="col-12 col-md">
 									
-									<input type="email" name="email" placeholder="E-mail" class="form-control form-control-sm input-membre">
+									<input type="email" name="email_search" placeholder="E-mail" class="form-control form-control-sm input-membre">
 
 								</div>
 
 								<div class="col-12 col-md">
 									
-									<input type="tel" name="telephone" placeholder="Téléphone" class="form-control form-control-sm input-membre">
+									<input type="tel" name="tel_search" placeholder="Téléphone" class="form-control form-control-sm input-membre">
 
 								</div>
 
+								<div>
+									
+									<input type="number" name="id_seance" value="{$seance.id_seance}" hidden>
+
+								</div>
+
+
 								<div class="col-12 col-md col-btn">
 									
-									<button type="submit" class="btn btn-primary btn-reserver text-center">RECHERCHER</button>
+									<button name="ajouter_participant" type="submit" class="btn btn-primary btn-reserver text-center">RECHERCHER</button>
 
 								</div>
 
@@ -418,6 +430,10 @@
 
 
 						<!-- résultats de la recherche pour Ajouter un participant à la séance -->
+						{if isset($users)}
+
+						{foreach from=$users item=user}
+							
 						<div class="col-12 resultat-recherche">
 							
 							<p>Résultat de la recherche :</p>
@@ -432,13 +448,13 @@
 									
 									<div class="col-12 col-lg-6">
 										
-										<span>Nom :</span> Bironneau
+										<span>Nom :</span> {$user->getNom_utilisateur()|upper}
 
 									</div>
 
 									<div class="col-12 col-lg-6">
 										
-										<span>Prénom :</span> Anaïs
+										<span>Prénom :</span> {$user->getPrenom_utilisateur()|capitalize}
 
 									</div>
 
@@ -448,13 +464,13 @@
 									
 									<div class="col-12 col-lg-6">
 										
-										<span>E-mail :</span> monadressemail@gmail.com
+										<span>E-mail :</span> {$user->getEmail()}
 
 									</div>
 
 									<div class="col-12 col-lg-6">
 										
-										<span>Téléphone :</span> 0677777777
+										<span>Téléphone :</span> {$user->getTelephone()}
 
 									</div>
 
@@ -475,7 +491,8 @@
 							</div>
 
 						</div> <!-- fin div résultat de la recherche -->
-
+						{/foreach}
+						{/if}
 					</div> <!-- fin div "Ajouter un participant" -->
 
 				</div> <!-- fin div "Voir les participants" -->
@@ -613,6 +630,11 @@
 		<!-- Scroll top + footer -->
 		<!-- <?php include("footer.php"); ?> -->
 		{include file = 'footer.tpl'}
-
+		{if isset($users)}
+			<!--si la variable au dessus existe on lance les script d'affichage de la div-->
+			{$onclick_admin_seance}
+			{$onclick_liste_participants}
+			{$onclick_ajouter_participant}
+		{/if}
 	</body>
 </html>

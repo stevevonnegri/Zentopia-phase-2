@@ -208,6 +208,9 @@
             //verifie si le membre connecter a deja reserver la seance et l'ajoute au tableau $données
             $donnees['A_Reserver'] = in_array($donnees['id_seance'], $this->getReservationById_SESSION());
 
+            //on ajoute la liste des participant de chaque cours.
+            $donnees['participants'] = $this->getListParticipant($donnees['id_seance']);
+
             //ajouter la liste des participant au cours
 
             array_push($lists, $donnees);
@@ -217,9 +220,29 @@
         return $lists;
     }
 
-    
-    public function getListParticipant() {
-        
+    /**
+     *@param in id de seance.
+     *
+     * recupere la liste des nom et prenom et id des participant a un cours selon id_seance
+     * 
+     * @return un tableau associatif avec la liste les 3 valeur demander.
+     */
+    public function getListParticipant($id_seance) {
+
+        $sql = $this->_bdd->query('SELECT id_utilisateur, nom_utilisateur, prenom_utilisateur 
+            FROM reserver 
+            NATURAL JOIN utilisateur
+            WHERE id_seance = '.$id_seance.'
+            ');
+
+        $lists_participant = [];
+
+        while ($donnees = $sql->fetch(PDO::FETCH_ASSOC)) {
+                array_push($lists_participant, $donnees);
+            }
+       
+        return $lists_participant;
+
     }
 
 
@@ -233,18 +256,18 @@
         //$save = $_SESSION['id_utilisateur'];
         //$_SESSION['id_utilisateur'] = 7;
         
-        $lists = [];
-
+        $lists_id_seances = [];
+ 
         if (isset($_SESSION['id_utilisateur'])) {
             $sql = $this->_bdd->query('SELECT id_seance FROM reserver WHERE id_utilisateur = '.$_SESSION['id_utilisateur']);
             
             while ($donnees = $sql->fetchColumn()) {
-                array_push($lists, $donnees);
+                array_push($lists_id_seances, $donnees);
             }
 
+            return $lists_id_seances;
         }
 
-            return $lists;
 
         //$_SESSION['id_utilisateur'] = $save;
 
@@ -298,6 +321,22 @@
         }
 
         return $lists;
+
+    }
+
+    /**
+     * supprime un participant d'une seance en fonction de son id.
+     *
+     * @param      string  $id_seance       The identifier seance
+     * @param      string  $id_utilisateur  The identifier utilisateur
+     */
+    public function deleteParticipant($id_seance, $id_utilisateur) {
+
+        $sql = $this->_bdd->exec('DELETE 
+            FROM reserver 
+            WHERE id_seance ='.$id_seance.'
+            AND id_utilisateur ='.$id_utilisateur.'
+            ');
 
     }
 

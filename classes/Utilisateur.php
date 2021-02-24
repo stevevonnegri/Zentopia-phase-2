@@ -299,7 +299,7 @@
      * @return     un tableau de données contenant les infos du ou des membres correspondant à la recherche
      */
 
-    public function getRechercheMembre($nom = NULL, $prenom = NULL, $tel = NULL, $rang = NULL){
+    public function getRechercheMembre($nom = NULL, $prenom = NULL, $tel = NULL, $rang = NULL, $email = NULL){
 
         $lists = [];
         $where = '';
@@ -322,6 +322,11 @@
         if ($rang) {
             
             $where .= 'AND rang = "' .$rang. '" '; 
+        }
+
+        if ($email) {
+            
+            $where .= 'AND email = "' .$email. '" '; 
         }
 
 
