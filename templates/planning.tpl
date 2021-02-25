@@ -178,18 +178,18 @@
 
 				<div class="row background-light align-items-center planning-search">
 					
-					<div class="col-9 col-lg-3">
+					<div class="col-9 col-lg-3" id="semaine">
 						
 						<!-- optionnel: implémenter une règle 'active' (avec border-bottom qui souligne) pour indiquer où on se trouve dans les pages du planning (SEMAINE ACTUELLE + Page "1" ou Page "2" ou Page "3") -->
-						<a href="?action=planning&page=1" class="semaine-actuelle {if $page == '1'}active{/if}" >SEMAINE ACTUELLE</a>
+						<a href="?action=planning&page=1#semaine" class="semaine-actuelle {if $page == '1'}active{/if}" >SEMAINE ACTUELLE</a>
 
 					</div>
 
 					<div class="col-3 col-lg-1">
 						
-						<a href="?action=planning&page=1" class="{if $page == '1'}active{/if}">1</a>
-						<a href="?action=planning&page=2" class="{if $page == '2'}active{/if}">2</a>
-						<a href="?action=planning&page=3" class="{if $page == '3'}active{/if}">3</a>
+						<a href="?action=planning&page=1#semaine" class="{if $page == '1'}active{/if}">1</a>
+						<a href="?action=planning&page=2#semaine" class="{if $page == '2'}active{/if}">2</a>
+						<a href="?action=planning&page=3#semaine" class="{if $page == '3'}active{/if}">3</a>
 
 					</div>
 
@@ -303,7 +303,7 @@
 									<a href="?action=planning&id_annuler={$seance.id_seance}" class="btn btn-primary shadow-none btn-reserver">ANNULER</a>
 								{elseif ($seance.nombre_de_places-$seance.nbr_place_prise) == 0}
 									<!--Si la personne n'a pas reserver et que le cours est complet, affiche COMPLET-->
-									<button class="btn btn-primary shadow-none btn-reserver">COMPLET</button>
+									
 								{else}
 									<!-- à afficher seulement si le membre est connecté et ne participe pas à la séance -->
 									<!-- au clic du bouton, le membre doit être ajouté à la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation, il faudra peut-être intégrer la redirection dans le Modal?)-->
@@ -329,7 +329,7 @@
 
 
 					</div>
-
+				{if $_SESSION['rang'] == admin OR $_SESSION['id_utilisateur'] == $seance.id_utilisateur}
 				<!-- à afficher seulement pour les admins OU le prof concerné par le cours, s'il est modérateur -->
 				<div class="admin-seance row justify-content-center background-light hidden" id="admin-seance-{$seance.id_seance}">
 					
@@ -391,8 +391,8 @@
 					<div class="col-12 hidden" id="ajouter-participant-{$seance.id_seance}">
 
 						<div class="col-12 col-lg-6">
-						
-						<form method="POST" action="?action=planning#id-seance-{$seance.id_seance}" class="form-recherche">
+						{if isset($page)}{$page}{else}1{/if}
+						<form method="POST" action="?action=planning&page={if isset($page)}{$page}{else}1{/if}#id-seance-{$seance.id_seance}" class="form-recherche">
 
 							<legend>Remplissez au moins un champ de recherche :</legend>
 
@@ -602,7 +602,15 @@
 					
 
 				</div>
+			{/if}
 			{/foreach} {* DEBUT LIGNE 237 *}
+
+			{if empty($seances)}
+				
+				<div class="row background-light align-items-center justify-content-start">
+					<p>Il n'y a pas de cours prevu cette semaine.</p>
+				</div>
+			{/if}
 
 				<!-- fin affichage dynamique du planning -->
 

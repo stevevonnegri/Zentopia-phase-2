@@ -89,9 +89,25 @@ $seance = new Seance($dbh);
 	//on recupere la date A:M:J
 		
 	//recuperation des information dans la BDD
-		//pour test avant le jour J, creation de la bonne date :
+		//creation des la date selon la page demander:
+        if ($page == 2) {
 
-		$BonneDate  = mktime(0, 0, 0, date("m")  , date("d")+5, date("Y"));
+            $jourDiff = 7 - date('w');
+            $BonneDate  = mktime(0, 0, 0, date("m")  , date("d")+$jourDiff, date("Y"));
+
+        } elseif ($page == 3) {
+
+            $jourDiff = 14 - date('w');
+            $BonneDate  = mktime(0, 0, 0, date("m")  , date("d")+$jourDiff, date("Y"));
+
+        } else {
+
+            $BonneDate = NULL;
+
+        }
+
+        //pour test avant le jour J,
+		//$BonneDate  = mktime(0, 0, 0, date("m")  , date("d")+10, date("Y"));
 
 		$seances = $seance->getSeance($filtre, $BonneDate);
 

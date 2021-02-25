@@ -206,7 +206,12 @@
             $donnees['nbr_place_prise'] =  $sql_2->fetchColumn();
 
             //verifie si le membre connecter a deja reserver la seance et l'ajoute au tableau $données
-            $donnees['A_Reserver'] = in_array($donnees['id_seance'], $this->getReservationById_SESSION());
+            if (isset($_SESSION['id_utilisateur'])) {
+
+                $donnees['A_Reserver'] = in_array($donnees['id_seance'], $this->getReservationById_SESSION());
+                
+            }
+            
 
             //on ajoute la liste des participant de chaque cours.
             $donnees['participants'] = $this->getListParticipant($donnees['id_seance']);
