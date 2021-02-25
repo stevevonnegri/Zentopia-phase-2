@@ -23,6 +23,9 @@
     public function setApprouve($approuve){
         $this->_approuve = $approuve;
     }
+    public function setId_utilisateur($id){
+        $this->_id_utilisateur = $id;
+    }
 
 
 
@@ -39,6 +42,11 @@
     public function getApprouve(){
         return $this->_approuve;
     }
+    public function getId_utilisateur(){
+        return $this->_id_utilisateur;
+    }
+
+
 
 
 

@@ -1,5 +1,19 @@
 <?php
 
+if (isset($_SESSION['id_utilisateur'])) {
+
+	$nom = $_SESSION['prenom_utilisateur']. ' ' .$_SESSION['nom_utilisateur'];
+	$email = $_SESSION['email'];
+	$tel = $_SESSION['telephone'];
+
+	$smarty->assign(array(
+	'nom' => $nom,
+	'email' => $email,
+	'tel' => $tel
+	));
+
+}
+
 // si le formulaire de contact a bien été envoyé
 if (isset($_POST['message'])) {
 

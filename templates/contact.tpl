@@ -72,14 +72,30 @@
 
 							<div class="form-group col-12 col-sm-6 form-input">
 					
-								<input type="text" class="form-control" name="nom" placeholder="Nom" required>
+								<input type="text" class="form-control" name="nom" placeholder="Nom" 
+
+								{if isset($nom)}
+
+									value="{$nom}"
+
+								{/if}
+
+								required>
 								<i class="fas fa-id-card form-icon"></i>
 
 							</div>
 
 							<div class="form-group col-12 col-sm-6 form-input">
 
-								<input type="email" class="form-control" name="email" placeholder="Email" required>
+								<input type="email" class="form-control" name="email" placeholder="Email" 
+
+								{if isset($email)}
+
+									value="{$email}"
+
+								{/if}
+
+								required>
 								<i class="fas fa-envelope form-icon"></i>
 
 							</div>
@@ -97,7 +113,15 @@
 
 							<div class="form-group col-12 col-sm-6 form-input">
 
-								<input type="tel" class="form-control" name="tel" placeholder="Téléphone" required>
+								<input type="tel" class="form-control" name="tel" placeholder="Téléphone" 
+
+								{if isset($tel)}
+
+									value="{$tel}"
+
+								{/if}
+
+								required>
 								<i class="fas fa-phone-square form-icon"></i>
 
 							</div>

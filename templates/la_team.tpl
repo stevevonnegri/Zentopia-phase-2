@@ -144,7 +144,11 @@
 			</div>
 
 
+			{if isset($avis_list)}
+
 			<div class="row testimonial justify-content-center" id="testimonial">
+
+				{foreach from=$avis_list item=avis}
 					
 				<div class="col-12 col-sm-6 col-lg-3 avis text-center">
 
@@ -152,127 +156,59 @@
 
 						<img src="assets/icons/quotationmarks.png" class="quote-img" />
 					
-						<p class="avis-nom">Jordan, 28 ans</p>
+						<p class="avis-nom">{$avis.prenom_utilisateur}, {$avis.age} ans</p>
 
-						<p class="avis-p">&laquo; J'adore venir au centre Zentopia méditer après mes parties de jeux vidéos ! Une fois posé au centre de la salle, assis en tailleur, j'oublie tout le stress et la rage que me procurent ces infâmes jeux et je renaît tel un homme nouveau... &raquo;</p>
+						<p class="avis-p">&laquo; {$avis.contenu_avis} &raquo;</p>
 
-						<img src="assets/icons/fivestar.png" class="avis-stars" width="150" height="36" alt="5 étoiles" />
+						<img src="assets/icons/
 
-					</div>
+						{if $avis.niveau_avis == 1}
 
-				</div>
+						onestar
 
-				<div class="col-12 col-sm-6 col-lg-3 avis text-center">
+						{elseif $avis.niveau_avis == 2}
 
-					<div class="avis-inner">
+						twostar
 
-						<img src="assets/icons/quotationmarks.png" class="quote-img" />
-					
-						<p class="avis-nom">Cassandra, 23 ans</p>
+						{elseif $avis.niveau_avis == 3}
 
-						<p class="avis-p">&laquo; Située à deux pas de ma librairie préférée, j'ai sauté le pas en été et décidé de me joindre à l'une des séances découverte. J'ai adoré, je me suis sentie à l'aise et valorisée. Un mois plus tard, j'avais mon abonnement ! &raquo;</p>
+						threestar
 
-						<img src="assets/icons/fourstar.png" class="avis-stars" width="150" height="36" alt="4 étoiles" />
+						{elseif $avis.niveau_avis == 4}
 
-					</div>
-				</div>
+						fourstar
 
-				<div class="col-12 col-sm-6 col-lg-3 avis text-center">
+						{elseif $avis.niveau_avis == 5}
 
-					<div class="avis-inner">
+						fivestar
 
-						<img src="assets/icons/quotationmarks.png" class="quote-img" />
-					
-						<p class="avis-nom">Olivier, 28 ans</p>
+						{/if}
 
-						<p class="avis-p">&laquo; Etant éleveur de chiens de profession, mon quotidien n'est pas de tout repos ! J'ai trouvé dans la pratique Zentopienne du yoga un exutoire, un moment important pour me recharger les batteries. L'équipe est devenue une véritable famille pour moi. &raquo;</p>
-
-						<img src="assets/icons/fourstarhalf.png" class="avis-stars" width="150" height="36" alt="4.5 étoiles" />
+						.png" class="avis-stars" width="150" height="36" alt="5 étoiles" />
 
 					</div>
 
 				</div>
 
-				<div class="col-12 col-sm-6 col-lg-3 avis text-center">
-
-					<div class="avis-inner">
-
-						<img src="assets/icons/quotationmarks.png" class="quote-img" />
-					
-						<p class="avis-nom">Emilien, 20 ans</p>
-
-						<p class="avis-p">&laquo; Très exigeant en matière de yoga, j'ai enfin trouvé un enseignement qui me plaît : j'aime sentir mon corps dépasser ses limites et le voir atteindre une souplesse inégalée. Les enseignants de Zentopia savent répondre à mes attentes très précises.  &raquo;</p>
-
-						<img src="assets/icons/fivestar.png" class="avis-stars" width="150" height="36" alt="5 étoiles" />
-
-					</div>
-
-				</div>
-
-				<div class="col-12 col-sm-6 col-lg-3 avis text-center">
-
-					<div class="avis-inner">
-
-						<img src="assets/icons/quotationmarks.png" class="quote-img" />
-					
-						<p class="avis-nom">Steve, 23 ans</p>
-
-						<p class="avis-p">&laquo; Etant quelqu'un de très zen, que la pression ne saurait affecter, c'est tout naturellement que j'ai adhéré à l'esprit du centre Zentopia. Ici, on avance à notre rythme, on prend le temps et on ne se laisse jamais perturber par les autres ! &raquo;</p>
-
-						<img src="assets/icons/fourstarhalf.png" class="avis-stars" width="150" height="36" alt="4.5 étoiles" />
-
-					</div>
-
-				</div>
-
-				<div class="col-12 col-sm-6 col-lg-3 avis text-center">
-
-					<div class="avis-inner">
-
-						<img src="assets/icons/quotationmarks.png" class="quote-img" />
-					
-						<p class="avis-nom">Melitta, 27 ans</p>
-
-						<p class="avis-p">&laquo; J'ai trouvé en la communauté de Zentopia un véritable espace où l'on se sent bien, écouté et entouré. Leurs méthodes d'enseignement sont incroyablement pédagogues et adaptées à tous, c'est un vrai instant magique que l'on partage ensemble à chaque séance. &raquo;</p>
-
-						<img src="assets/icons/fivestar.png" class="avis-stars" width="150" height="36" alt="5 étoiles" />
-
-					</div>
-
-				</div>
-
-				<div class="col-12 col-sm-6 col-lg-3 avis text-center">
-
-					<div class="avis-inner">
-
-						<img src="assets/icons/quotationmarks.png" class="quote-img" />
-					
-						<p class="avis-nom">Fatima, 62 ans</p>
-
-						<p class="avis-p">&laquo; J'ai découvert le yoga il y a peu, à l'initiative d'une amie qui m'a emmenée lors d'une séance découverte au centre Zentopia. J'ai beaucoup apprécié ce moment et j'ai pu faire la rencontre charmante d'Olenna, de Morgane ainsi qu'une partie de l'équipe. Je pense prendre mon abonnement prochainement. &raquo;</p>
-
-						<img src="assets/icons/fourstarhalf.png" class="avis-stars" width="150" height="36" alt="4.5 étoiles" />
-
-					</div>
-
-				</div>
+				{/foreach}
 
 			</div> <!-- fin div testimonial -->
 
+			{/if}
+
 
 			<!-- section Ajouter un avis -->
-			<div class="ajouter-avis-block text-center">
+			<div class="ajouter-avis-block text-center" id="ajout-avis">
 				
 				<h3>Partagez vous aussi votre expérience Zentopia !</h3>
 
-				<button class="btn-lg btn-primary shadow-none" onclick="showElement('ajouter-avis');">DEPOSEZ VOTRE AVIS</button>
-
 				<!-- partie cachée tant que le membre n'a pas cliqué sur le bouton ci-dessus -->
-				<div class="hidden" id="ajouter-avis">
+				<div id="ajouter-avis">
 					
 					<div class="ajouter-avis-inner">
 
 						
+						{if isset($avis_manquant)}
 						<!-- à afficher si le membre n'a pas encore écrit un avis -->
 						<form method="post" action="">
 
@@ -280,15 +216,15 @@
 
 								<div class="col-12 text-left">
 									
-									<label for="avis-contenu">Votre avis :</label>
-									<textarea class="form-control" name="avis-contenu"></textarea>
+									<label for="avis-contenu">Votre avis : (250 caractères maximum)</label>
+									<textarea class="form-control" name="avis-contenu" required></textarea>
 
 								</div>
 
 								<div class="col-12 col-md-6 col-lg-2 text-left">
 									
 									<label for="note">Votre note :</label>
-									<select class="form-control">
+									<select class="form-control" name="avis-note" required>
 										
 										<option value="">--Note--</option>
 										<option value="5">5/5</option>
@@ -300,41 +236,54 @@
 									</select>
 
 								</div>
-								
-								
-								<!-- à l'envoi du formulaire, envoyer le contenu de l'avis et la note, l'id utilisateur et approuvé set sur false à la BDD pour qu'il puisse ensuite apparaître dans la liste consultable par les modérateurs/admin -->
-							</div><button type="submit" class="btn-lg btn-primary shadow-none">SOUMETTRE</button>
+
+							</div>
+
+								<!-- affiche le message à l'utilisateur : 
+								- avis trop long si plus de 250 caractères
+								- confirmation de soumission d'avis si conforme -->
+								{if isset($message_error)}
+
+									<p class="error">{$message_error}</p>
+
+								{/if}
+
+							<button type="submit" class="btn-lg btn-primary shadow-none">SOUMETTRE</button>
 							
 
 						</form>
+						{/if}
 
 
 						<!-- à afficher lors que le membre n'est pas connecté ou inscrit -->
-						<!--<p>Vous devez posséder un compte pour laisser un avis client sur notre site.</p>
+						{if isset($est_connecte)}
+						<p>Vous devez posséder un compte pour laisser un avis client sur notre site.</p>
 
 						<div class="row">
 							
 							<div class="col compte-manquant">
 								
-								<a href="connexion.php" class="btn btn-primary shadow-none">SE CONNECTER</a>
-								<a href="inscription.php" class="btn btn-primary shadow-none">S'INSCRIRE</a>
+								<a href="?action=connexion" class="btn btn-primary shadow-none">SE CONNECTER</a>
+								<a href="?action=inscription" class="btn btn-primary shadow-none">S'INSCRIRE</a>
 
 							</div>
 
-						</div>-->
+						</div>
+						{/if}
 
 
 						<!-- à afficher lorsque le membre a déjà déposé un avis -->
-						<!--<div class="row avis-depose">
+						{if isset($avis_present)}
+						<div class="row avis-depose">
 							
 							<div class="col">
 								
-								<p>Vous avez déjà déposé votre avis client. Vous pouvez le consulter directement dans votre <a href="espace-personnel.php#mon-avis">espace personnel.</a></p>
+								<p>Vous avez bien déposé votre avis client. Une fois validé, vous pouvez le consulter directement dans votre <a href="?action=espace_personnel#mon-avis">espace personnel</a> ou parmi les avis ci-dessus.</p>
 
 							</div>
 
-						</div>-->
-
+						</div>
+						{/if}
 
 					</div>
 
