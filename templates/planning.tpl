@@ -66,6 +66,10 @@
 
 			<h1 id="reservation">RESERVATION EN LIGNE</h1>
 
+			{if isset($RangNonValide)}
+				{$RangNonValide}
+			{/if}
+
 			<!-- Animation arrow -->
 			<div class="anim-arrow">
 				<i class="fas fa-angle-double-down"></i>
@@ -88,7 +92,7 @@
 						
 						{if $_SESSION['rang'] == admin}
 							<!-- affiche le formulaire d'ajout de cours au clic -->
-							<button class="btn btn-primary btn-admin shadow-none ajouter-seance-btn" onclick="showElement('ajouter-seance');">+ AJOUTER UN COURS</button>
+							<button class="btn btn-primary btn-admin shadow-none ajouter-seance-btn" href="ajouter_un_cours" onclick="showElement('ajouter-seance');">+ AJOUTER UN COURS</button>
 						{/if}
 
 					</div>
@@ -118,15 +122,14 @@
 							<div class="col-12 col-sm-6 col-lg">
 								
 								<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
-								<label for="type-cours">Type de cours :</label>
+								<label for="nom_cours">Type de cours :</label>
 								<select class="form-control">
 									
-									<option value="hatha">Hatha</option>
-									<option value="vinyasa">Vinyasa</option>
-									<option value="slow-yoga">Slow yoga</option>
-									<option value="kid-yoga">Kid yoga</option>
-									<option value="meditation-guidee">Méditation guidée</option>
-									<option value="meditation-tibetaine">Méditation tibétaine</option>
+									{foreach from=$noms_des_cours item=nom_cours}
+
+										<option value="{$nom_cours}">{$nom_cours|capitalize}</option>
+
+									{/foreach}
 
 								</select>
 
@@ -135,15 +138,14 @@
 							<div class="col-12 col-sm">
 								
 								<!-- optionnel : récupérer les profs dynamiquement pour les afficher dans le select -->
-								<label for="type-cours">Enseignant :</label>
+								<label for="Enseignant">Enseignant :</label>
 								<select class="form-control">
-									
-									<option value="olenna">Olenna</option>
-									<option value="morgane">Morgane</option>
-									<option value="helene">Hélène</option>
-									<option value="lena">Léna</option>
-									<option value="marie">Marie</option>
-									<option value="bastien">Bastien</option>
+								
+									{foreach from=$prenoms_professeurs item=prenom_professeur}
+
+										<option value="{$prenom_professeur}">{$prenom_professeur|capitalize}</option>
+
+									{/foreach}
 
 								</select>
 
@@ -165,7 +167,7 @@
 
 							<div class="col-12 col-sm btn-col">
 								
-								<button class="btn btn-primary btn-admin shadow-none" type="submit">AJOUTER</button>
+								<button class="btn btn-primary btn-admin shadow-none" name="Ajouter_seance" type="submit">AJOUTER</button>
 
 							</div>
 

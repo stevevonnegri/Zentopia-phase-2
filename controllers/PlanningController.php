@@ -1,9 +1,13 @@
 <?php
 $seance = new Seance($dbh);
+$professeur = new Professeur($dbh);
 //recupêre la liste des cours present dans la BDD et les envoie a smarty
 	$noms_des_cours = $seance->allTypeDeCours();
+    $prenoms_professeurs = $professeur->prenom_all_professeur();
 
 	$smarty->assign('noms_des_cours', $noms_des_cours);
+    $smarty->assign('prenoms_professeurs', $prenoms_professeurs);
+
 //page active
 	//si une page est demander la set dans $page, sinon demande la page 1
 	if ($_GET['page'] == NULL) {
@@ -103,6 +107,34 @@ if(isset($_GET['id_annuler'])) {
     } else{
     //Il faut se connecter pour annuler un cours
     echo ('<script>document.location.href="?action=connexion"</script>');
+    }
+}
+
+ //echo 'TU MENTEND ???!!!!';
+
+//Ajouter une seance (admin)
+if(isset($_POST['Ajouter_seance'])) {
+
+    //On verifie que c'est bien un admin
+    if($_SESSION['rang'] == 'admin') {
+
+        //On regarde de le cours est possible dans les horaires
+        $seance->setDate_seance($_POST['']);
+        $seance->setHeure_debut_seance($_POST['heure-debut']);
+        $seance->setHeure_fin_seance($_POST['heure-fin']);
+        $seance->setId_type_de_cours($_POST['id_type_de_cours']);
+        $seance->setId_professeur($_POST['id_professeur']);
+
+        echo '<pre>';
+        var_dump($seance);
+        echo '</pre>';
+        //$seance->Add($seance);
+       
+
+
+    }else {
+        //Message d'erreur ->Pas le rang d'admin ou pas connecte
+        $smarty->assign('RangNonValide', 'Vous n\'avez pas les permissions pour cela ou vous avez était deconnecte') ;
     }
 }
     

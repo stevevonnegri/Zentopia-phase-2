@@ -28,6 +28,12 @@
     public function setAnnule($annule) {
         $this->_annule = $annule;
     }
+    public function setId_type_de_cours($id_Cours) {
+        $this->_id_type_de_cours = $id_cours;
+    }
+    public function setId_professeur($id_professeur) {
+        $this->_id_professeur = $id_professeur;
+    }
 
 
 
@@ -46,6 +52,12 @@
     }
     public function getAnnule() {
         return $this->_annule;
+    }
+    public function getId_type_de_cours() {
+        return $this->_id_type_de_cours;
+    }
+    public function getId_professeur() {
+        return $this->_id_professeur;
     }
 
     /**
@@ -301,4 +313,7 @@
 
     }
 
+    public function VerificationPlageHoraireDispo(){
+
+    }
 }

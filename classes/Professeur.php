@@ -32,4 +32,27 @@
         return $this->_photo;
     }
 
+
+    /**
+     * Renvoie un tableau avec avec le nom des professeurs
+     *
+     * @return     array  retourne les prenoms des professeurs pour l'affichage
+     */
+    public function prenom_all_professeur() {
+
+        $sql = $this->_bdd->query('SELECT prenom_utilisateur, id_professeur FROM utilisateur NATURAL JOIN professeur');
+
+        $lists = [];
+        while ($donnees = $sql->fetchColumn()) {
+            array_push($lists, $donnees);
+        }
+        return $lists;
+    }
+
+
+
+
+
+
+
 }
