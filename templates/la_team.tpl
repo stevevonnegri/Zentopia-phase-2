@@ -198,14 +198,12 @@
 
 
 			<!-- section Ajouter un avis -->
-			<div class="ajouter-avis-block text-center">
+			<div class="ajouter-avis-block text-center" id="ajout-avis">
 				
 				<h3>Partagez vous aussi votre expérience Zentopia !</h3>
 
-				<button class="btn-lg btn-primary shadow-none" onclick="showElement('ajouter-avis');">DEPOSEZ VOTRE AVIS</button>
-
 				<!-- partie cachée tant que le membre n'a pas cliqué sur le bouton ci-dessus -->
-				<div class="hidden" id="ajouter-avis">
+				<div id="ajouter-avis">
 					
 					<div class="ajouter-avis-inner">
 
@@ -239,15 +237,18 @@
 
 								</div>
 
-								{if isset($form_invalide)}
+							</div>
 
-									<p class="error">{$form_invalide}</p>
+								<!-- affiche le message à l'utilisateur : 
+								- avis trop long si plus de 250 caractères
+								- confirmation de soumission d'avis si conforme -->
+								{if isset($message_error)}
+
+									<p class="error">{$message_error}</p>
 
 								{/if}
-								
-								
-								<!-- à l'envoi du formulaire, envoyer le contenu de l'avis et la note, l'id utilisateur et approuvé set sur false à la BDD pour qu'il puisse ensuite apparaître dans la liste consultable par les modérateurs/admin -->
-							</div><button type="submit" class="btn-lg btn-primary shadow-none">SOUMETTRE</button>
+
+							<button type="submit" class="btn-lg btn-primary shadow-none">SOUMETTRE</button>
 							
 
 						</form>
@@ -277,7 +278,7 @@
 							
 							<div class="col">
 								
-								<p>Vous avez déjà déposé votre avis client. Vous pouvez le consulter directement dans votre <a href="espace-personnel.php#mon-avis">espace personnel.</a></p>
+								<p>Vous avez bien déposé votre avis client. Une fois validé, vous pouvez le consulter directement dans votre <a href="?action=espace_personnel#mon-avis">espace personnel</a> ou parmi les avis ci-dessus.</p>
 
 							</div>
 

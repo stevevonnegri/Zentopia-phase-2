@@ -58,21 +58,39 @@ if (isset($_SESSION['id_utilisateur'])) {
 	$smarty->assign('est_connecte', 'est_connecte');
 }
 
+if (isset($_GET['message_error'])) {
+
+	$smarty->assign('message_error', 'L\'avis déposé est supérieur aux 250 caractères maximum.');
+}
 
 // vérifie si le formulaire d'ajout avis a été envoyé
 if (isset($_POST['avis-contenu']) && isset($_POST['avis-note'])) {
 
-		
-	if ($_POST['avis-contenu'] > 250) {
+	// vérifie si l'avis ne dépasse pas les 250 caractères autorisés
+	if (strlen($_POST['avis-contenu']) > 250) {
 
-		echo "too long";
+		header('Location: ?action=la_team&message_error=true#ajout-avis');
 
-		$smarty->assign('form_invalide', 'L\'avis déposé est supérieur aux 250 caractères maximum.');
 
+	// sécurise la saisie de l'utilisateur pour l'envoyer à la BDD ensuite
 	} else {
 
+		// sécurise la saisie
 		$avis_contenu = htmlspecialchars($_POST['avis-contenu']);
 		$avis_note = $_POST['avis-note'];
+		$id = $_SESSION['id_utilisateur'];
+
+		// envoie les données à la BDD
+		$data = [
+			'contenu_avis' => $avis_contenu,
+			'niveau_avis' => $avis_note,
+			'id_utilisateur' => $id
+		];
+
+		$avis->Add($data);
+
+		header('Location: ?action=la_team#ajout-avis');
+
 	}
 
 }

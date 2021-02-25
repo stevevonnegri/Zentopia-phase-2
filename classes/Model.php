@@ -87,10 +87,10 @@ class Model {
 		$this->_bdd->exec('DELETE FROM '.$this->_table.' WHERE '.$colonne.' = "'.$id.'"');
 	}
 
-	public function Add($objet){
+	public function Add($array){
 		$champs = '';
 		$valeurs = '';
-		foreach($objet as $key => $value){
+		foreach($array as $key => $value){
 			if($value){
 				$champs .= $key.' , ';
 				$valeurs .= '"'.$value.'" , ';
