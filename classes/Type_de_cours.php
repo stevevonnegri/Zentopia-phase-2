@@ -105,4 +105,36 @@
 
     }
 
+
+    /**
+    * fonction récupérant la liste des cours de la catégorie "yoga"
+    *
+    *
+    *@return    <array>     un tableau contenant les données des types de cours
+    **/
+    public function getListYoga(){
+        $lists = [];
+        $sql = $this->_bdd->query('SELECT * FROM '.$this->_table. ' WHERE categorie_type_de_cours = "yoga"');
+        while($donnees = $sql->fetch(PDO::FETCH_ASSOC)){
+            $lists[] = new $this->_table($donnees);
+        }
+        return $lists; 
+    } 
+
+
+    /**
+    * fonction récupérant la liste des cours de la catégorie "méditation"
+    *
+    *
+    *@return    <array>     un tableau contenant les données des types de cours
+    **/
+    public function getListMeditation(){
+        $lists = [];
+        $sql = $this->_bdd->query('SELECT * FROM '.$this->_table. ' WHERE categorie_type_de_cours = "meditation"');
+        while($donnees = $sql->fetch(PDO::FETCH_ASSOC)){
+            $lists[] = new $this->_table($donnees);
+        }
+        return $lists; 
+    } 
+
 }

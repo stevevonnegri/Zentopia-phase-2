@@ -98,145 +98,65 @@
 		<div class="cours-bg">
 
 			<img src="assets/icons/yoga-mat.png" class="yoga-mat" width="60" height="60" alt="" />
-			
 
-			<!-- HATHA YOGA -->
-			<div  class="container hatha-block">
-				
-				<h1  class="text-center">NOS COURS DE YOGA</h1>
+			<h1  class="text-center">NOS COURS DE YOGA</h1>
 
-				<div class="row align-items-center">
-					
-					<div class="col-12 col-lg order-1">
-						
-						<div class="hatha-img">
+			{if isset($yogaliste)}
+
+				{foreach from=$yogaliste item=cours key=i}
+
+					<div  class="container cours-bg hatha-block">		
+
+						<div class="row align-items-center">
 							
-							<img src="assets/icons/yoga3.png" class="yoga3-enseignement" width="80" height="80" alt="" />
+							<div class="col-12 col-lg {if $i%2==1} order-2 {else} order-1 {/if}">
+								
+								<div class="cours-img text-center">
+
+									<img src="{$cours->getImage_type_de_cours()}" width="400" height="266" alt="Illustration de yoga"/>
+
+								</div>
+
+							</div>
+
+							<div class="col text-center {if $i%2==1} order-1 {else} order-2 {/if}">
+								
+								<h2 class="
+
+								{if $i%2==1} text-left {else} text-right {/if}
+
+								 nom-cours" id="hatha">{$cours->getNom_type_de_cours()|upper}</h2>
+
+								<p class="text-justify">{$cours->getDescription_type_de_cours()}</p>
+
+								<a href="?action=planning" class="btn btn-primary shadow-none">CONSULTEZ LE PLANNING</a>
+
+							</div>
 
 						</div>
 
 					</div>
 
-					<div class="col text-center order-2">
-						
-						<h2 class="text-right nom-cours" id="hatha">HATHA YOGA</h2>
+				{/foreach}
 
-						<p class="text-justify">Le hatha yoga est l'une des formes les plus traditionnelles du yoga. C'est une pratique lente, détendue afin de se recentrer sur soi et d'être à l'écoute de son corps.
-						<br/><br/>
-						Sa singularité ? Les postures sont tenues bien plus longtemps que dans les yogas dynamiques tels que le vinyasa, et on y travaille davantage les différentes respirations. Le hatha est ouvert à tous les niveaux.</p>
-
-						<a href="?action=planning" class="btn btn-primary shadow-none">CONSULTEZ LE PLANNING</a>
-
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
-
-
-		<!-- VINYASA YOGA -->
-		<div class="container vinyasa-block">
-
-			<div class="row align-items-center">
-				
-				<div class="col text-center order-2 order-lg-1">
-					
-					<h2 class="text-left nom-cours" id="vinyasa">VINYASA YOGA</h2>
-
-					<p class="text-justify">Le vinyasa est une pratique du yoga dite dynamique, qui repose sur l'enchaînement régulier de poses et de contre-poses sans discontinuer, le tout rythmé en parallèle par une respiration précise.
-
-					<br/><br/>
-					Le souffle et le mouvement sont intimement liés, provoquant ainsi l'augmentation de la température corporelle. Cette pratique du yoga, un peu plus soutenue, est tout de même accessible aux débutants, à l'exception des femmes enceintes.</p>
-
-					<a href="?action=planning" class="btn btn-primary shadow-none">CONSULTEZ LE PLANNING</a>
-
-				</div>
-
-				<div class="col-12 col-lg order-1 order-lg-2">
-					
-					<div class="vinyasa-img">
-						
-						<img src="assets/icons/yoga1.png" class="yoga1-enseignement" width="90" height="90" alt="" />
-
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
-
-
-		<!-- SLOW YOGA -->
-		<div class="slow-bg">
-
-			<div class="container slow-block">
-
-				<div class="row align-items-center">
-
-					<div class="col-12 col-lg order-1 order-lg-1">
-						
-						<div class="slow-img">
-							
-							<img src="assets/icons/yoga-senior.png" class="yoga-senior-enseignement" width="65" height="65" alt="" />
-
-						</div>
-
-					</div>
-					
-					<div class="col text-center order-1 order-lg-1">
-						
-						<h2 class="text-right nom-cours" id="slow">SLOW YOGA</h2>
-
-						<p class="text-justify">Le slow yoga est une version encore plus édulcorée que le hatha yoga. Cette pratique mélange des postures douces et passives, associées à des salutations au soleil afin de travailler en douceur tout le corps.
-
-						<br/><br/>
-						Ce type de yoga est particulièrement adaptée aux débutants qui hésitent encore, aux séniors et aux personnes en situation de handicap ou ayant une santé ne leur permettant pas de tenir trop longtemps certaines postures.</p>
-
-						<a href="?action=planning" class="btn btn-primary shadow-none">CONSULTEZ LE PLANNING</a>
-
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
-
-
-		<!-- KID YOGA -->
-		<div class="container kid-block">
-
-			<div class="row align-items-center">
-				
-				<div class="col text-center order-2 order-lg-1">
-					
-					<h2 class="text-left nom-cours" id="kid">KID YOGA</h2>
-
-					<p class="text-justify">Le yoga et la méditation ne sont pas réservés qu'aux plus grands ! Au contraire, ces pratiques sont très bénéfiques pour les enfants, qui ont eux aussi besoin de calmer leur corps et de canaliser leur mental.
-
-					<br/><br/>
-					En duo avec leur parent, nos séances de kid yoga permettent aux enfants âgés de 4 à 10 ans de suivre à leur rythme une séance adaptée, dans la joie et le calme.</p>
-
-					<a href="?action=planning" class="btn btn-primary shadow-none">CONSULTEZ LE PLANNING</a>
-
-				</div>
-
-				<div class="col-12 col-lg order-1 order-lg-2">
-					
-					<div class="kid-img">
-						
-						<img src="assets/icons/yoga2.png" class="yoga2-enseignement" width="90" height="90" alt="" />
-
-					</div>
-
-				</div>
-
-			</div>
+			{/if}
 
 			<div id="coursmeditanchor"></div>
+
+		</div>
+
+		<div class="container contactez-nous">
+
+			<div class="row">
+				
+				<div class="col text-center">
+					
+					<p>Pour toute demande d'information sur nos cours, contactez-nous via notre <a href="?action=contact">formulaire de contact</a> ou sur les réseaux sociaux !</p>
+
+				</div>
+
+			</div>
+			
 
 		</div>
 
@@ -248,73 +168,50 @@
 			
 			<img src="assets/icons/lotus.png" class="lotus" width="60" height="60" alt="" />
 
-			<!-- MEDITATION GUIDEE YOGA -->
-			<div class="container medit-guidee-block">
-				
-				<h1 class="text-center">NOS COURS DE MEDITATION</h1>
+			<h1 class="text-center">NOS COURS DE MEDITATION</h1>
 
-				<div class="row align-items-center">
-					
-					<div class="col-12 col-lg order-1">
-						
-						<div class="medit-guidee-img">
+			{if isset($meditationliste)}
+
+				{foreach from=$meditationliste item=cours key=i}
+
+					<div  class="container cours-bg hatha-block">		
+
+						<div class="row align-items-center">
 							
-							<img src="assets/icons/yoga4.png" class="yoga4-enseignement" width="100" height="100" alt="" />
+							<div class="col-12 col-lg {if $i%2==1} order-2 {else} order-1 {/if}">
+								
+								<div class="cours-img text-center">
+
+									<img src="{$cours->getImage_type_de_cours()}" width="400" height="266" alt="Illustration de yoga"/>
+
+								</div>
+
+							</div>
+
+							<div class="col text-center {if $i%2==1} order-1 {else} order-2 {/if}">
+								
+								<h2 class="
+
+								{if $i%2==1} text-left {else} text-right {/if}
+
+								 nom-cours" id="hatha">{$cours->getNom_type_de_cours()|upper}</h2>
+
+								<p class="text-justify">{$cours->getDescription_type_de_cours()}</p>
+
+								<a href="?action=planning" class="btn btn-primary shadow-none">CONSULTEZ LE PLANNING</a>
+
+							</div>
 
 						</div>
 
 					</div>
 
-					<div class="col text-center order-2">
-						
-						<h2 class="text-right nom-cours" id="guidee">MEDIATION GUIDEE</h2>
+				{/foreach}
 
-						<p class="text-justify">Contrairement aux apparences, le lâcher-prise n'est pas chose facile. Pour y parvenir, la méditation guidée est une bonne option. On se laisse porter par la voix du professeur pour atteindre l'état de pleine conscience qui nous permettra de faire le tri dans ses émotions.
-
-						<br/><br/>
-						Avec la méditation guidée, on apprend à évacuer le stress, à se reconnecter à soi, à retrouver le sommeil et évidemment à se focaliser sur l'instant présent. </p>
-
-						<a href="?action=planning" class="btn btn-primary shadow-none">CONSULTEZ LE PLANNING</a>
-
-					</div>
-
-				</div>
-
-			</div>
+			{/if}
 
 		</div>
 
-
-		<!-- MEDITATION TIBETAINE -->
-		<div class="container medit-tibet-block">
-
-			<div class="row align-items-center">
-				
-				<div class="col text-center order-2 order-lg-1">
-					
-					<h2 class="text-left nom-cours" id="tibetaine">MEDITATION TIBETAINE</h2>
-
-					<p class="text-justify">La méditation tibétaine va plus loin dans la pleine conscience que la méditation guidée, grâce à l'usage des bols tibétains, véritables objets d'art au pouvoir ancestral. Chaque bol a sa fréquence, et à celle-ci correspond l'un de nos sept chakras.
-					<br/><br/>
-					C'est en circulant dans notre corps au moyen de nos points d'énergie que ces vibrations nous permettent d'atteindre d'abord l'harmonie corps-esprit, et parfois même l'éveil corps-esprit qui nous permet l'accès à notre inconscient.</p>
-
-					<a href="?action=planning" class="btn btn-primary shadow-none">CONSULTEZ LE PLANNING</a>
-
-				</div>
-
-				<div class="col-12 col-lg order-1 order-lg-2">
-					
-					<div class="medit-tibet-img">
-						
-						<img src="assets/icons/medit2.png" class="medit2-enseignement" width="65" height="65" alt="" />
-
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
 
 
 
