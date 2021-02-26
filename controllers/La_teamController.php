@@ -1,16 +1,28 @@
 <?php
-$image = new Image($dbh);
 
-//cherche les images du sliders
+//ajoute une variable pour determiner la partie "active" de la navbar.
+$smarty->assign('active', 'la_team');
+
+
+
+
+
+// SECTION PRESENTATION DE LA TEAM
+$prof = new Professeur($dbh);
+$listeprof = $prof->getListeProf();
+$smarty->assign('listeprof', $listeprof);
+
+
+// SECTION SLIDER D'IMAGES
+// récupère les images
+$image = new Image($dbh);
 $imagesAll = $image->getList();
 
 //ajoute une variable pour determiner la partie "active" de la navbar.
-$smarty->assign(array(
-	'active' => 'la_team',
-	'imagesAll' => $imagesAll,
-));
+$smarty->assign('imagesAll', $imagesAll);
 
 
+// SECTION AFFICHAGE AVIS CLIENT
 // récupère les avis de la BDD
 $avis = new Avis($dbh);
 $avis_list = $avis->getAvisApprouves();

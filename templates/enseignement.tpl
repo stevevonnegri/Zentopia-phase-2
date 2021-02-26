@@ -119,7 +119,7 @@
 
 					<div class="col text-center order-2">
 						
-						<h2 class="text-right nom-cours">HATHA YOGA</h2>
+						<h2 class="text-right nom-cours" id="hatha">HATHA YOGA</h2>
 
 						<p class="text-justify">Le hatha yoga est l'une des formes les plus traditionnelles du yoga. C'est une pratique lente, détendue afin de se recentrer sur soi et d'être à l'écoute de son corps.
 						<br/><br/>
@@ -143,7 +143,7 @@
 				
 				<div class="col text-center order-2 order-lg-1">
 					
-					<h2 class="text-left nom-cours">VINYASA YOGA</h2>
+					<h2 class="text-left nom-cours" id="vinyasa">VINYASA YOGA</h2>
 
 					<p class="text-justify">Le vinyasa est une pratique du yoga dite dynamique, qui repose sur l'enchaînement régulier de poses et de contre-poses sans discontinuer, le tout rythmé en parallèle par une respiration précise.
 
@@ -188,7 +188,7 @@
 					
 					<div class="col text-center order-1 order-lg-1">
 						
-						<h2 class="text-right nom-cours">SLOW YOGA</h2>
+						<h2 class="text-right nom-cours" id="slow">SLOW YOGA</h2>
 
 						<p class="text-justify">Le slow yoga est une version encore plus édulcorée que le hatha yoga. Cette pratique mélange des postures douces et passives, associées à des salutations au soleil afin de travailler en douceur tout le corps.
 
@@ -213,7 +213,7 @@
 				
 				<div class="col text-center order-2 order-lg-1">
 					
-					<h2 class="text-left nom-cours">KID YOGA</h2>
+					<h2 class="text-left nom-cours" id="kid">KID YOGA</h2>
 
 					<p class="text-justify">Le yoga et la méditation ne sont pas réservés qu'aux plus grands ! Au contraire, ces pratiques sont très bénéfiques pour les enfants, qui ont eux aussi besoin de calmer leur corps et de canaliser leur mental.
 
@@ -267,7 +267,7 @@
 
 					<div class="col text-center order-2">
 						
-						<h2 class="text-right nom-cours">MEDIATION GUIDEE</h2>
+						<h2 class="text-right nom-cours" id="guidee">MEDIATION GUIDEE</h2>
 
 						<p class="text-justify">Contrairement aux apparences, le lâcher-prise n'est pas chose facile. Pour y parvenir, la méditation guidée est une bonne option. On se laisse porter par la voix du professeur pour atteindre l'état de pleine conscience qui nous permettra de faire le tri dans ses émotions.
 
@@ -292,7 +292,7 @@
 				
 				<div class="col text-center order-2 order-lg-1">
 					
-					<h2 class="text-left nom-cours">MEDITATION TIBETAINE</h2>
+					<h2 class="text-left nom-cours" id="tibetaine">MEDITATION TIBETAINE</h2>
 
 					<p class="text-justify">La méditation tibétaine va plus loin dans la pleine conscience que la méditation guidée, grâce à l'usage des bols tibétains, véritables objets d'art au pouvoir ancestral. Chaque bol a sa fréquence, et à celle-ci correspond l'un de nos sept chakras.
 					<br/><br/>

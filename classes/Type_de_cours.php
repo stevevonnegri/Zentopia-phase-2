@@ -79,4 +79,30 @@
 
     }
 
+
+    /**
+    * fonction récupérant la liste des cours enseignés par un prof
+    *
+    *
+    *@return    <array>     un tableau contenant les noms des cours que le prof enseigne
+    **/
+    public function getCoursProf(int $id) {
+    
+    $cours = [];
+    $sql = $this->_bdd->query(
+        'SELECT nom_type_de_cours 
+        FROM '.$this->_table.' 
+        NATURAL JOIN peut_enseigner
+        WHERE peut_enseigner.id_professeur = "'.$id.'"') ;
+
+    while($donnees = $sql->fetchColumn()){
+
+        $cours[] = $donnees;
+        
+        }
+        
+        return $cours; 
+
+    }
+
 }

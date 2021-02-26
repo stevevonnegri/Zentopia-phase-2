@@ -156,18 +156,32 @@
 }
 
 .nom-prof
- {
- 	.opensansSB();
- 	color: @myblue;
- 	font-size: 1.5rem;
- }
+{
+	.opensansSB();
+	color: @myblue;
+	font-size: 1.5rem;
+}
 
  .description-prof
-  {
-  	.opensans();
+{
+	.opensans();
 
-  	@media (max-width: 992px) { font-size: 0.8rem; }
-  }
+	@media (max-width: 992px) { font-size: 0.8rem; }
+}
+
+.cours-prof a
+{
+	margin: 15px;
+	font-size: 1.1rem;
+	.latoB();
+	color: @myred;
+
+	&:hover 
+	{
+		text-decoration: none;
+		color: @hoverred;
+	}
+}
 
 
 /* SECTION SLIDESHOW */
