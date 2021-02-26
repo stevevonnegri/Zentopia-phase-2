@@ -248,7 +248,7 @@
 							<h1 id="mes-cours">MES COURS</h1>
 							{if $seances == NULL}
 							<!-- affichage par défaut, si le membre n'a pas de réservation active -->
-							<p>Vous n'avez pas encore effectué de réservations sur un cours à venir.</p>
+							<p>Vous n'avez pas encore effectué de réservation sur un cours à venir.</p>
 
 							{else}
 								{foreach from=$seances item=$seance}

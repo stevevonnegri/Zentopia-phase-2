@@ -92,8 +92,70 @@
 					<p class="quote">&laquo; Celui qui est le maître de lui-même est plus grand que celui qui est le maître du monde &raquo; -Bouddha</p>
 
 
-					<!-- INSERTION DE LA PARTIE DYNAMIQUE PROF, HTML DEJA CREE -->
-					<?php include('front-end/prof-description.php'); ?>
+					<!-- affichage dynamique de la liste des profs -->
+					{if isset($listeprof)}
+
+						{foreach from=$listeprof item=prof key=i}
+
+							<div class="row team-member-block align-items-center">
+			
+								<div class="col-12 col-md-4 {if $i%2==1} order-2 {else} order-1 {/if}">
+									
+									<img src="{$prof.photo}" alt="Portrait d'un professeur" class="img-fluid img-prof">
+
+								</div>
+
+								<div class="col {if $i%2==1} order-1 {else} order-2 {/if}">
+									
+									<p class="nom-prof">{$prof.prenom_utilisateur}</p>
+
+									<p class="description-prof">{$prof.description_professeur}</p>
+
+									<p class="cours-prof">
+										{foreach from=$prof.listecours item=cours}
+
+											<a href="?action=enseignement#
+
+											{if $cours == 'hatha yoga'}
+
+												hatha
+
+											{elseif $cours == 'vinyasa yoga'}
+
+												vinyasa
+
+											{elseif $cours == 'slow yoga'}
+
+												slow
+
+											{elseif $cours == 'kid yoga'}
+
+												kid
+
+											{elseif $cours == 'meditation guidee'}
+
+												guidee
+
+											{elseif $cours == 'meditation tibetaine'}
+
+												tibetaine
+
+											{/if}
+
+
+											"><span># {$cours}</span></a>
+
+										{/foreach}
+
+									</p>
+
+								</div>
+
+							</div>
+
+						{/foreach}
+
+					{/if}
 
 				</div>
 
