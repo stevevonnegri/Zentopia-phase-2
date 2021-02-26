@@ -42,7 +42,6 @@ class Model {
 		return $lists; 
 	} 
 
-
 	// recupère un seul personnage en fonction de l'id
 	/**
 	* fonction recuperant un élément d'une BDD selon un ID et un nom de colonne.

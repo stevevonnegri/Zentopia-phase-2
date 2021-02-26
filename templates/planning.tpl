@@ -101,6 +101,7 @@
 
 				</div>
 
+				{if $_SESSION['rang'] == admin}
 				<!-- formulaire d'ajout de cours qui ne s'affiche qu'au clic du bouton -->
 				<div class="row hidden justify-content-around" id="ajouter-seance">
 					
@@ -119,14 +120,14 @@
 								
 								<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
 								<label for="type-cours">Type de cours :</label>
-								<select class="form-control">
+								<select class="form-control" id="ajaxCours">
 									
-									<option value="hatha">Hatha</option>
-									<option value="vinyasa">Vinyasa</option>
-									<option value="slow-yoga">Slow yoga</option>
-									<option value="kid-yoga">Kid yoga</option>
-									<option value="meditation-guidee">Méditation guidée</option>
-									<option value="meditation-tibetaine">Méditation tibétaine</option>
+									<option selected value="1">Hatha</option>
+									<option value="2">Vinyasa</option>
+									<option value="3">Slow yoga</option>
+									<option value="4">Kid yoga</option>
+									<option value="5">Méditation guidée</option>
+									<option value="6">Méditation tibétaine</option>
 
 								</select>
 
@@ -136,14 +137,13 @@
 								
 								<!-- optionnel : récupérer les profs dynamiquement pour les afficher dans le select -->
 								<label for="type-cours">Enseignant :</label>
-								<select class="form-control">
+								<select class="form-control" id="enseignant">
 									
+									<option value="marie">Marie</option>
+									<option value="lena">Léna</option>
+									<option value="helene">Hélène</option>
 									<option value="olenna">Olenna</option>
 									<option value="morgane">Morgane</option>
-									<option value="helene">Hélène</option>
-									<option value="lena">Léna</option>
-									<option value="marie">Marie</option>
-									<option value="bastien">Bastien</option>
 
 								</select>
 
@@ -174,7 +174,7 @@
 					</form>
 
 				</div>
-
+				{/if}
 
 				<div class="row background-light align-items-center planning-search">
 					
@@ -638,6 +638,9 @@
 		<!-- Scroll top + footer -->
 		<!-- <?php include("footer.php"); ?> -->
 		{include file = 'footer.tpl'}
+
+		<script type="text/javascript" src="assets/js/ajax.js"></script>
+
 		{if isset($users)}
 			<!--si la variable au dessus existe on lance les script d'affichage de la div-->
 			{$onclick_admin_seance}
