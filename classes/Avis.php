@@ -62,7 +62,7 @@
             'SELECT id_avis, contenu_avis, niveau_avis, prenom_utilisateur, date_de_naissance 
             FROM '.$this->_table.' 
             NATURAL JOIN utilisateur 
-            WHERE approuve = 0');
+            WHERE approuve = 0') ;
 
         while($donnees = $sql->fetch(PDO::FETCH_ASSOC)){
 
@@ -86,7 +86,8 @@
             'SELECT id_avis, contenu_avis, niveau_avis, prenom_utilisateur, date_de_naissance 
             FROM '.$this->_table.' 
             NATURAL JOIN utilisateur 
-            WHERE approuve = 1');
+            WHERE approuve = 1 
+            ORDER BY id_avis DESC');
 
         while($donnees = $sql->fetch(PDO::FETCH_ASSOC)){
 
