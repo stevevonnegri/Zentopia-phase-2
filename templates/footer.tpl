@@ -66,4 +66,4 @@
 <!-- lien Slick -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
-<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="assets/js/script.js"></script>

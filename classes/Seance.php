@@ -28,7 +28,7 @@
     public function setAnnule($annule) {
         $this->_annule = $annule;
     }
-    public function setId_type_de_cours($id_Cours) {
+    public function setId_type_de_cours($id_cours) {
         $this->_id_type_de_cours = $id_cours;
     }
     public function setId_professeur($id_professeur) {
@@ -270,10 +270,10 @@
      */
     public function allTypeDeCours() {
 
-        $sql = $this->_bdd->query('SELECT nom_type_de_cours FROM type_de_cours');
+        $sql = $this->_bdd->query('SELECT nom_type_de_cours, id_type_de_cours FROM type_de_cours');
 
         $lists = [];
-        while ($donnees = $sql->fetchColumn()) {
+        while ($donnees = $sql->fetch()) {
             array_push($lists, $donnees);
         }
 
@@ -313,7 +313,68 @@
 
     }
 
-    public function VerificationPlageHoraireDispo(){
 
+    /**
+     * Fonction qui compte le nombre de seance présente lors d'un ajoute ou d'une modification de seance pour eviter le chevauchement se seance durnat la meme periode
+     * 
+     * @param id-> Defauld a NULL   id de la seance a modifier (permet de ne pas compter dessus lors de la modification d'un prof par exemple)
+     * 
+     * @return sql retour le nombre de resultat
+     */
+    public function VerificationPlageHoraireDispo($id = NULL){
+
+        if( isset($id) ) {
+            $sql =$this->_bdd->query("SELECT count(*) FROM seance WHERE date_seance = date('".$this->_date_seance."') 
+            AND heure_fin_seance > time('".$this->_heure_debut_seance."') 
+            AND heure_debut_seance < time('".$this->_heure_fin_seance."') 
+            AND annule = 0 AND id_seance <> ".$id.";");
+
+        } else {
+            $sql =$this->_bdd->query("SELECT count(*) FROM seance WHERE date_seance = date('".$this->_date_seance."') 
+            AND heure_fin_seance > time('".$this->_heure_debut_seance."') 
+            AND heure_debut_seance < time('".$this->_heure_fin_seance."') 
+            AND annule = 0
+            ;");
+        }
+        return $sql->fetchColumn();
+    }
+
+    /**
+     * Verifie la validiter d une date lors de la modif d une seance ou l ajout 
+     * (verifie que la date et l'heure n'est pas encore passer, que l heure de fin soit plus grand que l heure de debut )
+     * 
+     * @param date date saisi lors de l ajout ou de la modification de la seance
+     * @param heure_debut heure de debut saisi lors de l ajout ou de la modification de la seance
+     * @param heure_fin heure de fin saisi lors de l ajout ou de la modification de la seance
+     * 
+     * @return retour si c'est erreur ou non
+     */
+    public function VerifDateHeure($date, $heure_debut, $heure_fin) {
+
+        if(date('Y-m-d') < $date) {
+            if($heure_debut < $heure_fin) {
+                return true;
+            }
+        } else if (date('Y-m-d') == $date ) {
+            if(date('H:i') < $heure_debut) {
+                if($heure_debut <  $heure_fin) {
+                    return true;
+                }
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Fonction pour l ajout de seance a la bdd
+     */
+    public function AddSeance() {
+
+        $sql = $this->_bdd->prepare('INSERT INTO seance (date_seance, heure_debut_seance, heure_fin_seance, id_type_de_cours, id_professeur) 
+            VALUES ("'.$this->getDate_seance().'", "'.$this->getHeure_debut_seance().'", "'.$this->getHeure_fin_seance().'", 
+            "'.$this->getId_type_de_cours().'", "'.$this->getId_professeur().'")');
+
+        $sql->execute();
     }
 }

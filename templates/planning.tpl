@@ -69,6 +69,12 @@
 			{if isset($RangNonValide)}
 				{$RangNonValide}
 			{/if}
+			{if isset($SeanceDejaPrise)}
+				{$SeanceDejaPrise}
+			{/if}
+			{if isset($DatePerimer)}
+				{$DatePerimer}
+			{/if}
 
 			<!-- Animation arrow -->
 			<div class="anim-arrow">
@@ -105,10 +111,11 @@
 
 				</div>
 
+				{if $_SESSION['rang'] == admin}
 				<!-- formulaire d'ajout de cours qui ne s'affiche qu'au clic du bouton -->
 				<div class="row hidden justify-content-around" id="ajouter-seance">
 					
-					<form method="post" action="">
+					<form method="post" action="#">
 						
 						<div class="form-row align-items-end ">
 							
@@ -123,11 +130,11 @@
 								
 								<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
 								<label for="nom_cours">Type de cours :</label>
-								<select class="form-control">
+								<select name="nom_type_cours" class="form-control" id="ajaxCours">
 									
 									{foreach from=$noms_des_cours item=nom_cours}
 
-										<option value="{$nom_cours}">{$nom_cours|capitalize}</option>
+										<option value="{$nom_cours.id_type_de_cours}">{$nom_cours.nom_type_de_cours|capitalize}</option>
 
 									{/foreach}
 
@@ -138,12 +145,12 @@
 							<div class="col-12 col-sm">
 								
 								<!-- optionnel : récupérer les profs dynamiquement pour les afficher dans le select -->
-								<label for="Enseignant">Enseignant :</label>
-								<select class="form-control">
+								<label for="prenom_professeur">Enseignant :</label>
+								<select name="prenom_professeur" class="form-control" id="enseignant">
 								
 									{foreach from=$prenoms_professeurs item=prenom_professeur}
 
-										<option value="{$prenom_professeur}">{$prenom_professeur|capitalize}</option>
+										<option value="{$prenom_professeur.id_professeur}">{$prenom_professeur.prenom_utilisateur|capitalize}</option>
 
 									{/foreach}
 
@@ -176,6 +183,7 @@
 					</form>
 
 				</div>
+				{/if}
 
 
 				<div class="row background-light align-items-center planning-search">
@@ -212,7 +220,7 @@
 
 									{foreach from=$noms_des_cours item=nom_cours}
 
-										<option value="{$nom_cours}">{$nom_cours|capitalize}</option>
+										<option value="{$nom_cours.nom_type_de_cours}">{$nom_cours.nom_type_de_cours|capitalize}</option>
 
 									{/foreach}
 
@@ -289,6 +297,8 @@
 							<p class="places-dispo">
 								{if ($seance.nombre_de_places-$seance.nbr_place_prise) == 0}
 									COMPLET
+								{elseif ($seance.annule == 1)}
+									ANNULER
 								{else}
 									places disponibles : {$seance.nombre_de_places-$seance.nbr_place_prise}
 								{/if}
@@ -306,6 +316,8 @@
 								{elseif ($seance.nombre_de_places-$seance.nbr_place_prise) == 0}
 									<!--Si la personne n'a pas reserver et que le cours est complet, affiche COMPLET-->
 									<button class="btn btn-primary shadow-none btn-reserver">COMPLET</button>
+								{elseif ($seance.annule == 1)}
+
 								{else}
 									<!-- à afficher seulement si le membre est connecté et ne participe pas à la séance -->
 									<!-- au clic du bouton, le membre doit être ajouté à la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation, il faudra peut-être intégrer la redirection dans le Modal?)-->
@@ -495,7 +507,7 @@
 							<div class="col-12 col-sm-6 col-lg">
 								
 								<label for="date-seance">Date :</label>
-								<input type="date" name="date-seance" class="form-control">
+								<input type="date" value="{$seance.date_seance}" name="date_seance" class="form-control">
 
 							</div>
 
@@ -503,14 +515,13 @@
 								
 								<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
 								<label for="type-cours">Type de cours :</label>
-								<select class="form-control">
+								<select class="form-control" name="nom_cours">
 									
-									<option value="hatha">Hatha</option>
-									<option value="vinyasa">Vinyasa</option>
-									<option value="slow-yoga">Slow yoga</option>
-									<option value="kid-yoga">Kid yoga</option>
-									<option value="meditation-guidee">Méditation guidée</option>
-									<option value="meditation-tibetaine">Méditation tibétaine</option>
+									{foreach from=$noms_des_cours item=nom_cours}
+
+										<option {if $seance.nom_type_de_cours == $nom_cours.nom_type_de_cours} selected="selected"{/if} value="{$nom_cours.id_type_de_cours}">{$nom_cours.nom_type_de_cours|capitalize}</option>
+
+									{/foreach}
 
 								</select>
 
@@ -520,14 +531,13 @@
 								
 								<!-- optionnel : récupérer les profs dynamiquement pour les afficher dans le select -->
 								<label for="type-cours">Enseignant :</label>
-								<select class="form-control">
+								<select class="form-control" name="prenom_professeur">
 									
-									<option value="olenna">Olenna</option>
-									<option value="morgane">Morgane</option>
-									<option value="helene">Hélène</option>
-									<option value="lena">Léna</option>
-									<option value="marie">Marie</option>
-									<option value="bastien">Bastien</option>
+									{foreach from=$prenoms_professeurs item=prenom_professeur}
+
+									<option {if $seance.prenom_utilisateur == $prenom_professeur.prenom_utilisateur} selected="selected"{/if} value="{$prenom_professeur.id_professeur}">{$prenom_professeur.prenom_utilisateur|capitalize}</option>
+
+									{/foreach}
 
 								</select>
 
@@ -536,20 +546,22 @@
 							<div class="col-12 col-sm">
 								
 								<label for="heure-debut">Heure de début :</label>
-								<input type="time" name="heure-debut" class="form-control">
+								<input type="time" value="{$seance.heure_debut_seance}" name="heure_debut" class="form-control">
 
 							</div>
 
 							<div class="col-12 col-sm">
 								
 								<label for="heure-debut">Heure de fin :</label>
-								<input type="time" name="heure-fin" class="form-control">
+								<input type="time" value="{$seance.heure_fin_seance}" name="heure_fin" class="form-control">
 
 							</div>
 
+							<input type="number" value="{$seance.id_seance}" name="id_seance" class="hidden">
+
 							<div class="col-12 col-sm btn-col">
 								
-								<button class="btn btn-primary btn-admin shadow-none" type="submit">AJOUTER</button>
+								<button class="btn btn-primary btn-admin shadow-none" name="Modif_seance" type="submit">MODIFIER</button>
 
 							</div>
 
@@ -564,26 +576,29 @@
 				<!-- à afficher au clic de l'admin sur le bouton "Annuler la séance" -->
 				<div class="row hidden background-light align-items-center justify-content-start" id="annuler-seance-{$seance.id_seance}">
 
-					<div class="col-12 col-sm-6">
-						
-						<form method="post" action="">
+					<form method="post" action="" class="col-12">
 
+						<div class="col-12 col-sm-6">
+						
 							<div class="form-row">
+
+							<input type="number" value="{$seance.id_seance}" name="id_seance" class="hidden">
+							<input type="number" value="{$seance.id_professeur}" name="id_professeur" class="hidden">
+
 							
 							<input type="checkbox" name="annuler-seance" class="form-check-input">
 							<label for="annuler-seance" class="form-check-label">J'annule cette séance. Tous les participants seront informés de l'annulation. </label></div>
 
-						</form>
+						</div>
 
-					</div>
-
-					<div class="col-12 col-sm-6 col-xl-2 text-center">
+						<div class="col-12 col-sm-6 col-xl-2 text-center">
 						
-						<!-- au clic du bouton, supprimer la séance concernée de la BDD -->
-						<button class="btn btn-primary btn-admin shadow-none">ANNULER LA SEANCE</button>
+							<!-- au clic du bouton, supprimer la séance concernée de la BDD -->
+							<button class="btn btn-primary btn-admin shadow-none" name="annuler_seance" type="submit">ANNULER LA SEANCE</button>
 
-					</div>
-					
+						</div>
+
+					</form>
 					
 
 				</div>
@@ -615,6 +630,7 @@
 		<!-- Scroll top + footer -->
 		<!-- <?php include("footer.php"); ?> -->
 		{include file = 'footer.tpl'}
+		<script type="text/javascript" src="assets/js/ajax.js"></script>
 
 	</body>
 </html>

@@ -39,9 +39,7 @@ $professeur = new Professeur($dbh);
 		$smarty->assign('seances', $seances);
 
 	//Partie Admin Participant
-        //afficher la liste des participant
-        
-        
+    //afficher la liste des participant
         
 
 $seance_reservation = new Seance($dbh);
@@ -60,7 +58,7 @@ if (isset($_GET['confirmationAnnulation'])) {
 }
 
 
-//Reserver une seance
+//Reserver une seance (utilisateur)
 if(isset($_GET['id_reservation'])) {
 
     //Verifier qu'on s'est bien connecter avec son compte
@@ -93,7 +91,7 @@ if(isset($_GET['id_reservation'])) {
 }
 }
 
-//Annuler une reservation de seance
+//Annuler une reservation de seance (utilisateur)
 if(isset($_GET['id_annuler'])) {
 
     if(isset($_SESSION['id_utilisateur'])){
@@ -110,33 +108,93 @@ if(isset($_GET['id_annuler'])) {
     }
 }
 
- //echo 'TU MENTEND ???!!!!';
-
 //Ajouter une seance (admin)
 if(isset($_POST['Ajouter_seance'])) {
 
     //On verifie que c'est bien un admin
     if($_SESSION['rang'] == 'admin') {
 
-        //On regarde de le cours est possible dans les horaires
-        $seance->setDate_seance($_POST['']);
-        $seance->setHeure_debut_seance($_POST['heure-debut']);
-        $seance->setHeure_fin_seance($_POST['heure-fin']);
-        $seance->setId_type_de_cours($_POST['id_type_de_cours']);
-        $seance->setId_professeur($_POST['id_professeur']);
+        if($seance->VerifDateHeure($_POST['date-seance'], $_POST['heure-debut'], $_POST['heure-fin']) == true) {
+            
+            //On regarde de le cours est possible dans les horaires
+            $seance->setDate_seance($_POST['date-seance']);
+            $seance->setHeure_debut_seance($_POST['heure-debut']); 
+            $seance->setHeure_fin_seance($_POST['heure-fin']);
+            $seance->setId_type_de_cours($_POST['nom_type_cours']);
+            $seance->setId_professeur($_POST['prenom_professeur']);            
 
-        echo '<pre>';
-        var_dump($seance);
-        echo '</pre>';
-        //$seance->Add($seance);
-       
+            if($seance->VerificationPlageHoraireDispo() == 0) {
+                echo 'J\'suis jsute trop con !!!';
+                $seance->AddSeance();
 
-
+            } else {
+                //Message d'erreur ->Deja une seance durant cette periode
+                $smarty->assign('SeanceDejaPrise', 'Il y a deja une seance durant cette periode') ;
+            }
+        } else {
+            //Date saisi deja passer
+            $smarty->assign('DatePerimer', 'La date rentrer est deja passer ou il y a un probleme avec l\'heure') ;
+            }
     }else {
         //Message d'erreur ->Pas le rang d'admin ou pas connecte
         $smarty->assign('RangNonValide', 'Vous n\'avez pas les permissions pour cela ou vous avez était deconnecte') ;
     }
 }
+
+//modifier une seance (admin ou moderateur et prof de la seance)
+if(isset($_POST['Modif_seance'])) {
+
+    //On verifie que c'est bien un admin ou le professeur
+    if($_SESSION['rang'] == 'admin' || $_SESSION['rang'] == 'moderateur' && $professeur->verifProf($_SESSION['id_utilisateur'], $_POST['prenom_professeur'])) {
+
+        //On verifie que les dates rentres concorde bien ensemble (pas de date passer, l'heure de debut inferieur a l'heure de fin)
+        if($seance->VerifDateHeure($_POST['date_seance'], $_POST['heure_debut'], $_POST['heure_fin']) == true) {
+
+            //On regarde de le cours est possible dans les horaires
+            if($seance->VerificationPlageHoraireDispo($seance->getId_seance()) == 0) {
+
+                $donnees = [
+                    'id_seance' => $_POST['id_seance'],
+                    'date_seance' => $_POST['date_seance'],
+                    'heure_debut_seance' => $_POST['heure_debut'],
+                    'heure_fin_seance' => $_POST['heure_fin'],
+                    'id_type_de_cours' => $_POST['nom_cours'],
+                    'id_professeur' => $_POST['prenom_professeur'],
+                ];
+                //On modifie la BDD avec le tableau
+                $seance->Update($donnees, $_POST['id_seance']);
+
+            } else {
+                //Message d'erreur ->Deja une seance durant cette periode
+                $smarty->assign('SeanceDejaPrise', 'Il y a deja une seance durant cette periode') ;
+            }
+        } else {
+            //Date saisi deja passer
+            $smarty->assign('DatePerimer', 'La date rentrer est deja passer ou il y a un probleme avec l\'heure') ;
+            }
+    }else {
+        //Message d'erreur ->Pas le rang d'admin ou pas connecte
+        $smarty->assign('RangNonValide', 'Vous n\'avez pas les permissions pour cela ou vous avez était deconnecte') ;
+    }
+}
+
+
+//Fait passer une seance en annuler dans la BDD
+if(isset($_POST['annuler_seance'])) {
+
+    //On verifie que c'est bien un admin ou le professeur
+    if($_SESSION['rang'] == 'admin' || $_SESSION['rang'] == 'moderateur' && $professeur->verifProf($_SESSION['id_utilisateur'], $_POST['id_professeur'])) {
+    
+        if(isset($_POST['annuler-seance']) ) {
+            $donnees['annule'] = '1';
+            $seance->Update($donnees, $_POST['id_seance']);
+        }
+    } else {
+        //Message d'erreur ->Pas le rang d'admin ou pas connecte
+        $smarty->assign('RangNonValide', 'Vous n\'avez pas les permissions pour cela ou vous avez était deconnecte') ;
+    }
+}
+
     
 //ajoute une variable pour determiner la partie "active" de la navbar.
 $smarty->assign('active', 'les_cours');
