@@ -371,7 +371,7 @@
 							{foreach from=$seance.participants item=participant}
 
 								<li>{$participant.prenom_utilisateur|capitalize} {$participant.nom_utilisateur|upper} 
-									<a class="btn-link" href="?action=planning&delete_seance_du_participant={$seance.id_seance}&delete_participant_a_une_seance={$participant.id_utilisateur}">Supprimer de la liste</a>
+									<a class="btn-link" href="?action=planning&delete_seance_du_participant={$seance.id_seance}&delete_participant_a_une_seance={$participant.id_utilisateur}&page={if isset($page)}{$page}{else}1{/if}#id-seance-{$seance.id_seance}">Supprimer de la liste</a>
 								</li>
 
 							{/foreach}
@@ -381,17 +381,26 @@
 					</div>
 
 					<div class="col-12">
-						
-						<button class="btn-link" onclick="showElement('ajouter-participant-{$seance.id_seance}');">+ Ajouter un participant</button>
+						{if ($seance.nombre_de_places-$seance.nbr_place_prise) == 0}
+							<p>Vous ne pouvez pas ajouter de participant car la seance est complète.
+						{else}
+							<button class="btn-link" onclick="showElement('ajouter-participant-{$seance.id_seance}');">+ Ajouter un participant</button>
+						{/if}
 
 					</div>
+					{if isset($addParticipantSucces)}
+						<div class="col-12">
+							<p>{$addParticipantSucces}<p>
+						</div>
+						
+					{/if}
 
-
+					{if ($seance.nombre_de_places-$seance.nbr_place_prise) != 0}
 					<!-- à afficher lorsque l'admin clique sur "Ajouter un participant" -->
 					<div class="col-12 hidden" id="ajouter-participant-{$seance.id_seance}">
 
 						<div class="col-12 col-lg-6">
-						{if isset($page)}{$page}{else}1{/if}
+						
 						<form method="POST" action="?action=planning&page={if isset($page)}{$page}{else}1{/if}#id-seance-{$seance.id_seance}" class="form-recherche">
 
 							<legend>Remplissez au moins un champ de recherche :</legend>
@@ -419,7 +428,7 @@
 
 								<div class="col-12 col-md col-btn">
 									
-									<button name="ajouter_participant" type="submit" class="btn btn-primary btn-reserver text-center">RECHERCHER</button>
+									<button name="rechercher_participant" type="submit" class="btn btn-primary btn-reserver text-center">RECHERCHER</button>
 
 								</div>
 
@@ -430,16 +439,15 @@
 
 
 						<!-- résultats de la recherche pour Ajouter un participant à la séance -->
-						{if isset($users)}
+						
+						{if isset($users) && $if_users_vide != 'user_vide'}
 
-						{foreach from=$users item=user}
-							
 						<div class="col-12 resultat-recherche">
-							
+						
+						{foreach from=$users item=user}
+
+
 							<p>Résultat de la recherche :</p>
-								
-							<!-- à afficher lorsque la recherche ne retourne aucun résultat -->
-							<!--<p class="text-center">Aucun membre trouvé. Veuillez vérifier les informations de recherche.</p>-->
 
 							<!-- à afficher lorsque la recherche retourne des éléments de la BDD -->
 							<div class="membre-trouve">
@@ -481,8 +489,20 @@
 
 									<!-- au clic du bouton, ajout du membre trouvé à la liste des participants de la séance -->
 									<div class="col text-center">
-										
-										<button class="btn btn-primary btn-reserver shadow-none">AJOUTER</button>
+
+										<form method="POST" action="?action=planning&page={if isset($page)}{$page}{else}1{/if}#liste-participants-{$seance.id_seance}" class="form-recherche">
+
+											<input type="number" name="id_seance" value="{$seance.id_seance}" hidden>
+
+											<input type="number" name="id_utilisateur" value="{$user->getId_utilisateur()}" hidden>
+
+											<input type="text" name="nom_utilisateur" value="{$user->getNom_utilisateur()}" hidden>
+
+											<input type="text" name="prenom_utilisateur" value="{$user->getPrenom_utilisateur()}" hidden>
+
+											<button	type="submit" name="ajouter_participant" class="btn btn-primary btn-reserver shadow-none">AJOUTER</button>
+
+										</form>
 
 									</div>
 
@@ -491,9 +511,20 @@
 							</div>
 
 						</div> <!-- fin div résultat de la recherche -->
+
 						{/foreach}
+						{elseif empty($users) && $if_users_vide == 'user_vide'}
+
+						<div class="col-12 resultat-recherche">
+
+							<!-- à afficher lorsque la recherche ne retourne aucun résultat -->
+							<p class="text-center">Aucun membre trouvé. Veuillez vérifier les informations de recherche.</p>
+
+						</div> <!-- fin div résultat de la recherche -->
 						{/if}
+
 					</div> <!-- fin div "Ajouter un participant" -->
+					{/if}
 
 				</div> <!-- fin div "Voir les participants" -->
 
@@ -640,12 +671,23 @@
 		{include file = 'footer.tpl'}
 
 		<script type="text/javascript" src="assets/js/ajax.js"></script>
+		<!--Ajout des script qui gere la reouverture des onclick si la page est recharger-->
+		{if isset($onclick_admin_seance)}
 
-		{if isset($users)}
-			<!--si la variable au dessus existe on lance les script d'affichage de la div-->
+			
 			{$onclick_admin_seance}
-			{$onclick_liste_participants}
-			{$onclick_ajouter_participant}
+
 		{/if}
+		{if isset($onclick_liste_participants)}
+
+			{$onclick_liste_participants}
+
+		{/if}
+		{if isset($onclick_ajouter_participant)}
+
+			{$onclick_ajouter_participant}
+
+		{/if}
+			
 	</body>
 </html>

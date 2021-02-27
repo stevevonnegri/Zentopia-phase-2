@@ -16,8 +16,8 @@ $seance = new Seance($dbh);
 
 
 //recherche des membre pour les ajouter a une seance
-    if (isset($_POST['ajouter_participant'])) {
-        
+    if (isset($_POST['rechercher_participant'])) {
+
         //on recupere le contenu des champs dans des variable
 
         if ($_POST['email_search'] == '') {
@@ -58,23 +58,83 @@ $seance = new Seance($dbh);
             '<script>showElement("ajouter-participant-'.$_POST['id_seance'].'");</script>';
 
         //on replace la personne au bon endroit sur la page et on envoie les variables a smarty
-            //TODO les 2 dernier script s'affiche en claire et le 1er n'a pas l'air de marcher.
+            //on verifie si $users est vide
+            if (empty($users)) {
+                $if_users_vide = 'user_vide';
+            }
             $smarty->assign(array(
                 'users' => $users,
+                'if_users_vide' => $if_users_vide,
                 'onclick_admin_seance' => $onclick_admin_seance,
                 'onclick_liste_participants' => $onclick_liste_participants,
                 'onclick_ajouter_participant' => $onclick_ajouter_participant
             ));
     }
+//apres avoir rechercher le membre on l'ajoute a la seance
+    if (isset($_POST['ajouter_participant'])) {
+        //on crée un nouvel objet seance
+        $seance = new Seance($dbh);
 
+        //on verifie que le participant n'est pas deja inscrit
+        $listseance = $seance->getItemFromReserver($_POST['id_seance'], 'id_seance');
+
+        if(in_array($_POST['id_utilisateur'], $listseance) == false){
+
+            $seance->addParticipant($_POST['id_seance'], $_POST['id_utilisateur']);
+
+            //on set le message a envoyer a smarty
+            $addParticipantSucces = "<p>Vous avez bien ajouté ".$_POST['prenom_utilisateur']." ".$_POST['nom_utilisateur']." à la séance</p>";
+            
+
+        } else { //si le participant est deja inscrit, envoie un message d'erreur a smarty
+
+            $addParticipantSucces = "<p>".$_POST['prenom_utilisateur']." ".$_POST['nom_utilisateur']." participe déja à la séance.</p>";
+
+        }
+
+        //on ecrit les scripts et on les met dans des variables
+            
+                //onclick admin-seance
+                $onclick_admin_seance = 
+                '<script>showElement("admin-seance-'.$_POST['id_seance'].'");</script>';
+                
+                //onclick liste-participants
+                $onclick_liste_participants = 
+                '<script>showElement("liste-participants-'.$_POST['id_seance'].'");</script>';
+
+        //envoie les message et les script a smarty
+            $smarty->assign(array(
+                'addParticipantSucces' => $addParticipantSucces,
+                'onclick_admin_seance' => $onclick_admin_seance,
+                'onclick_liste_participants' => $onclick_liste_participants
+            ));
+
+    }
 //suppresion d'un participant a une seance
     //verifie les id dans l'url
     if (isset($_GET['delete_seance_du_participant']) && isset($_GET['delete_participant_a_une_seance'])) {
-        //on transphorme les 2 valeur de GET en type number
+        //on transforme les 2 valeurs de GET en type number
         $id_utilisateur = intval($_GET['delete_participant_a_une_seance']);
         $id_seance = intval($_GET['delete_seance_du_participant']);
 
         $seance->deleteParticipant($id_seance, $id_utilisateur);
+
+        //on ecrit les scripts et on les met dans des variables
+        
+            //onclick admin-seance
+            $onclick_admin_seance = 
+            '<script>showElement("admin-seance-'.$id_seance.'");</script>';
+            
+            //onclick liste-participants
+            $onclick_liste_participants = 
+            '<script>showElement("liste-participants-'.$id_seance.'");</script>';
+
+        //on envoie les variable a smarty
+            $smarty->assign(array(
+                'onclick_admin_seance' => $onclick_admin_seance,
+                'onclick_liste_participants' => $onclick_liste_participants
+            ));
+
     }
 //ajoute un participant a une seance.
 
@@ -158,7 +218,7 @@ if(isset($_GET['id_reservation'])) {
                 
             } else {
                 //Renvoie une erreur smarty pour informer que la seance est pleine
-                $smarty->assign('seancePleine', '<script>alert(\'La seance que vous avez choisie est deja pleine\')</script>');
+                $smarty->assign('seancePleine', '<script>alert(\'La seance que vous avez choisi est deja pleine\')</script>');
             }
         } else{
             $smarty->assign('seanceDejaReserver', '<script>alert(\'Vous avez deja reserve cette seance, à bientot\')</script>');

@@ -312,7 +312,7 @@
     /**
      * cherche les seance a laquel participe un utilisateur
      * 
-     * @param id l'id d'une colone et son nom dans la BDD 
+     * @param id l'id d'une colone et son nom dans la BDD
      * 
      * @return lists return un tableau avec l'id_utilisateur des membres inscrits sur cette seance 
      */
@@ -343,6 +343,17 @@
             AND id_utilisateur ='.$id_utilisateur.'
             ');
 
+    }
+
+    /**
+     * Ajoute un participant a une seance
+     *
+     * @param      string  $id_seance       l'identifiant de la seance
+     * @param      string  $id_utilisateur  l'identifiant de l'utilisateur
+     */
+    public function addParticipant($id_seance, $id_utilisateur) {
+        $sql = $this->_bdd->prepare('INSERT INTO reserver (id_seance, id_utilisateur) VALUES ('.$id_seance.', '.$id_utilisateur.')');
+        $sql->execute();
     }
 
 }
