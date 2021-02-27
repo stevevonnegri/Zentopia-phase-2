@@ -6,7 +6,8 @@ function showElement($id) {
 
 	let x = document.getElementById($id);
 	x.classList.toggle('hidden');
-}	
+}
+
 
 // scroll-top permettant de remonter en haut de page
 $(window).scroll(function() {

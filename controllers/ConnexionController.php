@@ -20,6 +20,11 @@ if(isset($_POST['connexion'])) {
 
 }
 
+if (isset($_GET['reini'])) {
+
+    $smarty->assign('reinitialisation', 'reinitialisation');
+}
+
 
 //ajoute une variable pour determiner la partie "active" de la navbar.
 $smarty->assign('active', 'connexion');

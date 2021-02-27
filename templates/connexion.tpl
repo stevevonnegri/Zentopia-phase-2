@@ -41,6 +41,12 @@
 						
 						<h1>CONNECTEZ-VOUS</h1>
 
+						{if isset($reinitialisation)}
+
+							<p class="error">Votre mot de passe a bien été réinitialisé. Vous pouvez dès à présent vous connecter avec le nouveau mot de passe que nous vous avons envoyé par mail.</p>
+
+						{/if}
+
 						<form action="" method="post">
 
 							<input type="email" name="email_connexion" class="form-control connexion-input" placeholder="Email" required>
@@ -57,7 +63,7 @@
 								
 								<div class="col text-right">
 									
-									<a href="?action=mot_de_passe_oublier" class="mdp-oubli">mot de passe oublié ?</a>
+									<a href="?action=mdp_oublie" class="mdp-oubli">mot de passe oublié ?</a>
 
 								</div>
 

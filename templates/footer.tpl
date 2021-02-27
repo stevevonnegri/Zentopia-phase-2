@@ -66,4 +66,8 @@
 <!-- lien Slick -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
+<!-- lien ReCAPTCHA Google -->
+<script src="https://www.google.com/recaptcha/api.js?"></script>
+
+<!-- lien custom JS -->
 <script type="text/javascript" src="assets/js/script.js"></script>

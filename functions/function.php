@@ -60,4 +60,25 @@
 				return true;
 		}
 	}
+
+	/**
+	* Fonction qui génère un mot de passe aléatoire.
+	*
+	*@return <string> de 10 caractères aléatoires contenant des chiffres et des lettres
+	*
+	**/
+	function GenereMdp($length = 10) {
+
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $charactersLength = strlen($characters);
+	    $randomString = '';
+
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	    }
+
+	    return $randomString;
+	}
+
+
 ?>

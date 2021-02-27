@@ -160,8 +160,19 @@
     public function getUserByMail($mail) {
         $sql = $this->_bdd->query('SELECT * FROM '.$this->_table.' WHERE email = "'.$mail.'"');
         $utilisateur = $sql->fetch();
-        $utilisateur = new Utilisateur($utilisateur);
-        return $utilisateur;
+
+        if ($utilisateur == NULL) {
+            
+            return false;
+
+        } else {
+
+            $utilisateur = new Utilisateur($utilisateur);
+            return $utilisateur;
+        }
+
+
+        
     }
 
     //a tester : fonction d'ouverture de session.

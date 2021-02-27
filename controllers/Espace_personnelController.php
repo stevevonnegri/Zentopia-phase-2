@@ -28,7 +28,7 @@
 		$erreur = false;
 
 		if(password_verify($_POST['mot_de_passe_actuel'], $user_verif_mot_de_passe->getMot_de_passe())) {
-			//verifie que les mot de passe donnée sont conforme
+			//verifie que les mots de passe donnés sont conformes
 
 			$verif = VerifMot_De_PasseConforme($_POST['new_mot_de_passe']);
 

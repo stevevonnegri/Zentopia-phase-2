@@ -46,7 +46,13 @@ if (isset($_POST['message'])) {
         <b>Email : </b>' .$email. '<br>
         <b>Tel : </b>' .$tel. '<br>
         <b>Sujet : </b>' .$sujet. '<br>
-        <b>Message : </b>' .$contenu. '</p>';
+        <b>Message : </b>' .$contenu. '</p><br/><br/>
+
+        <p><b>ZENTOPIA <br/>
+        Centre de yoga et de méditation <br/>
+        26 rue des Tanneurs, 37000 TOURS <br/>
+        02 47 66 66 66 <br/>
+        contact@zentopia.fr</b></p>';
 
         // le message accusé de réception destiné à l'expéditeur
         $message_user = '<h1>Accusé de réception d\'un message de contact: </h1>
@@ -54,7 +60,13 @@ if (isset($_POST['message'])) {
         <b>Email : </b>' .$email. '<br>
         <b>Tel : </b>' .$tel. '<br>
         <b>Sujet : </b>' .$sujet. '<br>
-        <b>Message : </b>' .$contenu. '</p>';
+        <b>Message : </b>' .$contenu. '</p><br/><br/>
+
+        <p><b>ZENTOPIA <br/>
+        Centre de yoga et de méditation <br/>
+        26 rue des Tanneurs, 37000 TOURS <br/>
+        02 47 66 66 66 <br/>
+        contact@zentopia.fr</b></p>';
 
         // l'envoi des deux mails
 		$retour = mail('anais.bironneau@gmail.com', 'Envoi depuis la page Contact de Zentopia', $message, $entete);
