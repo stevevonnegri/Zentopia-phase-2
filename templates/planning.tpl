@@ -243,6 +243,7 @@
 				</div>
 
 			{assign var=date value=1}
+			{assign var=cmpt value=0}
 
 			<!--affichage d'une alert pour la resa et l'annulation d'une seance-->
 			{if isset($confirmationReservation)}
@@ -256,6 +257,15 @@
 			{/if}
 			{if isset($seanceDejaReserver)}
 				{$seanceDejaReserver}
+			{/if}
+			{if isset($ModifOk)}
+				{$ModifOk}
+			{/if}
+			{if isset($AjoutOk)}
+				{$AjoutOk}
+			{/if}
+			{if isset($AnnulationOk)}
+				{$AnnulationOk}
 			{/if}
 
 			{foreach from=$seances item=seance} {*FIN LIGNE 661 *}
@@ -298,7 +308,7 @@
 								{if ($seance.nombre_de_places-$seance.nbr_place_prise) == 0}
 									COMPLET
 								{elseif ($seance.annule == 1)}
-									ANNULER
+									ANNULÉ
 								{else}
 									places disponibles : {$seance.nombre_de_places-$seance.nbr_place_prise}
 								{/if}
@@ -512,10 +522,10 @@
 							</div>
 
 							<div class="col-12 col-sm-6 col-lg">
-								
+								{assign var="cmpt" value=$cmpt+1}
 								<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
 								<label for="type-cours">Type de cours :</label>
-								<select class="form-control" name="nom_cours">
+								<select class="form-control" name="nom_cours" id="ajaxCours-{$cmpt}">
 									
 									{foreach from=$noms_des_cours item=nom_cours}
 
@@ -531,7 +541,7 @@
 								
 								<!-- optionnel : récupérer les profs dynamiquement pour les afficher dans le select -->
 								<label for="type-cours">Enseignant :</label>
-								<select class="form-control" name="prenom_professeur">
+								<select class="form-control" name="prenom_professeur" id="enseignant-{$cmpt}">
 									
 									{foreach from=$prenoms_professeurs item=prenom_professeur}
 
@@ -582,12 +592,14 @@
 						
 							<div class="form-row">
 
-							<input type="number" value="{$seance.id_seance}" name="id_seance" class="hidden">
-							<input type="number" value="{$seance.id_professeur}" name="id_professeur" class="hidden">
+								<input type="number" value="{$seance.id_seance}" name="id_seance" class="hidden">
+								<input type="number" value="{$seance.id_professeur}" name="id_professeur" class="hidden">
 
+								
+								<input type="checkbox" name="annuler-seance" class="form-check-input">
+								<label for="annuler-seance" class="form-check-label">J'annule cette séance. Tous les participants seront informés de l'annulation. </label>
 							
-							<input type="checkbox" name="annuler-seance" class="form-check-input">
-							<label for="annuler-seance" class="form-check-label">J'annule cette séance. Tous les participants seront informés de l'annulation. </label></div>
+							</div>
 
 						</div>
 

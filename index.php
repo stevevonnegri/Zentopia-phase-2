@@ -2,16 +2,21 @@
 
 session_start();
 
-/*if (!isset($_SESSION)){
-    //Verifier si dans le cookie existe
-    if(isset($_COOKIE)) {
-        //Verifie si email+mdp match
+$user = new Utilisateur($dbh);
 
-        //Faire la connexion ensuite
-
-        session_start;
-
+//TODO steve Finir cookie reste co
+/*if (!isset($_SESSION) && (isset($_COOKIE['connexion'])) ){
+    //Verifie si email+mdp match
+    $cookieENT = $_COOKIE['connexion'];
+    $cookieEmail = explode ( '----' , $cookieENT);
+    $user = $user->getUserByMail($cookieEmail);
+    $key = password_hash($_POST['password_connexion'].$_SERVER['HTTP_USER_AGENT'].$_SERVER['HTTP_ACCEPT'].$_SERVER['HTTP_ACCEPT_ENCODING'].$_SERVER['HTTP_ACCEPT_LANGUAGE'], PASSWORD_DEFAULT);
+    if($key == $auth[1]) {
+        
     }
+
+        
+    
 }*/
 
 require('functions/function.php');
