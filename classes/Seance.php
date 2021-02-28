@@ -180,6 +180,7 @@
             //calcule la date a laquel on sera a la fin de la semaine.
 
             $jourLimite  = date('Y:m:d', mktime(0, 0, 0, date("m", $jourActuel)  , date("d", $jourActuel)+$jourDiff, date("Y", $jourActuel)));
+
             //on transforme la variable jourActuel de mktime vers une date
             $jourActuel = date('Y:m:d', $jourActuel);
 

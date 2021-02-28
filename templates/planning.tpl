@@ -105,7 +105,7 @@
 				<!-- formulaire d'ajout de cours qui ne s'affiche qu'au clic du bouton -->
 				<div class="row hidden justify-content-around" id="ajouter-seance">
 					
-					<form method="post" action="">
+					<form class="form_ajax" method="post" action="">
 						
 						<div class="form-row align-items-end ">
 							
@@ -120,9 +120,9 @@
 								
 								<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
 								<label for="type-cours">Type de cours :</label>
-								<select class="form-control" id="ajaxCours">
+								<select class="form-control" id="ajaxCours-0">
 									
-									<option selected value="1">Hatha</option>
+									<option value="1">Hatha</option>
 									<option value="2">Vinyasa</option>
 									<option value="3">Slow yoga</option>
 									<option value="4">Kid yoga</option>
@@ -137,7 +137,7 @@
 								
 								<!-- optionnel : récupérer les profs dynamiquement pour les afficher dans le select -->
 								<label for="type-cours">Enseignant :</label>
-								<select class="form-control" id="enseignant">
+								<select class="form-control" id="enseignant-0">
 									
 									<option value="marie">Marie</option>
 									<option value="lena">Léna</option>
@@ -231,8 +231,12 @@
 					</div>
 
 				</div>
-
+			<!--on assign 2 varibale:
+				la 1ere pour afficher la date, si elle n'est pas egale a la date de la precedente boucle.
+				la 2eme sert de compteur pour identifier les formulaire a surveiller pour l'ajax.
+			-->
 			{assign var=date value=1}
+			{assign var=cmpt value=0}
 
 			<!--affichage d'une alert pour la resa et l'annulation d'une seance-->
 			{if isset($confirmationReservation)}
@@ -264,6 +268,7 @@
 
 				{/if}
 
+				<!--on assigne la date de cette boucle à notre variable pour s'en "souvenir" au tour de boucle suivant.-->
 				{assign var=date value=$seance.date_seance}
 					
 					<div class="row background-light align-items-center seance-element" id="id-seance-{$seance.id_seance}">
@@ -534,7 +539,7 @@
 				<div class="row hidden background-light align-items-center justify-content-around" id="modif-seance-{$seance.id_seance}">
 					
 					<!-- form à pré-remplir avec les informations de la séance concernée -->
-					<form method="post" action="">
+					<form class="form_ajax" method="post" action="" >
 						
 						<div class="form-row align-items-end ">
 							
@@ -546,17 +551,18 @@
 							</div>
 
 							<div class="col-12 col-sm-6 col-lg">
-								
+								<!--on incremente la varable cmpt pour en faire un compteur de tour de boucle-->
+								{assign var="cmpt" value=$cmpt+1}
 								<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
 								<label for="type-cours">Type de cours :</label>
-								<select class="form-control">
+								<select class="form-control" id="ajaxCours-{$cmpt}">
 									
-									<option value="hatha">Hatha</option>
-									<option value="vinyasa">Vinyasa</option>
-									<option value="slow-yoga">Slow yoga</option>
-									<option value="kid-yoga">Kid yoga</option>
-									<option value="meditation-guidee">Méditation guidée</option>
-									<option value="meditation-tibetaine">Méditation tibétaine</option>
+									<option value="1">Hatha</option>
+									<option value="2">Vinyasa</option>
+									<option value="3">Slow yoga</option>
+									<option value="4">Kid yoga</option>
+									<option value="5">Méditation guidée</option>
+									<option value="6">Méditation tibétaine</option>
 
 								</select>
 
@@ -566,14 +572,13 @@
 								
 								<!-- optionnel : récupérer les profs dynamiquement pour les afficher dans le select -->
 								<label for="type-cours">Enseignant :</label>
-								<select class="form-control">
+								<select class="form-control" id="enseignant-{$cmpt}">
 									
 									<option value="olenna">Olenna</option>
 									<option value="morgane">Morgane</option>
 									<option value="helene">Hélène</option>
 									<option value="lena">Léna</option>
 									<option value="marie">Marie</option>
-									<option value="bastien">Bastien</option>
 
 								</select>
 

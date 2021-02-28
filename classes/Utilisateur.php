@@ -341,19 +341,25 @@
         }
 
 
+        if ($where != '') {
+            //si pas de condition, dans le cas ou toute les option sont NULL, la fonction substr renvoie false, se qui provoque une erreur dans la requte sql.
+            $where = substr($where, 4);
 
-        $where = substr($where, 4);
-
-
-        $sql = $this->_bdd->query(
+            $sql = $this->_bdd->prepare(
             'SELECT * FROM '.$this->_table.' WHERE '.$where);
+          
+            while($donnees = $sql->fetch(PDO::FETCH_ASSOC)){
+                $lists[] = new $this->_table($donnees);
+            }
 
-        while($donnees = $sql->fetch(PDO::FETCH_ASSOC)){
-            $lists[] = new $this->_table($donnees);
+            return $lists; 
+        
+        } else {
+            //si la variable where vaux '' c'est qu'il n'y a pas de parametre, donc la fonction renvoie un tableau vide.
+            return $lists;
+
         }
-
-        return $lists; 
-
+        
     } 
 
 }

@@ -10,7 +10,7 @@
 
 	$sql = $bdd->query('SELECT id_professeur, prenom_utilisateur FROM utilisateur NATURAL JOIN professeur NATURAL JOIN peut_enseigner WHERE id_type_de_cours = '.$id);
 	
-	$list = '<select class="form-control" id="enseignant">';
+	$list = '<select class="form-control" id="enseignant-'.$_POST['cmpt'].'">';
 
 	while ($donnees = $sql->fetch(PDO::FETCH_ASSOC)) {
 		$list .= '<option value="'.$donnees['id_professeur'].'">'.ucfirst($donnees['prenom_utilisateur']).'</option>';
