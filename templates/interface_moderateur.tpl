@@ -135,7 +135,7 @@
 							
 							<div class="col text-center">
 									
-									<a href="#" class="btn btn-primary btn-admin shadow-none">ACCEDER AU PLANNING</a>
+									<a href="?action=planning" class="btn btn-primary btn-admin shadow-none">ACCEDER AU PLANNING</a>
 
 							</div>
 

@@ -205,7 +205,7 @@
 
 					<div class="col-12 col-lg-7">
 						
-						<form method="POST" action="?action=planning#reservation">
+						<form method="POST" action="?action=planning&page={if isset($page)}{$page}{else}1{/if}#reservation">
 
 							<div class="form-row align-items-center">
 
@@ -410,7 +410,9 @@
 
 					<div class="col-12">
 						{if ($seance.nombre_de_places-$seance.nbr_place_prise) == 0}
-							<p>Vous ne pouvez pas ajouter de participant car la seance est complète.
+							<p>Vous ne pouvez pas ajouter de participant car la seance est complète.</p>
+						{elseif $seance.annule == true}
+							<p>Vous ne pouvez pas ajouter de participant car la seance est annulée.</p>
 						{else}
 							<button class="btn-link" onclick="showElement('ajouter-participant-{$seance.id_seance}');">+ Ajouter un participant</button>
 						{/if}
@@ -702,7 +704,6 @@
 		<!-- Scroll top + footer -->
 		<!-- <?php include("footer.php"); ?> -->
 		{include file = 'footer.tpl'}
-		<script type="text/javascript" src="assets/js/ajax.js"></script>
 
 		<script type="text/javascript" src="assets/js/ajax.js"></script>
 		<!--Ajout des script qui gere la reouverture des onclick si la page est recharger-->

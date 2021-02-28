@@ -2,6 +2,11 @@
 
 session_start();
 
+
+require('functions/function.php');
+require('config.php');
+
+
 $user = new Utilisateur($dbh);
 
 //TODO steve Finir cookie reste co
@@ -19,8 +24,6 @@ $user = new Utilisateur($dbh);
     
 }*/
 
-require('functions/function.php');
-require('config.php');
 
 $smarty = new Smarty();
 

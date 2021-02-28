@@ -262,7 +262,7 @@ if(isset($_POST['Ajouter_seance'])) {
             $seance->setHeure_fin_seance($_POST['heure-fin']);
             $seance->setId_type_de_cours($_POST['nom_type_cours']);
             $seance->setId_professeur($_POST['prenom_professeur']);            
-
+            
             if($seance->VerificationPlageHoraireDispo() == 0) {
                 $seance->AddSeance();
                 $smarty->assign('AjoutOk', 'La séance a bien été ajouter');

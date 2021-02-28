@@ -173,15 +173,16 @@
             //teste si $date est NULL
             if (!isset($date)) {
                 //si pas de date, on recupere celle d'aujourd'hui
-                $jourActuel = date('Y:m:d');
+                $jourActuel = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
                 //on recupere l'heure
                 $heureActuel = date('H:i:s');
-            
+               
             } else {
                 //si une date est donnée on la prend et on set l'heure a zero pour recupere toute les seance de la journée.
                 $jourActuel = $date;
                 $heureActuel = "00:00:00";
             }
+
 
             //on recupere le jour de la semaine)
             $jourSemaineActuel = date('w', $jourActuel);
@@ -192,6 +193,7 @@
             //calcule la date a laquel on sera a la fin de la semaine.
 
             $jourLimite  = date('Y:m:d', mktime(0, 0, 0, date("m", $jourActuel)  , date("d", $jourActuel)+$jourDiff, date("Y", $jourActuel)));
+            
 
             //on transforme la variable jourActuel de mktime vers une date
             $jourActuel = date('Y:m:d', $jourActuel);
@@ -302,6 +304,7 @@
         $sql = $this->_bdd->query('SELECT nom_type_de_cours, id_type_de_cours FROM type_de_cours');
 
         $lists = [];
+
         while ($donnees = $sql->fetch()) {
             array_push($lists, $donnees);
         }
@@ -391,6 +394,8 @@
             AND heure_debut_seance < time('".$this->_heure_fin_seance."') 
             AND annule = 0
             ;");
+
+
         }
         return $sql->fetchColumn();
     }
@@ -430,6 +435,8 @@
         $sql = $this->_bdd->prepare('INSERT INTO seance (date_seance, heure_debut_seance, heure_fin_seance, id_type_de_cours, id_professeur) 
             VALUES ("'.$this->getDate_seance().'", "'.$this->getHeure_debut_seance().'", "'.$this->getHeure_fin_seance().'", 
             "'.$this->getId_type_de_cours().'", "'.$this->getId_professeur().'")');
+
+        var_dump($sql);
 
         $sql->execute();
     }

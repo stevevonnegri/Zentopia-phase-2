@@ -17,9 +17,6 @@ if(isset($_POST['connexion'])) {
         .$_SERVER['HTTP_ACCEPT_ENCODING']
         .$_SERVER['HTTP_ACCEPT_LANGUAGE'], PASSWORD_DEFAULT), time() + 60*60*24*7, null, null, false, true);
 
-        echo '<pre>';
-        var_dump($_COOKIE);
-        echo '</pre>';
         $resultat = $user->OpenSession();
 
     } else {
@@ -29,7 +26,7 @@ if(isset($_POST['connexion'])) {
 
     //Verifie selon le retour de la fonction OpenSession, si != de true, renvoie une erreur sinon redirige vers l'espace personnel
     if($resultat === true) {
-        //echo ('<script>document.location.href="?action=espace_personnel"</script>');
+        echo ('<script>document.location.href="?action=espace_personnel"</script>');
     } elseif($resultat === 'MDP') {
         $smarty->assign('ErrorMDP', '<p class="alert-danger">Mot de passe incorrect</p>');
     } elseif($resultat === 'EMAIL') {
