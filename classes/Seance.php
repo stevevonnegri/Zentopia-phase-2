@@ -435,9 +435,6 @@
         $sql = $this->_bdd->prepare('INSERT INTO seance (date_seance, heure_debut_seance, heure_fin_seance, id_type_de_cours, id_professeur) 
             VALUES ("'.$this->getDate_seance().'", "'.$this->getHeure_debut_seance().'", "'.$this->getHeure_fin_seance().'", 
             "'.$this->getId_type_de_cours().'", "'.$this->getId_professeur().'")');
-
-        var_dump($sql);
-
         $sql->execute();
     }
 }

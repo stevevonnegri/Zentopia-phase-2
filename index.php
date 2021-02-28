@@ -2,27 +2,25 @@
 
 session_start();
 
-
 require('functions/function.php');
 require('config.php');
 
-
 $user = new Utilisateur($dbh);
 
-//TODO steve Finir cookie reste co
-/*if (!isset($_SESSION) && (isset($_COOKIE['connexion'])) ){
-    //Verifie si email+mdp match
+if (!isset($_SESSION['id_utilisateur']) && (isset($_COOKIE['connexion'])) ){
+
     $cookieENT = $_COOKIE['connexion'];
-    $cookieEmail = explode ( '----' , $cookieENT);
-    $user = $user->getUserByMail($cookieEmail);
-    $key = password_hash($_POST['password_connexion'].$_SERVER['HTTP_USER_AGENT'].$_SERVER['HTTP_ACCEPT'].$_SERVER['HTTP_ACCEPT_ENCODING'].$_SERVER['HTTP_ACCEPT_LANGUAGE'], PASSWORD_DEFAULT);
-    if($key == $auth[1]) {
-        
+    $cookieENT = explode ( '----' , $cookieENT);
+    $user = $user->getUserByMail($cookieENT[0]);
+    $key = $user->getMot_de_passe().$_SERVER['HTTP_USER_AGENT'].$_SERVER['HTTP_ACCEPT'].$_SERVER['HTTP_ACCEPT_ENCODING'].$_SERVER['HTTP_ACCEPT_LANGUAGE'];
+
+    if(password_verify($key, $cookieENT[1])) {
+        session_start();
+        $user->addVariableSession();
     }
 
-        
     
-}*/
+}
 
 
 $smarty = new Smarty();

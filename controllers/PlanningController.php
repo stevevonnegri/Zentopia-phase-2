@@ -265,6 +265,7 @@ if(isset($_POST['Ajouter_seance'])) {
             
             if($seance->VerificationPlageHoraireDispo() == 0) {
                 $seance->AddSeance();
+                echo ('<script>alert("La séance a bien été ajouter")</script>');
                 $smarty->assign('AjoutOk', 'La séance a bien été ajouter');
 
             } else {
@@ -303,8 +304,8 @@ if(isset($_POST['Modif_seance'])) {
                 ];
                 //On modifie la BDD avec le tableau
                 $seance->Update($donnees, $_POST['id_seance']);
+                echo ('<script>alert("La seance a bien été modifier, les personnes inscrit seront informées de la modification")</script>');
                 $smarty->assign('ModifOk', 'La seance a bien été modifier, les personnes inscrit seront informées de la modification');
-
             } else {
                 //Message d'erreur ->Deja une seance durant cette periode
                 $smarty->assign('SeanceDejaPrise', 'Il y a deja une seance durant cette periode') ;
@@ -329,6 +330,7 @@ if(isset($_POST['annuler_seance'])) {
         if(isset($_POST['annuler-seance']) ) {
             $donnees['annule'] = '1';
             $seance->Update($donnees, $_POST['id_seance']);
+            echo ('<script>alert("La seance a bien été annuler, les personnes inscrits seront informées de l\'annulation")</script>');
             $smarty->assign('AnnulationOk', 'La seance a bien été annuler, les personnes inscrits seront informées de l\'annulation');
         }
     } else {
