@@ -8,6 +8,7 @@
 //si clic sur le bouton deconnexion, detruit la session et redirige vers l'accueil
 	if ($_GET['deconnexion'] == true) {
 		session_destroy();
+		setcookie('connexion', '', time() - 60*60*24*7);
 		header('Location: index.php');
 	}
 //supprimer le compte
