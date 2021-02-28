@@ -23,6 +23,10 @@ class Model {
 		$this->_bdd = $bdd;
 	}
 
+	public function getBdd(){
+		return $this->_bdd;
+	}
+
 
     public function setBddTableau($bdd) {
 		foreach ($bdd as $attribut => $valeur) {	

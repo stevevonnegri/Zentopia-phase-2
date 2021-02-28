@@ -2,55 +2,57 @@
 
 $image = new Image($dbh);
 
-//On regarde combien de photo sont mis dans la bdd, si plus que 10, ca bloque l'envoye de nouvelle image
-if($image->count() >= 10) {
-    $smarty->assign('errorQuantite', 'Vous avez déjà plus que 10 photos quand le slider, veuillez en supprimez une pour en rajouter une nouvelle');
-} else {
+if(isset($_POST['image_add'])){
 
-    //Ca verifie qu'il a bien une image quand on clique sur envoye
-    if(isset($_POST['image_add'])){
+    //On regarde combien de photo sont mis dans la bdd, si plus que 10, ca bloque l'envoye de nouvelle image
+    if($image->count() >= 10) {
+        $smarty->assign('errorQuantite', 'Vous avez déjà plus que 10 photos quand le slider, veuillez en supprimez une pour en rajouter une nouvelle');
+    } else {
 
-        //ca verifie qu'il n'y a pas d'erreur dans l'image
-        if($_FILES['image']['error'] == 0){
+        //Ca verifie qu'il a bien une image quand on clique sur envoye
+        if($_SESSION['rang'] == 'admin' || $_SESSION['rang'] == 'moderateur'){
 
-            $image2 = new Image($dbh);
+            //ca verifie qu'il n'y a pas d'erreur dans l'image
+            if($_FILES['image']['error'] == 0){
 
-            //Deplace l'image du dossier temp, puis redimensionne l'image en 770px de largeur
-            $resultat = move_uploaded_file($_FILES['image']['tmp_name'], 'assets/images/'.$_FILES['image']['name']);
-            $image2->resizeImage('assets/images/'.$_FILES['image']['name'], 770, $_FILES['image']['name']);
+                $image2 = new Image($dbh);
 
-            //Renvoie les infos de l'image 
-            $tailleImage = getImageSize('assets/images/slider/770-'.$_FILES['image']['name']);
+                //Deplace l'image du dossier temp, puis redimensionne l'image en 770px de largeur
+                $resultat = move_uploaded_file($_FILES['image']['tmp_name'], 'assets/images/'.$_FILES['image']['name']);
+                $image2->resizeImage('assets/images/'.$_FILES['image']['name'], 770, $_FILES['image']['name']);
 
-            if(!$resultat){
-                //Verifie qu'il n'y a pas eu d'erreur lors du deplacement de l'image
-                $smarty->assign('errorFichier', 'Une erreur est survenue lors du déplacement du fichier');
-            }
+                //Renvoie les infos de l'image 
+                $tailleImage = getImageSize('assets/images/slider/770-'.$_FILES['image']['name']);
 
-            //Si la taille de l'image est entre 450 et 550px de hauteur pour 770px de largeur, alors on la conserve
-            if($tailleImage['1'] <= 550 && $tailleImage['1'] >= 450 && $tailleImage['0'] < 780 ) {
+                if(!$resultat){
+                    //Verifie qu'il n'y a pas eu d'erreur lors du deplacement de l'image
+                    $smarty->assign('errorFichier', 'Une erreur est survenue lors du déplacement du fichier');
+                }
 
-                //image pour les miniatures de la parti moderateur
-                $image2->resizeImage('assets/images/'.$_FILES['image']['name'], 100, $_FILES['image']['name']);
+                //Si la taille de l'image est entre 450 et 550px de hauteur pour 770px de largeur, alors on la conserve
+                if($tailleImage['1'] <= 550 && $tailleImage['1'] >= 450 && $tailleImage['0'] < 780 ) {
 
-                $data['url_image'] = $_FILES['image']['name'];
-                $data['id_utilisateur'] = $_SESSION['id_utilisateur'];
+                    //image pour les miniatures de la parti moderateur
+                    $image2->resizeImage('assets/images/'.$_FILES['image']['name'], 100, $_FILES['image']['name']);
 
-                $image->Add($data);
-                
-            } else {
-                //Fait une erreur pour la taille puis supprime les fichiers du serveur
-                $smarty->assign('errorTaille', 'L\'image chargée sur le serveur n\'est pas conforme à taille du diaporama. (Merci de choisir une image dont la taille est comprise entre 450px et 550px de hauteur sur 770px de large)');				
-                unlink('assets/images/'.$_FILES['image']['name']);
-                unlink('assets/images/slider/770-'.$_FILES['image']['name']);
-            }
-        }else {
-        $smarty->assign('errorUpload', 'Une erreur est survenu lors de l\'upload sur le serveur');				
-        
-        }						
-    }	
+                    $data['url_image'] = $_FILES['image']['name'];
+                    $data['id_utilisateur'] = $_SESSION['id_utilisateur'];
+
+                    $image->Add($data);
+                    
+                } else {
+                    //Fait une erreur pour la taille puis supprime les fichiers du serveur
+                    $smarty->assign('errorTaille', 'L\'image chargée sur le serveur n\'est pas conforme à taille du diaporama. (Merci de choisir une image dont la taille est comprise entre 450px et 550px de hauteur sur 770px de large)');				
+                    unlink('assets/images/'.$_FILES['image']['name']);
+                    unlink('assets/images/slider/770-'.$_FILES['image']['name']);
+                }
+            }else {
+            $smarty->assign('errorUpload', 'Une erreur est survenu lors de l\'upload sur le serveur');				
+            
+            }						
+        }	
+    }
 }
-
 /**
  * Test si on recupere bien l'id et le nom d'une image, puis la delete et informe en cas d'erreur
  */

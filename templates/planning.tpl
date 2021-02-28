@@ -66,6 +66,16 @@
 
 			<h1 id="reservation">RESERVATION EN LIGNE</h1>
 
+			{if isset($RangNonValide)}
+				{$RangNonValide}
+			{/if}
+			{if isset($SeanceDejaPrise)}
+				{$SeanceDejaPrise}
+			{/if}
+			{if isset($DatePerimer)}
+				{$DatePerimer}
+			{/if}
+
 			<!-- Animation arrow -->
 			<div class="anim-arrow">
 				<i class="fas fa-angle-double-down"></i>
@@ -88,7 +98,7 @@
 						
 						{if $_SESSION['rang'] == admin}
 							<!-- affiche le formulaire d'ajout de cours au clic -->
-							<button class="btn btn-primary btn-admin shadow-none ajouter-seance-btn" onclick="showElement('ajouter-seance');">+ AJOUTER UN COURS</button>
+							<button class="btn btn-primary btn-admin shadow-none ajouter-seance-btn" href="ajouter_un_cours" onclick="showElement('ajouter-seance');">+ AJOUTER UN COURS</button>
 						{/if}
 
 					</div>
@@ -119,15 +129,14 @@
 							<div class="col-12 col-sm-6 col-lg">
 								
 								<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
-								<label for="type-cours">Type de cours :</label>
-								<select class="form-control" id="ajaxCours-0">
+								<label for="nom_cours">Type de cours :</label>
+								<select name="nom_type_cours" class="form-control" id="ajaxCours-0">
 									
-									<option value="1">Hatha</option>
-									<option value="2">Vinyasa</option>
-									<option value="3">Slow yoga</option>
-									<option value="4">Kid yoga</option>
-									<option value="5">Méditation guidée</option>
-									<option value="6">Méditation tibétaine</option>
+									{foreach from=$noms_des_cours item=nom_cours}
+
+										<option value="{$nom_cours.id_type_de_cours}">{$nom_cours.nom_type_de_cours|capitalize}</option>
+
+									{/foreach}
 
 								</select>
 
@@ -136,14 +145,14 @@
 							<div class="col-12 col-sm">
 								
 								<!-- optionnel : récupérer les profs dynamiquement pour les afficher dans le select -->
-								<label for="type-cours">Enseignant :</label>
-								<select class="form-control" id="enseignant-0">
-									
-									<option value="marie">Marie</option>
-									<option value="lena">Léna</option>
-									<option value="helene">Hélène</option>
-									<option value="olenna">Olenna</option>
-									<option value="morgane">Morgane</option>
+								<label for="prenom_professeur">Enseignant :</label>
+								<select name="prenom_professeur" class="form-control" id="enseignant-0">
+								
+									{foreach from=$prenoms_professeurs item=prenom_professeur}
+
+										<option value="{$prenom_professeur.id_professeur}">{$prenom_professeur.prenom_utilisateur|capitalize}</option>
+
+									{/foreach}
 
 								</select>
 
@@ -165,7 +174,7 @@
 
 							<div class="col-12 col-sm btn-col">
 								
-								<button class="btn btn-primary btn-admin shadow-none" type="submit">AJOUTER</button>
+								<button class="btn btn-primary btn-admin shadow-none" name="Ajouter_seance" type="submit">AJOUTER</button>
 
 							</div>
 
@@ -176,6 +185,7 @@
 				</div>
 				{/if}
 
+				
 				<div class="row background-light align-items-center planning-search">
 					
 					<div class="col-9 col-lg-3" id="semaine">
@@ -210,7 +220,7 @@
 
 									{foreach from=$noms_des_cours item=nom_cours}
 
-										<option value="{$nom_cours}">{$nom_cours|capitalize}</option>
+										<option value="{$nom_cours.nom_type_de_cours}">{$nom_cours.nom_type_de_cours|capitalize}</option>
 
 									{/foreach}
 
@@ -250,6 +260,15 @@
 			{/if}
 			{if isset($seanceDejaReserver)}
 				{$seanceDejaReserver}
+			{/if}
+			{if isset($ModifOk)}
+				{$ModifOk}
+			{/if}
+			{if isset($AjoutOk)}
+				{$AjoutOk}
+			{/if}
+			{if isset($AnnulationOk)}
+				{$AnnulationOk}
 			{/if}
 
 			{foreach from=$seances item=seance} {*FIN LIGNE 661 *}
@@ -292,6 +311,8 @@
 							<p class="places-dispo">
 								{if ($seance.nombre_de_places-$seance.nbr_place_prise) == 0}
 									COMPLET
+								{elseif ($seance.annule == 1)}
+									ANNULÉ
 								{else}
 									places disponibles : {$seance.nombre_de_places-$seance.nbr_place_prise}
 								{/if}
@@ -308,7 +329,9 @@
 									<a href="?action=planning&id_annuler={$seance.id_seance}" class="btn btn-primary shadow-none btn-reserver">ANNULER</a>
 								{elseif ($seance.nombre_de_places-$seance.nbr_place_prise) == 0}
 									<!--Si la personne n'a pas reserver et que le cours est complet, affiche COMPLET-->
-									
+
+								{elseif ($seance.annule == 1)}
+
 								{else}
 									<!-- à afficher seulement si le membre est connecté et ne participe pas à la séance -->
 									<!-- au clic du bouton, le membre doit être ajouté à la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation, il faudra peut-être intégrer la redirection dans le Modal?)-->
@@ -546,23 +569,21 @@
 							<div class="col-12 col-sm-6 col-lg">
 								
 								<label for="date-seance">Date :</label>
-								<input type="date" name="date-seance" class="form-control">
+								<input type="date" value="{$seance.date_seance}" name="date_seance" class="form-control">
 
 							</div>
 
 							<div class="col-12 col-sm-6 col-lg">
-								<!--on incremente la varable cmpt pour en faire un compteur de tour de boucle-->
 								{assign var="cmpt" value=$cmpt+1}
 								<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
 								<label for="type-cours">Type de cours :</label>
-								<select class="form-control" id="ajaxCours-{$cmpt}">
+								<select class="form-control" name="nom_cours" id="ajaxCours-{$cmpt}">
 									
-									<option value="1">Hatha</option>
-									<option value="2">Vinyasa</option>
-									<option value="3">Slow yoga</option>
-									<option value="4">Kid yoga</option>
-									<option value="5">Méditation guidée</option>
-									<option value="6">Méditation tibétaine</option>
+									{foreach from=$noms_des_cours item=nom_cours}
+
+										<option {if $seance.nom_type_de_cours == $nom_cours.nom_type_de_cours} selected="selected"{/if} value="{$nom_cours.id_type_de_cours}">{$nom_cours.nom_type_de_cours|capitalize}</option>
+
+									{/foreach}
 
 								</select>
 
@@ -572,13 +593,13 @@
 								
 								<!-- optionnel : récupérer les profs dynamiquement pour les afficher dans le select -->
 								<label for="type-cours">Enseignant :</label>
-								<select class="form-control" id="enseignant-{$cmpt}">
+								<select class="form-control" name="prenom_professeur" id="enseignant-{$cmpt}">
 									
-									<option value="olenna">Olenna</option>
-									<option value="morgane">Morgane</option>
-									<option value="helene">Hélène</option>
-									<option value="lena">Léna</option>
-									<option value="marie">Marie</option>
+									{foreach from=$prenoms_professeurs item=prenom_professeur}
+
+									<option {if $seance.prenom_utilisateur == $prenom_professeur.prenom_utilisateur} selected="selected"{/if} value="{$prenom_professeur.id_professeur}">{$prenom_professeur.prenom_utilisateur|capitalize}</option>
+
+									{/foreach}
 
 								</select>
 
@@ -587,20 +608,22 @@
 							<div class="col-12 col-sm">
 								
 								<label for="heure-debut">Heure de début :</label>
-								<input type="time" name="heure-debut" class="form-control">
+								<input type="time" value="{$seance.heure_debut_seance}" name="heure_debut" class="form-control">
 
 							</div>
 
 							<div class="col-12 col-sm">
 								
 								<label for="heure-debut">Heure de fin :</label>
-								<input type="time" name="heure-fin" class="form-control">
+								<input type="time" value="{$seance.heure_fin_seance}" name="heure_fin" class="form-control">
 
 							</div>
 
+							<input type="number" value="{$seance.id_seance}" name="id_seance" class="hidden">
+
 							<div class="col-12 col-sm btn-col">
 								
-								<button class="btn btn-primary btn-admin shadow-none" type="submit">AJOUTER</button>
+								<button class="btn btn-primary btn-admin shadow-none" name="Modif_seance" type="submit">MODIFIER</button>
 
 							</div>
 
@@ -615,26 +638,31 @@
 				<!-- à afficher au clic de l'admin sur le bouton "Annuler la séance" -->
 				<div class="row hidden background-light align-items-center justify-content-start" id="annuler-seance-{$seance.id_seance}">
 
-					<div class="col-12 col-sm-6">
-						
-						<form method="post" action="">
+					<form method="post" action="" class="col-12">
 
+						<div class="col-12 col-sm-6">
+						
 							<div class="form-row">
+
+								<input type="number" value="{$seance.id_seance}" name="id_seance" class="hidden">
+								<input type="number" value="{$seance.id_professeur}" name="id_professeur" class="hidden">
+
+								
+								<input type="checkbox" name="annuler-seance" class="form-check-input">
+								<label for="annuler-seance" class="form-check-label">J'annule cette séance. Tous les participants seront informés de l'annulation. </label>
 							
-							<input type="checkbox" name="annuler-seance" class="form-check-input">
-							<label for="annuler-seance" class="form-check-label">J'annule cette séance. Tous les participants seront informés de l'annulation. </label></div>
+							</div>
 
-						</form>
+						</div>
 
-					</div>
-
-					<div class="col-12 col-sm-6 col-xl-2 text-center">
+						<div class="col-12 col-sm-6 col-xl-2 text-center">
 						
-						<!-- au clic du bouton, supprimer la séance concernée de la BDD -->
-						<button class="btn btn-primary btn-admin shadow-none">ANNULER LA SEANCE</button>
+							<!-- au clic du bouton, supprimer la séance concernée de la BDD -->
+							<button class="btn btn-primary btn-admin shadow-none" name="annuler_seance" type="submit">ANNULER LA SEANCE</button>
 
-					</div>
-					
+						</div>
+
+					</form>
 					
 
 				</div>
@@ -674,6 +702,7 @@
 		<!-- Scroll top + footer -->
 		<!-- <?php include("footer.php"); ?> -->
 		{include file = 'footer.tpl'}
+		<script type="text/javascript" src="assets/js/ajax.js"></script>
 
 		<script type="text/javascript" src="assets/js/ajax.js"></script>
 		<!--Ajout des script qui gere la reouverture des onclick si la page est recharger-->
