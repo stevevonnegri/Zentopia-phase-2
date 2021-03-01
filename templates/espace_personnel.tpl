@@ -186,10 +186,14 @@
 
 
 					<!-- BLOCK CHANGER DE MOT DE PASSE -->
-					<form method="POST" action="" class="block-mdp">
+					<form method="POST" action="" class="block-mdp" id="mot_de_passe">
 
 						<h1>CHANGER DE MOT DE PASSE</h1>
 
+						{if isset($message_succes_mdp)}
+							{$message_succes_mdp}
+						{/if}
+						
 						<div class="row">
 
 							<div class="col text-center">

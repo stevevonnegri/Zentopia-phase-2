@@ -20,6 +20,28 @@ if (isset($_POST['CompteDelete'])) {
 	session_destroy();
 	header('Location:?action=index&CompteDelete=true');
 }
+//si clic sur le bouton deconnexion, detruit la session et redirige vers l'accueil
+	if ($_GET['deconnexion'] == true) {
+		session_destroy();
+		setcookie('connexion', '', time() - 60*60*24*7);
+		header('Location: index.php');
+	}
+//supprimer le compte
+	if (isset($_POST['CompteDelete'])) {
+		$deluser = new Utilisateur($dbh);
+		$deluser->Delete($_SESSION['id_utilisateur']);
+		session_destroy();
+		header('Location:?action=index&CompteDelete=true');
+	}
+//affichage du message du succes si mdp bien changer
+	if (isset($_GET['message_succes_mdp'])) {
+		$smarty->assign('message_succes_mdp', '<p class="error">Votre mot de passe à bien été changer !</p>');
+	}
+//changement de mot de passe
+	if (isset($_POST['mettre_a_jour'])) {
+		//verifier si le mot de passe actuel est bon.
+		$user = new Utilisateur($dbh);
+		$user_verif_mot_de_passe = $user->getUserByMail($_SESSION['email']);
 
 // SECTION CHANGEMENT DE MDP
 if (isset($_POST['mettre_a_jour'])) {
