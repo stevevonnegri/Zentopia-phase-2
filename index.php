@@ -18,10 +18,20 @@ if (!isset($_SESSION['id_utilisateur']) && (isset($_COOKIE['connexion'])) ){
         session_start();
         $user->addVariableSession();
     }
-
     
 }
 
+if(isset($_POST['cookieAccepte'])) {
+    setcookie('accepteCookie', 'Accepte', time() + 60*60*24*7, null, null, false, true);  
+    $_SESSION['cookieAccepter'] = 'Accepter';  
+} 
+if (isset($_POST['cookieRefuse'])) {
+    $_SESSION['cookieRefuser'] = 'Refuser';
+}
+
+if(isset($_COOKIE['accepteCookie']) && !isset($_SESSION['cookieAccepter'])){
+    $_SESSION['cookieAccepter'] = 'Accepter';  
+}
 
 $smarty = new Smarty();
 

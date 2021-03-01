@@ -49,30 +49,41 @@
 
 	</div>
 
+	{if ($_SESSION['cookieAccepter'] == Accepter || $_SESSION['cookieRefuser'] == Refuser)}
 
-	<div class="cookies-bg">
-			
-		<div class="container">
+	{else}
+	
+		<div class="cookies-bg">
+				
+			<div class="container">
 
-			<form class="form-row justify-content-between">
-			
-				<div class="col-9">
-					
-					<p>Notre site utilise des cookies afin de vous garantir une expérience de navigation optimale. Consultez notre <a href="?action=reglement_interieur">politique de confidentialité</a> pour en savoir plus.</p>
+				<form class="form-row justify-content-between" method="post" action="#">
+				
+					<div class="col-8">
+						
+						<p>Notre site utilise des cookies afin de vous garantir une expérience de navigation optimale. Consultez notre <a href="?action=reglement_interieur">politique de confidentialité</a> pour en savoir plus.</p>
 
-				</div>
+					</div>
 
-				<div class="col-3">
-					
-					<button class="btn btn-primary shadow-none" name="">J'ACCEPTE</button>
+					<div class="col-2">
+						
+						<button class="btn btn-primary shadow-none" name="cookieAccepte" type="submit">J'ACCEPTE</button>
 
-				</div>
+					</div>
 
-			</form>
+					<div class="col-2">
+						
+						<button class="btn btn-primary shadow-none" name="cookieRefuse" type="submit">JE REFUSE</button>
+
+					</div>
+
+				</form>
+
+			</div>
 
 		</div>
 
-	</div>
+	{/if}
 
 </footer>
 

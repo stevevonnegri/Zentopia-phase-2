@@ -10,8 +10,7 @@ if(isset($_POST['connexion'])) {
     
     
     $resultat = $user->OpenSession();
-    //@TODO Ajout un $_POST pour l'acceptation des cookies qui valide l'option de rester connecter
-    if(isset($_POST['reste_connection']) && $resultat == true) {
+    if( isset($_POST['reste_connection']) && $resultat == true && isset($_COOKIE['accepteCookie'])) {
 
         if($resultat == true) {
             $userCookie = $user->getUserByMail($_POST['email_connexion']);
