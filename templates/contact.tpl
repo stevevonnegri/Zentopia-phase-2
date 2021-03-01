@@ -17,11 +17,9 @@
 		<header class="header-all"> 
 
 			<!-- Le bandeau contenant les coordonnées -->
-			<!-- <?php include("banner-coordonnees.php") ?>-->
 			{include file = 'banner_coordonnees.tpl'}
 
 			<!-- La navbar -->
-			<!-- <?php include("navbar.php") ?> -->
 			{include file = 'navbar.tpl'}
 
 		</header> 
@@ -54,8 +52,9 @@
 		<div class="container-fluid contact-block">
 
 			<div class="row"> <!-- englobe toute la partie Contact sur fond blanc -->
-				
-				<div class="col-12 col-lg-8 text-center"> <!-- NOUS ECRIRE -->
+
+				<!-- NOUS ECRIRE -->
+				<div class="col-12 col-lg-8 text-center"> 
 					
 					<h1 class="nous-ecrire">NOUS ECRIRE</h1>
 
@@ -145,8 +144,8 @@
 
 				</div>
 
-
-				<div class="col-12 col-lg-4 text-center coordoonnees"> <!-- NOS COORDONNEES -->
+				<!-- NOS COORDONNEES -->
+				<div class="col-12 col-lg-4 text-center coordoonnees"> 
 					
 					<h1>NOS COORDONNEES</h1>
 
@@ -185,7 +184,7 @@
 
 
 		<!-- Scroll top + footer -->
-		<!-- <?php include("footer.php"); ?> -->
 		{include file = 'footer.tpl'}
+		
 	</body>
 </html>

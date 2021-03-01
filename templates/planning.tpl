@@ -17,11 +17,9 @@
 		<header class="header-all"> 
 
 			<!-- Le bandeau contenant les coordonnées -->
-			<!-- <?php include("banner-coordonnees.php") ?>-->
 			{include file = 'banner_coordonnees.tpl'}
 
 			<!-- La navbar -->
-			<!-- <?php include("navbar.php") ?> -->
 			{include file = 'navbar.tpl'}
 
 		</header> 
@@ -97,6 +95,7 @@
 					<div class="col-12 col-md-5 col-xl-3 order-3 order-md-2 text-center">
 						
 						{if $_SESSION['rang'] == admin}
+
 							<!-- affiche le formulaire d'ajout de cours au clic -->
 							<button class="btn btn-primary btn-admin shadow-none ajouter-seance-btn" href="ajouter_un_cours" onclick="showElement('ajouter-seance');">+ AJOUTER UN COURS</button>
 						{/if}
@@ -112,77 +111,79 @@
 				</div>
 
 				{if $_SESSION['rang'] == admin}
-				<!-- formulaire d'ajout de cours qui ne s'affiche qu'au clic du bouton -->
-				<div class="row hidden justify-content-around" id="ajouter-seance">
-					
-					<form class="form_ajax" method="post" action="">
+
+					<!-- formulaire d'ajout de cours qui ne s'affiche qu'au clic du bouton -->
+					<div class="row hidden justify-content-around" id="ajouter-seance">
 						
-						<div class="form-row align-items-end ">
+						<form class="form_ajax" method="post" action="">
 							
-							<div class="col-12 col-sm-6 col-lg">
+							<div class="form-row align-items-end ">
 								
-								<label for="date-seance">Date :</label>
-								<input type="date" name="date-seance" class="form-control">
-
-							</div>
-
-							<div class="col-12 col-sm-6 col-lg">
-								
-								<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
-								<label for="nom_cours">Type de cours :</label>
-								<select name="nom_type_cours" class="form-control" id="ajaxCours-0">
+								<div class="col-12 col-sm-6 col-lg">
 									
-									{foreach from=$noms_des_cours item=nom_cours}
+									<label for="date-seance">Date :</label>
+									<input type="date" name="date-seance" class="form-control">
 
-										<option value="{$nom_cours.id_type_de_cours}">{$nom_cours.nom_type_de_cours|capitalize}</option>
+								</div>
 
-									{/foreach}
+								<div class="col-12 col-sm-6 col-lg">
+									
+									<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
+									<label for="nom_cours">Type de cours :</label>
+									<select name="nom_type_cours" class="form-control" id="ajaxCours-0">
+										
+										{foreach from=$noms_des_cours item=nom_cours}
 
-								</select>
+											<option value="{$nom_cours.id_type_de_cours}">{$nom_cours.nom_type_de_cours|capitalize}</option>
+
+										{/foreach}
+
+									</select>
+
+								</div>
+
+								<div class="col-12 col-sm">
+									
+									<!-- optionnel : récupérer les profs dynamiquement pour les afficher dans le select -->
+									<label for="prenom_professeur">Enseignant :</label>
+									<select name="prenom_professeur" class="form-control" id="enseignant-0">
+									
+										{foreach from=$prenoms_professeurs item=prenom_professeur}
+
+											<option value="{$prenom_professeur.id_professeur}">{$prenom_professeur.prenom_utilisateur|capitalize}</option>
+
+										{/foreach}
+
+									</select>
+
+								</div>
+
+								<div class="col-12 col-sm">
+									
+									<label for="heure-debut">Heure de début :</label>
+									<input type="time" name="heure-debut" class="form-control">
+
+								</div>
+
+								<div class="col-12 col-sm">
+									
+									<label for="heure-debut">Heure de fin :</label>
+									<input type="time" name="heure-fin" class="form-control">
+
+								</div>
+
+								<div class="col-12 col-sm btn-col">
+									
+									<button class="btn btn-primary btn-admin shadow-none" name="Ajouter_seance" type="submit">AJOUTER</button>
+
+								</div>
 
 							</div>
 
-							<div class="col-12 col-sm">
-								
-								<!-- optionnel : récupérer les profs dynamiquement pour les afficher dans le select -->
-								<label for="prenom_professeur">Enseignant :</label>
-								<select name="prenom_professeur" class="form-control" id="enseignant-0">
-								
-									{foreach from=$prenoms_professeurs item=prenom_professeur}
+						</form>
 
-										<option value="{$prenom_professeur.id_professeur}">{$prenom_professeur.prenom_utilisateur|capitalize}</option>
+					</div>
 
-									{/foreach}
-
-								</select>
-
-							</div>
-
-							<div class="col-12 col-sm">
-								
-								<label for="heure-debut">Heure de début :</label>
-								<input type="time" name="heure-debut" class="form-control">
-
-							</div>
-
-							<div class="col-12 col-sm">
-								
-								<label for="heure-debut">Heure de fin :</label>
-								<input type="time" name="heure-fin" class="form-control">
-
-							</div>
-
-							<div class="col-12 col-sm btn-col">
-								
-								<button class="btn btn-primary btn-admin shadow-none" name="Ajouter_seance" type="submit">AJOUTER</button>
-
-							</div>
-
-						</div>
-
-					</form>
-
-				</div>
 				{/if}
 
 				
@@ -190,7 +191,6 @@
 					
 					<div class="col-9 col-lg-3" id="semaine">
 						
-						<!-- optionnel: implémenter une règle 'active' (avec border-bottom qui souligne) pour indiquer où on se trouve dans les pages du planning (SEMAINE ACTUELLE + Page "1" ou Page "2" ou Page "3") -->
 						<a href="?action=planning&page=1#semaine" class="semaine-actuelle {if $page == '1'}active{/if}" >SEMAINE ACTUELLE</a>
 
 					</div>
@@ -210,21 +210,20 @@
 							<div class="form-row align-items-center">
 
 								<div class="col-6 col-md text-right col-search">
-									
-									<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
-								<label for="">Type de cours :</label>
+		
+									<label for="">Type de cours :</label>
 
-								<select name="nom_cours">
-										
-									<option value="">Tous</option>
+									<select name="nom_cours">
+											
+										<option value="">Tous</option>
 
-									{foreach from=$noms_des_cours item=nom_cours}
+										{foreach from=$noms_des_cours item=nom_cours}
 
-										<option value="{$nom_cours.nom_type_de_cours}">{$nom_cours.nom_type_de_cours|capitalize}</option>
+											<option value="{$nom_cours.nom_type_de_cours}">{$nom_cours.nom_type_de_cours|capitalize}</option>
 
-									{/foreach}
+										{/foreach}
 
-								</select>
+									</select>
 
 								</div>
 
@@ -241,14 +240,14 @@
 					</div>
 
 				</div>
-			<!--on assign 2 varibale:
-				la 1ere pour afficher la date, si elle n'est pas egale a la date de la precedente boucle.
-				la 2eme sert de compteur pour identifier les formulaire a surveiller pour l'ajax.
-			-->
+
+			<!--on assigne 2 variables : la 1ere pour afficher la date, si elle n'est pas égale à la date de la précédente boucle
+				la 2eme sert de compteur pour identifier les formulaires à surveiller pour l'ajax. -->
+
 			{assign var=date value=1}
 			{assign var=cmpt value=0}
 
-			<!--affichage d'une alert pour la resa et l'annulation d'une seance-->
+			<!--affichage d'une alert pour la resa et l'annulation d'une séance-->
 			{if isset($confirmationReservation)}
 				{$confirmationReservation}
 			{/if}
@@ -290,77 +289,83 @@
 				<!--on assigne la date de cette boucle à notre variable pour s'en "souvenir" au tour de boucle suivant.-->
 				{assign var=date value=$seance.date_seance}
 					
-					<div class="row background-light align-items-center seance-element" id="id-seance-{$seance.id_seance}">
+				<div class="row background-light align-items-center seance-element" id="id-seance-{$seance.id_seance}">
+					
+					<div class="col-12 col-sm-6 col-lg text-center col-below">
 						
-						<div class="col-12 col-sm-6 col-lg text-center col-below">
+						<p>{$seance.heure_debut_seance|date_format:"%Hh%M"|utf8_encode} - {$seance.heure_fin_seance|date_format:"%Hh%M"|utf8_encode}</p>
+
+					</div>
+
+					<div class="col-12 col-sm-6 col-lg text-center col-below">
+						
+						<p>{$seance.nom_type_de_cours|upper}, avec {$seance.prenom_utilisateur|capitalize} <br/>
 							
-							<p>{$seance.heure_debut_seance|date_format:"%Hh%M"|utf8_encode} - {$seance.heure_fin_seance|date_format:"%Hh%M"|utf8_encode}</p>
+							{assign var=ancre value=" "|explode:$seance.nom_type_de_cours}
 
-						</div>
+							<!-- ajouter l'ancre menant au type de cours à l'url -->
+							<a href="?action=enseignement#{$ancre.0|lower}" class="voir-description">> voir description</a> </p>
 
-						<div class="col-12 col-sm-6 col-lg text-center col-below">
-							
-							<p>{$seance.nom_type_de_cours|upper}, avec {$seance.prenom_utilisateur|capitalize} <br/>
-								
-								{assign var=ancre value=" "|explode:$seance.nom_type_de_cours}
+					</div>
 
-								<!-- ajouter l'ancre menant au type de cours à l'url -->
-								<a href="?action=enseignement#{$ancre.0|lower}" class="voir-description">> voir description</a> </p>
+					<div class="col-12 col-sm-6 col-lg text-center col-below">
+						
+						<p class="places-dispo">
+							{if ($seance.nombre_de_places-$seance.nbr_place_prise) == 0}
+								COMPLET
+							{elseif ($seance.annule == 1)}
+								ANNULÉ
+							{else}
+								places disponibles : {$seance.nombre_de_places-$seance.nbr_place_prise}
+							{/if}
+						</p>
 
-						</div>
+					</div>
 
-						<div class="col-12 col-sm-6 col-lg text-center col-below">
-							
-							<p class="places-dispo">
-								{if ($seance.nombre_de_places-$seance.nbr_place_prise) == 0}
-									COMPLET
-								{elseif ($seance.annule == 1)}
-									ANNULÉ
-								{else}
-									places disponibles : {$seance.nombre_de_places-$seance.nbr_place_prise}
-								{/if}
-							</p>
+					<div class="col-12 col-sm-6 col-lg text-center col-below">
 
-						</div>
+						{if isset($_SESSION['id_utilisateur'])}
 
-						<div class="col-12 col-sm-6 col-lg text-center col-below">
-							{if isset($_SESSION['id_utilisateur'])}
+							{if $seance.A_Reserver == true}
 
-								{if $seance.A_Reserver == true}
-									<!-- à afficher seulement si le membre est connecté et est un participant de la séance -->
-									<!-- au clic du bouton, le membre doit être retiré de la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation d'annulation, il faudra peut-être intégrer la redirection dans le Modal?)-->
-									<a href="?action=planning&id_annuler={$seance.id_seance}" class="btn btn-primary shadow-none btn-reserver">ANNULER</a>
-								{elseif ($seance.nombre_de_places-$seance.nbr_place_prise) == 0}
-									<!--Si la personne n'a pas reserver et que le cours est complet, affiche COMPLET-->
+								<!-- à afficher seulement si le membre est connecté et est un participant de la séance -->
+								<a href="?action=planning&id_annuler={$seance.id_seance}" class="btn btn-primary shadow-none btn-reserver">ANNULER</a>
 
-								{elseif ($seance.annule == 1)}
+							{elseif ($seance.nombre_de_places-$seance.nbr_place_prise) == 0}
 
-								{else}
-									<!-- à afficher seulement si le membre est connecté et ne participe pas à la séance -->
-									<!-- au clic du bouton, le membre doit être ajouté à la liste des participants, et la page devrait se recharger. (à voir comment ça se comporte avec le Modal de confirmation, il faudra peut-être intégrer la redirection dans le Modal?)-->
-									<a href="?action=planning&id_reservation={$seance.id_seance}" class="btn btn-primary shadow-none btn-reserver">RESERVER</a>
-								{/if}
+								<!--DOIT ETRE LAISSE VIDE : si la personne n'a pas reserver et que le cours est complet, affiche COMPLET-->
+
+							{elseif ($seance.annule == 1)}
+
+								<!--DOIT ETRE LAISSE VIDE -->
 
 							{else}
 
-								<!-- à afficher seulement si le membre n'est pas connecté/inscrit -->
-								<a href="?action=connexion" class="btn btn-primary shadow-none btn-reserver">SE CONNECTER</a>
+								<!-- à afficher seulement si le membre est connecté et ne participe pas à la séance -->
+								<a href="?action=planning&id_reservation={$seance.id_seance}" class="btn btn-primary shadow-none btn-reserver">RESERVER</a>
 
 							{/if}
 
-							<!-- à afficher seulement pour les admins et les profs/modé dont c'est le cours FAIT POUR ADMIN, a faire TODO for modo-->
+						{else}
 
-							{if $_SESSION['rang'] == admin OR $_SESSION['id_utilisateur'] == $seance.id_utilisateur}
+							<!-- à afficher seulement si le membre n'est pas connecté/inscrit -->
+							<a href="?action=connexion" class="btn btn-primary shadow-none btn-reserver">SE CONNECTER</a>
 
-								<button class="btn btn-primary btn-admin shadow-none" onclick="showElement('admin-seance-{$seance.id_seance}');"><i class="fas fa-user-cog"></i></button>
+						{/if}
 
-							{/if}
 
-						</div>
+						{if $_SESSION['rang'] == admin OR $_SESSION['id_utilisateur'] == $seance.id_utilisateur}
 
+							<button class="btn btn-primary btn-admin shadow-none" onclick="showElement('admin-seance-{$seance.id_seance}');"><i class="fas fa-user-cog"></i></button>
+
+						{/if}
 
 					</div>
+
+				</div>
+
 				{if $_SESSION['rang'] == admin OR $_SESSION['id_utilisateur'] == $seance.id_utilisateur}
+
 				<!-- à afficher seulement pour les admins OU le prof concerné par le cours, s'il est modérateur -->
 				<div class="admin-seance row justify-content-center background-light hidden" id="admin-seance-{$seance.id_seance}">
 					
@@ -395,10 +400,8 @@
 					
 					<div class="col-12">
 						
-						<!-- à remplacer par les données de la BDD -->
 						<ul class="list-style-none">
 
-							<!-- bouton doit supprimer le participant de la séance -->
 							{foreach from=$seance.participants item=participant}
 
 								<li>{$participant.prenom_utilisateur|capitalize} {$participant.nom_utilisateur|upper} 
@@ -412,23 +415,35 @@
 					</div>
 
 					<div class="col-12">
+
 						{if ($seance.nombre_de_places-$seance.nbr_place_prise) == 0}
+
 							<p>Vous ne pouvez pas ajouter de participant car la seance est complète.</p>
+
 						{elseif $seance.annule == true}
+
 							<p>Vous ne pouvez pas ajouter de participant car la seance est annulée.</p>
+
 						{else}
+
 							<button class="btn-link" onclick="showElement('ajouter-participant-{$seance.id_seance}');">+ Ajouter un participant</button>
+
 						{/if}
 
 					</div>
+
 					{if isset($addParticipantSucces)}
+
 						<div class="col-12">
+
 							<p>{$addParticipantSucces}<p>
+
 						</div>
 						
 					{/if}
 
 					{if ($seance.nombre_de_places-$seance.nbr_place_prise) != 0}
+
 					<!-- à afficher lorsque l'admin clique sur "Ajouter un participant" -->
 					<div class="col-12 hidden" id="ajouter-participant-{$seance.id_seance}">
 
@@ -472,91 +487,93 @@
 
 
 						<!-- résultats de la recherche pour Ajouter un participant à la séance -->
-						
 						{if isset($users) && $if_users_vide != 'user_vide'}
 
-						<div class="col-12 resultat-recherche">
-						
-						{foreach from=$users item=user}
+							<div class="col-12 resultat-recherche">
+							
+							{foreach from=$users item=user}
 
 
-							<p>Résultat de la recherche :</p>
+								<p>Résultat de la recherche :</p>
 
-							<!-- à afficher lorsque la recherche retourne des éléments de la BDD -->
-							<div class="membre-trouve">
+								<!-- à afficher lorsque la recherche retourne des éléments de la BDD -->
+								<div class="membre-trouve">
 
-								<div class="row">
-									
-									<div class="col-12 col-lg-6">
+									<div class="row">
 										
-										<span>Nom :</span> {$user->getNom_utilisateur()|upper}
+										<div class="col-12 col-lg-6">
+											
+											<span>Nom :</span> {$user->getNom_utilisateur()|upper}
+
+										</div>
+
+										<div class="col-12 col-lg-6">
+											
+											<span>Prénom :</span> {$user->getPrenom_utilisateur()|capitalize}
+
+										</div>
 
 									</div>
 
-									<div class="col-12 col-lg-6">
+									<div class="row">
 										
-										<span>Prénom :</span> {$user->getPrenom_utilisateur()|capitalize}
+										<div class="col-12 col-lg-6">
+											
+											<span>E-mail :</span> {$user->getEmail()}
+
+										</div>
+
+										<div class="col-12 col-lg-6">
+											
+											<span>Téléphone :</span> {$user->getTelephone()}
+
+										</div>
+
+									</div>
+
+									<div class="row">
+										
+
+										<!-- au clic du bouton, ajout du membre trouvé à la liste des participants de la séance -->
+										<div class="col text-center">
+
+											<form method="POST" action="?action=planning&page={if isset($page)}{$page}{else}1{/if}#liste-participants-{$seance.id_seance}" class="form-recherche">
+
+												<input type="number" name="id_seance" value="{$seance.id_seance}" hidden>
+
+												<input type="number" name="id_utilisateur" value="{$user->getId_utilisateur()}" hidden>
+
+												<input type="text" name="nom_utilisateur" value="{$user->getNom_utilisateur()}" hidden>
+
+												<input type="text" name="prenom_utilisateur" value="{$user->getPrenom_utilisateur()}" hidden>
+
+												<button	type="submit" name="ajouter_participant" class="btn btn-primary btn-reserver shadow-none">AJOUTER</button>
+
+											</form>
+
+										</div>
 
 									</div>
 
 								</div>
 
-								<div class="row">
-									
-									<div class="col-12 col-lg-6">
-										
-										<span>E-mail :</span> {$user->getEmail()}
+							</div> <!-- fin div résultat de la recherche -->
 
-									</div>
+							{/foreach}
 
-									<div class="col-12 col-lg-6">
-										
-										<span>Téléphone :</span> {$user->getTelephone()}
-
-									</div>
-
-								</div>
-
-								<div class="row">
-									
-
-									<!-- au clic du bouton, ajout du membre trouvé à la liste des participants de la séance -->
-									<div class="col text-center">
-
-										<form method="POST" action="?action=planning&page={if isset($page)}{$page}{else}1{/if}#liste-participants-{$seance.id_seance}" class="form-recherche">
-
-											<input type="number" name="id_seance" value="{$seance.id_seance}" hidden>
-
-											<input type="number" name="id_utilisateur" value="{$user->getId_utilisateur()}" hidden>
-
-											<input type="text" name="nom_utilisateur" value="{$user->getNom_utilisateur()}" hidden>
-
-											<input type="text" name="prenom_utilisateur" value="{$user->getPrenom_utilisateur()}" hidden>
-
-											<button	type="submit" name="ajouter_participant" class="btn btn-primary btn-reserver shadow-none">AJOUTER</button>
-
-										</form>
-
-									</div>
-
-								</div>
-
-							</div>
-
-						</div> <!-- fin div résultat de la recherche -->
-
-						{/foreach}
 						{elseif empty($users) && $if_users_vide == 'user_vide'}
 
-						<div class="col-12 resultat-recherche">
+							<div class="col-12 resultat-recherche">
 
-							<!-- à afficher lorsque la recherche ne retourne aucun résultat -->
-							<p class="text-center">Aucun membre trouvé. Veuillez vérifier les informations de recherche.</p>
+								<!-- à afficher lorsque la recherche ne retourne aucun résultat -->
+								<p class="text-center">Aucun membre trouvé. Veuillez vérifier les informations de recherche.</p>
 
-						</div> <!-- fin div résultat de la recherche -->
+							</div> <!-- fin div résultat de la recherche -->
+
 						{/if}
 
-					</div> <!-- fin div "Ajouter un participant" -->
+						</div> <!-- fin div "Ajouter un participant" -->
+
 					{/if}
 
 				</div> <!-- fin div "Voir les participants" -->
@@ -579,8 +596,9 @@
 							</div>
 
 							<div class="col-12 col-sm-6 col-lg">
+
 								{assign var="cmpt" value=$cmpt+1}
-								<!-- optionnel : récupérer tous les types de cours dynamiquement pour les afficher dans le select -->
+
 								<label for="type-cours">Type de cours :</label>
 								<select class="form-control" name="nom_cours" id="ajaxCours-{$cmpt}">
 									
@@ -596,13 +614,13 @@
 
 							<div class="col-12 col-sm">
 								
-								<!-- optionnel : récupérer les profs dynamiquement pour les afficher dans le select -->
+
 								<label for="type-cours">Enseignant :</label>
 								<select class="form-control" name="prenom_professeur" id="enseignant-{$cmpt}">
 									
 									{foreach from=$prenoms_professeurs item=prenom_professeur}
 
-									<option {if $seance.prenom_utilisateur == $prenom_professeur.prenom_utilisateur} selected="selected"{/if} value="{$prenom_professeur.id_professeur}">{$prenom_professeur.prenom_utilisateur|capitalize}</option>
+										<option {if $seance.prenom_utilisateur == $prenom_professeur.prenom_utilisateur} selected="selected"{/if} value="{$prenom_professeur.id_professeur}">{$prenom_professeur.prenom_utilisateur|capitalize}</option>
 
 									{/foreach}
 
@@ -671,15 +689,20 @@
 					
 
 				</div>
-			{/if}
-			{/foreach} {* DEBUT LIGNE 237 *}
 
-			{if empty($seances)}
-				
-				<div class="row background-light align-items-center justify-content-start">
-					<p>Il n'y a pas de cours prevu cette semaine.</p>
-				</div>
-			{/if}
+				{/if}
+
+				{/foreach} {* DEBUT LIGNE 237 *}
+
+				{if empty($seances)}
+					
+					<div class="row background-light align-items-center justify-content-start">
+
+						<p>Il n'y a pas de cours prévus sur cette semaine.</p>
+
+					</div>
+
+				{/if}
 
 				<!-- fin affichage dynamique du planning -->
 
@@ -705,22 +728,24 @@
 		</div> <!-- fin div container -->
 
 		<!-- Scroll top + footer -->
-		<!-- <?php include("footer.php"); ?> -->
 		{include file = 'footer.tpl'}
 
+		<!--Ajout des scripts qui gèrent la réouverture des onclick si la page est rechargée-->
 		<script type="text/javascript" src="assets/js/ajax.js"></script>
-		<!--Ajout des script qui gere la reouverture des onclick si la page est recharger-->
+		
 		{if isset($onclick_admin_seance)}
 
 			
 			{$onclick_admin_seance}
 
 		{/if}
+
 		{if isset($onclick_liste_participants)}
 
 			{$onclick_liste_participants}
 
 		{/if}
+		
 		{if isset($onclick_ajouter_participant)}
 
 			{$onclick_ajouter_participant}

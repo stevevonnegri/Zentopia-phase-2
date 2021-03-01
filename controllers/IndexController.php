@@ -1,12 +1,11 @@
 <?php
 
-// affichage d'un message de confimation si l'on est redirigé ici apres la suppresion de compte
+// affichage d'un message de confimation si l'on est redirigé ici après la suppression de compte
 if ($_GET['CompteDelete'] == true) {
-	$smarty->assign('CompteDelete', '<p class="center alert-warning">Votre compte a bien été supprimé !<p>');
+	$smarty->assign('CompteDelete', 'CompteDelete');
 }
 
-
-// ajoute une variable pour determiner la partie "active" de la navbar.
+// ajoute une variable pour déterminer la partie "active" de la navbar.
 $smarty->assign(array(
 	'active' => 'accueil'
 ));
@@ -49,8 +48,6 @@ if (isset($_POST['email']) && $_POST['email'] != '') {
 		$newsletter = ['newsletter' => 1];
 
 		$user_newsletter->Update($newsletter, $id);
-
-		var_dump($user_newsletter);
 
 		$smarty->assign('alert_user', 'Vous êtes désormais inscrit à notre newsletter.');
 	}

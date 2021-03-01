@@ -58,7 +58,7 @@
 			
 				<div class="col-9">
 					
-					<p>Notre site utilise des cookies afin de vous garantir une expérience de navigation optimale. Consultez notre <a href="?action=reglement_interieur">politique de confidentialité</a> pour en savoir plus.</p>
+					<p>Notre site utilise des cookies afin de vous garantir une expérience de navigation optimale. Consultez notre <a href="?action=mentions_legales">politique de confidentialité</a> pour en savoir plus.</p>
 
 				</div>
 

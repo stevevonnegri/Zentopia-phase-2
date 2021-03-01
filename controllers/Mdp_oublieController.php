@@ -16,7 +16,7 @@ if (isset($_POST['email'])) {
 
 	} else {
 
-		// pré-rempli le champ avec l'adresse mail (valide) si erreur CAPTCHA du membre
+		// pré-remplit le champ avec l'adresse mail (valide) si erreur CAPTCHA du membre
 		$smarty->assign('mail', $mail);
 
 		// vérifie si la case CAPTCHA a été cochée
@@ -76,11 +76,8 @@ if (isset($_POST['email'])) {
 
 				header('Location: ?action=index');
 			};
-
 		}
-
 	}
-
 }
 
 $smarty->display('templates/mdp_oublie.tpl');

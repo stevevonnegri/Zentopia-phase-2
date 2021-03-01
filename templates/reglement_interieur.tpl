@@ -17,15 +17,12 @@
 		<header class="header-all"> 
 
 			<!-- Le bandeau contenant les coordonnées -->
-			<!-- <?php include("banner-coordonnees.php") ?>-->
 			{include file = 'banner_coordonnees.tpl'}
 
 			<!-- La navbar -->
-			<!-- <?php include("navbar.php") ?> -->
 			{include file = 'navbar.tpl'}
 
 		</header> 
-
 
 
 
@@ -98,7 +95,7 @@
 
 
 		<!-- Scroll top + footer -->
-		<!-- <?php include("footer.php"); ?> -->
 		{include file = 'footer.tpl'}
+		
 	</body>
 </html>

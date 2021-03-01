@@ -16,11 +16,9 @@
 		<header class="header-all"> 
 
 			<!-- Le bandeau contenant les coordonnées -->
-			<!-- <?php include("banner-coordonnees.php") ?>-->
 			{include file = 'banner_coordonnees.tpl'}
 
 			<!-- La navbar -->
-			<!-- <?php include("navbar.php") ?> -->
 			{include file = 'navbar.tpl'}
 
 		</header> 
@@ -36,7 +34,6 @@
 						
 						<img src="assets/icons/yoga-male.png" class="img-fluid"/>
 
-						<!-- à remplacer par une variable prénom de l'utilisateur -->
 						<p>Bonjour {$_SESSION.prenom_utilisateur}</p>
 
 						<a href="?action=espace_personnel" class="btn btn-primary btn-menu-left shadow-none">MES INFORMATIONS <i class="fas fa-caret-right text-right"></i></a>
@@ -50,8 +47,8 @@
 						<a href="?action=interface_moderateur" class="btn btn-primary btn-admin shadow-none">MODERATION<i class="fas fa-caret-right text-right"></i></a>
 						{/if}
 
-						{if $_SESSION.rang == 'admin'}
 						<!-- afficher seulement si admin -->
+						{if $_SESSION.rang == 'admin'}
 						<a href="?action=interface_moderateur" class="btn btn-primary btn-admin shadow-none">ADMINISTRATION<i class="fas fa-caret-right text-right"></i></a>	
 						{/if}
 
@@ -66,124 +63,127 @@
 					{if $form == active}
 						{include file = 'espace_personnel_form.tpl'}
 					{else}
-					<!-- BLOCK COORDONNEES AFFICHAGE-->
-					<div class="block-coordonnees">
 
-						<h1>MES COORDONNEES</h1>
+						<!-- BLOCK COORDONNEES AFFICHAGE-->
+						<div class="block-coordonnees">
 
-						<div class="row">
+							<h1>MES COORDONNEES</h1>
 
-							<div class="col-12 col-lg-6">
+							<div class="row">
+
+								<div class="col-12 col-lg-6">
+									
+									<label for="">Civilité :</label>
+									<p class="info-p">{$_SESSION.genre}</p>
+
+								</div>
+
+								<div class="col-12 col-lg-6">
+									
+									<label for="">Date de naissance :</label>
+									<p class="info-p">{$_SESSION.date_de_naissance}</p>
+
+								</div>
 								
-								<label for="">Civilité :</label>
-								<p class="info-p">{$_SESSION.genre}</p>
 
 							</div>
 
-							<div class="col-12 col-lg-6">
+							<div class="row">
+
+								<div class="col-12 col-lg-6">
+									
+									<label for="">Prénom :</label>
+									<p class="info-p">{$_SESSION.prenom_utilisateur}</p>
+
+								</div>
+
+								<div class="col-12 col-lg-6">
+									
+									<label for="">Nom :</label>
+									<p class="info-p">{$_SESSION.nom_utilisateur}</p>
+
+								</div>
 								
-								<label for="">Date de naissance :</label>
-								<p class="info-p">{$_SESSION.date_de_naissance}</p>
+							</div>
+
+							<div class="row">
+								
+								<div class="col-12 col-lg-6">
+									
+									<label for="">Email :</label>
+									<p class="info-p">{$_SESSION.email}</p>
+
+								</div>
+
+								<div class="col-12 col-lg-6">
+									
+									<label for="">Téléphone :</label>
+									<p class="info-p">{$_SESSION.telephone}</p>
+
+								</div>
 
 							</div>
+
+							<div class="row">
+								
+								<div class="col-12 col-lg-6">
+									
+									<label for="">Code postal :</label>
+									<p class="info-p">{$_SESSION.adresse_code_postal}</p>
+
+								</div>
+
+								<div class="col-12 col-lg-6">
+
+									<label for="">Ville :</label>
+									<p class="info-p">{$_SESSION.adresse_ville}</p>
+
+								</div>
+
+							</div>
+
+							<div class="row">
+								
+								<div class="col">
+									
+									<label for="">Adresse :</label>
+									<p class="info-p">{$_SESSION.adresse_rue}</p>
+
+								</div>
+
+								<div class="col">
+									
+									<legend>Newsletter :</legend>
+									
+									<p class="info-p">
+									{if $_SESSION.newsletter == false}
+										Pas inscrit
+									{else}
+										Deja inscrit
+									{/if}
+									</p>
+
+								</div>
+
+							</div>
+
+
+							<div class="row">
+
+								<div class="col text-center">
+		
+									<a href="?action=espace_personnel&form=active" class="btn btn-primary btn-red shadow-none">MODIFIER MES INFORMATIONS</a>
+
+								</div>
+
+							</div>
+
+							<img src="assets/icons/yoga4.png" class="yoga4" height="100" width="100"/>
 							
+						</div> <!-- fin div block-coordonnees -->
 
-						</div>
-
-						<div class="row">
-
-							<div class="col-12 col-lg-6">
-								
-								<label for="">Prénom :</label>
-								<p class="info-p">{$_SESSION.prenom_utilisateur}</p>
-
-							</div>
-
-							<div class="col-12 col-lg-6">
-								
-								<label for="">Nom :</label>
-								<p class="info-p">{$_SESSION.nom_utilisateur}</p>
-
-							</div>
-							
-						</div>
-
-						<div class="row">
-							
-							<div class="col-12 col-lg-6">
-								
-								<label for="">Email :</label>
-								<p class="info-p">{$_SESSION.email}</p>
-
-							</div>
-
-							<div class="col-12 col-lg-6">
-								
-								<label for="">Téléphone :</label>
-								<p class="info-p">{$_SESSION.telephone}</p>
-
-							</div>
-
-						</div>
-
-						<div class="row">
-							
-							<div class="col-12 col-lg-6">
-								
-								<label for="">Code postal :</label>
-								<p class="info-p">{$_SESSION.adresse_code_postal}</p>
-
-							</div>
-
-							<div class="col-12 col-lg-6">
-
-								<label for="">Ville :</label>
-								<p class="info-p">{$_SESSION.adresse_ville}</p>
-
-							</div>
-
-						</div>
-
-						<div class="row">
-							
-							<div class="col">
-								
-								<label for="">Adresse :</label>
-								<p class="info-p">{$_SESSION.adresse_rue}</p>
-
-							</div>
-
-							<div class="col">
-								
-								<legend>Newsletter :</legend>
-								
-								<p class="info-p">
-								{if $_SESSION.newsletter == false}
-									Pas inscrit
-								{else}
-									Deja inscrit
-								{/if}
-								</p>
-
-							</div>
-
-						</div>
-
-
-						<div class="row">
-
-							<div class="col text-center">
-	
-								<a href="?action=espace_personnel&form=active" class="btn btn-primary btn-red shadow-none">MODIFIER MES INFORMATIONS</a>
-
-							</div>
-
-						</div>
-
-						<img src="assets/icons/yoga4.png" class="yoga4" height="100" width="100"/>
-						
-					</div> <!-- fin div block-coordonnees -->
 					{/if}<!--fin du if affichage/modification des données-->
+
 
 					<!-- BLOCK CHANGER DE MOT DE PASSE -->
 					<form method="POST" action="" class="block-mdp">
@@ -246,50 +246,56 @@
 						<div class="col">
 
 							<h1 id="mes-cours">MES COURS</h1>
+
 							{if $seances == NULL}
+
 							<!-- affichage par défaut, si le membre n'a pas de réservation active -->
 							<p>Vous n'avez pas encore effectué de réservation sur un cours à venir.</p>
 
 							{else}
+
 								{foreach from=$seances item=$seance}
-							<!-- affichage des cours à venir si le membre a effectué une ou plusieurs réservations -->
-							<div class="cours-membre">
-								
-								<div class="row">
 
-									<div class="col text-left">		
-
-										<p class="cours-date"><i class="fas fa-chevron-right"></i>{$seance['date_seance']|date_format:"%A %e %B :"|utf8_encode}</p>
-
-									</div>
-
-									<div class="col text-right">
+									<!-- affichage des cours à venir si le membre a effectué une ou plusieurs réservations -->
+									<div class="cours-membre">
 										
-										<a href="?action=espace_personnel&adminDelSeanceId={$seance['id_seance']}" class="btn btn-primary btn-annuler shadow-none">ANNULER LA RESERVATION</a>
+										<div class="row">
+
+											<div class="col text-left">		
+
+												<p class="cours-date"><i class="fas fa-chevron-right"></i>{$seance['date_seance']|date_format:"%A %e %B :"|utf8_encode}</p>
+
+											</div>
+
+											<div class="col text-right">
+												
+												<a href="?action=espace_personnel&adminDelSeanceId={$seance['id_seance']}" class="btn btn-primary btn-annuler shadow-none">ANNULER LA RESERVATION</a>
+
+											</div>
+
+
+										</div>
+
+										<div class="row">
+
+											<div class="col">
+												
+												<p class="cours-info"><span class="cours-nom">{$seance['nom_type_de_cours']|upper} </span>avec  {$ObjetSeance->getProfesseurNameById($seance['id_professeur'])}</p>
+
+											</div>
+
+											<div class="col">
+												
+												<p class="cours-info">de {$seance['heure_debut_seance']|date_format:"%kh%M"} à {$seance['heure_fin_seance']|date_format:"%kh%M"}</p>
+
+											</div>
+
+										</div>
 
 									</div>
 
-
-								</div>
-
-								<div class="row">
-
-									<div class="col">
-										
-										<p class="cours-info"><span class="cours-nom">{$seance['nom_type_de_cours']|upper} </span>avec  {$ObjetSeance->getProfesseurNameById($seance['id_professeur'])}</p>
-
-									</div>
-
-									<div class="col">
-										
-										<p class="cours-info">de {$seance['heure_debut_seance']|date_format:"%kh%M"} à {$seance['heure_fin_seance']|date_format:"%kh%M"}</p>
-
-									</div>
-
-								</div>
-
-							</div>
 								{/foreach}
+
 							{/if}
 
 							<a href="?action=planning#reservation" class="btn btn-primary btn-red shadow-none">ACCEDER AU PLANNING</a>
@@ -309,6 +315,7 @@
 
 							<!-- affichage par défaut, si le membre n'a pas encore écrit d'avis qui a été validé -->
 							{if $avisUtilisateur == false}
+
 								<p>Vous n'avez pas encore donné votre avis sur notre établissement.</p>
 
 								<a href="?action=la_team#ajout-avis" class="btn btn-primary btn-red shadow-none">ECRIRE MON AVIS</a>
@@ -319,7 +326,8 @@
 								<p>Votre avis est en attente de modération. Il sera consultable ici et sur <a href="?action=la_team#testimonial" class="team-link">cette page</a> une fois approuvé.</p>
 
 							{else}
-							<!-- affichage si le membre a un avis validé et publié sur le site -->
+
+								<!-- affichage si le membre a un avis validé et publié sur le site -->
 								<div class="avis-client text-center">
 
 									<p>&laquo; {$avisUtilisateur->getContenu_avis()} &raquo;</p>
@@ -354,7 +362,7 @@
 
 									</div>
 
-									<p class="suppr-avis" onclick="supprAvis();">Supprimer mon avis</p>
+									<p class="suppr-avis" onclick="showElement('suppr-avis-confirmation');">Supprimer mon avis</p>
 
 									<div class="hidden" id="suppr-avis-confirmation">
 
@@ -365,6 +373,7 @@
 									</div>
 
 								</div> <!-- fin div avis client si membre a écrit un avis -->
+
 							{/if}
 
 						</div>
@@ -375,7 +384,7 @@
 						
 						<div class="col-8 mx-auto text-center">
 							
-							<p class="suppr-compte mx-auto" onclick="supprCompte();">Supprimer mon compte</p>
+							<p class="suppr-compte mx-auto" onclick="showElement('confirmation-suppression');">Supprimer mon compte</p>
 
 							<div id="confirmation-suppression" class="hidden">
 
@@ -403,28 +412,7 @@
 		</div>
 
 		<!-- Scroll top + footer -->
-		<!-- <?php include("footer.php"); ?> -->
 		{include file = 'footer.tpl'}
-
-
-	<script>
-		
-		// afficher la confirmation de suppression de l'avis client
-		function supprAvis() {
-
-			let x = document.getElementById('suppr-avis-confirmation');
-			x.classList.toggle('hidden');
-		}	
-
-
-		// afficher la confirmation de suppression du compte
-		function supprCompte() {
-
-			let x = document.getElementById('confirmation-suppression');
-			x.classList.toggle('hidden');
-		}
-
-	</script>
 
 	</body>
 </html>

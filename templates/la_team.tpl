@@ -21,11 +21,9 @@
 		<header class="header-all"> 
 
 			<!-- Le bandeau contenant les coordonnées -->
-			<!-- <?php include("banner-coordonnees.php") ?>-->
 			{include file = 'banner_coordonnees.tpl'}
 
 			<!-- La navbar -->
-			<!-- <?php include("navbar.php") ?> -->
 			{include file = 'navbar.tpl'}
 
 		</header> 
@@ -208,53 +206,53 @@
 
 			{if isset($avis_list)}
 
-			<div class="row testimonial justify-content-center" id="testimonial">
+				<div class="row testimonial justify-content-center" id="testimonial">
 
-				{foreach from=$avis_list item=avis}
-					
-				<div class="col-12 col-sm-6 col-lg-3 avis text-center">
+					{foreach from=$avis_list item=avis}
+						
+					<div class="col-12 col-sm-6 col-lg-3 avis text-center">
 
-					<div class="avis-inner">
+						<div class="avis-inner">
 
-						<img src="assets/icons/quotationmarks.png" class="quote-img" />
-					
-						<p class="avis-nom">{$avis.prenom_utilisateur}, {$avis.age} ans</p>
+							<img src="assets/icons/quotationmarks.png" class="quote-img" />
+						
+							<p class="avis-nom">{$avis.prenom_utilisateur}, {$avis.age} ans</p>
 
-						<p class="avis-p">&laquo; {$avis.contenu_avis} &raquo;</p>
+							<p class="avis-p">&laquo; {$avis.contenu_avis} &raquo;</p>
 
-						<img src="assets/icons/
+							<img src="assets/icons/
 
-						{if $avis.niveau_avis == 1}
+							{if $avis.niveau_avis == 1}
 
-						onestar
+							onestar
 
-						{elseif $avis.niveau_avis == 2}
+							{elseif $avis.niveau_avis == 2}
 
-						twostar
+							twostar
 
-						{elseif $avis.niveau_avis == 3}
+							{elseif $avis.niveau_avis == 3}
 
-						threestar
+							threestar
 
-						{elseif $avis.niveau_avis == 4}
+							{elseif $avis.niveau_avis == 4}
 
-						fourstar
+							fourstar
 
-						{elseif $avis.niveau_avis == 5}
+							{elseif $avis.niveau_avis == 5}
 
-						fivestar
+							fivestar
 
-						{/if}
+							{/if}
 
-						.png" class="avis-stars" width="150" height="36" alt="5 étoiles" />
+							.png" class="avis-stars" width="150" height="36" alt="5 étoiles" />
+
+						</div>
 
 					</div>
 
-				</div>
+					{/foreach}
 
-				{/foreach}
-
-			</div> <!-- fin div testimonial -->
+				</div> <!-- fin div testimonial -->
 
 			{/if}
 
@@ -301,14 +299,12 @@
 
 							</div>
 
-								<!-- affiche le message à l'utilisateur : 
-								- avis trop long si plus de 250 caractères
-								- confirmation de soumission d'avis si conforme -->
-								{if isset($message_error)}
+	
+							{if isset($message_error)}
 
-									<p class="error">{$message_error}</p>
+								<p class="error">{$message_error}</p>
 
-								{/if}
+							{/if}
 
 							<button type="submit" class="btn-lg btn-primary shadow-none">SOUMETTRE</button>
 							
@@ -336,15 +332,17 @@
 
 						<!-- à afficher lorsque le membre a déjà déposé un avis -->
 						{if isset($avis_present)}
-						<div class="row avis-depose">
-							
-							<div class="col">
+
+							<div class="row avis-depose">
 								
-								<p>Vous avez bien déposé votre avis client. Une fois validé, vous pouvez le consulter directement dans votre <a href="?action=espace_personnel#mon-avis">espace personnel</a> ou parmi les avis ci-dessus.</p>
+								<div class="col">
+									
+									<p>Vous avez bien déposé votre avis client. Une fois validé, vous pouvez le consulter directement dans votre <a href="?action=espace_personnel#mon-avis">espace personnel</a> ou parmi les avis ci-dessus.</p>
+
+								</div>
 
 							</div>
 
-						</div>
 						{/if}
 
 					</div>
@@ -359,7 +357,6 @@
 
 
 		<!-- Scroll top + footer -->
-		<!-- <?php include("footer.php"); ?> -->
 		{include file = 'footer.tpl'}
 		
 

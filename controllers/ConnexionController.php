@@ -20,13 +20,13 @@ if(isset($_POST['connexion'])) {
         }
     }
 
-    //Verifie selon le retour de la fonction OpenSession, si != de true, renvoie une erreur sinon redirige vers l'espace personnel
+    // vérifie selon le retour de la fonction OpenSession, si != true, renvoie une erreur sinon redirige vers l'espace personnel
     if($resultat === true) {
         echo ('<script>document.location.href="?action=espace_personnel"</script>');
     } elseif($resultat === 'MDP') {
-        $smarty->assign('ErrorMDP', '<p class="alert-danger">Mot de passe incorrect</p>');
+        $smarty->assign('ErrorMDP', '<p class="error">Mot de passe incorrect</p>');
     } elseif($resultat === 'EMAIL') {
-        $smarty->assign('ErrorEMAIL', '<p class="alert-danger">Email incorrect</p>');
+        $smarty->assign('ErrorEMAIL', '<p class="error">Email incorrect</p>');
     }
 
 }
@@ -37,7 +37,7 @@ if (isset($_GET['reini'])) {
 }
 
 
-//ajoute une variable pour determiner la partie "active" de la navbar.
+// ajoute une variable pour déterminer la partie "active" de la navbar.
 $smarty->assign('active', 'connexion');
 
 $smarty->display('templates/connexion.tpl');

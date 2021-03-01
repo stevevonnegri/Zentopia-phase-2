@@ -26,15 +26,12 @@ if ($_SESSION['rang'] == 'admin') {
 }
 
 
-
-
 // SECTION "GERER LES AVIS CLIENT" (modérateur & admin)
 // vérifie si on a cliqué sur "Gérer les avis clients"
 if (isset($_GET['avis'])) {
 
 	// passe la variable concernée à SMARTY pour qu'il affiche le bloc Avis client
 	$smarty->assign('gerer_avis', 'gerer_avis');
-
 
 	// récupère les avis en attente de modération
 	$avis = new Avis($dbh);
@@ -61,8 +58,6 @@ if (isset($_GET['avis'])) {
 
 		// envoie les données des avis en attente à SMARTY
 		$smarty->assign('avis_en_attente', $avis_en_attente);
-
-
 
 
 		// check si l'admin a cliqué sur le bouton pour valider l'avis
@@ -92,8 +87,6 @@ if (isset($_GET['avis'])) {
 			exit();
 
 		}
-
-
 	} 	
 
 	// SECTION VOIR TOUS LES AVIS
@@ -102,7 +95,6 @@ if (isset($_GET['avis'])) {
 
 
 		$avis_valides = $avis->getAvisApprouves();
-
 
 		// calcule l'âge de l'utilisateur en fonction de sa date de naissance
 		$id_tableau = 0;
@@ -234,8 +226,6 @@ if (isset($_GET['membres'])) {
 
 			$smarty->assign('champs_vides', 'champs_vides');
 		}
-
-
 	}
 
 
@@ -253,7 +243,6 @@ if (isset($_GET['membres'])) {
 		$user = new Utilisateur($dbh);
 		$user_modif = $user->getItem($id);
 		$smarty->assign('user_modif', $user_modif);
-
 	}
 
 
@@ -333,9 +322,7 @@ if (isset($_GET['membres'])) {
 			header('Location: ?action=interface_moderateur&membres=true');
 			exit();
 
-
 		}
-
 	} 
 
 
@@ -350,11 +337,7 @@ if (isset($_GET['membres'])) {
 		$smarty->assign('confirm_suppr', 'confirm_suppr');
 
 	}
-
 }
-
-
-
 
 
 $smarty->display('templates/interface_moderateur.tpl');

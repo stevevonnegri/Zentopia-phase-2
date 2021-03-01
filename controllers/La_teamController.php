@@ -1,24 +1,20 @@
 <?php
 
-//ajoute une variable pour determiner la partie "active" de la navbar.
+// ajoute une variable pour déterminer la partie "active" de la navbar.
 $smarty->assign('active', 'la_team');
 
 
-
-
-
 // SECTION PRESENTATION DE LA TEAM
+// récupère la liste des profs et les envoie à SMARTY
 $prof = new Professeur($dbh);
 $listeprof = $prof->getListeProf();
 $smarty->assign('listeprof', $listeprof);
 
 
 // SECTION SLIDER D'IMAGES
-// récupère les images
+// récupère les images et les envoie à SMARTY
 $image = new Image($dbh);
 $imagesAll = $image->getList();
-
-//ajoute une variable pour determiner la partie "active" de la navbar.
 $smarty->assign('imagesAll', $imagesAll);
 
 
@@ -104,7 +100,6 @@ if (isset($_POST['avis-contenu']) && isset($_POST['avis-note'])) {
 		header('Location: ?action=la_team#ajout-avis');
 
 	}
-
 }
 
 

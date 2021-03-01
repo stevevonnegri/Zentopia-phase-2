@@ -78,7 +78,7 @@ if (isset($_POST['message'])) {
 	
 }
 
-//ajoute une variable pour determiner la partie "active" de la navbar.
+// ajoute une variable pour déterminer la partie "active" de la navbar.
 $smarty->assign('active', 'contact');
 
 $smarty->display('templates/contact.tpl');

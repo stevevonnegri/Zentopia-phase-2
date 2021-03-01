@@ -13,16 +13,19 @@
 
 		<!-- SECTION HEADER (contient le bandeau d'info, la navbar et sa background-img + la scroll arrow) -->
 		<header class="header-homepage"> 
-			<!--affichage du message de confirmation en cas de suppresion de compte-->
+
+			<!--affichage du message de confirmation en cas de suppression de compte-->
 			{if isset($CompteDelete)}
-				{$CompteDelete}
+				
+				<div class="col text-center error">Votre compte a bien été supprimé.</div>
+
 			{/if}
+
+
 			<!-- Le bandeau contenant les coordonnées -->
-			<!-- <?php include("banner-coordonnees.php") ?>-->
 			{include file = 'banner_coordonnees.tpl'}
 
 			<!-- La navbar -->
-			<!-- <?php include("navbar.php") ?> -->
 			{include file = 'navbar.tpl'}
 
 			<!-- La scroll arrow (icône Font Awesome) -->
@@ -43,7 +46,7 @@
 
 				<div class="col col-md-9 col-lg-7 text-center">
 
-Découvrez notre pratique du yoga et de la méditation selon nos trois principes :
+					Découvrez notre pratique du yoga et de la méditation selon nos trois principes :
 
 				</div>
 
@@ -161,35 +164,36 @@ Découvrez notre pratique du yoga et de la méditation selon nos trois principes
 
 			{if !isset($_SESSION['newsletter']) || $_SESSION['newsletter'] == 0}
 			
-			<div class="row justify-content-center">
-				
-				<div class="col">
+				<div class="row justify-content-center">
 					
-					<form method="post" class="form-inline justify-content-center">
+					<div class="col">
 						
-						<input type="email" name="email" placeholder="saisir mon email" required>
-						<button type="submit" class="btn btn-primary shadow-none">M'INSCRIRE</button>
+						<form method="post" class="form-inline justify-content-center">
+							
+							<input type="email" name="email" placeholder="saisir mon email" required>
+							<button type="submit" class="btn btn-primary shadow-none">M'INSCRIRE</button>
 
 
 
-					</form>
+						</form>
 
-					{if isset($alert_user)}
+						{if isset($alert_user)}
 
-						<p class="error">{$alert_user}</p>
+							<p class="error">{$alert_user}</p>
 
-					{/if}
+						{/if}
+
+					</div>
 
 				</div>
 
-			</div>
-
 			
-			{if !isset($_SESSION['seance_decouverte']) || $_SESSION['seance_decouverte'] == 0 }
+				{if !isset($_SESSION['seance_decouverte']) || $_SESSION['seance_decouverte'] == 0 }
 
-				<p class="newsletter-homepage-disclaimer">*Offre valable pour tout.e nouvel.le élève s'inscrivant à la newsletter, sur l'une des six séances découvertes proposées par Zentopia sur l'année, plus d'informations dans le mail de confirmation de la newsletter.</p>
-				
-			{/if}
+					<p class="newsletter-homepage-disclaimer">*Offre valable pour tout.e nouvel.le élève s'inscrivant à la newsletter, sur l'une des six séances découvertes proposées par Zentopia sur l'année, plus d'informations dans le mail de confirmation de la newsletter.</p>
+					
+				{/if}
+
 			{/if}
 
 		</div>
@@ -253,7 +257,7 @@ Découvrez notre pratique du yoga et de la méditation selon nos trois principes
 
 
 		<!-- Scroll top + footer -->
-		<!-- <?php include("footer.php"); ?> -->
 		{include file = 'footer.tpl'}
+		
 	</body>
 </html>

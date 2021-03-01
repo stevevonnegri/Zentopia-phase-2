@@ -1,13 +1,12 @@
 <?php
 $user = new Utilisateur($dbh);
 
-//traitement des donnée de l'inscription si clic sur le bouton NOUS REJOINDRE
+// traitement des données de l'inscription si clic sur le bouton "NOUS REJOINDRE"
 if (isset($_POST['NOUS_REJOINDRE'])) {
 	$erreur = false;
 
-	//recuperation des donnée du formulaire sauf le mot de passe que l'on hashera apres.
+	// récuperation des données du formulaire sauf le mot de passe que l'on hashera apres
 	$user->setEmail($_POST['email']);
-
 	$user->setGenre($_POST['genre']);
 	$user->setPrenom_utilisateur($_POST['prenom']);
 	$user->setNom_utilisateur($_POST['nom']);
@@ -18,92 +17,87 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 	$user->setTelephone($_POST['telephone']);
 	$user->setNewsletter($_POST['newsletter']);
 
-	//ETAPE VERIFIACTION
-		//verification de l'email
-			//email au bon format
-			
-			$error_email_message = $user->EmailBonFormat();
 
-		//Verifie la validité et que les mot de passe est identique et si oui le hash
+	// ETAPE VERIFIACTION
+	// vérification de l'email
+	$error_email_message = $user->EmailBonFormat();
 
-			// verifie si le mot de passe est valide (entre 8 et 30 caractères ET avec au moins une lettre et un chiffre)
+	// vérification du mdp
+	$verif = VerifMot_De_PasseConforme($_POST['mot_de_passe']);
 
-			$verif = VerifMot_De_PasseConforme($_POST['mot_de_passe']);
+	if ($verif !== true ) {
 
-			if ($verif !== true ) {
+		$error_mot_de_passe_message = $verif;
+		$erreur = true;
+	}
+	
+	// vérifie si les mots de passe sont identiques
+	$verif = VerifMot_De_PasseIndetique($_POST['mot_de_passe'], $_POST['mot_de_passe_verif']);
 
-				$error_mot_de_passe_message = $verif;
-				$erreur = true;
-			}
-			
-			//verifie si les mot de passe sont identique
+	if ($verif === false) {
 
-			$verif = VerifMot_De_PasseIndetique($_POST['mot_de_passe'], $_POST['mot_de_passe_verif']);
+		$error_verif_mot_de_passe_message = '<p class="error">Les mots de passe ne correspondent pas.</p>';
 
-			if ($verif === false) {
+	} else {
 
-				$error_verif_mot_de_passe_message = '<p class="alert-danger">Vos mots de passe ne correspondent pas.</p>';
+		$user->setMot_de_passe($_POST['mot_de_passe']);
+	}
 
-			} else {
+	// vérifie que le nom et le prénom ne comportent pas de caractères spéciaux
+	// le nom en premier
+	if (!preg_match("/^[a-zéèêëïüA-Z-' ]*$/", $user->getNom_utilisateur())) {
 
-				$user->setMot_de_passe($_POST['mot_de_passe']);
-			}
+		$error_nom_utilisateur_message = '<p class="error">Le nom renseigné comporte des caractères non valides.</p>';
+		$erreur = true;
+
+	} 
+
+	// ensuite le prénom
+	if (!preg_match("/^[a-zéèêëïüA-Z-' ]*$/", $user->getPrenom_utilisateur())) {
+
+		$error_prenom_utilisateur_message = '<p class="error">Le prénom renseigné comporte des caractères non valides.</p>';
+		$erreur = true;
+
+	}
 
 
-		//verifie que le nom et le prenom n'on pas de charactere speciaux
-			//le nom en 1er
-			if (!preg_match("/^[a-zéèêëïüA-Z-' ]*$/", $user->getNom_utilisateur())) {
+	// vérifie que l'utilisateur a plus de 18 ans
+	if ($user->VerifPlusDe18ans()) {
+		
+		$error_date_naissance_message = '<p class="error">Vous devez avoir au moins 18 ans pour vous inscrire.</p>';
 
-				$error_nom_utilisateur_message = '<p class="alert-danger">Votre Nom à des caractere non valide.</p>';
-				$erreur = true;
+	} else {
 
-			}
-			//Ensuite le prenom
-			if (!preg_match("/^[a-zéèêëïüA-Z-' ]*$/", $user->getPrenom_utilisateur())) {
+		$error_date_naissance_message = 'ok';
 
-				$error_prenom_utilisateur_message = '<p class="alert-danger">Votre Prénom à des caractere non valide.</p>';
-				$erreur = true;
+	}
 
-			}
+	// vérifie que le code postal fait bien 5 chiffres
+	if (!preg_match("#^[0-9]{5}$#", $user->getAdresse_code_postal())) {
 
-		//verification que l'utilisateur a plus de 18 ans
-			
-			if ($user->VerifPlusDe18ans()) {
-				
-				$error_date_naissance_message = '<p class="alert-danger">Vous devez avoir au moins 18 ans pour vous inscrire.</p>';
+			$error_Adresse_code_postal_message = '<p class="error">Votre code postal doit etre composé de 5 chiffres.</p>';
+			$erreur = true;
 
-			} else {
+	}
 
-				$error_date_naissance_message = 'ok';
+	// vérifie qu'il n'y ait pas de chiffre dans le nom de la ville
+	if (preg_match("/[0-9]+/", $user->getAdresse_ville())) {
 
-			}
+	 	$error_Adresse_ville_message = '<p class="error">Le nom de votre ville ne doit pas contenir de chiffres.</p>';
+			$erreur = true;
+	 }
 
-		//Verification que le code postal fasse bien 5 chiffre.
-			if (!preg_match("#^[0-9]{5}$#", $user->getAdresse_code_postal())) {
+	// vérifie le num de tel
+	if (!preg_match("#(0|\+33|0033)[1-9][0-9]{8}#", $user->getTelephone())) {
 
-					$error_Adresse_code_postal_message = '<p class="alert-danger">Votre code postal doit etre composé de 5 chiffres.</p>';
-					$erreur = true;
+	 	$error_telephone_message = '<p class="error">Votre numero de téléphone doit contenir au moins 10 chiffres et pas de lettre.</p>';
+			$erreur = true;
+	}
 
-			}
-
-		//Verification qu'il n'y ai pas de chiffre dans le nom de la ville
-			if (preg_match("/[0-9]+/", $user->getAdresse_ville())) {
-
-			 	$error_Adresse_ville_message = '<p class="alert-danger">Le nom de votre ville ne doit contenir de chiffres.</p>';
-					$erreur = true;
-			 }
-
-		//Verification du num de tel
-			if (!preg_match("#(0|\+33|0033)[1-9][0-9]{8}#", $user->getTelephone())) {
-
-			 	$error_telephone_message = '<p class="alert-danger">Votre numero de téléphone doit contenir au moins 10 chiffres et pas de lettre.</p>';
-					$erreur = true;
-			 }
-
-	//FIN VERIFICATION
-
-		//si pas d'erreur : envoie de toute les information dans la BDD et redirige vers l'espace personnel.
+	// FIN VERIFICATION
+	// si pas d'erreur : envoi de toute les informations dans la BDD et redirection vers l'espace personnel
 	if ($erreur === false AND $error_email_message === 'ok' AND $error_date_naissance_message === 'ok') {
+
 		//on hash le mot de passe avant de l'envoyer vers la BDD
 		$mdp = $user->getMot_de_passe();
 
@@ -112,7 +106,6 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 
 
 		// envoi d'un mail de confirmation d'inscription
-
 		$email = $_POST['email'];
 
 		// l'en-tête nécessaire pour afficher le html dans les mails
@@ -136,16 +129,14 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 		$retour = mail($email, 'Bienvenue dans la communauté Zentopia !', $message, $entete);
 
 
-
-
-		//on remet le mot de passe non hash dans l'objet user pour le mettre en variable de session.
+		// on remet le mot de passe non hash dans l'objet user pour le mettre en variable de session
 		$user->setMot_de_passe($mdp);
 		
-		//ajouter les variable de SESSION ici.
+		// ajout des variables de SESSION 
 		if ($user->OpenSession() == true) {
 			header('Location: ?action=espace_personnel');
 		} else {
-			echo('<p class="center alert-danger">Compte crée mais erreur dans l\'ouverture de session.</p>');
+			echo('<p class="center error">La session n\'a pu être créée.</p>');
 		}
 	
 	} else {
@@ -158,7 +149,7 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 			$smarty->assign('error_date_naissance_message', $error_date_naissance_message);
 		}
 		
-		//on envoie toute les erreur a smary
+		// on envoie toutes les erreusr à SMARTY
 		$smarty->assign(array(
 			'error_mot_de_passe_message' => $error_mot_de_passe_message,
 			'error_verif_mot_de_passe_message' => $error_verif_mot_de_passe_message,
