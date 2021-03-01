@@ -292,7 +292,7 @@
 								{/foreach}
 							{/if}
 
-							<a href="?action=planning" class="btn btn-primary btn-red shadow-none">ACCEDER AU PLANNING</a>
+							<a href="?action=planning#reservation" class="btn btn-primary btn-red shadow-none">ACCEDER AU PLANNING</a>
 
 						</div>
 						
@@ -311,7 +311,7 @@
 							{if $avisUtilisateur == false}
 								<p>Vous n'avez pas encore donné votre avis sur notre établissement.</p>
 
-								<a href="?action=la_team" class="btn btn-primary btn-red shadow-none">ECRIRE MON AVIS</a>
+								<a href="?action=la_team#ajout-avis" class="btn btn-primary btn-red shadow-none">ECRIRE MON AVIS</a>
 
 							{elseif $avisUtilisateur->getApprouve() == 0}
 

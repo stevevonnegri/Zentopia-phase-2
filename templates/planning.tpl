@@ -301,8 +301,11 @@
 						<div class="col-12 col-sm-6 col-lg text-center col-below">
 							
 							<p>{$seance.nom_type_de_cours|upper}, avec {$seance.prenom_utilisateur|capitalize} <br/>
+								
+								{assign var=ancre value=" "|explode:$seance.nom_type_de_cours}
+
 								<!-- ajouter l'ancre menant au type de cours à l'url -->
-								<a href="?action=enseignement" class="voir-description">> voir description</a> </p>
+								<a href="?action=enseignement#{$ancre.0|lower}" class="voir-description">> voir description</a> </p>
 
 						</div>
 

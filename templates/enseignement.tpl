@@ -121,11 +121,13 @@
 
 							<div class="col text-center {if $i%2==1} order-1 {else} order-2 {/if}">
 								
+								{assign var=ancre value=" "|explode:$cours->getNom_type_de_cours()}
+
 								<h2 class="
 
 								{if $i%2==1} text-left {else} text-right {/if}
 
-								 nom-cours" id="hatha">{$cours->getNom_type_de_cours()|upper}</h2>
+								 nom-cours" id="{$ancre.0|lower}">{$cours->getNom_type_de_cours()|upper}</h2>
 
 								<p class="text-justify">{$cours->getDescription_type_de_cours()}</p>
 
@@ -190,11 +192,13 @@
 
 							<div class="col text-center {if $i%2==1} order-1 {else} order-2 {/if}">
 								
+								{assign var=ancre value=" "|explode:$cours->getNom_type_de_cours()}
+
 								<h2 class="
 
 								{if $i%2==1} text-left {else} text-right {/if}
 
-								 nom-cours" id="hatha">{$cours->getNom_type_de_cours()|upper}</h2>
+								 nom-cours" id="{$ancre.0|lower}">{$cours->getNom_type_de_cours()|upper}</h2>
 
 								<p class="text-justify">{$cours->getDescription_type_de_cours()}</p>
 
