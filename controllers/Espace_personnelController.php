@@ -18,7 +18,10 @@
 		session_destroy();
 		header('Location:?action=index&CompteDelete=true');
 	}
-
+//affichage du message du succes si mdp bien changer
+	if (isset($_GET['message_succes_mdp'])) {
+		$smarty->assign('message_succes_mdp', '<p class="error">Votre mot de passe à bien été changer !</p>');
+	}
 //changement de mot de passe
 	if (isset($_POST['mettre_a_jour'])) {
 		//verifier si le mot de passe actuel est bon.
@@ -62,8 +65,8 @@
 			// envoie le nouveau mot de passe dans la BDD en recperant l'id dans les info de session.
 			$user->Update($donnée, $_SESSION['id_utilisateur']);
 			//puis actualise la page.
-			header('Location: ?action=espace_personnel');
-	// A FAIRE 	afficher un message de succes sur la prochaine fenetre.
+			header('Location: ?action=espace_personnel&message_succes_mdp=true#mot_de_passe');
+			
 		
 		} else {
 
@@ -108,7 +111,7 @@
 			//ETAPE VERIFIACTION
 				//verification de l'email
 
-/* /!\ */		$error_email_message = $userModif->EmailBonFormat('MODIF');
+				$error_email_message = $userModif->EmailBonFormat('MODIF');
 
 				//verifie que le nom et le prenom n'on pas de charactere speciaux
 					//le nom en 1er
