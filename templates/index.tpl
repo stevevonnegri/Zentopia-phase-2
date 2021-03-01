@@ -60,7 +60,7 @@ Découvrez notre pratique du yoga et de la méditation selon nos trois principes
 
 						<h1>Bienveillance</h1>
 
-						<p>Nous prônous la tolérance et la bienveillance dans nos locaux, pour que tous et toutes puissent se sentir à l'aise, en sécurité et entouré.e.s.</p>
+						<p>Nous prônons la tolérance et la bienveillance dans nos locaux, pour que tous et toutes puissent se sentir à l'aise, en sécurité et entouré.e.s.</p>
 
 					</div>
 					
@@ -133,23 +133,34 @@ Découvrez notre pratique du yoga et de la méditation selon nos trois principes
 			<div class="row justify-content-center">
 
 				<div class="col col-md-11 col-lg-9 col-xl-6 text-center newsletter-homepage-titre">
-					Inscrivez-vous à notre newsletter pour ne rien louper de nos actus et recevez votre invitation
 
-					{if isset($seance_decouverte)}
+					{if isset($_SESSION['newsletter']) && $_SESSION['newsletter'] == 1}
 
-						à l'une de <span>nos séances découverte</span>* 
+						Merci de vous etre inscrit a notre newsletter !
 
-					{else}
-						
-						!
+					{elseif !isset($_SESSION['newsletter']) || $_SESSION['newsletter'] == 0}
 
-					{/if}
+						Inscrivez-vous à notre newsletter pour ne rien louper de nos actus 
 
-					 
+						{if $_SESSION['seance_decouverte'] == 0 }
+
+							et recevez votre invitation à l'une de <span>nos séances découverte</span>* 
+
+						{else}
+							
+							!
+
+						{/if}
+					
+					 {/if}
+
 				</div>
+					
 
 			</div>
 
+			{if !isset($_SESSION['newsletter']) || $_SESSION['newsletter'] == 0}
+			
 			<div class="row justify-content-center">
 				
 				<div class="col">
@@ -173,10 +184,12 @@ Découvrez notre pratique du yoga et de la méditation selon nos trois principes
 
 			</div>
 
-			{if isset($seance_decouverte)}
+			
+			{if !isset($_SESSION['seance_decouverte']) || $_SESSION['seance_decouverte'] == 0 }
 
-			<p class="newsletter-homepage-disclaimer">*Offre valable pour tout.e nouvel.le élève s'inscrivant à la newsletter, sur l'une des six séances découvertes proposées par Zentopia sur l'année, plus d'informations dans le mail de confirmation de la newsletter.</p>
-
+				<p class="newsletter-homepage-disclaimer">*Offre valable pour tout.e nouvel.le élève s'inscrivant à la newsletter, sur l'une des six séances découvertes proposées par Zentopia sur l'année, plus d'informations dans le mail de confirmation de la newsletter.</p>
+				
+			{/if}
 			{/if}
 
 		</div>
