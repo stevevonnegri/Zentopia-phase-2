@@ -1,15 +1,32 @@
 <?php
 
+/**
+* <h2>Classe Model, classe mère de toutes les autres classes</h2>
+* <p>Celle-ci contient :</p>
+* <ul>
+*   <li>Le constructeur, la fonction hydrate</li>
+*   <li>Les fonctions générales qui seront utilisées via ses classes filles</li>
+* </ul>
+* @author Anaïs Bironneau, Olivier Clément & Steve von Negri
+* @date 11/02/2021
+*/
+
 class Model {
 	protected $_bdd;
 
-
+	/**
+	* Constructeur
+	* @param $donnees (array) : tableau des données permettant l'hydratation de l'objet
+	*/
 	public function __construct(array $donnees){
 		$this->hydrate($donnees);
 	}
 
 
-
+	/**
+	* Fonction d'hydratation
+	* @param $donnees (array) : tableau des données permettant l'hydratation de l'objet
+	*/
 	public function hydrate(array $donnees){
 		foreach ($donnees as $attribut => $valeur) {	
 			$method = 'set'.ucfirst($attribut); 
@@ -19,15 +36,33 @@ class Model {
 		}
 	}
 
+
+	/***********/
+    /* SETTERS */
+    /***********/
+    
 	public function setBdd($bdd){
 		$this->_bdd = $bdd;
 	}
+
+
+	/***********/
+    /* GETTERS */
+    /***********/
+
 
 	public function getBdd(){
 		return $this->_bdd;
 	}
 
 
+	/**
+	 * Fonction "setBDDTableau"
+	 * récupère la BDD et garde uniquement la valeur dans l'objet
+	 *
+	 * @param $bdd : les infos de la BDD sous forme de tableau
+	 *
+	*/
     public function setBddTableau($bdd) {
 		foreach ($bdd as $attribut => $valeur) {	
 			$method = 'set'.ucfirst($attribut); 
@@ -37,6 +72,13 @@ class Model {
 		}
 	}
 
+
+	/**
+	 * Fonction "getList"
+	 * récupère la liste des entrées d'une table dans la BDD
+	 *
+	 * @return un tableau contenant les données
+	*/
 	public function getList(){
 		$lists = [];
 		$sql = $this->_bdd->query('SELECT * FROM '.$this->_table);
@@ -46,14 +88,15 @@ class Model {
 		return $lists; 
 	} 
 
-	// recupère un seul personnage en fonction de l'id
+
 	/**
-	* fonction recuperant un élément d'une BDD selon un ID et un nom de colonne.
+	* Fonction "getItem"
+	* récupère un élément dans la BDD selon les paramètres qu'on lui passe
 	*
-	*@param      <int>   	$id     	l'id l'element
-	*@param      <string>   $colonne    nom de la colonne
+	*@param $id : id de l'élément
+	*@param $colonne : nom de la colonne visée s'il y en a 
 	*
-	*@return 	<object> 	retourne UN objet avec les information de la BDD.
+	*@return retourne un objet contenant les données.
 	**/
 	public function getItem($id, $colonne = NULL){
 
@@ -73,12 +116,12 @@ class Model {
 	}
 
 
-
 	/**
-	* fonction suppriment un élément d'une BDD selon un ID et un nom de colonne.
+	* Fonction "Delete"
+	* supprime un élément de la BDD.
 	*
-	*@param      <int>   	$id     	l'id l'element
-	*@param      <string>   $colonne    nom de la colonne
+	*@param $id : id de l'élément
+	*@param $colonne : nom de la colonne visée s'il y en a 
 	*
 	**/
 	public function Delete($id, $colonne = NULL){
@@ -90,6 +133,14 @@ class Model {
 		$this->_bdd->exec('DELETE FROM '.$this->_table.' WHERE '.$colonne.' = "'.$id.'"');
 	}
 
+
+	/**
+	* Fonction "Add"
+	* ajoute un élément à la BDD.
+	*
+	*@param $array : le tableau contenant les données qu'on souhaite ajouter
+	*
+	**/
 	public function Add($array){
 		$champs = '';
 		$valeurs = '';
@@ -106,7 +157,14 @@ class Model {
 		$sql->execute();
 	}
 
-	
+
+	/**
+	* Fonction "Update"
+	* met à jour un élément à la BDD.
+	*
+	*@param $data (array) : le tableau contenant les données qu'on souhaite mettre à jour
+	*@param $id : id de l'élément ciblé
+	**/
 	public function Update(array $data, $id){
         $valeurs = '';
 		foreach($data as $key => $value) {
@@ -121,9 +179,12 @@ class Model {
 		$sql->execute();
 	}
 
+
 	/**
-	 * Compte le nombre d'entrer dans la table
-	 * @return sql la quantite d'entre dans une table
+	 * Fonction "Count"
+	 * compte le nombre d'entrées dans la table
+	 *
+	 * @return le résultat de la requête
 	 */
 	public function Count() {
 		

@@ -49,6 +49,31 @@
 
 	</div>
 
+
+	<div class="cookies-bg">
+			
+		<div class="container">
+
+			<form class="form-row justify-content-between">
+			
+				<div class="col-9">
+					
+					<p>Notre site utilise des cookies afin de vous garantir une expérience de navigation optimale. Consultez notre <a href="?action=reglement_interieur">politique de confidentialité</a> pour en savoir plus.</p>
+
+				</div>
+
+				<div class="col-3">
+					
+					<button class="btn btn-primary shadow-none" name="">J'ACCEPTE</button>
+
+				</div>
+
+			</form>
+
+		</div>
+
+	</div>
+
 </footer>
 
 <!-- lien library Jquery -->

@@ -1,4 +1,16 @@
 <?php
+
+/**
+* <h2>Classe Image, fille de Model</h2>
+* <p>Celle-ci contient :</p>
+* <ul>
+*   <li>Les getters et les setters</li>
+*   <li>Les fonctions custom liées aux images du site</li>
+* </ul>
+* @author Anaïs Bironneau, Olivier Clément & Steve von Negri
+* @date 11/02/2021
+*/
+
  class Image extends Model{
 
     protected $_id_image;
@@ -8,7 +20,11 @@
     protected $_table = "image";
     protected $_cle = "id_image";
 
-    //setters
+
+    /***********/
+    /* SETTERS */
+    /***********/
+       
     public function setId_image(int $id){
         $this->_id_image = $id;
     }
@@ -17,7 +33,10 @@
     }
 
 
-    //Getters
+    /***********/
+    /* GETTERS */
+    /***********/
+
     public function getId_image(){
         return $this->_id_image;
     }
@@ -25,11 +44,15 @@
         return $this->_url_image;
     }
 
-/**
- * @param image_source lien de l'image a resize
- * @param largeur cible pour la taille de l'image
- * @param nom de l'image
- */
+    /**
+     * Fonction "resizeImage"
+     * redimmensionne la taille d'une image
+     *
+     * @param $image_source : lien de l'image a resize
+     * @param $largeur : largeur cible pour la taille de l'image
+     * @param $nom : nom de l'image
+     *
+     */
     public function resizeImage($image_source, $largeur, $nom) {
 
 
@@ -53,19 +76,25 @@
     }
 
     /**
-     * @param largeur de l'image
-     * @param nom de l'image
+     * Fonction "getImageLink"
+     * génère le lien d'une image
+     *
+     * @param $largeur : largeur de de l'image
+     * @param $nom : nom de l'image
      * @return le chemin d'une image avec la largeur + nom d'une image
      */
     public static function GetImageLink($largeur, $nom){
         return ('assets/images/slider/'.$largeur.'-'.$nom);
     }
 
+
     /**
-     * Supprime les photos du slider du serveur puis de la bdd
-     * @param id de l'image 
-     * @param nom de l'image
-     * @return resultat de la requete
+     * Fonction "deleteImage"
+     * supprime les photos du slider du serveur puis de la bdd
+     * 
+     * @param $id : id de l'image 
+     * @param $nom : nom de l'image
+     * @return renvoie le résultat de la requête
      */
     public function deleteImage($id, $nom) {
         unlink('assets/images/'.$nom);
@@ -76,7 +105,5 @@
 
         return $resultat;
     }
-
-    
 
 }

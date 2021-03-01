@@ -1,4 +1,16 @@
 <?php
+
+/**
+* <h2>Classe Seance, fille de Model</h2>
+* <p>Celle-ci contient :</p>
+* <ul>
+*   <li>Les getters et les setters</li>
+*   <li>Les fonctions custom liées aux séances présentes sur le planning dynamique du site</li>
+* </ul>
+* @author Anaïs Bironneau, Olivier Clément & Steve von Negri
+* @date 11/02/2021
+*/
+
  class Seance extends Model{
 
     protected $_id_seance;
@@ -12,7 +24,11 @@
     protected $_table = "seance";
     protected $_cle = "id_seance";
 
-    //setters
+    
+    /***********/
+    /* SETTERS */
+    /***********/
+      
     public function setId_seance(int $id){
         $this->_id_seance = $id;
     }
@@ -37,7 +53,10 @@
 
 
 
-    //Getters
+    /***********/
+    /* GETTERS */
+    /***********/
+
     public function getId_seance(){
         return $this->_id_seance;
     }
@@ -61,12 +80,12 @@
     }
 
     /**
-    *@param id de l'utilisateur
+    * Fonction "getSeanceById"
+    * récupère la liste des informations nécessaire à l'affichage des séances réservées dans l'espace personnel
+    * 
+    * @param $id (int) : id de l'utilisateur
     *
-    * fonction qui recupere la liste des information nécessaire a l'affichage des seance reserver 
-    * dans l'espace personnel
-    *
-    *@return array un tableau contenant la liste des sceance et leur information
+    * @return un tableau contenant la liste des séances et leurs données
     **/
     public function getSeanceById(int $id) {
 
@@ -90,12 +109,13 @@
         return $lists;
     }
 
+
     /**
-    *@param int l'id du professeur
-    *
-    * fonction qui trouve et renvoie le prenom dun professeur avec son id
-    *
-    *@return string le prenom d'un professeur
+    * Fonction "getProfesseurNameById"
+    * récupère le prénom d'un professeur avec son id
+    * 
+    * @param $id (int) : id du professeur
+    * @return le prénom du professeur
     **/
     public function getProfesseurNameById(int $id) {
         $sql = $this->_bdd->query('SELECT prenom_utilisateur 
@@ -106,11 +126,15 @@
 
         return $sql->fetchColumn();
     }
+
+
     /**
-    * @param int l'id de la seance
-    * @param int l'id de l'utilisateur
+    * Fonction "DeleteReservationById"
+    * supprime la jointure entre une seance et l'utilisateur qui l'a réservée
     *
-    * supprime la jointure entre une seance et l'utilisateur qui la reserver.
+    * @param $id_seance (int) : l'id de la seance
+    * @param $id_utilisateur (int) : l'id de l'utilisateur
+    *
     **/
     public function DeleteReservationById(int $id_seance, int $id_utilisateur) {
 
@@ -123,9 +147,10 @@
 
     
     /**
-     * Ajoute une Reservation dans la table reserve
+     * Fonction "AddReservation"
+     * ajoute une réservation dans la table "reserver"
      * 
-     * @param objet est un tableau qui doit avoir l'id d'une seance et l'id d'un utilisateur pour fonctioner
+     * @param $objet : un tableau qui doit avoir l'id d'une séance et l'id d'un utilisateur pour fonctionner
      */
     public function AddReservation($objet){
 		$champs = '';
@@ -144,9 +169,10 @@
 	}
 
     /**
-	* fonction suppriment un élément d'une BDD selon un ID et un nom de colonne.
+    * Fonction "DeleteSeance"
+	* supprime une réservation de la table "reserver"
 	*
-	*@param      data un tableau l'id seance et l'id utilisateur
+	*@param $data : un tableau contenant l'id de la séance et l'id de l'utilisateur
 	*
 	**/
 	public function DeleteSeance($data){
@@ -155,50 +181,56 @@
         
 	}
 
+
     /**
-     * Renvoie les seance depuis la date envoyer, jusqu'au dimanche suivant
+     * Fonction "getSeance"
+     * renvoie les séances depuis la date envoyée, jusqu'au dimanche suivant
      *
-     * @param      <mktime>  date a partir de laquel on veux les seance, prend la date du jour si NULL
+     * @param $filtre : ajoute un filtre si sélectionné par l'utilisateur
+     * @param $date : date à partir de laquelle on veux les séances, prend la date du jour si NULL
      *
-     * @return     un tableau avec toute les information utile sur les seance demander.
+     * @return un tableau avec toutes les informations utiles sur les séances demandées
      */
     public function getSeance($filtre = "", $date = NULL) {
-        //ajoute un filtre selon le type de seance si option utiliser
+
+        // ajoute un filtre selon le type de séance si option utilisée
         $where = "";
         if ($filtre != "") {
             $where .= 'AND nom_type_de_cours = "'.$filtre.'"';
         }
 
-        //creation des variable utilisé
-            //teste si $date est NULL
+        // création des variables utilisées
+            // teste si $date est NULL
             if (!isset($date)) {
-                //si pas de date, on recupere celle d'aujourd'hui
+
+                // si pas de date, on récupère celle d'aujourd'hui
                 $jourActuel = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
-                //on recupere l'heure
+
+                // on récupère l'heure
                 $heureActuel = date('H:i:s');
                
             } else {
-                //si une date est donnée on la prend et on set l'heure a zero pour recupere toute les seance de la journée.
+
+                // si une date est donnée on la prend et on set l'heure à zero pour récupérer toutes les séances de la journée
                 $jourActuel = $date;
                 $heureActuel = "00:00:00";
             }
 
 
-            //on recupere le jour de la semaine)
+            // on récupère le jour de la semaine
             $jourSemaineActuel = date('w', $jourActuel);
 
-        //calcul des variable
-            //calcul le nombre de jour restant dans la semaine
+        // calcul des variables
+            // calcule le nombre de jours restants dans la semaine
             $jourDiff = 7 - $jourSemaineActuel;
-            //calcule la date a laquel on sera a la fin de la semaine.
 
+            // calcule la date à laquelle on sera à la fin de la semaine
             $jourLimite  = date('Y:m:d', mktime(0, 0, 0, date("m", $jourActuel)  , date("d", $jourActuel)+$jourDiff, date("Y", $jourActuel)));
-            
 
-            //on transforme la variable jourActuel de mktime vers une date
+            // on transforme la variable jourActuel de mktime vers une date
             $jourActuel = date('Y:m:d', $jourActuel);
 
-        //envoie de la commande SQL
+        // envoi de la requête SQL
         $sql = $this->_bdd->query('SELECT seance.id_seance, date_seance, heure_debut_seance, heure_fin_seance, annule, nom_type_de_cours, nombre_de_places, utilisateur.prenom_utilisateur, utilisateur.id_utilisateur
             FROM seance
             NATURAL JOIN type_de_cours
@@ -212,7 +244,8 @@
 
         $lists = [];
         while($donnees = $sql->fetch(PDO::FETCH_ASSOC)){
-            //on recupere le nombre de reservation pour la seance donnée pour pouvoir calculer le nombre de place restante
+
+            // on récupère le nombre de réservations pour la séance donnée pour pouvoir calculer le nombre de places restantes
             $sql_2 = $this->_bdd->query('
                 SELECT COUNT(*) 
                 FROM reserver 
@@ -220,18 +253,17 @@
 
             $donnees['nbr_place_prise'] =  $sql_2->fetchColumn();
 
-            //verifie si le membre connecter a deja reserver la seance et l'ajoute au tableau $données
+            // vérifie si le membre connecté a déjà réservé la séance et l'ajoute au tableau $donnees
             if (isset($_SESSION['id_utilisateur'])) {
 
                 $donnees['A_Reserver'] = in_array($donnees['id_seance'], $this->getReservationById_SESSION());
                 
             }
             
-
-            //on ajoute la liste des participant de chaque cours.
+            // on ajoute la liste des participants de chaque cours
             $donnees['participants'] = $this->getListParticipant($donnees['id_seance']);
 
-            //ajouter la liste des participant au cours
+            // ajouter la liste des participants au cours
 
             array_push($lists, $donnees);
 
@@ -240,12 +272,15 @@
         return $lists;
     }
 
+
+
     /**
-     *@param in id de seance.
+     * Fonction "getListParticipant"
+     * récupère la liste des noms, prénoms et id des participants à un cours
      *
-     * recupere la liste des nom et prenom et id des participant a un cours selon id_seance
+     * @param $id_seance : l'id de la séance à partir de laquelle la fonction doit retourner des données
      * 
-     * @return un tableau associatif avec la liste les 3 valeur demander.
+     * @return un tableau associatif avec la liste les valeurs demandées
      */
     public function getListParticipant($id_seance) {
 
@@ -267,14 +302,12 @@
 
 
     /**
-     * recupere les id des seance reserver par le membre connecter
-     *
-     * @return     un tableau simple avec la liste des id de seance  
+     * Fonction getReservationById_SESSION
+     * récupère les ids des séances réservées par le membre connecté
+     * 
+     * @return un tableau simple avec la liste des ids de séance  
      */
     public function getReservationById_SESSION() {
-        //modification de la varible de session pour faire des TEST
-        //$save = $_SESSION['id_utilisateur'];
-        //$_SESSION['id_utilisateur'] = 7;
         
         $lists_id_seances = [];
  
@@ -288,16 +321,14 @@
             return $lists_id_seances;
         }
 
-
-        //$_SESSION['id_utilisateur'] = $save;
-
     }
 
 
     /**
-     * retourne sous forme de tableau simple tout les nom des type de cours present dans la BDD
+     * Fonction "allTypeDeCours"
+     * retourne tous les noms des types de cours présents dans la BDD
      *
-     * @return     array  retourne les nom des type de cours
+     * @return retourne un tableau contenant les noms des types de cours
      */
     public function allTypeDeCours() {
 
@@ -312,12 +343,15 @@
         return $lists;
 
     }
+
+
     /**
-     * compte le nombre de participant a une seance
+     * Fonction "CountParticipantSeance"
+     * compte le nombre de participants à une seance
      * 
-     * @param id l'id de la seance
+     * @param $id : l'id de la séance
      * 
-     * @return sql return le nombre de participant à cette seance
+     * @return le nombre de participants à cette seance
      */
     public function CountParticipantSeance($id) {
         $sql = $this->_bdd->query('SELECT count(*) FROM reserver WHERE id_'.$this->_table.' = '.$id);
@@ -326,11 +360,13 @@
 
     
     /**
-     * cherche les seance a laquel participe un utilisateur
+     * Fonction "getItemFromReserver"
+     * cherche les séances auxquelles participe un utilisateur
      * 
-     * @param id l'id d'une colone et son nom dans la BDD
+     * @param $id : l'id de l'utilisateur
+     * @param $colonne : le nom de la colonne où on veut chercher
      * 
-     * @return lists return un tableau avec l'id_utilisateur des membres inscrits sur cette seance 
+     * @return un tableau avec l'id_utilisateur des membres inscrits sur cette séance 
      */
     public function getItemFromReserver($id, $colonne) {
 
@@ -346,10 +382,11 @@
     }
 
     /**
-     * supprime un participant d'une seance en fonction de son id.
+     * Fonction "deleteParticipant"
+     * supprime un participant d'une séance
      *
-     * @param      string  $id_seance       The identifier seance
-     * @param      string  $id_utilisateur  The identifier utilisateur
+     * @param $id_seance : l'id de la séance
+     * @param $id_utilisateur : l'id de l'utilisateur
      */
     public function deleteParticipant($id_seance, $id_utilisateur) {
 
@@ -362,10 +399,11 @@
     }
 
     /**
-     * Ajoute un participant a une seance
+     * Fonction "addParticipant"
+     * ajoute un participant à une seance
      *
-     * @param      string  $id_seance       l'identifiant de la seance
-     * @param      string  $id_utilisateur  l'identifiant de l'utilisateur
+     * @param $id_seance : l'id de la séance
+     * @param $id_utilisateur : l'id de l'utilisateur
      */
     public function addParticipant($id_seance, $id_utilisateur) {
         $sql = $this->_bdd->prepare('INSERT INTO reserver (id_seance, id_utilisateur) VALUES ('.$id_seance.', '.$id_utilisateur.')');
@@ -374,11 +412,12 @@
 
 
     /**
-     * Fonction qui compte le nombre de seance présente lors d'un ajoute ou d'une modification de seance pour eviter le chevauchement se seance durnat la meme periode
+     * Fonction "VerificationPlageHoraireDispo"
+     * compte le nombre de séances présentes lors d'un ajout ou d'une modification de séance pour éviter le chevauchement de séance durant la même période
      * 
-     * @param id-> Defauld a NULL   id de la seance a modifier (permet de ne pas compter dessus lors de la modification d'un prof par exemple)
+     * @param $id : par défaut à NULL, sinon id de la séance à modifier (permet de ne pas compter dessus lors de la modification d'un prof par exemple)
      * 
-     * @return sql retour le nombre de resultat
+     * @return le résultat de la requête
      */
     public function VerificationPlageHoraireDispo($id = NULL){
 
@@ -401,14 +440,14 @@
     }
 
     /**
-     * Verifie la validiter d une date lors de la modif d une seance ou l ajout 
-     * (verifie que la date et l'heure n'est pas encore passer, que l heure de fin soit plus grand que l heure de debut )
+     * Fonction "VerifDateHeure"
+     * vérifie la validité d'une date lors de la modif ou l'ajout d'une séance (par exemple que la date et l'heure ne soient pas encore passés, que l'heure de fin soit ultérieure à l'heure de début)
      * 
-     * @param date date saisi lors de l ajout ou de la modification de la seance
-     * @param heure_debut heure de debut saisi lors de l ajout ou de la modification de la seance
-     * @param heure_fin heure de fin saisi lors de l ajout ou de la modification de la seance
+     * @param $date : la date saisie lors de l'ajout ou de la modification de la séance
+     * @param $heure_debut : heure de début saisie
+     * @param $heure_fin : heure de fin saisie
      * 
-     * @return retour si c'est erreur ou non
+     * @return true or false
      */
     public function VerifDateHeure($date, $heure_debut, $heure_fin) {
 
@@ -428,7 +467,8 @@
     }
 
     /**
-     * Fonction pour l ajout de seance a la bdd
+     * Fonction "AddSeance"
+     * ajoute une séance à la BDD
      */
     public function AddSeance() {
 

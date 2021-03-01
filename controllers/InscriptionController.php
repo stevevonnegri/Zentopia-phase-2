@@ -110,6 +110,34 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 		$user->setMot_de_passe(password_hash($mdp, PASSWORD_DEFAULT));
 		$user->AddUtilisateur();
 
+
+		// envoi d'un mail de confirmation d'inscription
+
+		$email = $_POST['email'];
+
+		// l'en-tête nécessaire pour afficher le html dans les mails
+		$entete  = 'MIME-Version: 1.0' . "\r\n";
+        $entete .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+        $entete .= 'From: ' .$email. "\r\n";
+
+        // le message de réinitialisation de mdp
+        $message = '<h1>Bienvenue dans la communauté Zentopia !</h1>
+        
+        <p>Vous faites désormais partie de la famille Zentopia. Vous pouvez dès à présent vous connecter sur notre site avec vos identifiants et profiter de tous les avantages membre.</p><br/><br/>
+
+        <p><b>ZENTOPIA <br/>
+        Centre de yoga et de méditation <br/>
+        26 rue des Tanneurs, 37000 TOURS <br/>
+        02 47 66 66 66 <br/>
+        contact@zentopia.fr</b></p>
+        ';
+
+        // l'envoi du mail
+		$retour = mail($email, 'Bienvenue dans la communauté Zentopia !', $message, $entete);
+
+
+
+
 		//on remet le mot de passe non hash dans l'objet user pour le mettre en variable de session.
 		$user->setMot_de_passe($mdp);
 		

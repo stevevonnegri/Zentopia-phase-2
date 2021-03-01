@@ -1,4 +1,16 @@
 <?php
+
+/**
+* <h2>Classe Type_de_cours, fille de Model</h2>
+* <p>Celle-ci contient :</p>
+* <ul>
+*   <li>Les getters et les setters</li>
+*   <li>Les fonctions custom liées aux types de cours dispensés</li>
+* </ul>
+* @author Anaïs Bironneau, Olivier Clément & Steve von Negri
+* @date 11/02/2021
+*/
+
  class Type_de_cours extends Model{
 
     protected $_id_type_de_cours;
@@ -12,7 +24,11 @@
     protected $_table = "type_de_cours";
     protected $_cle = "id_type_de_cours";
 
-    //setters
+
+    /***********/
+    /* SETTERS */
+    /***********/
+      
     public function setId_type_de_cours(int $id){
         $this->_id_type_de_cours = $id;
     }
@@ -36,8 +52,10 @@
     }
 
 
+    /***********/
+    /* GETTERS */
+    /***********/
 
-    //Getters
     public function getId_type_de_cours(){
         return $this->_id_type_de_cours;
     }
@@ -60,12 +78,15 @@
         return $this->_icone_type_de_cours;
     }
 
+
+
     /**
-     * Cherhce le nombre de place d'une seance par rapport a son type de cours
+     * Fonction "getItemForSeance"
+     * cherche le nombre de places disponibles d'une séance par rapport à son type de cours
      * 
-     * @param id l'id d'une seance
+     * @param $id : l'id d'une séance
      * 
-     * @return sql renvoie le nombre de place pour la seance
+     * @return le nombre de places pour la seance
      */
     public function getItemForSeance($id) {
 
@@ -81,10 +102,12 @@
 
 
     /**
-    * fonction récupérant la liste des cours enseignés par un prof
+    * Fonction "getCoursProf"
+    * récupère la liste des cours enseignés par un prof
     *
+    * @param $id (int) : l'id d'un professeur
     *
-    *@return    <array>     un tableau contenant les noms des cours que le prof enseigne
+    *@return un tableau contenant les noms des cours que le prof enseigne
     **/
     public function getCoursProf(int $id) {
     
@@ -107,10 +130,10 @@
 
 
     /**
-    * fonction récupérant la liste des cours de la catégorie "yoga"
+    * Fonction "getListYoga"
+    * récupère la liste des cours de la catégorie "yoga"
     *
-    *
-    *@return    <array>     un tableau contenant les données des types de cours
+    *@return un tableau contenant les données des types de cours
     **/
     public function getListYoga(){
         $lists = [];
@@ -123,10 +146,10 @@
 
 
     /**
-    * fonction récupérant la liste des cours de la catégorie "méditation"
+    * Fonction "getListMeditation"
+    * récupère la liste des cours de la catégorie "méditation"
     *
-    *
-    *@return    <array>     un tableau contenant les données des types de cours
+    *@return un tableau contenant les données des types de cours
     **/
     public function getListMeditation(){
         $lists = [];
