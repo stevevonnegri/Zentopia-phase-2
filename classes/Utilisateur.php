@@ -1,4 +1,17 @@
 <?php
+
+/**
+* <h2>Classe Utilisateur, fille de Model</h2>
+* <p>Celle-ci contient :</p>
+* <ul>
+*   <li>Les getters et les setters</li>
+*   <li>Les fonctions custom liées aux utilisateurs</li>
+* </ul>
+* @author Anaïs Bironneau, Olivier Clément & Steve von Negri
+* @date 11/02/2021
+*/
+
+
  class Utilisateur extends Model{
 
     protected $_id_utilisateur;
@@ -19,7 +32,11 @@
     protected $_table = "utilisateur";
     protected $_cle = "id_utilisateur";
 
-    //setters
+
+    /***********/
+    /* SETTERS */
+    /***********/
+      
     public function setId_utilisateur(int $id){
         $this->_id_utilisateur = $id;
     }
@@ -64,7 +81,10 @@
     }
 
 
-    //Getters
+    /***********/
+    /* GETTERS */
+    /***********/
+
     public function getId_utilisateur(){
         return $this->_id_utilisateur;
     }
@@ -110,11 +130,13 @@
 
     
     /**
-     * fonction pour ajouter l'objet utilisateur dans la BDD
+     * Fonction "AddUtilisateur"
+     * ajoute un objet utilisateur dans la BDD
      */
     public function AddUtilisateur() {
-        //test si la personne veux s'inscrire a la newletter si oui, envoie le booleen true pour les colonne 
-        //"newsletter" et "seance_decouverte" -> la personne venant de s'inscrire, il n'y a pas besoin de tester si elle a deja fait des cours puisque cela n'est pas possible.
+
+        // teste si la personne veux s'inscrire à la newletter si oui, envoie le booléen true pour les colonnes 
+        // "newsletter" et "seance_decouverte" -> la personne venant de s'inscrire, il n'y a pas besoin de tester si elle a deja fait des cours puisque cela n'est pas possible
          if ($this->getNewsletter() != 1) {
             $sql = $this->_bdd->prepare('INSERT INTO utilisateur (nom_utilisateur, prenom_utilisateur, genre, date_de_naissance, adresse_rue, adresse_code_postal, adresse_ville, telephone, email, mot_de_passe) 
             VALUES ("'.$this->getNom_utilisateur().'", "'.$this->getPrenom_utilisateur().'", "'.$this->getGenre().'", "'.$this->getDate_de_naissance().'", "'.$this->getAdresse_rue().'",
@@ -127,20 +149,24 @@
         $sql->execute();
     }
 
+
     /**
-     * compte le nombre d'utilisateur avec le mail de l'objet appelant la fonction.
+     * Fonction "countItemByEmail"
+     * cherche à savoir s'il y a un utilisateur associé au mail contenu dans l'objet appelant la fonction
      *
-     * @return     <int>  nombre d'entrer ayant l'email donnée.
+     * @return le nombre d'entrées ayant l'email donnée
      */
     public function countItemByEmail() {
         $sql = $this->_bdd->query('SELECT COUNT(*) FROM utilisateur where email = "'.$this->getEmail().'"');
         return $sql->fetchColumn();
     }
 
+
     /**
-     * compte le nombre de reservation avec l'id de l'objet appelant la fonction.
+     * Fonction "countReserverByEmail"
+     * compte le nombre de réservations associées à l'id de l'objet appelant la fonction.
      * 
-     * @return     <int>  nombre de reservation deja faite par l'utilisateur.
+     * @return le nombre de réservations effectuées par l'utilisateur.
      */
     public function countReserverByEmail() {
         $sql = $this->_bdd->query('SELECT COUNT(*) FROM reserver 
@@ -151,11 +177,13 @@
     }
 
 
-    //Recupere les informations de l'utilisateur qui sont egal à l'email et les stocks dans un objet
     /**
-    * recupere les information de la BDD en fonction d'un email.
+    * Fonction "getUserByMail"
+    * récupère les données d'un utilisateur en fonction de son email
     *
-    *@return retourne un objet utilisateur qui correspond a l'email envoyer
+    * @param $mail : le mail dont on souhaite récupérer un possible utilisateur
+    *
+    *@return retourne un objet utilisateur
     **/
     public function getUserByMail($mail) {
         $sql = $this->_bdd->query('SELECT * FROM '.$this->_table.' WHERE email = "'.$mail.'"');
@@ -175,13 +203,12 @@
         
     }
 
-    //a tester : fonction d'ouverture de session.
+
     /**
-     * verifie si le mail de l'aobjet est bien dans la BDD
-     * recupere les information coresspondant au mail
-     * ouvre une session et set les info dans les variable de session
+     * Fonction "OpenSession"
+     * vérifie si le mail de l'objet est bien dans la BDD, récupère les informations correspondant au mail, ouvre une session et set les infos dans les variables de session
      *
-     * @return     true si la session est ouverte, 'MDP' si le mot de passe donnée et celui de la BDD ne corresponde pas, 'EMAIL' si l'email n'existe pas dans la BDD.
+     * @return     true si la session est ouverte, 'MDP' si le mot de passe donné et celui de la BDD ne correspondent pas, 'EMAIL' si l'email n'existe pas dans la BDD
      */
     public function OpenSession() {
         //si l'objet appelant la fonction possede un email dans la BDD
@@ -212,7 +239,8 @@
     
 
     /**
-     * crée ou met a jours les variable de session.
+     * Fonction "addVariableSession"
+     * crée ou met à jour les variables de session.
      */
     public function addVariableSession() {
 
@@ -232,17 +260,17 @@
     }
 
 
-
-    //PARTIE VERIFICATION DES INFO INSCRIPTION/MODIFICATION
-    //VERIFICATION DE L'EMAIL
-
     /**
-    * verifie si l'email est present dans la BDD et si il est au bon format
+    * Fonction "EmailBonFormat"
+    * vérifie si l'email est présent dans la BDD et s'il est au bon format
+    *
+    * @param $modifier : NULL par défaut, à renseigner si on ne veut pas que l'email soit vérifié dans la BDD
     *
     *@return string 'ok' si tout va bien, sinon revoie le message d'erreur correspondant.
     **/
     public function EmailBonFormat($modifier = NULL) {
-            //on set la variable $error_email_message a OK
+
+            // on set la variable $error_email_message a OK
             $error_email_message = 'ok';
             //email au bon format
             if (filter_var($this->getEmail(), FILTER_VALIDATE_EMAIL)) {
@@ -251,13 +279,13 @@
 
                 if ($this->countItemByEmail() != 0 AND isset($modifier) === NULL) {
                     
-                    $error_email_message = '<p class="alert-danger">Cet email existe deja, merci de vous connecter (ou cliquer ici pour vous connecter).</p>';
+                    $error_email_message = '<p class="alert-danger">Cet email est déjà lié à un compte existant.</p>';
 
                 }
 
              } else {
 
-                $error_email_message = '<p class="alert-danger"> format de l\'email invalide.</p>';
+                $error_email_message = '<p class="alert-danger">Le format de l\'email est invalide.</p>';
                     
             }
 
@@ -268,9 +296,10 @@
 
 
     /**
-    * verifie si l'age de l'utilisateur est superieur a 18 ans
+    * Fonction "VerifPlusDe18ans"
+    * vérifie si l'âge de l'utilisateur est supérieur à 18 ans
     *
-    *@return true si il a 18ans ou plus, false dans le cas contraire.
+    *@return true s'il a 18 ans ou plus, false dans le cas contraire
     **/
     public function VerifPlusDe18ans() {
         //verification que l'utilisateur a plus de 18 ans
@@ -302,12 +331,16 @@
     }
 
 
-
      /**
-     * Fonction de recherche de membre par critères
-     * construit la requête SQL en fonction des champs remplis avant de l'envoyer à la BDD
+     * Fonction "getRechercheMembre"
+     * construit la requête SQL de recherche de membres en fonction des champs remplis, et l'envoie à la BDD
      *
-     * @return     un tableau de données contenant les infos du ou des membres correspondant à la recherche
+     * @param $nom : NULL par défaut, contient le nom de l'utilisateur si renseigné
+     * @param $prenom : NULL par défaut, contient le prénom de l'utilisateur si renseigné
+     * @param $tel : NULL par défaut, contient le téléphone de l'utilisateur si renseigné
+     * @param $email : NULL par défaut, contient le mail de l'utilisateur si renseigné
+     *
+     * @return un tableau de données contenant les infos du ou des membres correspondant à la recherche
      */
 
     public function getRechercheMembre($nom = NULL, $prenom = NULL, $tel = NULL, $rang = NULL, $email = NULL){
@@ -343,7 +376,8 @@
         
 
         if ($where != '') {
-            //si pas de condition, dans le cas ou toute les option sont NULL, la fonction substr renvoie false, se qui provoque une erreur dans la requte sql.
+
+            // si pas de condition, dans le cas ou toutes les options sont NULL, la fonction substr renvoie false, ce qui provoque une erreur dans la requête
             $where = substr($where, 4);
 
             $sql = $this->_bdd->query(
@@ -356,7 +390,8 @@
             return $lists;
         
         } else {
-            //si la variable where vaux '' c'est qu'il n'y a pas de parametre, donc la fonction renvoie un tableau vide.
+
+            // si la variable where vaut '' c'est qu'il n'y a pas de paramètres, donc la fonction renvoie un tableau vide.
             return $lists;
 
         }

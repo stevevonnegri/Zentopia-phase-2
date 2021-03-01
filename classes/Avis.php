@@ -1,4 +1,16 @@
 <?php
+
+/**
+* <h2>Classe Avis, fille de Model</h2>
+* <p>Celle-ci contient :</p>
+* <ul>
+*   <li>Les getters et les setters</li>
+*   <li>Les fonctions custom liées aux avis client</li>
+* </ul>
+* @author Anaïs Bironneau, Olivier Clément & Steve von Negri
+* @date 11/02/2021
+*/
+
  class Avis extends Model{
 
     protected $_id_avis;
@@ -10,7 +22,11 @@
     protected $_table = "avis";
     protected $_cle = "id_avis";
 
-    //setters
+
+    /***********/
+    /* SETTERS */
+    /***********/
+        
     public function setId_avis(int $id){
         $this->_id_avis = $id;
     }
@@ -29,7 +45,10 @@
 
 
 
-    //Getters
+    /***********/
+    /* GETTERS */
+    /***********/
+
     public function getId_avis(){
         return $this->_id_avis;
     }
@@ -48,9 +67,8 @@
 
 
 
-
-
     /**
+     * Fonction "getAvisNonApprouves"
      * récupère les avis en attente de modération et les infos liés à leurs auteurs via la table utilisateur
      *
      * @return     un tableau contenant les infos de l'avis et de l'utilisateur lié
@@ -75,6 +93,7 @@
     }
 
     /**
+     * Fonction "getAvisApprouves"
      * récupère les avis déjà modérés et les infos liés à leurs auteurs via la table utilisateur
      *
      * @return     un tableau contenant les infos de l'avis et de l'utilisateur lié

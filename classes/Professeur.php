@@ -1,4 +1,17 @@
 <?php
+
+/**
+* <h2>Classe Professeur, fille de Model</h2>
+* <p>Celle-ci contient :</p>
+* <ul>
+*   <li>Les getters et les setters</li>
+*   <li>Les fonctions custom liées aux entités professeur du site</li>
+* </ul>
+* @author Anaïs Bironneau, Olivier Clément & Steve von Negri
+* @date 11/02/2021
+*/
+
+
  class Professeur extends Model{
 
     protected $_id_professeur;
@@ -9,7 +22,11 @@
     protected $_table = "professeur";
     protected $_cle = "id_professeur";
 
-    //setters
+
+    /***********/
+    /* SETTERS */
+    /***********/
+      
     public function setId_professeur(int $id){
         $this->_id_professeur = $id;
     }
@@ -24,7 +41,10 @@
     }
 
 
-    //Getters
+    /***********/
+    /* GETTERS */
+    /***********/
+
     public function getId_professeur(){
         return $this->_id_professeur;
     }
@@ -40,10 +60,10 @@
 
 
     /**
-    * fonction récupérant la liste des profs et leurs informations
+    * Fonction "getListeProf"
+    * récupère la liste des profs et leurs informations
     *
-    *
-    *@return    <array>    un tableau contenant les infos de du professeur et de l'utilisateur lié
+    *@return un tableau contenant les infos de du professeur et de l'utilisateur lié
     **/
     public function getListeProf() {
     
@@ -65,10 +85,10 @@
     }
 
     /**
-    * fonction récupérant la liste des cours enseignés par un prof
+    * Fonction "getCoursProf"
+    * récupère la liste des cours enseignés par un prof
     *
-    *
-    *@return    <array>     un tableau contenant les noms des cours que le prof enseigne
+    *@return un tableau contenant les noms des cours que le prof enseigne
     **/
     public function getCoursProf(int $id) {
     
@@ -78,7 +98,6 @@
         FROM type_de_cours 
         NATURAL JOIN peut_enseigner
         WHERE peut_enseigner.id_professeur = "'.$id.'"') ;
-
 
 
     while($donnees = $sql->fetchColumn()){
@@ -92,11 +111,11 @@
     }
 
 
-
     /**
-     * Renvoie un tableau avec avec le nom des professeurs
+     * Fonction "prenom_all_professeur"
+     * récupère les noms des professeurs
      *
-     * @return     array  retourne les prenoms des professeurs pour l'affichage
+     * @return un tableau contenant les prénoms des professeurs pour l'affichage
      */
     public function prenom_all_professeur() {
 
@@ -110,10 +129,11 @@
     }
 
     /**
-     * Verifie que l id dun utilisateur correspond a l id du prof dans la bdd
+     * Fonction "verifProf"
+     * vérifie que l'id d'un utilisateur correspond à l'id du prof dans la BDD
      * 
-     * @param id_utilisateur id de l utilisateur
-     * @param id_professeur id d un professeur de la bdd que l'on souhaite verifier qu il correspond
+     * @param $id_utilisateur : id de l'utilisateur
+     * @param $id_professeur : id d'un professeur que l'on souhaite comparer
      * 
      * @return true ou false
      */
@@ -126,11 +146,6 @@
             return true;
         }
     }
-
-
-
-
-
 
 
 }

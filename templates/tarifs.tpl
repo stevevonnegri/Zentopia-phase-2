@@ -44,9 +44,9 @@
 
 			<p class="tarifs-p">Vous pouvez télécharger nos tarifs <a href="assets/images/tarifs.jpg" download>ici</a>.</p>
 
-			<p class="tarifs-p">Avant toute nouvelle inscription, prenez bien soin de lire notre <a href="reglement-interieur.php">règlement intérieur</a>.</p>
+			<p class="tarifs-p">Avant toute nouvelle inscription, prenez bien soin de lire notre <a href="?action=mentions_legales">règlement intérieur</a>.</p>
 
-			<a href="planning.php#reservation" class="btn btn-lg btn-primary shadow-none button-rejoindre">RESERVEZ VOTRE SEANCE</a>
+			<a href="?action=planning#reservation" class="btn btn-lg btn-primary shadow-none button-rejoindre">RESERVEZ VOTRE SEANCE</a>
 
 		</div>
 

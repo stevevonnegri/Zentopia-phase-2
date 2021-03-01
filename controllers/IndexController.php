@@ -50,8 +50,6 @@ if (isset($_POST['email']) && $_POST['email'] != '') {
 
 		$user_newsletter->Update($newsletter, $id);
 
-		var_dump($user_newsletter);
-
 		$smarty->assign('alert_user', 'Vous êtes désormais inscrit à notre newsletter.');
 	}
 }
