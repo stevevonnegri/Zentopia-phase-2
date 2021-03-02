@@ -277,15 +277,15 @@
 
                 //test si l'email est deja dans la BDD
 
-                if ($this->countItemByEmail() != 0 AND isset($modifier) === NULL) {
-                    
-                    $error_email_message = '<p class="alert-danger">Cet email est déjà lié à un compte existant.</p>';
+                if ($this->countItemByEmail() != 0 AND $modifier == NULL) {
+
+                    $error_email_message = '<p class="error">Cet email est déjà lié à un compte existant.</p>';
 
                 }
 
              } else {
 
-                $error_email_message = '<p class="alert-danger">Le format de l\'email est invalide.</p>';
+                $error_email_message = '<p class="error">Le format de l\'email est invalide.</p>';
                     
             }
 

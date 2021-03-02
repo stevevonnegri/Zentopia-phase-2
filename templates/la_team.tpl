@@ -68,7 +68,7 @@
 
 				<p>Toutes deux professeures de yoga depuis des années, Olenna et Morgane sont spécialisées dans le hatha yoga, et dispensent plusieurs cours par semaine, ainsi que des cours particuliers à domicile. Morgane dispense également des cours de méditation tibétaine depuis 2019.</p>
 
-				<a href="enseignement.php" class="btn btn-outline-light">NOTRE ENSEIGNEMENT</a>
+				<a href="?action=enseignement" class="btn btn-outline-light">NOTRE ENSEIGNEMENT</a>
 				
 				</div>
 

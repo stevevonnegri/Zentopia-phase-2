@@ -34,6 +34,7 @@ if (isset($_POST['mettre_a_jour'])) {
 	$user = new Utilisateur($dbh);
 	$user_verif_mot_de_passe = $user->getUserByMail($_SESSION['email']);
 
+
 	// crée une variable erreur initialisée à false pour plus tard
 	$erreur = false;
 
@@ -60,6 +61,7 @@ if (isset($_POST['mettre_a_jour'])) {
 
 	} else {
 
+		$error_mauvais_mot_de_passe = '<p class="error">Mauvais mot de passe.</p>';
 		$erreur = true;
 	}
 
@@ -75,7 +77,6 @@ if (isset($_POST['mettre_a_jour'])) {
 
 		header('Location: ?action=espace_personnel');
 
-	// A FAIRE 	afficher un message de succes sur la prochaine fenetre.
 		
 		} else {
 
@@ -83,7 +84,7 @@ if (isset($_POST['mettre_a_jour'])) {
 			$smarty->assign(array(
 				'error_mot_de_passe_message' => $error_mot_de_passe_message,
 				'error_verif_mot_de_passe_message' => $error_verif_mot_de_passe_message,
-				'error_mauvais_mot_de_passe' => '<p class="error">Mauvais mot de passe.</p>'
+				'error_mauvais_mot_de_passe' => $error_mauvais_mot_de_passe
 			));
 
 		}

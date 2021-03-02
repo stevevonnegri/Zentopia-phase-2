@@ -7,6 +7,7 @@ require('function.php');
 require('config.php');
 require('../classes/Model.php');
 require('../classes/Utilisateur.php');
+require('../classes/Seance.php');
 
 //require ('../controllers/InscriptionController.php');
 
@@ -37,60 +38,54 @@ class TestClass extends \PHPUnit\Framework\TestCase {
 
 	}
 
-	/**
-	 * test la verification du format de l'adresse mail
-	 *
-	 * @dataProvider donneesForTestFormatEmail
-	 *
-	 *
-	public function testFormatEmail($user) {
-
-		$this->assertSame($user->EmailBonFormat('MODIF'), 'ok');
-		
-	}
-
-	public function donneesForTestFormatEmail() {
-		$array1 = array('email' => 'zentopia-olenna@gmail.com');
-		$user1 = new Utilisateur($array1);
-		$user1->setBddTableau($dbh);
-
-		return [
-			[$user1]
-		];
-	}
-	*/
-
 	
 	/**
 	 * test la verification de l'age
-	 *
-	 * @dataProvider donneesForTestAge
+	 * /!\ attention true = -de 18 ans et false + de 18 ans.
 	 *
 	 */
-	public function testAge($user1, $user2, $user3) {
+	public function testAge() {
 
-		$this->assertSame($user1->VerifPlusDe18ans(), true);
-		$this->assertSame($user2->VerifPlusDe18ans(), true);
-		$this->assertSame($user3->VerifPlusDe18ans(), false);
-
-	}
-
-	public function donneesForTestAge() {
-		$array1 = array('date_de_naissance' => '2003:02:28');
+		$array1 = array('date_de_naissance' => date('2003/03/01'));
 		$user1 = new Utilisateur($array1);
 		
-		$array2 = array('date_de_naissance' => '2003:03:01');
+		$array2 = array('date_de_naissance' => date('2003/03/02'));
 		$user2 = new Utilisateur($array2);
 
-		$array3 = array('date_de_naissance' => '2003:03:02');
+		$array3 = array('date_de_naissance' => '2003/03/03');
 		$user3 = new Utilisateur($array3);
 
-		$user1->setBddTableau($dbh);
-		$user2->setBddTableau($dbh);
-		$user3->setBddTableau($dbh);
+		$this->assertSame($user1->VerifPlusDe18ans(), false);
+		$this->assertSame($user2->VerifPlusDe18ans(), false);
+		$this->assertSame($user3->VerifPlusDe18ans(), true);
+
+	}
+
+	/**
+	 * test de la verification de l'heure de debut et fin d'une seance.*
+	 * 
+	 * @dataProvider donneesForTestDateHeure
+	 */
+	public function testDateHeure($date, $heure_debut, $heure_fin) {
+		$array1 = array('id_seance' => 1);
+		$seance = new Seance($array1);
+
+		$this->assertSame($seance->VerifDateHeure($date, $heure_debut, $heure_fin), false);
+	}
+
+	
+	public function donneesForTestDateHeure() {
 
 		return [
-			[$user1, $user2, $user3]
+			['2021-03-03', '10:00','10:01'],
+			[date('Y-m-d'), '14:17', '16:00'],
+			['2021-03-04', '00:00', '24:00'],
+			['2021-03-04', '00:1601234', '00:17'],
+			['2021-0304-168-0987', '00:1601234', '00:17'],
+			['2021-03-04', '200:00', '291:00'],
+
 		];
+
 	}
+
 }

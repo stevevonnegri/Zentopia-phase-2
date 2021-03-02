@@ -94,6 +94,7 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 			$erreur = true;
 	}
 
+	
 	// FIN VERIFICATION
 	// si pas d'erreur : envoi de toute les informations dans la BDD et redirection vers l'espace personnel
 	if ($erreur === false AND $error_email_message === 'ok' AND $error_date_naissance_message === 'ok') {
