@@ -281,6 +281,14 @@
 
                     $error_email_message = '<p class="error">Cet email est déjà lié à un compte existant.</p>';
 
+                } elseif ($this->countItemByEmail() != 0 AND $modifier != NULL) {
+
+                    if ($this->getEmail() != $_SESSION['email']) {
+                        
+                         $error_email_message = '<p class="error">Cet email est déjà lié à un compte existant.</p>';
+                        
+                    }
+
                 }
 
              } else {

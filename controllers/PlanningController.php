@@ -3,13 +3,6 @@
 $seance = new Seance($dbh);
 $professeur = new Professeur($dbh);
 
-// récupère la liste des cours présents dans la BDD et les envoie à SMARTY
-$noms_des_cours = $seance->allTypeDeCours();
-$prenoms_professeurs = $professeur->prenom_all_professeur();
-
-$smarty->assign('noms_des_cours', $noms_des_cours);
-$smarty->assign('prenoms_professeurs', $prenoms_professeurs);
-
 // PAGE ACTIVE
 // si une page est demandée, on la set dans $page, sinon on demande la page 1
 if ($_GET['page'] == NULL) {
@@ -151,41 +144,6 @@ if (isset($_GET['delete_seance_du_participant']) && isset($_GET['delete_particip
     ));
 
 }
-
-
-// AJOUT D'UN PARTICIPANT A UNE SEANCE
-// affichage des séances de la semaine, teste si un filtre est actif ou non
-$filtre = "";
-
-if (isset($_POST['filtre'])) {
-	$filtre = $_POST['nom_cours'];
-}
-
-// on récupère la date A:M:J
-	
-// récuperation des informations dans la BDD et création des la date selon la page demandée
-if ($page == 2) {
-
-    $jourDiff = 7 - date('w');
-    $BonneDate  = mktime(0, 0, 0, date("m")  , date("d")+$jourDiff, date("Y"));
-
-} elseif ($page == 3) {
-
-    $jourDiff = 14 - date('w');
-    $BonneDate  = mktime(0, 0, 0, date("m")  , date("d")+$jourDiff, date("Y"));
-
-} else {
-
-    $BonneDate = NULL;
-
-}
-
-//pour test avant le jour J, $BonneDate  = mktime(0, 0, 0, date("m")  , date("d")+10, date("Y"));
-
-$seances = $seance->getSeance($filtre, $BonneDate);
-
-// envoie des informations à SMARTY
-$smarty->assign('seances', $seances);
 
 
 // RESERVATION D'UNE SEANCE
@@ -333,7 +291,7 @@ if(isset($_POST['Ajouter_seance'])) {
             
             if($seance->VerificationPlageHoraireDispo() == 0) {
                 $seance->AddSeance();
-                echo ('<script>alert("La séance a bien été ajoutée.")</script>');
+                
                 $smarty->assign('AjoutOk', 'La séance a bien été ajoutée.');
 
             } else {
@@ -410,7 +368,47 @@ if(isset($_POST['annuler_seance'])) {
     }
 }
 
-    
+// récupère la liste des cours présents dans la BDD et les envoie à SMARTY
+$noms_des_cours = $seance->allTypeDeCours();
+$prenoms_professeurs = $professeur->prenom_all_professeur();
+
+$smarty->assign('noms_des_cours', $noms_des_cours);
+$smarty->assign('prenoms_professeurs', $prenoms_professeurs);
+
+// affichage des séances de la semaine, teste si un filtre est actif ou non
+    $filtre = "";
+
+    if (isset($_POST['filtre'])) {
+        $filtre = $_POST['nom_cours'];
+    }
+
+    // on récupère la date A:M:J
+        
+    // récuperation des informations dans la BDD et création des la date selon la page demandée
+    if ($page == 2) {
+
+        $jourDiff = 7 - date('w');
+        $BonneDate  = mktime(0, 0, 0, date("m")  , date("d")+$jourDiff, date("Y"));
+
+    } elseif ($page == 3) {
+
+        $jourDiff = 14 - date('w');
+        $BonneDate  = mktime(0, 0, 0, date("m")  , date("d")+$jourDiff, date("Y"));
+
+    } else {
+
+        $BonneDate = NULL;
+
+    }
+
+    //pour test avant le jour J, $BonneDate  = mktime(0, 0, 0, date("m")  , date("d")+10, date("Y"));
+
+    $seances = $seance->getSeance($filtre, $BonneDate);
+
+    // envoie des informations à SMARTY
+    $smarty->assign('seances', $seances);
+
+
 // ajoute une variable pour déterminer la partie "active" de la navbar
 $smarty->assign('active', 'les_cours');
 
