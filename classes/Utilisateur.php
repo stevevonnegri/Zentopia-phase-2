@@ -280,6 +280,14 @@
 
                     $error_email_message = '<p class="error">Cet email est déjà lié à un compte existant.</p>';
 
+                } elseif ($this->countItemByEmail() != 0 AND $modifier != NULL) {
+
+                    if ($this->getEmail() != $_SESSION['email']) {
+                        
+                         $error_email_message = '<p class="error">Cet email est déjà lié à un compte existant.</p>';
+                        
+                    }
+
                 }
 
              } else {
@@ -395,6 +403,24 @@
 
         }
         
-    } 
+    }
+
+    /**
+    * Fonction "Delete"
+    * supprime un utilisateur, son avis et ses seances reservées.
+    *
+    *@param $id : id de l'élément
+    *
+    *
+    **/
+    public function Delete($id, $colonne = NULL) {
+
+        $this->_bdd->exec('DELETE FROM reserver WHERE id_utilisateur = "'.$id.'"');
+
+        $this->_bdd->exec('DELETE FROM avis WHERE id_utilisateur = "'.$id.'"');
+
+        $this->_bdd->exec('DELETE FROM '.$this->_table.' WHERE id_utilisateur = "'.$id.'"');
+
+    }
 
 }
