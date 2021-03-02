@@ -64,22 +64,67 @@
 
 			<h1 id="reservation">RESERVATION EN LIGNE</h1>
 
-			{if isset($RangNonValide)}
-				{$RangNonValide}
-			{/if}
-			{if isset($SeanceDejaPrise)}
-				{$SeanceDejaPrise}
-			{/if}
-			{if isset($DatePerimer)}
-				{$DatePerimer}
-			{/if}
+			
 
 			<!-- Animation arrow -->
 			<div class="anim-arrow">
 				<i class="fas fa-angle-double-down"></i>
 			</div>
 
+						<!--affichage d'une alert pour la resa et l'annulation d'une séance-->
+			
 
+			
+
+				<div class="col error-col text-center">
+
+					<p class="error">
+
+					{if isset($RangNonValide)}
+					
+						{$RangNonValide}
+
+					{/if}
+
+					{if isset($SeanceDejaPrise)}
+
+						{$SeanceDejaPrise}
+
+					{/if}
+
+					{if isset($DatePerimer)}
+
+						{$DatePerimer}
+
+					{/if}
+
+					{if isset($confirmationReservation)}
+				{$confirmationReservation}
+			{/if}
+			{if isset($confirmationAnnulation)}
+				{$confirmationAnnulation}
+			{/if}
+			{if isset($seancePleine)}
+				{$seancePleine}
+			{/if}
+			{if isset($seanceDejaReserver)}
+				{$seanceDejaReserver}
+			{/if}
+			{if isset($ModifOk)}
+				{$ModifOk}
+			{/if}
+			{if isset($AjoutOk)}
+				{$AjoutOk}
+			{/if}
+			{if isset($AnnulationOk)}
+				{$AnnulationOk}
+			{/if}
+
+					</p>
+
+				</div>
+
+		
 			<div class="planning-dynamique">
 			
 				<div class="row planning-head justify-content-around align-items-center">
@@ -247,28 +292,6 @@
 			{assign var=date value=1}
 			{assign var=cmpt value=0}
 
-			<!--affichage d'une alert pour la resa et l'annulation d'une séance-->
-			{if isset($confirmationReservation)}
-				{$confirmationReservation}
-			{/if}
-			{if isset($confirmationAnnulation)}
-				{$confirmationAnnulation}
-			{/if}
-			{if isset($seancePleine)}
-				{$seancePleine}
-			{/if}
-			{if isset($seanceDejaReserver)}
-				{$seanceDejaReserver}
-			{/if}
-			{if isset($ModifOk)}
-				{$ModifOk}
-			{/if}
-			{if isset($AjoutOk)}
-				{$AjoutOk}
-			{/if}
-			{if isset($AnnulationOk)}
-				{$AnnulationOk}
-			{/if}
 
 			{foreach from=$seances item=seance} {*FIN LIGNE 661 *}
 					
