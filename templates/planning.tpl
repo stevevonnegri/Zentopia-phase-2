@@ -64,15 +64,6 @@
 
 			<h1 id="reservation">RESERVATION EN LIGNE</h1>
 
-			{if isset($RangNonValide)}
-				{$RangNonValide}
-			{/if}
-			{if isset($SeanceDejaPrise)}
-				{$SeanceDejaPrise}
-			{/if}
-			{if isset($DatePerimer)}
-				{$DatePerimer}
-			{/if}
 
 			<!-- Animation arrow -->
 			<div class="anim-arrow">
@@ -80,8 +71,18 @@
 			</div>
 
 
+
 			<div class="planning-dynamique">
-			
+
+			{if isset($RangNonValide)}
+				<p class="error text-center">{$RangNonValide}</p>
+			{/if}
+			{if isset($SeanceDejaPrise)}
+				<p class="error text-center">{$SeanceDejaPrise}</p>
+			{/if}
+			{if isset($DatePerimer)}
+				<p class="error text-center">{$DatePerimer}</p>
+			{/if}
 				<div class="row planning-head justify-content-around align-items-center">
 						
 					<div class="col text-left order-1">
@@ -249,25 +250,25 @@
 
 			<!--affichage d'une alert pour la resa et l'annulation d'une séance-->
 			{if isset($confirmationReservation)}
-				{$confirmationReservation}
+				<p class="error text-center">{$confirmationReservation}</p>
 			{/if}
 			{if isset($confirmationAnnulation)}
-				{$confirmationAnnulation}
+				<p class="error text-center">{$confirmationAnnulation}</p>
 			{/if}
 			{if isset($seancePleine)}
-				{$seancePleine}
+				<p class="error text-center">{$seancePleine}</p>
 			{/if}
 			{if isset($seanceDejaReserver)}
-				{$seanceDejaReserver}
+				<p class="error text-center">{$seanceDejaReserver}</p>
 			{/if}
 			{if isset($ModifOk)}
-				{$ModifOk}
+				<p class="error text-center">{$ModifOk}</p>
 			{/if}
 			{if isset($AjoutOk)}
-				{$AjoutOk}
+				<p class="error text-center">{$AjoutOk}</p>
 			{/if}
 			{if isset($AnnulationOk)}
-				{$AnnulationOk}
+				<p class="error text-center">{$AnnulationOk}</p>
 			{/if}
 
 			{foreach from=$seances item=seance} {*FIN LIGNE 661 *}

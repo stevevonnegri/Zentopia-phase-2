@@ -318,8 +318,15 @@ if(isset($_POST['Modif_seance'])) {
         // vérifie que les dates renseignées concordent bien (pas de date antérieure, l'heure de début inférieure à l'heure de fin, etc)
         if($seance->VerifDateHeure($_POST['date_seance'], $_POST['heure_debut'], $_POST['heure_fin']) == true) {
 
+            $seance->setDate_seance($_POST['id_seance']);
+            $seance->setDate_seance($_POST['date_seance']);
+            $seance->setHeure_debut_seance($_POST['heure_debut']); 
+            $seance->setHeure_fin_seance($_POST['heure_fin']);
+            $seance->setId_type_de_cours($_POST['nom_type_cours']);
+            $seance->setId_professeur($_POST['prenom_professeur']); 
+
             // vérifie que le cours est possible dans les horaires donnés
-            if($seance->VerificationPlageHoraireDispo($seance->getId_seance()) == 0) {
+            if($seance->VerificationPlageHoraireDispo($seance->getId_professeur()) == 0) {
 
                 $donnees = [
                     'id_seance' => $_POST['id_seance'],
@@ -332,7 +339,6 @@ if(isset($_POST['Modif_seance'])) {
 
                 // on modifie la BDD avec le tableau
                 $seance->Update($donnees, $_POST['id_seance']);
-                echo ('<script>alert("La séance a bien été modifiée, les participant.e.s seront informé.e.s de la modification")</script>');
                 $smarty->assign('ModifOk', 'La séance a bien été modifiée, les participant.e.s seront informé.e.s de la modification');
 
             } else {
@@ -359,7 +365,7 @@ if(isset($_POST['annuler_seance'])) {
         if(isset($_POST['annuler-seance']) ) {
             $donnees['annule'] = '1';
             $seance->Update($donnees, $_POST['id_seance']);
-            echo ('<script>alert("La séance a bien été annulée, les participant.e.s seront informé.e.s de l\'annulation")</script>');
+            //echo ('<script>alert("La séance a bien été annulée, les participant.e.s seront informé.e.s de l\'annulation")</script>');
             $smarty->assign('AnnulationOk', 'La séance a bien été annulée, les participant.e.s seront informé.e.s de l\'annulation');
         }
     } else {

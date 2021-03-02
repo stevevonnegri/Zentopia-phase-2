@@ -175,7 +175,6 @@ class Model {
 		$valeurs = substr($valeurs,0,-2);
 
 		$sql = $this->_bdd->prepare('UPDATE '.$this->_table.' SET '.$valeurs.' WHERE id_'.$this->_table.' = '.$id);
-
 		$sql->execute();
 	}
 
