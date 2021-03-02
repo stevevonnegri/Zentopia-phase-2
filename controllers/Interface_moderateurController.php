@@ -137,13 +137,12 @@ if (isset($_GET['avis'])) {
 }
 
 
-// SECTION RECHERCHER LES MEMBRES (modérateur & admin avec droits différents)
-// vérifie si on a cliqué sur "Rechercher un membre"
+// SECTION GERER GALERIE (modérateur & admin avec droits différents)
+// vérifie si on a cliqué sur "Gérer la galerie"
 if (isset($_GET['galerie'])) {
 	$smarty->assign('galerie', 'true');
 	include('controllers/Interface_mode_gerer_galerieController.php');
 }
-
 
 
 // SECTION RECHERCHER LES MEMBRES (modérateur & admin avec droits différents)

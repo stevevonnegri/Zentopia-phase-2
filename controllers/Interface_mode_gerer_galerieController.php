@@ -4,15 +4,15 @@ $image = new Image($dbh);
 
 if(isset($_POST['image_add'])){
 
-    //On regarde combien de photo sont mis dans la bdd, si plus que 10, ca bloque l'envoye de nouvelle image
+    // on regarde combien de photos sont déjà stockées, s'il y en a plus que 10, ca bloque l'envoi de nouvelles images
     if($image->count() >= 10) {
         $smarty->assign('errorQuantite', 'Vous avez déjà plus que 10 photos quand le slider, veuillez en supprimez une pour en rajouter une nouvelle');
     } else {
 
-        //Ca verifie qu'il a bien une image quand on clique sur envoye
+        // vérifie qu'il y a bien une image quand on clique sur envoyer
         if($_SESSION['rang'] == 'admin' || $_SESSION['rang'] == 'moderateur'){
 
-            //ca verifie qu'il n'y a pas d'erreur dans l'image
+            // vérifie qu'il n'y a pas d'erreur dans l'image
             if($_FILES['image']['error'] == 0){
 
                 $image2 = new Image($dbh);
@@ -29,7 +29,7 @@ if(isset($_POST['image_add'])){
                     $smarty->assign('errorFichier', 'Une erreur est survenue lors du déplacement du fichier');
                 }
 
-                //Si la taille de l'image est entre 450 et 550px de hauteur pour 770px de largeur, alors on la conserve
+                //Si la taille de l'image est entre 400 et 600px de hauteur pour 770px de largeur, alors on la conserve
                 if($tailleImage['1'] <= 600 && $tailleImage['1'] >= 400 && $tailleImage['0'] < 780 ) {
 
                     //image pour les miniatures de la parti moderateur
@@ -54,7 +54,7 @@ if(isset($_POST['image_add'])){
     }
 }
 /**
- * Test si on recupere bien l'id et le nom d'une image, puis la delete et informe en cas d'erreur
+ * Test si on récupère bien l'id et le nom d'une image, puis la delete et informe en cas d'erreur
  */
 if(isset($_GET['id']) && ($_GET['nom'])) {
     $image->deleteImage($_GET['id'], $_GET['nom']);

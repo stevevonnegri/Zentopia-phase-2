@@ -64,14 +64,45 @@
 
 			<h1 id="reservation">RESERVATION EN LIGNE</h1>
 
+			
 
 			<!-- Animation arrow -->
 			<div class="anim-arrow">
 				<i class="fas fa-angle-double-down"></i>
 			</div>
 
+						<!--affichage d'une alert pour la resa et l'annulation d'une séance-->
+			
 
+			
 
+				<div class="col error-col text-center">
+
+					<p class="error">
+
+					{if isset($RangNonValide)}
+					
+						{$RangNonValide}
+
+					{/if}
+
+					{if isset($SeanceDejaPrise)}
+
+						{$SeanceDejaPrise}
+
+					{/if}
+
+					{if isset($DatePerimer)}
+
+						{$DatePerimer}
+
+					{/if}
+
+					</p>
+
+				</div>
+
+		
 			<div class="planning-dynamique">
 
 			{if isset($RangNonValide)}

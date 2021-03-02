@@ -11,9 +11,9 @@ if (isset($_POST['NOUS_REJOINDRE'])) {
 	$user->setPrenom_utilisateur($_POST['prenom']);
 	$user->setNom_utilisateur($_POST['nom']);
 	$user->setDate_de_naissance($_POST['date_de_naissance']);
-	$user->setAdresse_rue($_POST['adresse_rue']);
+	$user->setAdresse_rue(htmlspecialchars($_POST['adresse_rue']));
 	$user->setAdresse_code_postal($_POST['adresse_code_postal']);
-	$user->setAdresse_ville($_POST['adresse_ville']);
+	$user->setAdresse_ville(htmlspecialchars($_POST['adresse_ville']));
 	$user->setTelephone($_POST['telephone']);
 	$user->setNewsletter($_POST['newsletter']);
 

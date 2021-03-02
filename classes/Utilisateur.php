@@ -276,7 +276,6 @@
             if (filter_var($this->getEmail(), FILTER_VALIDATE_EMAIL)) {
 
                 //test si l'email est deja dans la BDD
-
                 if ($this->countItemByEmail() != 0 AND $modifier == NULL) {
 
                     $error_email_message = '<p class="error">Cet email est déjà lié à un compte existant.</p>';
