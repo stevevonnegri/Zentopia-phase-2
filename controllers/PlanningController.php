@@ -222,6 +222,36 @@ if(isset($_GET['id_reservation'])) {
                 $data['id_seance'] = $_GET['id_reservation'];
                 $data['id_utilisateur'] = $_SESSION['id_utilisateur'];
                 $seance_reservation->AddReservation($data);
+
+                // envoi d'un mail de confirmation de réservation
+                $email = $_SESSION['email'];
+
+                // l'en-tête nécessaire pour afficher le html dans les mails
+                $entete  = 'MIME-Version: 1.0' . "\r\n";
+                $entete .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+                $entete .= 'From: ' .$email. "\r\n";
+
+                // le corps du mail
+                $message = '<h1>Confirmation de réservation</h1>
+                
+                <p>Votre inscription à la séance de yoga a bien été enregistrée. Vous retrouverez toutes les informations nécessaires en vous connectant à votre espace personnel.</p>
+
+                <p>S\'il s\'agit d\'une erreur ou si vous souhaitez annuler ultérieurement votre réservation, vous pouvez le faire directement via le planning sur notre site, ou nous contacter au 02 47 66 66 66.</p>
+
+                <p>A bientôt dans notre espace Zentopia !</p>
+                <br/><br/>
+
+                <p><b>ZENTOPIA <br/>
+                Centre de yoga et de méditation <br/>
+                26 rue des Tanneurs, 37000 TOURS <br/>
+                02 47 66 66 66 <br/>
+                contact@zentopia.fr</b></p>
+                ';
+
+                // l'envoi du mail
+                $retour = mail($email, 'Confirmation de réservation', $message, $entete);
+
+
                 echo ('<script>document.location.href="?action=planning&confirmationReservation=true"</script>');
                 
             } else {
@@ -248,6 +278,34 @@ if(isset($_GET['id_annuler'])) {
         $data['id_seance'] = $_GET['id_annuler'];
         $data['id_utilisateur'] = $_SESSION['id_utilisateur'];
         $seance_reservation->DeleteSeance($data);
+
+        // envoi d'un mail de confirmation d'annulation
+        $email = $_SESSION['email'];
+
+        // l'en-tête nécessaire pour afficher le html dans les mails
+        $entete  = 'MIME-Version: 1.0' . "\r\n";
+        $entete .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+        $entete .= 'From: ' .$email. "\r\n";
+
+        // le corps du mail
+        $message = '<h1>Confirmation d\'annulation</h1>
+        
+        <p>Votre annulation de réservation à la séance de yoga a bien été enregistrée. Vous retrouverez toutes les informations nécessaires en vous connectant à votre espace personnel.</p>
+
+        <p>S\'il s\'agit d\'une erreur ou si vous souhaitez vous réinscrire ultérieurement à la séance, vous pouvez le faire directement via le planning sur notre site, ou nous contacter au 02 47 66 66 66.</p>
+
+        <p>A bientôt dans notre espace Zentopia !</p>
+        <br/><br/>
+
+        <p><b>ZENTOPIA <br/>
+        Centre de yoga et de méditation <br/>
+        26 rue des Tanneurs, 37000 TOURS <br/>
+        02 47 66 66 66 <br/>
+        contact@zentopia.fr</b></p>
+        ';
+
+        // l'envoi du mail
+        $retour = mail($email, 'Confirmation d\'annulation', $message, $entete);
 
         echo ('<script>document.location.href="?action=planning&confirmationAnnulation=true"</script>');
 
