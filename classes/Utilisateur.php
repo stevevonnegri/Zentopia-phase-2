@@ -404,6 +404,24 @@
 
         }
         
-    } 
+    }
+
+    /**
+    * Fonction "Delete"
+    * supprime un utilisateur, son avis et ses seances reservées.
+    *
+    *@param $id : id de l'élément
+    *
+    *
+    **/
+    public function Delete($id, $colonne = NULL) {
+
+        $this->_bdd->exec('DELETE FROM reserver WHERE id_utilisateur = "'.$id.'"');
+
+        $this->_bdd->exec('DELETE FROM avis WHERE id_utilisateur = "'.$id.'"');
+
+        $this->_bdd->exec('DELETE FROM '.$this->_table.' WHERE id_utilisateur = "'.$id.'"');
+
+    }
 
 }

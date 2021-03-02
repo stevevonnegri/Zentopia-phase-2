@@ -15,8 +15,10 @@ if ($_GET['deconnexion'] == true) {
 
 // SECTION SUPPRIMER LE COMPTE
 if (isset($_POST['CompteDelete'])) {
+
 	$deluser = new Utilisateur($dbh);
 	$deluser->Delete($_SESSION['id_utilisateur']);
+	
 	session_destroy();
 	header('Location:?action=index&CompteDelete=true');
 }
