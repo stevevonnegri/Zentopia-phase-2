@@ -71,14 +71,12 @@
 				<i class="fas fa-angle-double-down"></i>
 			</div>
 
-						<!--affichage d'une alert pour la resa et l'annulation d'une séance-->
-			
+						
 
-			
+			<!--affichage d'une alert pour la resa et l'annulation d'une séance-->
+			<div class="planning-dynamique">
 
-				<div class="col error-col text-center">
-
-					<p class="error">
+				<p class="text-center error">
 
 					{if isset($RangNonValide)}
 					
@@ -98,22 +96,52 @@
 
 					{/if}
 
-					</p>
 
-				</div>
+					{if isset($confirmationReservation)}
 
-		
-			<div class="planning-dynamique">
+						{$confirmationReservation}
 
-			{if isset($RangNonValide)}
-				<p class="error text-center">{$RangNonValide}</p>
-			{/if}
-			{if isset($SeanceDejaPrise)}
-				<p class="error text-center">{$SeanceDejaPrise}</p>
-			{/if}
-			{if isset($DatePerimer)}
-				<p class="error text-center">{$DatePerimer}</p>
-			{/if}
+					{/if}
+
+					{if isset($confirmationAnnulation)}
+
+
+						{$confirmationAnnulation}
+
+					{/if}
+
+					{if isset($seancePleine)}
+
+						{$seancePleine}
+
+					{/if}
+
+					{if isset($seanceDejaReserver)}
+
+						{$seanceDejaReserver}
+
+					{/if}
+
+					{if isset($ModifOk)}
+
+						{$ModifOk}
+
+					{/if}
+
+					{if isset($AjoutOk)}
+
+						{$AjoutOk}
+
+					{/if}
+
+					{if isset($AnnulationOk)}
+
+						{$AnnulationOk}
+
+					{/if}
+
+				</p>
+
 				<div class="row planning-head justify-content-around align-items-center">
 						
 					<div class="col text-left order-1">
@@ -279,28 +307,6 @@
 			{assign var=date value=1}
 			{assign var=cmpt value=0}
 
-			<!--affichage d'une alert pour la resa et l'annulation d'une séance-->
-			{if isset($confirmationReservation)}
-				<p class="error text-center">{$confirmationReservation}</p>
-			{/if}
-			{if isset($confirmationAnnulation)}
-				<p class="error text-center">{$confirmationAnnulation}</p>
-			{/if}
-			{if isset($seancePleine)}
-				<p class="error text-center">{$seancePleine}</p>
-			{/if}
-			{if isset($seanceDejaReserver)}
-				<p class="error text-center">{$seanceDejaReserver}</p>
-			{/if}
-			{if isset($ModifOk)}
-				<p class="error text-center">{$ModifOk}</p>
-			{/if}
-			{if isset($AjoutOk)}
-				<p class="error text-center">{$AjoutOk}</p>
-			{/if}
-			{if isset($AnnulationOk)}
-				<p class="error text-center">{$AnnulationOk}</p>
-			{/if}
 
 			{foreach from=$seances item=seance} {*FIN LIGNE 661 *}
 					
@@ -616,7 +622,7 @@
 				<div class="row hidden background-light align-items-center justify-content-around" id="modif-seance-{$seance.id_seance}">
 					
 					<!-- form à pré-remplir avec les informations de la séance concernée -->
-					<form class="form_ajax" method="post" action="" >
+					<form class="form_ajax" method="post" action="?action=planning#id-seance-{$seance.id_seance}">
 						
 						<div class="form-row align-items-end ">
 							
@@ -693,7 +699,7 @@
 				<!-- à afficher au clic de l'admin sur le bouton "Annuler la séance" -->
 				<div class="row hidden background-light align-items-center justify-content-start" id="annuler-seance-{$seance.id_seance}">
 
-					<form method="post" action="" class="col-12">
+					<form method="post" action="?action=planning#id-seance-{$seance.id_seance}" class="col-12">
 
 						<div class="col-12 col-sm-6">
 						

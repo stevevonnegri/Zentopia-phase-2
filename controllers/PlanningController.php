@@ -318,7 +318,7 @@ if(isset($_POST['Modif_seance'])) {
         // vérifie que les dates renseignées concordent bien (pas de date antérieure, l'heure de début inférieure à l'heure de fin, etc)
         if($seance->VerifDateHeure($_POST['date_seance'], $_POST['heure_debut'], $_POST['heure_fin']) == true) {
 
-            $seance->setDate_seance($_POST['id_seance']);
+            $seance->setId_seance($_POST['id_seance']);
             $seance->setDate_seance($_POST['date_seance']);
             $seance->setHeure_debut_seance($_POST['heure_debut']); 
             $seance->setHeure_fin_seance($_POST['heure_fin']);
@@ -326,7 +326,7 @@ if(isset($_POST['Modif_seance'])) {
             $seance->setId_professeur($_POST['prenom_professeur']); 
 
             // vérifie que le cours est possible dans les horaires donnés
-            if($seance->VerificationPlageHoraireDispo($seance->getId_professeur()) == 0) {
+            if($seance->VerificationPlageHoraireDispo($seance->getId_seance()) == 0) {
 
                 $donnees = [
                     'id_seance' => $_POST['id_seance'],

@@ -132,11 +132,11 @@
 
 											{elseif $cours == 'meditation guidee'}
 
-												guidee
+												meditation
 
 											{elseif $cours == 'meditation tibetaine'}
 
-												tibetaine
+												meditation
 
 											{/if}
 

@@ -139,7 +139,7 @@
 
 					{if isset($_SESSION['newsletter']) && $_SESSION['newsletter'] == 1}
 
-						Merci de vous etre inscrit a notre newsletter !
+						Merci de vous être inscrit.e à notre newsletter !
 
 					{elseif !isset($_SESSION['newsletter']) || $_SESSION['newsletter'] == 0}
 

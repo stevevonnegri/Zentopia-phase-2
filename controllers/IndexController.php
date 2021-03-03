@@ -49,6 +49,8 @@ if (isset($_POST['email']) && $_POST['email'] != '') {
 
 		$user_newsletter->Update($newsletter, $id);
 
+		$_SESSION['newsletter'] = 1;
+
 		$smarty->assign('alert_user', 'Vous êtes désormais inscrit à notre newsletter.');
 	}
 }
