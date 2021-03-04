@@ -1,7 +1,7 @@
 # zentopia-phase-2
 La phase 2 du projet Zentopia réalisé en groupe, dans le cadre de la formation de webdev CCI Colmar.
 
-URL: https://anaisbironneau.devcolmar.xyz/phase2/
+URL: https://anaisbironneau.devcolmar.xyz/zentopia-phase-2/
 
 TECH UTILISEES: HTML5 / CSS3 / Javascript / Bootstrap / LESS / Slick / PHP... (à remplir au fur et à mesure)
 
@@ -17,6 +17,17 @@ CONTENU:
 
 Ce repo privé a vocation à constituer un espace de travail versioning pour les 3 membres du groupe, et d'offrir un accès aux formateurs qui suivent les projets. Il pourra également contenir des documents annexes, nécessaires au rendu du projet, si besoin est.
 
-ACCES:
+ACCES BDD :
 
-// à définir
+Base SQL : desdgfco_steve
+Utilisateur : desdgfco_ussteve
+Mot de passe : ~Cx0Nmu3H@!a
+Accès PHPMyAdmin : https://pma.devcolmar.xyz/
+
+IDENTIFIANTS COMPTES DU SITE :
+
+Membre : membre@zentopia.fr / mdp : 123456789a
+Modérateur : moderateur@zentopia.fr / mdp : 123456789a
+Admin : admin@zentopia.fr / mdp : 123456789a
+
+
