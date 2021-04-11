@@ -9,7 +9,7 @@ AUTEURS: Anais Bironneau / Olivier Clément / Steve Freiherr Von Negri
 
 DESCRIPTION:
 
-Un site dynamique d'un faux client, réalisé dans le cadre de la Phase 2 du Projet 1. Le code du Projet 1 "Zentopia" (site consultable ici https://anaisbironneau.devcolmar.xyz/zentopia-prod/ et code présent sur ce repo public https://github.com/anais-bironneau/static-website1 a été entièrement repris pour constituer la base de la Phase 2.
+Un site dynamique d'un faux client, réalisé dans le cadre de la Phase 2 du Projet 1. Le code du Projet 1 "Zentopia" (site consultable ici https://anaisbironneau.devcolmar.xyz/zentopia-prod/ et code présent sur ce repo public https://github.com/anais-bironneau/static-website1 ) a été entièrement repris pour constituer la base de la Phase 2.
 
 Le but de la Phase 2 est de transformer le site vitrine en un site dynamique, notamment grâce à l'intégration de fonctionnalités exécutées avec du PHP orienté objet et à la manipulation d'une base de données parfaitement fonctionnelle. 
 
