@@ -1,33 +1,46 @@
 # zentopia-phase-2
-La phase 2 du projet Zentopia réalisé en groupe, dans le cadre de la formation de webdev CCI Colmar.
 
-URL: https://anaisbironneau.devcolmar.xyz/zentopia-phase-2/
 
-TECH UTILISEES: HTML5 / CSS3 / Javascript / Bootstrap / LESS / Slick / PHP... (à remplir au fur et à mesure)
+URL: https://zentopia.anaisbironneau.com/
 
-AUTEURS: Anais Bironneau / Olivier Clément / Steve Freiherr Von Negri
+TECH USED: HTML5 / CSS3 / Javascript / jQuery / AJAX / Bootstrap / LESS / Slick / PHP
+
+AUTHOR: Anais Bironneau / Olivier Clément / Steve Freiherr Von Negri
 
 DESCRIPTION:
 
-Un site dynamique d'un faux client, réalisé dans le cadre de la Phase 2 du Projet 1. Le code du Projet 1 "Zentopia" (site consultable ici https://anaisbironneau.devcolmar.xyz/zentopia-prod/ et code présent sur ce repo public https://github.com/anais-bironneau/static-website1 ) a été entièrement repris pour constituer la base de la Phase 2.
+~ FR:
 
-Le but de la Phase 2 est de transformer le site vitrine en un site dynamique, notamment grâce à l'intégration de fonctionnalités exécutées avec du PHP orienté objet et à la manipulation d'une base de données parfaitement fonctionnelle. 
+Projet de site web dynamique réalisé dans le cadre d'une formation de développement web. Le site devait être développé en PHP Orienté-objet, avec architecture semi-MVC et moteur de template SMARTY. Le design (totalement fait-main) et le front-end en général a été réalisé en amont par moi-même lors d'un projet personnel précédent. Tout le back-end du site, avec ses différentes fonctionnalités, ont en revanche été réalisées en groupe.
 
-CONTENU:
+Liste des fonctionnalités du site :
 
-Ce repo privé a vocation à constituer un espace de travail versioning pour les 3 membres du groupe, et d'offrir un accès aux formateurs qui suivent les projets. Il pourra également contenir des documents annexes, nécessaires au rendu du projet, si besoin est.
+- Interface modérateur/administrateur
+- Espace membre (inscription, connexion & gestion de ses données)
+- Planning dynamique (réservation, annulation et gestion des séances)
+- Avis client (soumission, suppression et modération)
+- Formulaire de contact avec gestion d'envoi des mails
 
-ACCES BDD :
 
-Base SQL : desdgfco_steve
-Utilisateur : desdgfco_ussteve
-Mot de passe : ~Cx0Nmu3H@!a
-Accès PHPMyAdmin : https://pma.devcolmar.xyz/
+L'entreprise ZENTOPIA est une création purement fictive.
 
-IDENTIFIANTS COMPTES DU SITE :
 
-Membre : membre@zentopia.fr / mdp : 123456789a
-Modérateur : moderateur@zentopia.fr / mdp : 123456789a
-Admin : admin@zentopia.fr / mdp : 123456789a
+~ EN :
+
+Dynamic website project carried out as part of a web development course. Website had to be made using Object-oriented PHP, a semi-MVC framework and a SMARTY template engine. The site's design (entirely homemade) and overall front-end was previously developed by myself as part as another personal project. All back-end and its features were on the contrary developed as a team.
+
+Website's list of features:
+
+- Moderation/administration panel
+- Client space module (log in, sign up & manage personal data)
+- Dynamic schedule (booking, cancelling & managing of a yoga course)
+- Client reviews (posting, deleting & reviewing)
+- Contact form & sending of emails  
+
+ZENTOPIA is a purely fictional creation.
+
+
+
+
 
 
