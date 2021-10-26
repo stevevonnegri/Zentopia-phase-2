@@ -2,7 +2,7 @@
         
     // données de la connexion à la bdd
 	$bdd = 'desdgfco_steve';
-	$server = '127.0.0.1';
+	$server = '';
     $user = 'desdgfco_ussteve';
     $password = '~Cx0Nmu3H@!a';
 
